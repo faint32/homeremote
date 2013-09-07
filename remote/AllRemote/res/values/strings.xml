@@ -1,0 +1,290 @@
+﻿<resources>
+
+    <string name="app_name">Remote</string>
+    <string name="action_setting">Remote</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">All Remote Control </string>
+    <string name="device_name">CTRL</string>
+    <string name="toast">TOAST</string>
+    <string name="timeout">Timeout</string>
+    <string name="title_studying"><![CDATA[Are learning...]]></string>
+    <string name="title_studyed">Learning success</string>
+    <string name="title_about">About</string>
+    <string name="study_alert"><![CDATA[Please specify a button to learn"]]></string>
+    <string name="study_info"><![CDATA[Please be learned remote control transmitter head close alignment receiver transmitter head, a distance of about 3CM, and long learning keys 1 to 2S]]></string>
+    <string name="study_loading">study loading</string>
+    <string name="study_timeout">Study data timeout quit</string>
+    <string name="study_save">Save data</string>
+    <string name="study_exit">Quit learning</string>
+    <string name="about_ok">OK</string>
+    <string name="device_type">Device Type</string>
+    <string name="name_text">Device Name</string>
+    <string name="cur_name">Current Device</string>
+    
+    <string name="count_text"></string>
+    <string name="auto_text">Auto</string>
+    <string name="stop_text">Stop</string>
+    <string name="up_text">Up</string>
+    <string name="down_text">Down</string>
+    <string name="manual_text">manually</string>
+    <string name="save_text">Save</string>
+    <string name="set_menu">SetUp</string>
+    <string name="updata_end">Database updata finished</string>
+    <string name="air_power_off">Mode:OFF</string>
+    
+    <string name="language">
+        
+	<![CDATA[
+	Software installation:"*. Apk" files copied or downloaded to the phone memory card 
+    through the "document management" or "File Manager" to find the file, 
+    click on the relevant directory follow the prompts to install, 
+    the system will generate: "mobile phone remote control icon;\n
+	]]>		
+    </string>
+    
+    <string name="about_info">
+<![CDATA[ SOMMER CO.,LTD.\n
+        							   ]]>
+    </string>
+    <string name="Long"><![CDATA[ SOMMER CO.,LTD.]]></string>
+    <string name="str_about">
+	<![CDATA[
+	Software information:\n
+	Name: all remote \n
+	Version: V0.0.1Beta\n
+	\n
+	Contact:\n
+	Company: SOMMER CO.,LTD.\n
+	
+	
+	]]>
+    </string>
+    <string name="LongAbout">
+<![CDATA[  SOMMER CO.,LTD.\n]]>
+    </string>
+    <string name="Clean"></string>
+    <string name="CleanAbout"><![CDATA[Version:v2.0.2\n]]></string>
+ 	 <string name="show">Show the key value</string>
+ 
+    <!-- Splash -->
+    <string name="splash_loading"><![CDATA[Loading...]]></string>
+    <!-- MainActivity -->
+    <string name="str_title">Warning</string>
+    <string name="str_message">Quit?</string>
+    <string name="str_ok">OK</string>
+    <string name="str_back">Return</string>
+	<!-- NUM -->
+	<string name="bt_num0">0</string>
+    <string name="bt_num1">1</string>
+    <string name="bt_num2">2</string>
+    <string name="bt_num3">3</string>
+    <string name="bt_num4">4</string>
+    <string name="bt_num5">5</string>
+    <string name="bt_num6">6</string>
+    <string name="bt_num7">7</string>
+    <string name="bt_num8">8</string>
+    <string name="bt_num9">9</string>
+   <string name="bt_num10"><![CDATA[-/]]></string>
+    <string name="bt_bck">Return</string>
+    <!-- TV -->
+    <string name="tv">tv</string>
+    <string name="str_tv">TV</string>
+    <string name="tv_power">ON/OFF</string>
+    <string name="tv_mute">Mute</string>
+    <string name="tv_key0">0</string>
+    <string name="tv_key1">1</string>
+    <string name="tv_key2">2</string>
+    <string name="tv_key3">3</string>
+    <string name="tv_key4">4</string>
+    <string name="tv_key5">5</string>
+    <string name="tv_key6">6</string>
+    <string name="tv_key7">7</string>
+    <string name="tv_key8">8</string>
+    <string name="tv_key9">9</string>
+    <string name="tv_key10"><![CDATA[-/]]></string>
+    <string name="tv_menu">Menu</string>
+    <string name="tv_chadd">CH+</string>
+    <string name="tv_chsub">CH-</string>
+    <string name="tv_voladd">Vol+</string>
+    <string name="tv_volsub">Vol-</string>
+    <string name="tv_ok">OK</string>
+    <string name="tv_av">AV/TV</string>
+    <string name="tv_back">Return</string>
+    
+
+    <!-- STB -->
+    <string name="stb">stb</string>
+    <string name="str_stb">STB</string>
+    <string name="stb_wait">Standby</string>
+    <string name="stb_watch">Guides</string>
+    <string name="stb_back">Return</string>
+    <string name="stb_key0">0</string>
+    <string name="stb_key1">1</string>
+    <string name="stb_key2">2</string>
+    <string name="stb_key3">3</string>
+    <string name="stb_key4">4</string>
+    <string name="stb_key5">5</string>
+    <string name="stb_key6">6</string>
+    <string name="stb_key7">7</string>
+    <string name="stb_key8">8</string>
+    <string name="stb_key9">9</string>
+    <string name="stb_chadd">CH+</string>
+    <string name="stb_chsub">CH-</string>
+    <string name="stb_voladd">Vol+</string>
+    <string name="stb_volsub">Vol-</string>
+    <string name="stb_up">Up</string>
+    <string name="stb_down">Down</string>
+    <string name="stb_left">Left</string>
+    <string name="stb_right">Right</string>
+    <string name="stb_ok">OK</string>
+    <string name="stb_menu">Menu</string>
+    <!-- DVD -->
+    <string name="dvd">dvd</string>
+    <string name="str_dvd">DVD</string>
+    <string name="dvd_power">ON/OF</string>
+    <string name="dvd_mute">Mute</string>
+    <string name="dvd_quickforward">>></string>
+    <string name="dvd_quickback"><![CDATA[<<]]></string>
+    <string name="dvd_play">Play</string>
+    <string name="dvd_stop">Stop</string>
+    <string name="dvd_upsong"><![CDATA[|<<]]></string>
+    <string name="dvd_downsong">>>|</string>
+    <string name="dvd_pause">Pause</string>
+    <string name="dvd_av">Format</string>
+    <string name="dvd_title">Title</string>
+    <string name="dvd_open">Pass in and out</string>
+    <string name="dvd_menu">Menu</string>
+    <string name="dvd_back">Return</string>
+    <string name="dvd_up">Up</string>
+    <string name="dvd_down">Down</string>
+    <string name="dvd_left">Left</string>
+    <string name="dvd_right">Right</string>
+    <string name="dvd_ok">OK</string>
+
+    <!-- fan -->
+    <string name="fan">fan</string>
+    <string name="str_fan">Fan</string>
+    <string name="fan_power">ON/OFF</string>
+    <string name="fan_mode"> Mode</string>
+    <string name="fan_li">Anion</string>
+    <string name="fan_speed">Air Volume</string>
+    <string name="fan_key0">ON/Wind</string>
+    <string name="fan_speedlow">Low Speed</string>
+    <string name="fan_speedmiddle">Medium Speed</string>
+    <string name="fan_speedhight">High Speed</string>
+    <string name="fan_sleep">Sleep</string>
+    <string name="fan_freq">Shake</string>
+    <string name="fan_cool">Cold</string>
+    <string name="fan_timer">Timing</string>
+    <string name="fan_light">Light</string>
+    <string name="fan_key1">1</string>
+    <string name="fan_key2">2</string>
+    <string name="fan_key3">3</string>
+    <string name="fan_key4">4</string>
+    <string name="fan_key5">5</string>
+    <string name="fan_key6">6</string>
+    <string name="fan_key7">7</string>
+    <string name="fan_key8">8</string>
+    <string name="fan_key9">9</string>
+
+    <!-- Light -->
+    <string name="light">light</string>
+    <string name="str_light">LAMP</string>
+    <string name="light_power_all_on">All On</string>
+    <string name="light_power_all_off">All Off</string>
+    <string name="light_power_on">On</string>
+    <string name="light_power_off">OFF</string>
+    <string name="light_light">Brightness+</string>
+    <string name="light_dark">Brightness-</string>
+    <string name="light_lost">Burglar</string>
+    <string name="light_keyA">A</string>
+    <string name="light_keyB">B</string>
+    <string name="light_keyC">C</string>
+    <string name="light_keyD">D</string>
+    <string name="light_setting">SET</string>
+    <string name="light_study">Learn</string>
+    <string name="light_key1">1</string>
+    <string name="light_key2">2</string>
+    <string name="light_key3">3</string>
+    <string name="light_key4">4</string>
+    <string name="light_key5">5</string>
+    <string name="light_key6">6</string>
+    <string name="light_timer1">Timing1</string>
+    <string name="light_timer2">Timing2</string>
+    <string name="light_timer3">Timing3</string>
+    <string name="light_timer4">Timing4</string>
+    <!-- pjt -->
+    <string name="pjt">pjt</string>
+    <string name="str_pjt">PJT</string>
+    <string name="pjt_power_on">ON</string>
+    <string name="pjt_power_off">OFF</string>
+    <string name="pjt_computer">PC</string>
+    <string name="pjt_video">VIDEO</string>
+    <string name="pjt_sign">Source</string>
+    <string name="pjt_zoomadd">Zoom +</string>
+    <string name="pjt_zoomsub">Zoom -</string>
+    <string name="pjt_pictureadd">Screens+</string>
+    <string name="pjt_picturesub">Screens-</string>
+    <string name="pjt_brightness">Brightness</string>
+    <string name="pjt_auto">Auto</string>
+    <string name="pjt_exit">Quit</string>
+    <string name="pjt_menu">Menu</string>
+    <string name="pjt_pause">Pause</string>
+    <string name="pjt_mute">Mute</string>
+    <string name="pjt_voladd">VOL+</string>
+    <string name="pjt_volsub">VOL-</string>
+    <string name="pjt_up">UP</string>
+    <string name="pjt_down">DOWN</string>
+    <string name="pjt_left">LEFT</string>
+    <string name="pjt_right">RIGHT</string>
+    <string name="pjt_ok">OK</string>
+    <!-- AIR -->
+    <string name="air">air</string>
+    <string name="str_air">AIR</string>
+    <string name="air_power">ON/OF</string>
+    <string name="air_tempadd">Up</string>
+    <string name="air_tempsub">Down</string>
+    <string name="air_mode">Mode</string>
+    <string name="air_wind_count">Air volume</string>
+    <string name="air_wind_dir">Manually Wind</string>
+    <string name="air_wind_auto_dir">Auto Wind</string>
+    <string name="air_mode_val">Mode:</string>
+    <string name="air_temp_val">Temperature:</string>
+    <string name="air_wind_dir_val">Wind Dir:</string>
+    <string name="air_wind_val">Air volume:</string>
+    <string name="air_wind_count_value_1">Auto</string>
+    <string name="air_wind_count_value_2">Low</string>
+    <string name="air_wind_count_value_3">middle</string>
+    <string name="air_wind_count_value_4">High</string>
+    <string name="air_wind_dir_value_1">Up</string>
+    <string name="air_wind_dir_value_2">middle</string>
+    <string name="air_wind_dir_value_3">Down</string>
+    <string name="air_wind_dir_value_4">Auto</string>
+    <string name="air_wind_auto_dir_value_1">ON</string>
+    <string name="air_wind_auto_dir_value_0">OFF</string>
+    <string name="air_mode_value_1">Auto</string>
+    <string name="air_mode_value_2">Refrigerating</string>
+    <string name="air_mode_value_3">Dehumidifying</string>
+    <string name="air_mode_value_4">Ventilation</string>
+    <string name="air_mode_value_5">Heating</string>
+    <string name="d">Degree</string>
+
+    <string-array name="type_array">
+        <item>TV</item>
+        <item>DVD</item>
+        <item>STB</item>
+        <item>AIR</item>
+        <item>FAN</item>
+        <item>PJT</item>
+    </string-array>
+    
+    <!-- MENU -->
+    <string name="study">Learn</string>
+    <string name="options">select</string>
+    <string name="about">About</string>
+    <string name="quit">exit</string>
+    <string name="dialog_ok">OK</string>
+    
+    <string name="option_info"><![CDATA[The first use of the code operation: turn on the device, select the device type, brand or region name and then press automatic Jianniu, paired device reaction: such as switch machines, and out of positions, the volume change action, press the stopthen save the check button is normal, not normal, repeat operation can also manually upward, downward search single brand or a single area to search for matching less than All brand or region within the search code.]]></string>
+
+</resources>

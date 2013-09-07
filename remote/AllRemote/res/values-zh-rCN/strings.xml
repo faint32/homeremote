@@ -1,0 +1,278 @@
+﻿<resources>
+
+    <string name="app_name">万能遥控器</string>
+ 
+    <string name="dialog_ok">确定</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">万能遥控器</string>
+    <string name="device_name">AllRemote</string>
+    <string name="toast">TOAST</string>
+    <string name="timeout">数据接收超时</string>
+    <string name="title_studying"><![CDATA[正在学习...]]></string>
+    <string name="title_studyed">学习成功</string>
+    <string name="title_about">关于</string>
+    <string name="study_alert"><![CDATA[请指定一个要学习的按键"]]></string>
+    <string name="study_info"><![CDATA[请将被学遥控器发射头贴近对准接收器发射头，距离约3CM，并长按被学习的按键1到2S]]></string>
+   <string name="study_loading">学习 载入中</string>
+    <string name="study_save">保存数据</string>
+    <string name="study_exit">退出学习</string>
+    <string name="study_timeout">学习超时退出</string>
+    <string name="about_ok">确定</string>
+    <string name="device_type">设备类型</string>
+    <string name="name_text">设备名称</string>
+    <string name="cur_name">当前设备</string>
+    <string name="count_text"></string>
+    <string name="auto_text">自动</string>
+    <string name="stop_text">停止</string>
+    <string name="up_text">向上</string>
+    <string name="down_text">向下</string>
+    <string name="manual_text">手动</string>
+    <string name="save_text">保存</string>
+     <string name="set_menu">设置</string>
+     <string name="updata_end">数据更新完毕</string>
+     <string name="air_power_off">模式:关闭</string>
+    <string name="language">
+<![CDATA[
+        	软件安装:将“*.apk”文件拷贝或下载到手机存储卡上，通过“文件管理”或“文件管理器”，
+			找到相关目录下的该文件，点击按提示安装，系统会生成：“手机遥控器”图标;\n
+	]]>		
+    </string>
+     <string name="str_about">
+<![CDATA[
+	软件信息:\n
+	名称:手机遥控器\n
+	版本:v0.0.1\n
+	支持硬件类型:V1\n
+	\n
+	联系方式:\n
+	
+	\n
+	
+	]]>
+    </string>
+    <string name="about_info">
+<![CDATA[
+        							  
+        							          版本:v0.0.1]]>
+    </string>
+    <string name="Long"><![CDATA[无锡力芯微电子有限公司]]></string>
+    <string name="LongAbout">
+<![CDATA[
+        							  
+        							          版本:v0.0.1]]>
+    </string>
+    <string name="Clean"></string>
+    <string name="CleanAbout"><![CDATA[版本:v2.0.2\n]]></string>
+   
+    <!-- Splash -->
+    <string name="splash_loading"><![CDATA[Loading...]]></string>
+    <!-- MainActivity -->
+    <string name="str_title">警告</string>
+    <string name="str_message">退出系统?</string>
+    <string name="str_ok">确定</string>
+    <string name="str_back">返回</string>
+
+ 
+
+    <!-- TV -->
+    <string name="tv">tv</string>
+    <string name="str_tv">电视</string>
+    <string name="tv_power">开关</string>
+    <string name="tv_mute">静音</string>
+    <string name="tv_key0">0</string>
+    <string name="tv_key1">1</string>
+    <string name="tv_key2">2</string>
+    <string name="tv_key3">3</string>
+    <string name="tv_key4">4</string>
+    <string name="tv_key5">5</string>
+    <string name="tv_key6">6</string>
+    <string name="tv_key7">7</string>
+    <string name="tv_key8">8</string>
+    <string name="tv_key9">9</string>
+    <string name="tv_key10">-/&#8212;</string>
+    <string name="tv_menu">菜单</string>
+    <string name="tv_chadd">频道+</string>
+    <string name="tv_chsub">频道-</string>
+    <string name="tv_voladd">音量+</string>
+    <string name="tv_volsub">音量-</string>
+    <string name="tv_ok">确定</string>
+    <string name="tv_av">AV/TV</string>
+    <string name="tv_back">返回</string>
+     <string name="tv_show">按键显示</string>
+
+    <!-- STB -->
+    <string name="stb">stb</string>
+    <string name="str_stb">机顶盒</string>
+    <string name="stb_wait">待机</string>
+    <string name="stb_watch">导视</string>
+    <string name="stb_back">返回</string>
+    <string name="stb_key0">0</string>
+    <string name="stb_key1">1</string>
+    <string name="stb_key2">2</string>
+    <string name="stb_key3">3</string>
+    <string name="stb_key4">4</string>
+    <string name="stb_key5">5</string>
+    <string name="stb_key6">6</string>
+    <string name="stb_key7">7</string>
+    <string name="stb_key8">8</string>
+    <string name="stb_key9">9</string>
+    <string name="stb_chadd">频道+</string>
+    <string name="stb_chsub">频道-</string>
+    <string name="stb_voladd">音量+</string>
+    <string name="stb_volsub">音量-</string>
+    <string name="stb_up">上</string>
+    <string name="stb_down">下</string>
+    <string name="stb_left">左</string>
+    <string name="stb_right">右</string>
+    <string name="stb_ok">确定</string>
+    <string name="stb_menu">菜单</string>
+
+    <!-- DVD -->
+    <string name="dvd">dvd</string>
+    <string name="str_dvd">影碟机</string>
+    <string name="dvd_power">开关</string>
+    <string name="dvd_mute">静音</string>
+    <string name="dvd_quickforward">快进</string>
+    <string name="dvd_quickback">快退</string>
+    <string name="dvd_play">播放</string>
+    <string name="dvd_stop">停止</string>
+    <string name="dvd_upsong">上一曲</string>
+    <string name="dvd_downsong">下一曲</string>
+    <string name="dvd_pause">暂停</string>
+    <string name="dvd_av">制式</string>
+    <string name="dvd_title">标题</string>
+    <string name="dvd_open">开关仓</string>
+    <string name="dvd_menu">菜单</string>
+    <string name="dvd_back">返回</string>
+    <string name="dvd_up">上</string>
+    <string name="dvd_down">下</string>
+    <string name="dvd_left">左</string>
+    <string name="dvd_right">右</string>
+    <string name="dvd_ok">确定</string>
+
+    <!-- fan -->
+    <string name="fan">fan</string>
+    <string name="str_fan">风扇</string>
+    <string name="fan_power">开关</string>
+    <string name="fan_mode"> 模式</string>
+    <string name="fan_li">负离子</string>
+    <string name="fan_speed">风量</string>
+    <string name="fan_key0">开/风速</string>
+    <string name="fan_speedlow">低速</string>
+    <string name="fan_speedmiddle">中速</string>
+    <string name="fan_speedhight">高速</string>
+    <string name="fan_sleep">睡眠</string>
+    <string name="fan_freq">摇头</string>
+    <string name="fan_cool">制冷</string>
+    <string name="fan_timer">定时</string>
+    <string name="fan_light">灯光</string>
+    <string name="fan_key1">1</string>
+    <string name="fan_key2">2</string>
+    <string name="fan_key3">3</string>
+    <string name="fan_key4">4</string>
+    <string name="fan_key5">5</string>
+    <string name="fan_key6">6</string>
+    <string name="fan_key7">7</string>
+    <string name="fan_key8">8</string>
+    <string name="fan_key9">9</string>
+    <!-- PJT -->
+    <string name="pjt">pjt</string>
+    <string name="str_pjt">投影仪</string>
+    <string name="pjt_power_on">开机</string>
+    <string name="pjt_power_off">关机</string>
+    <string name="pjt_computer">电脑</string>
+    <string name="pjt_video">视频</string>
+    <string name="pjt_sign">信号源</string>
+    <string name="pjt_zoomadd">变焦+</string>
+    <string name="pjt_zoomsub">变焦-</string>
+    <string name="pjt_pictureadd">画面+</string>
+    <string name="pjt_picturesub">画面-</string>
+    <string name="pjt_brightness">亮度</string>
+    <string name="pjt_auto">自动</string>
+    <string name="pjt_exit">退出</string>
+    <string name="pjt_menu">菜单</string>
+    <string name="pjt_pause">暂停</string>
+    <string name="pjt_mute">静音</string>
+    <string name="pjt_voladd">音量+</string>
+    <string name="pjt_volsub">音量-</string>
+    <string name="pjt_up">上</string>
+    <string name="pjt_down">下</string>
+    <string name="pjt_left">左</string>
+    <string name="pjt_right">右</string>
+    <string name="pjt_ok">确定</string>
+
+    <!-- Light -->
+    <string name="light">light</string>
+    <string name="str_light">灯</string>
+    <string name="light_power_all_on">全开</string>
+    <string name="light_power_all_off">全关</string>
+    <string name="light_power_on">开</string>
+    <string name="light_power_off">关</string>
+    <string name="light_light">变亮</string>
+    <string name="light_dark">变暗</string>
+    <string name="light_lost">防盗</string>
+    <string name="light_keyA">A</string>
+    <string name="light_keyB">B</string>
+    <string name="light_keyC">C</string>
+    <string name="light_keyD">D</string>
+    <string name="light_setting">设置</string>
+    <string name="light_study">学习</string>
+    <string name="light_key1">1</string>
+    <string name="light_key2">2</string>
+    <string name="light_key3">3</string>
+    <string name="light_key4">4</string>
+    <string name="light_key5">5</string>
+    <string name="light_key6">6</string>
+    <string name="light_timer1">定时1</string>
+    <string name="light_timer2">定时2</string>
+    <string name="light_timer3">定时3</string>
+    <string name="light_timer4">定时4</string>
+    <!-- AIR -->
+    <string name="air">air</string>
+    <string name="str_air">空调</string>
+    <string name="air_power">开关</string>
+    <string name="air_tempadd">温度加</string>
+    <string name="air_tempsub">温度减</string>
+    <string name="air_mode">模式</string>
+    <string name="air_wind_count">风量</string>
+    <string name="air_wind_dir">手动风向</string>
+    <string name="air_wind_auto_dir">自动风向</string>
+    <string name="air_mode_val">模式:</string>
+    <string name="air_temp_val">温度:</string>
+    <string name="air_wind_dir_val">风向:</string>
+    <string name="air_wind_val">风量:</string>
+    <string name="air_wind_count_value_1">自动</string>
+    <string name="air_wind_count_value_2">低</string>
+    <string name="air_wind_count_value_3">中</string>
+    <string name="air_wind_count_value_4">高</string>
+    <string name="air_wind_dir_value_1">向上</string>
+    <string name="air_wind_dir_value_2">中</string>
+    <string name="air_wind_dir_value_3">向下</string>
+    <string name="air_wind_dir_value_4">自动</string>
+    <string name="air_wind_auto_dir_value_1">开</string>
+    <string name="air_wind_auto_dir_value_0">关</string>
+    <string name="air_mode_value_1">自动</string>
+    <string name="air_mode_value_2">制冷</string>
+    <string name="air_mode_value_3">抽湿</string>
+    <string name="air_mode_value_4">送风</string>
+    <string name="air_mode_value_5">制热</string>
+    <string name="d">度</string>
+
+    <string-array name="type_array">
+        <item>电视</item>
+        <item>影碟机</item>
+        <item>机顶盒</item>
+        <item>空调</item>
+        <item>风扇</item>
+        <item>投影仪</item>
+    </string-array>
+
+    <!-- MENU -->
+    <string name="study">学习</string>
+    <string name="help">帮助</string>
+    <string name="options">选择</string>
+    <string name="about">关于</string>
+    <string name="quit">退出</string>
+    <string name="option_info"><![CDATA[首次使用对码操作：打开设备电源，选相应的设备类型，品牌或地区名称，然后按上下键钮，进行配对，当设备有反应：如开关机，进出仓，音量变化动作时，按停止然后按保存，检查各按键是否正常，不正常则重复操作，也可以手动向上，向下搜索，如果单品牌或单地区范围搜索配对不到，可以在全部品牌或地区范围内进行搜索对码。]]></string>
+
+</resources>

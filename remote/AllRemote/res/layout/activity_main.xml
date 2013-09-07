@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+ 
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/gallerylayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <HorizontalScrollView
+                android:id="@+id/hs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+                </TabWidget>
+            </HorizontalScrollView>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </TabHost>
+    
+     <ImageView android:id="@+id/code_sending" 
+     android:visibility="gone" 
+     android:layout_width="fill_parent"
+      android:layout_height="wrap_content" 
+      android:contentDescription="code_sending"
+      android:src="@drawable/code_sending" />
+   
+  <LinearLayout
+      android:id="@+id/pop_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_alignParentBottom="true"
+      >
+        <Button
+            android:id="@+id/btn_menu"
+          
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/button_control"
+         	          
+            android:contentDescription="@string/set_menu" />
+    </LinearLayout>
+</RelativeLayout>
