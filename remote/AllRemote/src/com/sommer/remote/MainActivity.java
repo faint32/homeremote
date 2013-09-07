@@ -186,13 +186,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				.setContent(intent);
 		tabHost.addTab(spec);
 
-//		intent = new Intent().setClass(this, LightActivity.class);
-//		spec = tabHost
-//				.newTabSpec(this.getString(R.string.light))
-//				.setIndicator(this.getString(R.string.str_light))
-//				.setContent(intent);
-//		tabHost.addTab(spec);
-		
 
 		
 		tabHost.setCurrentTab(0);
