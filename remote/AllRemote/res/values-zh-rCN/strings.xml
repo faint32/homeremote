@@ -62,10 +62,13 @@
         							          版本:v0.0.1]]>
     </string>
     <string name="Clean"></string>
-    <string name="CleanAbout"><![CDATA[版本:v2.0.2\n]]></string>
+  
    
-    <!-- Splash -->
-    <string name="splash_loading"><![CDATA[Loading...]]></string>
+    <!-- Start -->
+    <string name="start_loading"><![CDATA[Loading...]]></string>
+    
+    
+    
     <!-- MainActivity -->
     <string name="str_title">警告</string>
     <string name="str_message">退出系统?</string>

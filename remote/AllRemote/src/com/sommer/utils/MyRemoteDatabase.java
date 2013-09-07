@@ -36,7 +36,7 @@ public class MyRemoteDatabase {
         mEditor.putString(DVDINDEX,Value.dvd_index); 
         mEditor.putString(FANINDEX,Value.fan_index); 
         mEditor.putString(PJTINDEX,Value.pjt_index); 
-        mEditor.putString(LIGHTINDEX,Value.light_index); 
+
         mEditor.putString(AIRINDEX,Value.air_index); 
         mEditor.putBoolean(INITIAL,Value.initial); 
         
@@ -62,7 +62,7 @@ public class MyRemoteDatabase {
 		Value.dvd_index  = sharedPreferences.getString(DVDINDEX, "1001");
 		Value.fan_index  = sharedPreferences.getString(FANINDEX, "3001");
 		Value.pjt_index  = sharedPreferences.getString(PJTINDEX, "4000");
-		Value.light_index  = sharedPreferences.getString(LIGHTINDEX, "6000");
+
 		Value.air_index  = sharedPreferences.getString(AIRINDEX, "5000");
 		Value.initial =sharedPreferences.getBoolean(INITIAL, false);
 

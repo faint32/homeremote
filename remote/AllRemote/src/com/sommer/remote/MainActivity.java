@@ -76,7 +76,7 @@ import android.widget.Toast;
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity implements OnTouchListener,
 		OnGestureListener {
-	private static final String TAG = "ET4003_REMOTE_DEMO";
+	private static final String TAG = "MainActivity";
 	private static final int FLING_MIN_DISTANCE = 20;
 	private static final int FLING_MIN_VELOCITY = 0;
 	private static final int STUDY = 1;
