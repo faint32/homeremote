@@ -1,6 +1,7 @@
 package com.sommer.remote;
 
 import com.sommer.allremote.R;
+import com.sommer.service.RemoteUpdateService;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,7 @@ public class StartActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        startService(new Intent(this, RemoteUpdateService.class));
         new Handler().postDelayed(new Runnable() {
 			public void run() {
 				Intent mainIntent = new Intent(StartActivity.this,

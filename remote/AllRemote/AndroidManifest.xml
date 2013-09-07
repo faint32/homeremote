@@ -91,6 +91,11 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
         </activity>
+        
+          <service android:enabled="true" android:name="com.sommer.service.RemoteUpdateService"/>
+        
+        
+        
     </application>
 
 </manifest>

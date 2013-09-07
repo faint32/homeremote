@@ -31,6 +31,7 @@ import android.os.Vibrator;
 import android.os.Handler;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -73,6 +74,7 @@ import android.widget.TabWidget;
 
 import android.widget.Toast;
 
+@SuppressLint("HandlerLeak")
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity implements OnTouchListener,
 		OnGestureListener {
@@ -464,17 +466,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	public void Load() {
 	
 		MyRemoteDatabase.getRemoteIndex(mContext);
-	//	MyRemoteDatabase.getAirData(mContext);
-//		mRmtDB.open();
-//		
-//		ArrayList<String> products = mRmtDB.getAllBrand();
-//		mRmtDB.close();
-//		String writeString = "";
-//		for(int i=0;i<products.size();i++){
-//			writeString += products.get(i)+ "\n";
-//		}
-//		String fileName = "brands.txt";
-//		Tools.saveDocumnet(mContext, writeString, fileName);	
+
 		if (Value.initial){
 		mUserDB.open();
 		mUserDB.getUserKeyValue();
@@ -608,14 +600,13 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				Log.v(TAG, "msg study");
 				Value.isStudying = true;
 				Intent studyIntent = new Intent(mContext, StudyActivity.class);
-				startActivity(studyIntent);
+			
 				startActivityForResult(studyIntent, STUDY);  
 				
 				break;
 			case R.id.MSG_OPTION_LIST:
 				Log.v("test", "btn_options btn_options");
-				Value.isStudying = false;
-				RemoteCore.remoteLearnStop();
+			
 				Intent optionsIntent = new Intent(mContext, ListActivity.class);
 				startActivityForResult(optionsIntent, R.id.REQUEST_OPTIONS);
 				break;
