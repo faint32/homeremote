@@ -119,7 +119,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		
 		
-		initHostTab(dType);
+		initHostTab(Value.deviceType);
 
 		
 		tabHost.setCurrentTab(0);
@@ -160,7 +160,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	
 		
 	
-		RemoteCore.finishRemote();
+		
 	}
 	
 	@Override

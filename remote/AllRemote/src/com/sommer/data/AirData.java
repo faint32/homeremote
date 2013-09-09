@@ -36,15 +36,15 @@ public class AirData {
 	}
 	public  int addTmp(int mTmp) {
 		mTmp++;
-		if (mTmp>35){
-			mTmp= 35;
+		if (mTmp>30){
+			mTmp= 30;
 		}
 		return mTmp;
 	}
 	public  int subTmp(int mTmp) {
 		mTmp--;
-		if (mTmp<18){
-			mTmp= 18;
+		if (mTmp<16){
+			mTmp= 16;
 		}
 		return mTmp;
 	}

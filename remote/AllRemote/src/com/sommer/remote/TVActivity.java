@@ -217,88 +217,107 @@ public class TVActivity extends Activity implements OnClickListener,
 		switch (_view.getId()) {
 		case R.id.tv_key0:
 			Value.currentKey = "tv_key0";
-			Value.cKey = current + 0;
+			Value.cKey = current + 21;
 			break;
 		case R.id.tv_key1:
 		
 			Value.currentKey = "tv_key1";
-			Value.cKey = current + 1;
+			Value.cKey = current + 12;
 			break;
 		case R.id.tv_key2:
 			
 			Value.currentKey = "tv_key2";
+			Value.cKey = current + 13;
 			break;
 		case R.id.tv_key3:
 			
 			Value.currentKey = "tv_key3";
+			Value.cKey = current + 14;
 			break;
 		case R.id.tv_key4:
 			
 			Value.currentKey = "tv_key4";
+			Value.cKey = current + 15;
 			break;
 		case R.id.tv_key5:
 			
 			Value.currentKey = "tv_key5";
+			Value.cKey = current + 16;
 			break;
 		case R.id.tv_key6:
 			
 			Value.currentKey = "tv_key6";
+			Value.cKey = current + 17;
 			break;
 		case R.id.tv_key7:
 			
 			Value.currentKey = "tv_key7";
+			Value.cKey = current + 18;
 			break;
 		case R.id.tv_key8:
 			
 			Value.currentKey = "tv_key8";
+			Value.cKey = current + 19;
 			break;
 		case R.id.tv_key9:
 		
 			Value.currentKey = "tv_key9";
+			Value.cKey = current + 20;
 			break;
 		case R.id.tv_key10:
 			
 			Value.currentKey = "tv_key10";
+			Value.cKey = current + 22;
 			break;
 		case R.id.tv_power:
 		
 			Value.currentKey = "tv_power";
+			Value.cKey = current + 0;
 			break;
 		case R.id.tv_av:
 		
 			Value.currentKey = "tv_av";
+			Value.cKey = current + 5;
 			break;
 		case R.id.tv_mute:
 		
 			Value.currentKey = "tv_mute";
+			Value.cKey = current + 8;
 			break;
 		case R.id.tv_back:
 			
 			Value.currentKey = "tv_back";
+			Value.cKey = current + 9;
 			break;
 		case R.id.tv_chadd:
 		
 			Value.currentKey = "tv_chadd";
+			Value.cKey = current + 10;
 			break;
 		case R.id.tv_chsub:
 			
 			Value.currentKey = "tv_chsub";
+			Value.cKey = current + 11;
 			break;
 		case R.id.tv_voladd:
 			
 			Value.currentKey = "tv_voladd";
+			Value.cKey = current + 6;
 			break;
 		case R.id.tv_volsub:
 			
 			Value.currentKey = "tv_volsub";
+			Value.cKey = current + 7;
 			break;
 		case R.id.tv_ok:
 		
 			Value.currentKey = "tv_ok";
+			Value.cKey = current + 3;
 			break;
 		case R.id.tv_menu:
 		
 			Value.currentKey = "tv_menu";
+			Value.cKey = current + 1;
 			break;
 		default:
 			

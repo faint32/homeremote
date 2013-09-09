@@ -247,7 +247,7 @@ void sendTestCode(int count){
 		 String testCode = RemoteCore.encodeRemoteData(rmtData);
 		 showCodeSending();
 		 RemoteCore.sendTestRemote(testCode);
-		 hideCodeSending();
+	//	 hideCodeSending();
 		 }else{
 		Log.v(TAG, "air index data ->"+ index);	 
 		int id=	 Integer.parseInt(index);
@@ -287,12 +287,15 @@ void sendTestCode(int count){
 			 break;
 		 }
 		 MyRemoteDatabase.saveRemoteIndex(getApplicationContext());
+		 if(mType!= Value.DeviceType.TYPE_AIR){
 		 mRmtDB.open();
 		 mRmtDB.setKeyRemoteData(mType, index);
 		 mRmtDB.close();
+		 
 		 mUsertDB.open();
 		 mUsertDB.saveAllKeyTabValue();
 		 mUsertDB.close();
+		 }
 	 }
 	 
 	@Override

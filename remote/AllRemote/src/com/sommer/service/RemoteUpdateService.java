@@ -129,6 +129,7 @@ public class RemoteUpdateService extends IntentService {
 		if (Value.initial){
 		mUserDB.open();
 		mUserDB.getUserKeyValue();
+		mUserDB.getRemoteIndex();
 		mUserDB.close();
 		Log.v(TAG, "updata finished");
 //		Toast toast = Toast.makeText(mContext, R.string.updata_end,

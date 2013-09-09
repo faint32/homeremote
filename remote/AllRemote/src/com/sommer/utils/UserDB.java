@@ -40,9 +40,19 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	final static String TAG = "UserDB";
 
-	final static String USER_TAB	="user_tab";
+	
 	final static String REMOTE	="remote_index";
+	
 	final static String AIR	="air_data";
+	
+	
+	
+	final static String USERTAB	="user_tab";
+	public static final String USER_ID = "_id";
+	public static final String USER_NAME = "key_name";
+	public static final String USER_LEARN = "is_learned";
+	public static final String USER_DATA = "remote_data";
+
 	//用户数据库文件的版本
 	private static final int DB_VERSION = 1;
 	//数据库文件目标存放路径为系统默认位置，
@@ -183,6 +193,7 @@ public class UserDB extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	}
 
+	@SuppressWarnings("unused")
 	private SQLiteDatabase openOrCreateDatabase(String string, Object object) {
 	// TODO Auto-generated method stub
 		return null;
@@ -190,7 +201,7 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	public void getUserKeyValue(){
 		
-			Cursor c = myUserDB.query(Value.USERTAB, null, null ,null, null, null, null);
+			Cursor c = myUserDB.query(USERTAB, null, null ,null, null, null, null);
 			c.moveToFirst();
 			do{
 
@@ -214,31 +225,48 @@ public class UserDB extends SQLiteOpenHelper {
 	public  void saveAllKeyTabValue(){
 		
 		Log.v(TAG, "saveAllKeyTabValue start");
-		Cursor c = myUserDB.query(Value.USERTAB, null, null ,null, null, null, null);
+		Cursor c = myUserDB.query(USERTAB, null, null ,null, null, null, null);
 		c.moveToFirst();
 		do{
 			 ContentValues cvs = new ContentValues();
 
 		//	Value.keyRemoteTab.put(c.getString(1), c.getString(2));
 			 
-			cvs.put(Value.USER_NAME, c.getString(1));
+			cvs.put(USER_NAME, c.getString(1));
 			
 			String data = RemoteCore.updateRemoteData(c.getString(2));
 		     
-			cvs.put(Value.USER_DATA,data );
+			cvs.put(USER_DATA,data );
 		      
-		  	myUserDB.update(Value.USERTAB, cvs, "key_name=?", new String[] {c.getString(1)});
+		  	myUserDB.update(USERTAB, cvs, "key_name=?", new String[] {c.getString(1)});
 			
 		//	Value.keyRemoteTab.put(kv.getKeyName(), kv.getData());
 		}while(c.moveToNext());
 	
 		c.close(); 
-		 
-		
 
 		
 	}
 	
+	public  void getRemoteIndex(){
+		
+		Log.v(TAG, "saveAllKeyTabValue start");
+		Cursor c = myUserDB.query(REMOTE, null, null ,null, null, null, null);
+		int size = c.getCount();
+		Value.deviceType = new int[size];
+		Value.deviceIndex = new String[size];
+		c.moveToFirst();
+		int i = 0;
+		do{
+			Value.deviceType[i]=c.getInt(1);
+			Value.deviceIndex[i] = c.getString(2); 
+			i++;
+		}while(c.moveToNext());
+	
+		c.close(); 
+
+		Log.v(TAG, "devicetype--->"+ Value.deviceType.toString());
+	}
 	
 	
 	
