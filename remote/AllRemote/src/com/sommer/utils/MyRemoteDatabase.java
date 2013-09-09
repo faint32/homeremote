@@ -55,15 +55,15 @@ public class MyRemoteDatabase {
         mEditor.commit();  
 	}
 	
-	public static void getRemoteIndex(Context _mContext){
-		SharedPreferences  sharedPreferences = _mContext.getSharedPreferences(DB,0);  
+	public static void getRemoteIndex(Context mContext){
+		SharedPreferences  sharedPreferences = mContext.getSharedPreferences(DB,0);  
 		Value.tv_index  = sharedPreferences.getString(TVINDEX, "0000");
 		Value.stb_index  = sharedPreferences.getString(STBINDEX, "2173");
 		Value.dvd_index  = sharedPreferences.getString(DVDINDEX, "1001");
 		Value.fan_index  = sharedPreferences.getString(FANINDEX, "3001");
 		Value.pjt_index  = sharedPreferences.getString(PJTINDEX, "4000");
 
-		Value.air_index  = sharedPreferences.getString(AIRINDEX, "5000");
+		Value.air_index  = sharedPreferences.getString(AIRINDEX, "5003");
 		Value.initial =sharedPreferences.getBoolean(INITIAL, false);
 
 	}
@@ -76,7 +76,7 @@ public class MyRemoteDatabase {
 		ad.setmWindCount(sharedPreferences.getInt(WINDC, 1));
 		ad.setmWindDir(sharedPreferences.getInt(WINDD, 1));
 		ad.setmWindAuto(sharedPreferences.getInt(WINDA, 1));
-		ad.setCodeType(sharedPreferences.getInt(CODETYPE, 5000));
+		ad.setCodeType(sharedPreferences.getInt(CODETYPE, 5003));
 		
 		
 		return ad;

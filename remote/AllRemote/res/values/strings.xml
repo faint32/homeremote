@@ -30,6 +30,8 @@
     <string name="save_text">Save</string>
     <string name="set_menu">SetUp</string>
     <string name="updata_end">Database updata finished</string>
+    <string name=" first_updata_end">First  Database initial finished</string>
+   
     <string name="air_power_off">Mode:OFF</string>
     
     <string name="language">

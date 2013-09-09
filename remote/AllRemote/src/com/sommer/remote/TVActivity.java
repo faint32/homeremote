@@ -16,9 +16,11 @@ import com.sommer.ui.SelectPicPopupWindow;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -35,12 +37,16 @@ public class TVActivity extends Activity implements OnClickListener,
 
 	//NumButton numberButtonWindows;
 	FuncationButton funButtonWindows;
+	int current;
 //	TextView keyValueIndex;
 //	String TVCodeIndex;
 //	HashMap<String , KeyValue> keyTab = new HashMap<String , KeyValue>();   
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tv);
+		Intent intent = getIntent();   
+		
+		current = intent.getIntExtra("current", 0);   
 		
 		
 	
@@ -211,10 +217,12 @@ public class TVActivity extends Activity implements OnClickListener,
 		switch (_view.getId()) {
 		case R.id.tv_key0:
 			Value.currentKey = "tv_key0";
+			Value.cKey = current + 0;
 			break;
 		case R.id.tv_key1:
 		
 			Value.currentKey = "tv_key1";
+			Value.cKey = current + 1;
 			break;
 		case R.id.tv_key2:
 			
@@ -298,21 +306,12 @@ public class TVActivity extends Activity implements OnClickListener,
 			break;
 		}
 		if (Value.currentKey != null) {
-			
+			KeyTreate.getInstance().keyTreate();	
 //			numberButtonWindows = new NumButton(this, itemsOnClick);
 //			numberButtonWindows.showAtLocation(this.findViewById(R.id.tv_main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-			funButtonWindows = new FuncationButton(this, itemsOnClick);
-			funButtonWindows.showAtLocation(this.findViewById(R.id.tv_main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
-//			KeyTreate.getInstance().keyTreate();
-//			KeyValue kv = Value.keyValueTab.get(Value.currentKey);
-//			if (kv.getIsLearned()==1){
-//			keyValueIndex.setText("Learn key value     " +Value.currentKey);
-//			keyValueIndex.setTextColor(Color.RED);
-//			}
-//			else {
-//			keyValueIndex.setText("normal key value     " +Value.currentKey);
-//			keyValueIndex.setTextColor(Color.BLUE);	
-//			}
+//			funButtonWindows = new FuncationButton(this, itemsOnClick);
+//			funButtonWindows.showAtLocation(this.findViewById(R.id.tv_main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+
 			
 		}
 	}

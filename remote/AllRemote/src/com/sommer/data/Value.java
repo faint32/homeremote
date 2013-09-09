@@ -1,5 +1,6 @@
 package com.sommer.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class Value {
@@ -15,11 +16,11 @@ public final class Value {
 	};
 	public static final String USERTAB = "user_tab";
 	public static final String USER_ID = "_id";
-	public static final String USER_NAME = "name";
+	public static final String USER_NAME = "key_name";
 	public static final String USER_CODE = "code_type";
 	public static final String USER_FORM = "form";
 	public static final String USER_LEARN = "is_learned";
-	public static final String USER_DATA = "data";
+	public static final String USER_DATA = "remote_data";
 	public static final String USER_DEVICE = "device_type";
 	public static final String USER_COLUMN = "key_column";
 	
@@ -35,6 +36,7 @@ public final class Value {
 	public static Boolean initial;
 	public static Boolean isStudying = false;
 	public static String currentKey = null;
+	public static int cKey = 0;
 	
 	public static final String[] tv_keys = {
 		"tv_power",
@@ -196,8 +198,8 @@ public final class Value {
 		"air_wind_auto_dir", //Auto Wind
 
 	};
-	public static HashMap<String, KeyValue> keyValueTab ;
-
+	public static HashMap<String, String> keyRemoteTab ;
+	public static ArrayList<KeyValue> keyValueTab  ;
 	
 	public static class DeviceType {
 		public final static int TYPE_TV = 0x00;

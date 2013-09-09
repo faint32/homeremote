@@ -19,6 +19,7 @@ import com.sommer.data.CodeType;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
+import com.sommer.ircomm.RemoteCore;
 
 
 import android.content.ContentValues;
@@ -40,6 +41,8 @@ public class UserDB extends SQLiteOpenHelper {
 	final static String TAG = "UserDB";
 
 	final static String USER_TAB	="user_tab";
+	final static String REMOTE	="remote_index";
+	final static String AIR	="air_data";
 	//用户数据库文件的版本
 	private static final int DB_VERSION = 1;
 	//数据库文件目标存放路径为系统默认位置，
@@ -190,17 +193,14 @@ public class UserDB extends SQLiteOpenHelper {
 			Cursor c = myUserDB.query(Value.USERTAB, null, null ,null, null, null, null);
 			c.moveToFirst();
 			do{
-				KeyValue kv = new KeyValue();
-				kv.setKeyName(c.getString(1));
-				kv.setIsLearned(c.getInt(4));
-				kv.setData(c.getString(5));
-				kv.setDeviceType(c.getInt(6));
-				kv.setKeyColumn(c.getInt(7));
-				Value.keyValueTab.put(kv.getKeyName(), kv);
+
+
+				Value.keyRemoteTab.put(c.getString(1), c.getString(2));
+				
+			//	Value.keyRemoteTab.put(kv.getKeyName(), kv.getData());
 			}while(c.moveToNext());
 	//		 String name = cursor.getString(cursor.getColumnIndex("name"));
 
-			
 		
 		c.close(); 
 		
@@ -212,22 +212,31 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	@SuppressWarnings("unchecked")
 	public  void saveAllKeyTabValue(){
-		 Set<?> set=Value.keyValueTab.entrySet();
-	        Iterator<?> it=set.iterator();
+		
 		Log.v(TAG, "saveAllKeyTabValue start");
-		  while(it.hasNext()){
-		Map.Entry<String, KeyValue> me=(Map.Entry<String, KeyValue>)it.next();  
-		  KeyValue kv = me.getValue();
-		 
-		  ContentValues values = new ContentValues();
-		      values.put(Value.USER_NAME, kv.getKeyName());
-		      values.put(Value.USER_LEARN, kv.getIsLearned());
-		      values.put(Value.USER_DATA,kv.getData() );
-		      values.put(Value.USER_DEVICE,kv.getDeviceType());
-		      values.put(Value.USER_COLUMN,kv.getKeyColumn());
-		  	myUserDB.update(Value.USERTAB, values, "name=?", new String[] {kv.getKeyName()});
+		Cursor c = myUserDB.query(Value.USERTAB, null, null ,null, null, null, null);
+		c.moveToFirst();
+		do{
+			 ContentValues cvs = new ContentValues();
 
-		  }
+		//	Value.keyRemoteTab.put(c.getString(1), c.getString(2));
+			 
+			cvs.put(Value.USER_NAME, c.getString(1));
+			
+			String data = RemoteCore.updateRemoteData(c.getString(2));
+		     
+			cvs.put(Value.USER_DATA,data );
+		      
+		  	myUserDB.update(Value.USERTAB, cvs, "key_name=?", new String[] {c.getString(1)});
+			
+		//	Value.keyRemoteTab.put(kv.getKeyName(), kv.getData());
+		}while(c.moveToNext());
+	
+		c.close(); 
+		 
+		
+
+		
 	}
 	
 	

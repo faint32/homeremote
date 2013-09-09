@@ -331,7 +331,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 	public int setKeyRemoteData(int _type,String _index){
 	//	ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
 		String[] rmtData = new String[35];
-		Set<?> set=Value.keyValueTab.entrySet();
+		Set<?> set=Value.keyRemoteTab.entrySet();
 	    Iterator<?> it=set.iterator();
 		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
 		if (c==null){
@@ -424,7 +424,8 @@ public class RemoteDB extends SQLiteOpenHelper {
 	
 	public ArrayList<String> getProducts(String deviceType,String _brandName){
 		ArrayList<String> products =  new ArrayList<String>();
-			Cursor c = myDataBase.query(LIST_TAB, null,  "brand =? and type = ? " ,new String[]{_brandName,deviceType}, null, null, null);
+		String brandNameLow = _brandName.toLowerCase();
+			Cursor c = myDataBase.query(LIST_TAB, null,  "brand =? and type = ? " ,new String[]{brandNameLow,deviceType}, null, null, null);
 			c.moveToFirst();
 			do{
 				
@@ -490,7 +491,8 @@ public class RemoteDB extends SQLiteOpenHelper {
 				kv.setKeyName(keyName);
 				kv.setDeviceType(c.getInt(2));
 				kv.setKeyColumn(c.getInt(3));
-				Value.keyValueTab.put(keyName, kv);
+				Value.keyValueTab.add(kv);
+			//	Value.keyRemoteTab.put(keyName, kv.getData());
 				}while (c.moveToNext());
 
 			c.close(); 

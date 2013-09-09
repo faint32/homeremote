@@ -46,43 +46,43 @@ public class AirActivity extends Activity implements OnClickListener {
 
 		Button air_power = (Button) findViewById(R.id.air_power);
 		air_power.setOnClickListener(this);
-		air_power.setWidth((screenWidth) / 3);
+		air_power.setWidth((screenWidth) / 4);
 		air_power.setHeight((screenHeight) / 10);
 		air_power.setBackgroundResource(R.drawable.button_power);
 
 		Button air_mode = (Button) findViewById(R.id.air_mode);
 		air_mode.setOnClickListener(this);
-		air_mode.setWidth((screenWidth) / 3);
+		air_mode.setWidth((screenWidth) / 4);
 		air_mode.setHeight((screenHeight) / 10);
 		air_mode.setBackgroundResource(R.drawable.button);
 
 		Button air_tempadd = (Button) findViewById(R.id.air_tempadd);
 		air_tempadd.setOnClickListener(this);
-		air_tempadd.setWidth((screenWidth) / 3);
+		air_tempadd.setWidth((screenWidth) / 4);
 		air_tempadd.setHeight((screenHeight) / 10);
 		air_tempadd.setBackgroundResource(R.drawable.button);
 		
 		Button air_tempsub = (Button) findViewById(R.id.air_tempsub);
 		air_tempsub.setOnClickListener(this);
-		air_tempsub.setWidth((screenWidth) / 3);
+		air_tempsub.setWidth((screenWidth) / 4);
 		air_tempsub.setHeight((screenHeight) / 10);
 		air_tempsub.setBackgroundResource(R.drawable.button);
 
 		Button air_wind_auto_dir = (Button) findViewById(R.id.air_wind_auto_dir);
 		air_wind_auto_dir.setOnClickListener(this);
-		air_wind_auto_dir.setWidth((screenWidth) / 3);
+		air_wind_auto_dir.setWidth((screenWidth) / 4);
 		air_wind_auto_dir.setHeight((screenHeight) / 10);
 		air_wind_auto_dir.setBackgroundResource(R.drawable.button);
 
 		Button air_wind_count = (Button) findViewById(R.id.air_wind_count);
 		air_wind_count.setOnClickListener(this);
-		air_wind_count.setWidth((screenWidth) / 3);
+		air_wind_count.setWidth((screenWidth) / 4);
 		air_wind_count.setHeight((screenHeight) / 10);
 		air_wind_count.setBackgroundResource(R.drawable.button);
 
 		Button air_wind_dir = (Button) findViewById(R.id.air_wind_dir);
 		air_wind_dir.setOnClickListener(this);
-		air_wind_dir.setWidth((screenWidth) / 3);
+		air_wind_dir.setWidth((screenWidth) / 4);
 		air_wind_dir.setHeight((screenHeight) / 10);
 		air_wind_dir.setBackgroundResource(R.drawable.button);
 		

@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.view.KeyEvent;
 
 public class StartActivity extends Activity {
-	private final int SPLASH_DISPLAY_LENGHT = 1000;//Integer.valueOf(this.getString(R.string.splash_delay_value));
+	private final int SPLASH_DISPLAY_LENGHT = 2000;//Integer.valueOf(this.getString(R.string.splash_delay_value));
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

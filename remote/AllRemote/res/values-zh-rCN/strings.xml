@@ -28,9 +28,10 @@
     <string name="down_text">向下</string>
     <string name="manual_text">手动</string>
     <string name="save_text">保存</string>
-     <string name="set_menu">设置</string>
-     <string name="updata_end">数据更新完毕</string>
-     <string name="air_power_off">模式:关闭</string>
+    <string name="set_menu">设置</string>
+    <string name="updata_end">数据更新完毕</string>
+    <string name=" first_updata_end">数据库 初始化 完成</string>
+    <string name="air_power_off">模式:关闭</string>
     <string name="language">
 <![CDATA[
         	软件安装:将“*.apk”文件拷贝或下载到手机存储卡上，通过“文件管理”或“文件管理器”，

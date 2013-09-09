@@ -1,24 +1,18 @@
 package com.sommer.remote;
 
 //import java.io.File;
-import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 
 import com.sommer.allremote.R;
-import com.sommer.data.KeyToRemote;
-import com.sommer.data.KeyValue;
+
 import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 import com.sommer.ircomm.RemoteCore;
+import com.sommer.ircomm.RemoteOut;
 
 import com.sommer.ui.SelectPicPopupWindow;
 import com.sommer.utils.MyRemoteDatabase;
-import com.sommer.utils.RemoteDB;
-import com.sommer.utils.Tools;
-import com.sommer.utils.UserDB;
 
 
 
@@ -32,7 +26,7 @@ import android.os.Handler;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TabActivity;
@@ -67,7 +61,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
+
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -75,7 +69,7 @@ import android.widget.TabWidget;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
-@SuppressWarnings("deprecation")
+
 public class MainActivity extends TabActivity implements OnTouchListener,
 		OnGestureListener {
 	private static final String TAG = "MainActivity";
@@ -83,14 +77,17 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static final int FLING_MIN_VELOCITY = 0;
 	private static final int STUDY = 1;
 
-
+	int[] dType ={Value.DeviceType.TYPE_AIR,Value.DeviceType.TYPE_TV,Value.DeviceType.TYPE_DVD,
+			Value.DeviceType.TYPE_STB,Value.DeviceType.TYPE_FAN,Value.DeviceType.TYPE_PJT		
+	};
+	
+	
 	private static Context mContext;
 	private TabHost tabHost;
 	private HorizontalScrollView mHs;
 	private GestureDetector mGestureDetector;
 	private Button mBt_menu;
-	private RemoteDB mRmtDB = null;
-	private UserDB mUserDB = null;
+	
 	private static KeyTreate mKeyTreate = null;
 	SelectPicPopupWindow menuWindow;
 	private Vibrator vibrator;  
@@ -109,8 +106,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		line.setOnTouchListener(this);
 		line.setLongClickable(true);
 		mContext = this;
+	
 		mHs = (HorizontalScrollView) findViewById(R.id.hs);
-		Value.keyValueTab = new  HashMap<String, KeyValue> ();
+//		Value.keyRemoteTab = new  HashMap<String, String> ();
 		mBt_menu = (Button) findViewById(R.id.btn_menu);
 		mBt_menu.setOnClickListener(new OnClickListener() {			
 				public void onClick(View v) {
@@ -118,74 +116,10 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 					menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
 				}
 			});
-		mRmtDB = new RemoteDB(getApplicationContext());
-		try {
-			mRmtDB.createDataBase();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		
-		mUserDB = new UserDB(getApplicationContext());
-		try {
-			mUserDB.createDataBase();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	//	Load();
-		
-	
-		tabHost = getTabHost();
-		TabHost.TabSpec spec;
-		tabHost.setup();
-		Intent intent;
-		intent = new Intent().setClass(this, TVActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.tv))
-				.setIndicator(this.getString(R.string.str_tv))
-				.setContent(intent);
-		tabHost.addTab(spec);
 		
 		
-
-
-		intent = new Intent().setClass(this, STBActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.stb))
-				.setIndicator(this.getString(R.string.str_stb))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, DVDActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.dvd))
-				.setIndicator(this.getString(R.string.str_dvd))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
-		intent = new Intent().setClass(this, PJTActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.pjt))
-				.setIndicator(this.getString(R.string.str_pjt))
-				.setContent(intent);
-		tabHost.addTab(spec);
-		intent = new Intent().setClass(this, AirActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.air))
-				.setIndicator(this.getString(R.string.str_air))
-				.setContent(intent);
-		tabHost.addTab(spec);		
 		
-		intent = new Intent().setClass(this, FanActivity.class);
-		spec = tabHost
-				.newTabSpec(this.getString(R.string.fan))
-				.setIndicator(this.getString(R.string.str_fan))
-				.setContent(intent);
-		tabHost.addTab(spec);
-
+		initHostTab(dType);
 
 		
 		tabHost.setCurrentTab(0);
@@ -195,8 +129,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
 		int screenHeight = dm.heightPixels;
-		Value.screenWidth = dm.widthPixels;
-		Value.screenHeight = dm.heightPixels;
+	
 		if (count > 4) {
 			for (int i = 0; i < count; i++) {
 				tabWidget.getChildTabViewAt(i).setMinimumWidth(screenWidth / 4);
@@ -216,6 +149,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			mKeyTreate.setContext(this);
 			mKeyTreate.setHandler(mHandler);
 		}
+		RemoteOut.activate();
 	//	RemoteComm.initRemote();
 	
 	}
@@ -224,17 +158,15 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	public void onDestroy() {
 		super.onDestroy();
 	
-		Save();
-		mUserDB.close();
-		mRmtDB.close();
+		
+	
 		RemoteCore.finishRemote();
 	}
 	
 	@Override
 	public void onPause() {
 		super.onPause();
-		mUserDB.close();
-		mRmtDB.close();
+		
 	//	RemoteComm.finishRemote();
 	}
 	
@@ -273,7 +205,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	}
 	
 	
-	
+
 	
 
 	@Override
@@ -293,6 +225,91 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			return super.onKeyDown(keyCode, event);
 		}
 	}
+	
+	
+	
+	void initHostTab(int[] dType){
+		tabHost = getTabHost();
+		TabHost.TabSpec spec;
+		tabHost.setup();
+		Intent intent;
+		for (int i=0;i<dType.length;i++){
+			
+		switch (dType[i]){
+		
+		case Value.DeviceType.TYPE_TV:
+			intent = new Intent().setClass(this, TVActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.tv))
+					.setIndicator(this.getString(R.string.str_tv))
+					.setContent(intent);
+			tabHost.addTab(spec);
+			break;
+		case Value.DeviceType.TYPE_DVD:
+			intent = new Intent().setClass(this, DVDActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.dvd))
+					.setIndicator(this.getString(R.string.str_dvd))
+					.setContent(intent);
+			tabHost.addTab(spec);
+			break;
+		case Value.DeviceType.TYPE_STB:
+			intent = new Intent().setClass(this,STBActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.stb))
+					.setIndicator(this.getString(R.string.str_stb))
+					.setContent(intent);
+			tabHost.addTab(spec);
+			break;
+		case Value.DeviceType.TYPE_PJT:
+			intent = new Intent().setClass(this, PJTActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.pjt))
+					.setIndicator(this.getString(R.string.str_pjt))
+					.setContent(intent);
+			tabHost.addTab(spec);
+			break;
+		case Value.DeviceType.TYPE_FAN:
+			intent = new Intent().setClass(this, FanActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.fan))
+					.setIndicator(this.getString(R.string.str_fan))
+					.setContent(intent);
+			tabHost.addTab(spec);
+			break;
+		case Value.DeviceType.TYPE_AIR:
+			intent = new Intent().setClass(this, AirActivity.class);
+			intent.putExtra("current",i);  
+			spec = tabHost
+					.newTabSpec(this.getString(R.string.air))
+					.setIndicator(this.getString(R.string.str_air))
+					.setContent(intent);
+			tabHost.addTab(spec);		
+			break;
+		
+		default:
+			break;
+		}
+	}
+		
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public boolean onDown(MotionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -456,36 +473,11 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		MyRemoteDatabase.saveRemoteIndex(mContext);
 	}
 
-	public void Load() {
 	
-		MyRemoteDatabase.getRemoteIndex(mContext);
-
-		if (Value.initial){
-		mUserDB.open();
-		mUserDB.getUserKeyValue();
-		mUserDB.close();
-		}
-		else{
-		mRmtDB.open();
-		mRmtDB.getKeyInitialTable();
-		
-		mRmtDB.close();
-		KeyToRemote.allKeyTabSetValue(mContext);
-		mUserDB.open();
-		mUserDB.saveAllKeyTabValue();
-		mUserDB.close();
-		Value.initial=true;
-		
-		Toast toast = Toast.makeText(getApplicationContext(), R.string.updata_end,
-				Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-		toast.show();
-		Save();
-		}
 
 		
 
-	}
+	
 	
 	public static Context getContext() {
 		return mContext;
@@ -568,7 +560,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			case R.id.MESSAGE_SEND:
 				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
 				 long [] pattern = {100,100};   // 停止 开启 停止 开启   
-				vibrator.vibrate(pattern,1);           //重复两次上面的pattern 如果只想震动一次，index设为-1   
+				vibrator.vibrate(pattern,1);          
 				showCodeSending();
 				
 		//		hideCodeSending();

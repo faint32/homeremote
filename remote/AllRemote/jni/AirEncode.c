@@ -12702,7 +12702,7 @@ char HandleAirRemote(AIR_status air_status , char *vAirBuffer){
 
 
 jbyteArray
-Java_com_etek_ircomm_RemoteComm_getAirData( JNIEnv*  env,jobject jobj,jintArray data ){
+Java_com_sommer_ircomm_RemoteCore_getAirData( JNIEnv*  env,jobject jobj,jintArray data ){
 	AIR_status airStatus;
 //	unsigned char airDatas[20];
 	unsigned char airSendData[128];

@@ -147,12 +147,12 @@ public class KeyToRemote {
 	public static void allKeyTabSetValue(Context mContext){
 		ArrayList<RemoteData> tempRemotes = new ArrayList<RemoteData>();
 	
-		String[] tvCodeDatas = new String[30];
-		String[] dvdCodeDatas = new String[30];
-		String[] stbCodeDatas = new String[30];
+		String[] tvCodeDatas = new String[100];
+		String[] dvdCodeDatas = new String[100];
+		String[] stbCodeDatas = new String[100];
 		
-		String[] fanCodeDatas = new String[30];
-		String[] pjtCodeDatas = new String[30];
+		String[] fanCodeDatas = new String[100];
+		String[] pjtCodeDatas = new String[100];
 		if (mRmtDB==null){
 			mRmtDB = new RemoteDB(mContext);	
 			}
@@ -189,7 +189,7 @@ public class KeyToRemote {
 		
 		 
 		 
-		 Set<?> set=Value.keyValueTab.entrySet();
+		 Set<?> set=Value.keyRemoteTab.entrySet();
 	        Iterator<?> it=set.iterator();
 		Log.v(TAG, "keyTabSetValue start");
 			

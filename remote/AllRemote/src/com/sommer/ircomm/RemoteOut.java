@@ -2,10 +2,10 @@ package com.sommer.ircomm;
 
 
 
-import java.util.Arrays;
+
 import java.util.LinkedList;
 
-import com.sommer.data.RemoteData;
+
 
 
 
@@ -90,26 +90,27 @@ public class RemoteOut {
 	//	UpdateParameters(false); // might as well do it at every iteration, it's cheap
 		generatedSnd = playque.poll();
 		length = generatedSnd.length;
-		Log.v(TAG, "length ===========> " + length);
+//		Log.v(TAG, "length ===========> " + length);
 		if (minbufsize<length)
 			minbufsize=length;
 		audiotrk = new AudioTrack(AudioManager.STREAM_MUSIC,
 				sampleRate, AudioFormat.CHANNEL_OUT_STEREO,
 				AudioFormat.ENCODING_PCM_8BIT, minbufsize,
 				AudioTrack.MODE_STATIC);
-		Log.v(TAG, "sampleRate ===========> " + sampleRate);
-		Log.v(TAG, "minbufsize ===========> " + minbufsize);
+//		Log.v(TAG, "sampleRate ===========> " + sampleRate);
+//		Log.v(TAG, "minbufsize ===========> " + minbufsize);
 		audiotrk.setStereoVolume(1,1);
 		audiotrk.write(generatedSnd, 0, length); 
 		audiotrk.play();
 	}
 
 
-	public static void sendRemote(String keyValue) {
+	public static void sendRemote(byte[] data) {
 		// TODO Auto-generated method stub
-		if (keyValue==null)
-			return;
-		playque.add(EncoderCore.getRemoteFrameData( keyValue));
+//		if (keyValue==null)
+//			return;
+	//	playque.add(EncoderCore.getRemoteFrameData( keyValue));
+		playque.add(EncoderCore.getComData(data));
 		synchronized(audiothread) {audiothread.notify();}
 	}
 }

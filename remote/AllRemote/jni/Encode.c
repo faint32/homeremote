@@ -12,7 +12,7 @@
 
 
 jbyteArray
-Java_com_etek_ircomm_RemoteComm_Encode( JNIEnv*  env,jobject jobj,jbyteArray data,jstring codeType ){
+Java_com_sommer_ircomm_RemoteCore_Encode( JNIEnv*  env,jobject jobj,jbyteArray data,jstring codeType ){
 
 	unsigned char sendCode[128];
 	int i, length;
