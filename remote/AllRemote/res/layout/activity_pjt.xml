@@ -16,6 +16,7 @@
             android:id="@+id/pjt_power_on"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_power"
                         android:textColor="#FFFFFF"
            />
 
@@ -32,6 +33,7 @@
             android:id="@+id/pjt_computer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_computer" />
 
@@ -39,6 +41,7 @@
             android:id="@+id/pjt_video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_video" />
 
@@ -46,6 +49,7 @@
             android:id="@+id/pjt_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_sign" />
 
@@ -53,6 +57,7 @@
             android:id="@+id/pjt_brightness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_brightness" />
     </LinearLayout>
@@ -68,6 +73,7 @@
             android:id="@+id/pjt_zoomadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_zoomadd" />
 
@@ -75,6 +81,7 @@
             android:id="@+id/pjt_zoomsub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_zoomsub" />
 
@@ -82,6 +89,7 @@
             android:id="@+id/pjt_pictureadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_pictureadd" />
 
@@ -89,6 +97,7 @@
             android:id="@+id/pjt_picturesub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_picturesub" />
     </LinearLayout>
@@ -104,6 +113,7 @@
             android:id="@+id/pjt_auto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_auto" />
 
@@ -111,6 +121,7 @@
             android:id="@+id/pjt_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_exit" />
 
@@ -118,6 +129,7 @@
             android:id="@+id/pjt_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_menu" />
 
@@ -125,6 +137,7 @@
             android:id="@+id/pjt_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_pause" />
     </LinearLayout>
@@ -140,6 +153,7 @@
             android:id="@+id/pjt_mute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_mute" />
 
@@ -147,6 +161,7 @@
             android:id="@+id/pjt_voladd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_voladd" />
 
@@ -154,6 +169,7 @@
             android:id="@+id/pjt_volsub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_volsub" />
 
@@ -161,6 +177,7 @@
             android:id="@+id/pjt_power_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_power_off" />
     </LinearLayout>
@@ -176,6 +193,7 @@
             android:id="@+id/pjt_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_up" />
     </LinearLayout>
@@ -191,6 +209,7 @@
             android:id="@+id/pjt_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_left" />
 
@@ -198,6 +217,7 @@
             android:id="@+id/pjt_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_ok" />
 
@@ -205,6 +225,7 @@
             android:id="@+id/pjt_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_right" />
     </LinearLayout>
@@ -220,6 +241,7 @@
             android:id="@+id/pjt_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/pjt_down" />
     </LinearLayout>

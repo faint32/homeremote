@@ -32,9 +32,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class TVActivity extends Activity implements OnClickListener,
+public class TVActivity extends BaseActivity implements OnClickListener,
 		OnLongClickListener {
-
+    final static String TAG = "TVActivity";
 	//NumButton numberButtonWindows;
 	FuncationButton funButtonWindows;
 	int current;
@@ -49,22 +49,18 @@ public class TVActivity extends Activity implements OnClickListener,
 		current = intent.getIntExtra("current", 0);   
 		
 		
-	
 		
-		
-	//	TVCodeIndex = MyRemoteIndexStore.getUserDB(getApplicationContext(),"mTVIndex");
-	
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
 		int screenHeight = dm.heightPixels;
-		
+		Log.v(TAG, "dm widthpixels--->"+screenWidth+"       dm heightPixels ------>"+ screenHeight);
 		Button tv_key0 = (Button) findViewById(R.id.tv_key0);
 		tv_key0.setOnClickListener(this);
 		
 		tv_key0.setWidth((screenWidth) / 4);
 		tv_key0.setHeight((screenHeight) / 10);
-		tv_key0.setBackgroundResource(R.drawable.button);
+	
 		
 
 		Button tv_key1 = (Button) findViewById(R.id.tv_key1);
@@ -72,123 +68,122 @@ public class TVActivity extends Activity implements OnClickListener,
 		tv_key1.setWidth((screenWidth) / 4);
 		tv_key1.setHeight((screenHeight) / 10);
 	//	tv_key1.getBackground().setAlpha(50);
-		tv_key1.setBackgroundResource(R.drawable.button);
+		
 		
 		Button tv_key2 = (Button) findViewById(R.id.tv_key2);
 		tv_key2.setOnClickListener(this);
 		tv_key2.setWidth((screenWidth) / 4);
 		tv_key2.setHeight((screenHeight) / 10);
 	//	tv_key2.getBackground().setAlpha(50);
-		tv_key2.setBackgroundResource(R.drawable.button);
+		
 		
 		Button tv_key3 = (Button) findViewById(R.id.tv_key3);
 		tv_key3.setOnClickListener(this);
 		tv_key3.setWidth((screenWidth) / 4);
 		tv_key3.setHeight((screenHeight) / 10);
 	//	tv_key3.getBackground().setAlpha(50);
-		tv_key3.setBackgroundResource(R.drawable.button);
+		
 		Button tv_key4 = (Button) findViewById(R.id.tv_key4);
 		tv_key4.setOnClickListener(this);
 		tv_key4.setWidth((screenWidth) / 4);
 		tv_key4.setHeight((screenHeight) / 10);
-		tv_key4.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_key5 = (Button) findViewById(R.id.tv_key5);
 		tv_key5.setOnClickListener(this);
 		tv_key5.setWidth((screenWidth) / 4);
 		tv_key5.setHeight((screenHeight) / 10);
-		tv_key5.setBackgroundResource(R.drawable.button);
+	
 
 		Button tv_key6 = (Button) findViewById(R.id.tv_key6);
 		tv_key6.setOnClickListener(this);
 		tv_key6.setWidth((screenWidth) / 4);
 		tv_key6.setHeight((screenHeight) / 10);
-		tv_key6.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_key7 = (Button) findViewById(R.id.tv_key7);
 		tv_key7.setOnClickListener(this);
 		tv_key7.setWidth((screenWidth) / 4);
 		tv_key7.setHeight((screenHeight) / 10);
-		tv_key7.setBackgroundResource(R.drawable.button);
+	
 
 		Button tv_key8 = (Button) findViewById(R.id.tv_key8);
 		tv_key8.setOnClickListener(this);
 		tv_key8.setWidth((screenWidth) / 4);
 		tv_key8.setHeight((screenHeight) / 10);
-		tv_key8.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_key9 = (Button) findViewById(R.id.tv_key9);
 		tv_key9.setOnClickListener(this);
 		tv_key9.setWidth((screenWidth) / 4);
 		tv_key9.setHeight((screenHeight) / 10);
-		tv_key9.setBackgroundResource(R.drawable.button);
+		
 		
 		Button tv_10 = (Button) findViewById(R.id.tv_key10);
 		tv_10.setOnClickListener(this);
 		tv_10.setWidth((screenWidth) / 4);
 		tv_10.setHeight((screenHeight) / 10);
-		tv_10.setBackgroundResource(R.drawable.button);
+	
 
 		Button tv_power = (Button) findViewById(R.id.tv_power);
 		tv_power.setOnClickListener(this);
 		tv_power.setWidth((screenWidth) / 4);
 		tv_power.setHeight((screenHeight) / 10);
-		tv_power.setBackgroundResource(R.drawable.button_power);
+		
 
 		Button tv_av = (Button) findViewById(R.id.tv_av);
 		tv_av.setOnClickListener(this);
 		tv_av.setWidth((screenWidth) / 4);
 		tv_av.setHeight((screenHeight) / 10);
-		tv_av.setBackgroundResource(R.drawable.button);
+	
 
 		Button tv_mute = (Button) findViewById(R.id.tv_mute);
 		tv_mute.setOnClickListener(this);
 		tv_mute.setWidth((screenWidth) / 4);
 		tv_mute.setHeight((screenHeight) / 10);
-		tv_mute.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_back = (Button) findViewById(R.id.tv_back);
 		tv_back.setOnClickListener(this);
 		tv_back.setWidth((screenWidth) / 4);
 		tv_back.setHeight((screenHeight) / 10);
-		tv_back.setBackgroundResource(R.drawable.button);
-
+		
 		Button tv_chadd = (Button) findViewById(R.id.tv_chadd);
 		tv_chadd.setOnClickListener(this);
 		tv_chadd.setWidth((screenWidth) / 4);
 		tv_chadd.setHeight((screenHeight) / 10);
-		tv_chadd.setBackgroundResource(R.drawable.button);
+	
 
 		Button tv_chsub = (Button) findViewById(R.id.tv_chsub);
 		tv_chsub.setOnClickListener(this);
 		tv_chsub.setWidth((screenWidth) / 4);
 		tv_chsub.setHeight((screenHeight) / 10);
-		tv_chsub.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_voladd = (Button) findViewById(R.id.tv_voladd);
 		tv_voladd.setOnClickListener(this);
 		tv_voladd.setOnLongClickListener(this);
 		tv_voladd.setWidth((screenWidth) / 4);
 		tv_voladd.setHeight((screenHeight) / 10);
-		tv_voladd.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_volsub = (Button) findViewById(R.id.tv_volsub);
 		tv_volsub.setOnClickListener(this);
 		tv_volsub.setWidth((screenWidth) / 4);
 		tv_volsub.setHeight((screenHeight) / 10);
-		tv_volsub.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_ok = (Button) findViewById(R.id.tv_ok);
 		tv_ok.setOnClickListener(this);
 		tv_ok.setWidth((screenWidth) / 4);
 		tv_ok.setHeight((screenHeight) / 10);
-		tv_ok.setBackgroundResource(R.drawable.button);
+		
 
 		Button tv_menu = (Button) findViewById(R.id.tv_menu);
 		tv_menu.setOnClickListener(this);
 		tv_menu.setWidth((screenWidth) / 4);
 		tv_menu.setHeight((screenHeight) / 10);
-		tv_menu.setBackgroundResource(R.drawable.button);
+	
 		
 //		 keyValueIndex = (TextView) findViewById(R.id.tv_showkey);
 //		 keyValueIndex.setTextSize(24);

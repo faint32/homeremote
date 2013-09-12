@@ -65,6 +65,7 @@
             android:id="@+id/air_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_power"
              />
     </LinearLayout>
 
@@ -78,21 +79,24 @@
             android:id="@+id/air_tempadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
             android:text="@string/air_tempadd" />
 
         <Button
             android:id="@+id/air_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
             android:text="@string/air_mode" />
 
         <Button
             android:id="@+id/air_tempsub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
             android:text="@string/air_tempsub" />
     </LinearLayout>
 
@@ -107,21 +111,24 @@
             android:id="@+id/air_wind_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
             android:text="@string/air_wind_count" />
 
         <Button
             android:id="@+id/air_wind_dir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button"          
             android:text="@string/air_wind_dir" />
 
         <Button
             android:id="@+id/air_wind_auto_dir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button"
             android:text="@string/air_wind_auto_dir" />
     </LinearLayout>
 

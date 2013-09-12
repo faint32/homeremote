@@ -3,12 +3,10 @@ package com.sommer.remote;
 
 
 import com.sommer.allremote.R;
-import com.sommer.data.KeyValue;
+
 import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 
-import android.app.Activity;
-import android.graphics.Color;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,9 +14,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
-public class DVDActivity extends Activity implements OnClickListener {
+
+public class DVDActivity extends BaseActivity implements OnClickListener {
 //	TextView keyValueIndex;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,115 +31,115 @@ public class DVDActivity extends Activity implements OnClickListener {
 		dvd_av.setOnClickListener(this);
 		dvd_av.setWidth((screenWidth) / 4);
 		dvd_av.setHeight((screenHeight) / 10);
-		dvd_av.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_back = (Button)findViewById(R.id.dvd_back);
 		dvd_back.setOnClickListener(this);
 		dvd_back.setWidth((screenWidth) / 4);
 		dvd_back.setHeight((screenHeight) / 10);
-		dvd_back.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_down = (Button)findViewById(R.id.dvd_down);
 		dvd_down.setOnClickListener(this);
 		dvd_down.setWidth((screenWidth) / 4);
 		dvd_down.setHeight((screenHeight) / 10);
-		dvd_down.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_downsong = (Button)findViewById(R.id.dvd_downsong);
 		dvd_downsong.setOnClickListener(this);
 		dvd_downsong.setWidth((screenWidth) / 4);
 		dvd_downsong.setHeight((screenHeight) / 10);
-		dvd_downsong.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_left = (Button)findViewById(R.id.dvd_left);
 		dvd_left.setOnClickListener(this);
 		dvd_left.setWidth((screenWidth) / 4);
 		dvd_left.setHeight((screenHeight) / 10);
-		dvd_left.setBackgroundResource(R.drawable.button);
+	
 		
 		Button dvd_menu = (Button)findViewById(R.id.dvd_menu);
 		dvd_menu.setOnClickListener(this);
 		dvd_menu.setWidth((screenWidth) / 4);
 		dvd_menu.setHeight((screenHeight) / 10);
-		dvd_menu.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_mute = (Button)findViewById(R.id.dvd_mute);
 		dvd_mute.setOnClickListener(this);
 		dvd_mute.setWidth((screenWidth) / 4);
 		dvd_mute.setHeight((screenHeight) / 10);
-		dvd_mute.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_ok = (Button)findViewById(R.id.dvd_ok);
 		dvd_ok.setOnClickListener(this);
 		dvd_ok.setWidth((screenWidth) / 4);
 		dvd_ok.setHeight((screenHeight) / 10);
-		dvd_ok.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_open = (Button)findViewById(R.id.dvd_open);
 		dvd_open.setOnClickListener(this);
 		dvd_open.setWidth((screenWidth) / 4);
 		dvd_open.setHeight((screenHeight) / 10);
-		dvd_open.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_pause = (Button)findViewById(R.id.dvd_pause);
 		dvd_pause.setOnClickListener(this);
 		dvd_pause.setWidth((screenWidth) / 4);
 		dvd_pause.setHeight((screenHeight) / 10);
-		dvd_pause.setBackgroundResource(R.drawable.button);
+		
 		
 		Button dvd_play = (Button)findViewById(R.id.dvd_play);
 		dvd_play.setOnClickListener(this);	
 		dvd_play.setWidth((screenWidth) / 4);
 		dvd_play.setHeight((screenHeight) / 10);
-		dvd_play.setBackgroundResource(R.drawable.button);
+	
 		
 		Button dvd_power = (Button)findViewById(R.id.dvd_power);
 		dvd_power.setOnClickListener(this);
 		dvd_power.setWidth((screenWidth) / 4);
 		dvd_power.setHeight((screenHeight) / 10);
-		dvd_power.setBackgroundResource(R.drawable.button_power);
+	
 		
 		Button dvd_quickback = (Button)findViewById(R.id.dvd_quickback);
 		dvd_quickback.setOnClickListener(this);
 		dvd_quickback.setWidth((screenWidth) / 4);
 		dvd_quickback.setHeight((screenHeight) / 10);
-		dvd_quickback.setBackgroundResource(R.drawable.button);
+
 		
 		Button dvd_quickforward = (Button)findViewById(R.id.dvd_quickforward);
 		dvd_quickforward.setOnClickListener(this);
 		dvd_quickforward.setWidth((screenWidth) / 4);
 		dvd_quickforward.setHeight((screenHeight) / 10);
-		dvd_quickforward.setBackgroundResource(R.drawable.button);
+
 		
 		Button dvd_right = (Button)findViewById(R.id.dvd_right);
 		dvd_right.setOnClickListener(this);
 		dvd_right.setWidth((screenWidth) / 4);
 		dvd_right.setHeight((screenHeight) / 10);
-		dvd_right.setBackgroundResource(R.drawable.button);
+
 		
 		Button dvd_stop = (Button)findViewById(R.id.dvd_stop);
 		dvd_stop.setOnClickListener(this);
 		dvd_stop.setWidth((screenWidth) / 4);
 		dvd_stop.setHeight((screenHeight) / 10);
-		dvd_stop.setBackgroundResource(R.drawable.button);
+
 		
 		Button dvd_title = (Button)findViewById(R.id.dvd_title);
 		dvd_title.setOnClickListener(this);
 		dvd_title.setWidth((screenWidth) / 4);
 		dvd_title.setHeight((screenHeight) / 10);
-		dvd_title.setBackgroundResource(R.drawable.button);
+
 		
 		Button dvd_up = (Button)findViewById(R.id.dvd_up);
 		dvd_up.setOnClickListener(this);
 		dvd_up.setWidth((screenWidth) / 4);
 		dvd_up.setHeight((screenHeight) / 10);
-		dvd_up.setBackgroundResource(R.drawable.button);
+	
 		
 		Button dvd_upsong = (Button)findViewById(R.id.dvd_upsong);
 		dvd_upsong.setOnClickListener(this);
 		dvd_upsong.setWidth((screenWidth) / 4);
 		dvd_upsong.setHeight((screenHeight) / 10);
-		dvd_upsong.setBackgroundResource(R.drawable.button);
+	
 		
 //		 keyValueIndex = (TextView) findViewById(R.id.dvd_showkey);
 //		 keyValueIndex.setTextSize(24);
@@ -239,15 +237,7 @@ public class DVDActivity extends Activity implements OnClickListener {
 		}
 		if (Value.currentKey != null) {
 			KeyTreate.getInstance().keyTreate();
-//			KeyValue kv = Value.keyValueTab.get(Value.currentKey);
-//			if (kv.getIsLearned()==1){
-//			keyValueIndex.setText("Learn key value     " +Value.currentKey);
-//			keyValueIndex.setTextColor(Color.RED);
-//			}
-//			else {
-//				keyValueIndex.setText("normal key value     " +Value.currentKey);
-//				keyValueIndex.setTextColor(Color.BLUE);	
-//			}
+
 			
 		}
 	}

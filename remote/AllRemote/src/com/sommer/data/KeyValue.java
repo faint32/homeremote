@@ -43,12 +43,12 @@ public class KeyValue {
 	
 	
 	public String getKeyValue(){
-		String keyValue = this.keyName
+		String keyString = this.keyName
 		 + this.isLearned
 		+ this.data
 		+ this.deviceType
 		+ this.keyColumn;
-	return keyValue;	
+	return keyString;	
 	}
 	
 	

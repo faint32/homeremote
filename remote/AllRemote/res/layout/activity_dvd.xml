@@ -15,14 +15,15 @@
             android:id="@+id/dvd_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                 
+            android:background="@drawable/button_power"     
             />
 
         <Button
             android:id="@+id/dvd_open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:textColor="#FFFFFF"
+            android:background="@drawable/button"
+            android:textColor="#FFFFFF"
             android:text="@string/dvd_open" />
     </LinearLayout>
 
@@ -38,12 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dvd_quickforward"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/dvd_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_play" />
 
@@ -51,6 +54,7 @@
             android:id="@+id/dvd_quickback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_quickback" />
 
@@ -58,6 +62,7 @@
             android:id="@+id/dvd_mute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_mute" />
     </LinearLayout>
@@ -73,6 +78,7 @@
             android:id="@+id/dvd_upsong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_upsong" />
 
@@ -80,6 +86,7 @@
             android:id="@+id/dvd_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_pause" />
 
@@ -87,6 +94,7 @@
             android:id="@+id/dvd_downsong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_downsong" />
 
@@ -94,6 +102,7 @@
             android:id="@+id/dvd_av"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_av" />
     </LinearLayout>
@@ -109,6 +118,7 @@
             android:id="@+id/dvd_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_menu" />
 
@@ -116,6 +126,7 @@
             android:id="@+id/dvd_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_stop" />
 
@@ -123,6 +134,7 @@
             android:id="@+id/dvd_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_title" />
 
@@ -130,6 +142,7 @@
             android:id="@+id/dvd_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_back" />
     </LinearLayout>
@@ -145,6 +158,7 @@
             android:id="@+id/dvd_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_up" />
     </LinearLayout>
@@ -160,6 +174,7 @@
             android:id="@+id/dvd_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_left" />
 
@@ -167,6 +182,7 @@
             android:id="@+id/dvd_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_ok" />
 
@@ -174,6 +190,7 @@
             android:id="@+id/dvd_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_right" />
     </LinearLayout>
@@ -189,6 +206,7 @@
             android:id="@+id/dvd_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/dvd_down" />
     </LinearLayout>

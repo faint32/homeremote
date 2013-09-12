@@ -16,6 +16,7 @@
             android:id="@+id/fan_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_power"
                          />
     </LinearLayout>
 
@@ -30,6 +31,7 @@
             android:id="@+id/fan_key1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key1" />
 
@@ -37,6 +39,7 @@
             android:id="@+id/fan_key2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key2" />
 
@@ -44,6 +47,7 @@
             android:id="@+id/fan_key3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key3" />
 
@@ -51,6 +55,7 @@
             android:id="@+id/fan_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_light" />
     </LinearLayout>
@@ -66,6 +71,7 @@
             android:id="@+id/fan_key4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key4" />
 
@@ -73,6 +79,7 @@
             android:id="@+id/fan_key5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key5" />
 
@@ -80,6 +87,7 @@
             android:id="@+id/fan_key6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key6" />
 
@@ -87,6 +95,7 @@
             android:id="@+id/fan_sleep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_sleep" />
     </LinearLayout>
@@ -102,6 +111,7 @@
             android:id="@+id/fan_key7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key7" />
 
@@ -109,6 +119,7 @@
             android:id="@+id/fan_key8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key8" />
 
@@ -116,6 +127,7 @@
             android:id="@+id/fan_key9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key9" />
 
@@ -123,6 +135,7 @@
             android:id="@+id/fan_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_mode" />
     </LinearLayout>
@@ -138,6 +151,7 @@
             android:id="@+id/fan_li"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_li" />
 
@@ -145,6 +159,7 @@
             android:id="@+id/fan_key0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_key0" />
 
@@ -152,6 +167,7 @@
             android:id="@+id/fan_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_timer" />
 
@@ -159,6 +175,7 @@
             android:id="@+id/fan_cool"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_cool" />
     </LinearLayout>
@@ -174,6 +191,7 @@
             android:id="@+id/fan_speedmiddle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_speedmiddle" />
     </LinearLayout>
@@ -189,6 +207,7 @@
             android:id="@+id/fan_speedlow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_speedlow" />
 
@@ -196,6 +215,7 @@
             android:id="@+id/fan_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_speed" />
 
@@ -203,6 +223,7 @@
             android:id="@+id/fan_speedhight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_speedhight" />
     </LinearLayout>
@@ -218,6 +239,7 @@
             android:id="@+id/fan_freq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
                         android:textColor="#FFFFFF"
             android:text="@string/fan_freq" />
     </LinearLayout>

@@ -12,7 +12,7 @@ import com.sommer.ircomm.RemoteCore;
 import com.sommer.ircomm.RemoteOut;
 
 import com.sommer.ui.SelectPicPopupWindow;
-import com.sommer.utils.MyRemoteDatabase;
+
 
 
 
@@ -28,7 +28,7 @@ import android.os.Handler;
 import android.annotation.SuppressLint;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
+
 import android.app.TabActivity;
 
 import android.content.Context;
@@ -37,6 +37,7 @@ import android.content.Context;
 //import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 //import android.content.IntentFilter;
 
 
@@ -45,10 +46,8 @@ import android.util.Log;
 
 import android.view.GestureDetector;
 import android.view.Gravity;
-import android.view.KeyEvent;
+
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
 import android.view.GestureDetector.OnGestureListener;
@@ -62,11 +61,15 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("HandlerLeak")
 
@@ -91,8 +94,13 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static KeyTreate mKeyTreate = null;
 	SelectPicPopupWindow menuWindow;
 	private Vibrator vibrator;  
+	
+	
+	
+
 	// private boolean mIsExit = false;
 	
+
 
 
 	@Override
@@ -139,6 +147,10 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			tabWidget.getChildAt(i).getLayoutParams().height = (screenHeight) / 18;
 			tabWidget.getChildAt(i).getLayoutParams().width = screenWidth / 4;
 		}
+		
+		
+		
+		
 	}
 
 	@Override
@@ -167,7 +179,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	public void onPause() {
 		super.onPause();
 		
-	//	RemoteComm.finishRemote();
+	
 	}
 	
 	@Override
@@ -176,55 +188,13 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		super.onRestart();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// MenuInflater inflater = getMenuInflater();
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		
-//		
-//		case R.id.study:
-//			
-//			return true;
-//		case R.id.options:
-//		
-//			return true;
-//		case R.id.about:
-//			
-//			return true;
-//		case R.id.quit:
-//			
-//			return true;
-		}
-		return false;
-	}
 	
 	
 
 	
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-				openOptionsMenu();
-				return true;
-
-		}
-		if (keyCode == KeyEvent.KEYCODE_MENU) {
-			openOptionsMenu();
-			return true;
-		} 
-		else {
-			return super.onKeyDown(keyCode, event);
-		}
-	}
 	
 	
 	
@@ -348,18 +318,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 
 	
 
-	@SuppressWarnings("unused")
-	private void delayDialog(long _time, final Dialog _dialog) {
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
-			public void run() {
-				if (_dialog != null && _dialog.isShowing()) {
-		//			KeyData.mIsStudy = false;
-					_dialog.dismiss();
-				}
-			}
-		}, _time);
-	}
 
 	
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
@@ -467,14 +425,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	
 	
 	
-	
-	
-	public void Save() {
-		MyRemoteDatabase.saveRemoteIndex(mContext);
-	}
-
-	
-
 		
 
 	
@@ -591,8 +541,8 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				break;
 			case R.id.MSG_OPTION_LIST:
 				Log.v("test", "btn_options btn_options");
-			
-				Intent optionsIntent = new Intent(mContext, ListActivity.class);
+				
+				Intent optionsIntent = new Intent(mContext, RemoteListOptions.class);
 				startActivityForResult(optionsIntent, R.id.REQUEST_OPTIONS);
 				break;
 			case R.id.MSG_OPTION_QUIT:

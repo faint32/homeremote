@@ -56,6 +56,10 @@
             android:name="com.sommer.remote.DVDActivity"
             android:screenOrientation="portrait" >
         </activity>
+         <activity
+            android:name="com.sommer.remote.RemoteListOptions"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name="com.sommer.remote.FanActivity"
             android:screenOrientation="portrait" >
