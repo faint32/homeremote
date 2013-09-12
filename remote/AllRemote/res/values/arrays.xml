@@ -1,66 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
      <string-array name="menu_name_base">
-　　        <item>Search</item>
-　　        <item>File Manager</item>
-　　        <item>Down Mangaer</item>
-　　        <item>Full screen</item>
-　　        <item>Input URL</item>
-	 <item>Book Mark</item>
-     <item>Book Mark Sync</item>
-     <item>Share Page</item>
-     <item>Quit </item>
-     <item>Night </item>
-     <item >Fresh</item>
-     <item >More</item>	
-　　    </string-array>
-	 
-	<string-array name="menu_image_base">
-　　        <item>@drawable/menu_search</item>
-　　        <item>@drawable/menu_filemanager</item>
-　　        <item>@drawable/menu_downmanager</item>
-　　        <item>@drawable/menu_fullscreen</item>
-　　        <item>@drawable/menu_inputurl</item>
-  	 <item>@drawable/menu_bookmark</item>
-	 <item>@drawable/menu_bookmark_sync_import </item>
-	 <item>@drawable/menu_sharepage </item>
-	 <item>@drawable/menu_quit </item>
-	 <item>@drawable/menu_nightmode </item>
-	 <item>@drawable/menu_refresh </item>
-	 <item>@drawable/menu_more </item>
-　　    </string-array>
-
-	
-     <string-array name="menu_image_expands">
-　　        <item>@drawable/menu_auto_landscape</item>
-　　        <item>@drawable/menu_penselectmodel</item>
-　　        <item>@drawable/menu_page_attr</item>
-　　        <item>@drawable/menu_novel_mode</item>
-　　        <item>@drawable/menu_page_updown</item>
-	 <item>@drawable/menu_checkupdate </item>
-	 <item>@drawable/menu_checknet </item>
-	 <item>@drawable/menu_refreshtimer </item>
-	 <item>@drawable/menu_settings </item>
-	 <item>@drawable/menu_help </item>
-	 <item>@drawable/menu_about </item>
-	  <item>@drawable/menu_return </item>
-　　    </string-array>
-	  
-      <string-array name="menu_name_expands">
-　　        <item>Landscape </item>
-　　        <item>Learn </item>
-　　        <item>Page attr</item>
-　　        <item>Novel</item>
-　　        <item>Page UPDown</item>
-	 <item>Check update </item>
-	 <item>Check net </item>
-	 <item>Refresh Time</item>
-	 <item>Setting</item>
-	 <item>Help</item>
-	 <item>About </item>
-	  <item>Return</item>
+　　        <item>Select</item>
+　　        <item>Learn</item>
+　　        <item>Setting</item>
+　　        <item>About</item>
+　　        <item>Quit</item>
+	 <item>Return</item>
+   
 　　    </string-array>
      
+     
+     
+     
+<string-array name="menu_image_base">
+　　        <item>@drawable/menu_list</item>
+　　        <item>@drawable/menu_learn</item>
+　　        <item>@drawable/menu_settings</item>
+　　        <item>@drawable/menu_about</item>
+　　        <item>@drawable/menu_quit</item>
+  	 <item>@drawable/menu_return</item>
+　　    </string-array>
+	
+	  
+ <string-array name="type_array">
+        <item>TV</item>
+        <item>DVD</item>
+        <item>STB</item>
+        <item>FAN</item>
+        <item>PJT</item>
+        <item>AIR</item>
+ </string-array>
+      
+
 </resources>
 
 

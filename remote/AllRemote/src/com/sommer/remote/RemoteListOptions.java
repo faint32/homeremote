@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sommer.allremote.R;
-import com.sommer.data.RemoteList;
+import com.sommer.data.RemoteDevice;
+import com.sommer.data.Value;
 import com.sommer.ui.RemoteAdapter;
 import com.sommer.ui.RemoteAdapter.OnAdapterChangeListener;
 
@@ -28,8 +29,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class RemoteListOptions extends Activity implements OnClickListener,OnAdapterChangeListener,OnItemClickListener{
 	ListView listView;
 	Button btn_add;
-	List<RemoteList> list;
-	RemoteAdapter numberAdapter;
+	List<RemoteDevice> list;
+	RemoteAdapter rmtAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +44,20 @@ public class RemoteListOptions extends Activity implements OnClickListener,OnAda
 
 		listView.setOnItemClickListener(this);
 	
-		list = new ArrayList<RemoteList>();
-		RemoteList item = new RemoteList();
+		list = new ArrayList<RemoteDevice>();
+		RemoteDevice item = new RemoteDevice();
 
-		item.setName("1");
+		item.setName("");
 		list.add(item);
 		
 
 		
 		
-		numberAdapter = new RemoteAdapter(this, list);
+		rmtAdapter = new RemoteAdapter(this, list);
 	
-		numberAdapter.setOnAdapterChangeListener(this);
+		rmtAdapter.setOnAdapterChangeListener(this);
 		
-		listView.setAdapter(numberAdapter);
+		listView.setAdapter(rmtAdapter);
     }
 	@Override
 	public void onClick(View v) {
@@ -73,17 +74,16 @@ public class RemoteListOptions extends Activity implements OnClickListener,OnAda
 	@Override
 	public void listRemove(int currentItem) {
 	
-		numberAdapter.notifyDataSetChanged();
+		rmtAdapter.notifyDataSetChanged();
 		
 	}
 	
 	private void addItem(){
-		RemoteList item = new RemoteList();
-		item.setType(1);
-		item.setName("home");
-		numberAdapter.addItem(item);
-		
-		numberAdapter.notifyDataSetChanged();
+		RemoteDevice item = new RemoteDevice();
+		item.setType(Value.DeviceType.TYPE_TV);
+		item.setName("");
+		rmtAdapter.addItem(item);
+		rmtAdapter.notifyDataSetChanged();
 		
 		
 	}

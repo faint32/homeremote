@@ -408,19 +408,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	}
 	
-//	public String getBrandName(String _type,int _index){
-//		String brandName = null;
-//		
-//			Cursor c = myDataBase.query(BRAND_TAB, null,  " type =? and brand_code = ?" ,new String[]{_type,String.valueOf(_index)}, null, null, null);
-//		//	Cursor c = myDataBase.rawQuery("SELECT * FROM " + TV_CODE_TAB + " WHERE custom=20020080"   ,null);
-//			c.moveToFirst();
-//			brandName= c.getString(1);
-//			
-//			c.close(); 
-//		
-//		return brandName;
-//		
-//	}
+
 	
 	public ArrayList<String> getProducts(String deviceType,String _brandName){
 		ArrayList<String> products =  new ArrayList<String>();
@@ -438,6 +426,30 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	}
 	
+	
+	
+
+//	public void getKeyInitialTable(){
+//			String keyName;
+//			Cursor c = myDataBase.query(KEY_TAB, null,  null ,null, null, null, null);
+//			c.moveToFirst();
+//			
+//				do {
+//				KeyValue kv = new KeyValue();
+//				keyName = c.getString(1);
+//				kv.setKeyName(keyName);
+//				kv.setDeviceType(c.getInt(2));
+//				kv.setKeyColumn(c.getInt(3));
+//				Value.keyValueTab.add(kv);
+//			//	Value.keyRemoteTab.put(keyName, kv.getData());
+//				}while (c.moveToNext());
+//
+//			c.close(); 
+//		
+//	}
+//	
+	
+	
 	public ArrayList<String> translateBrands(ArrayList<String> brands){
 		ArrayList<String> newBrands =  new ArrayList<String>();
 		String localeLanguage =Locale.getDefault().getLanguage();
@@ -445,20 +457,23 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 				if (localeLanguage.equals("zh"))
 				{
-					column = 6;	//get brand chinese name
+					column = 4;	//get brand chinese name
+				}else if (localeLanguage.equals("tw"))
+				{
+					column = 3;	//get brand taiwan name
 				}
 				else
 				{
-					column = 4; //get brand english name
+					column = 2; //get brand english default name
 				}
-		Log.v(TAG, "get language  " + localeLanguage + "    column  " + column);		
+	//	Log.v(TAG, "get language  " + localeLanguage + "    column  " + column);		
 		for (String brand :brands){
 			
 			Cursor c = myDataBase.query(BRAND_TAB, null,  "brand =?  " ,new String[]{brand}, null, null, null);
-			c.moveToFirst();
-			
+			if (c.moveToFirst()){
+			//	Log.v(TAG, "cursor successed");
 				byte[] val = c.getBlob(column);  
-				if (val!=null){
+				if (val!=null&& localeLanguage.equals("zh")){
 					try {
 						newBrands.add(new String(val,"GBK"));
 					} catch (UnsupportedEncodingException e) {
@@ -466,11 +481,13 @@ public class RemoteDB extends SQLiteOpenHelper {
 						e.printStackTrace();
 					}
 				}else {
-					newBrands.add(brand);
+					newBrands.add(c.getString(column));
 				}
-				
+
 			
-			
+			}else {
+				newBrands.add(brand);	
+			}
 			c.close(); 
 		}
 
@@ -478,28 +495,21 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return newBrands;
 		
 	}
-	
 
-	public void getKeyInitialTable(){
-			String keyName;
-			Cursor c = myDataBase.query(KEY_TAB, null,  null ,null, null, null, null);
-			c.moveToFirst();
-			
-				do {
-				KeyValue kv = new KeyValue();
-				keyName = c.getString(1);
-				kv.setKeyName(keyName);
-				kv.setDeviceType(c.getInt(2));
-				kv.setKeyColumn(c.getInt(3));
-				Value.keyValueTab.add(kv);
-			//	Value.keyRemoteTab.put(keyName, kv.getData());
-				}while (c.moveToNext());
-
-			c.close(); 
+	public int getKeyColumn(String keyName){
+		int keyColumn = 0;
 		
-	}
+		Cursor c = myDataBase.query(KEY_TAB, null,  "name =?  " ,new String[]{keyName}, null, null, null);
+		
+		if (c.moveToFirst()){
+			int index = c.getColumnIndex("key_column");
+			keyColumn =	c.getInt(index);
+		}
+		c.close();
+		
+		return keyColumn; 
+}
 
-	
 	/**
 	 * compareListValue compare arraylist all members 
 	 * @param datas

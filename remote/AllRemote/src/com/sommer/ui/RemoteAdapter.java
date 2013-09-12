@@ -3,7 +3,8 @@ package com.sommer.ui;
 import java.util.List;
 
 import com.sommer.allremote.R;
-import com.sommer.data.RemoteList;
+import com.sommer.data.RemoteDevice;
+
 
 import android.content.Context;
 import android.text.Editable;
@@ -18,24 +19,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 public class RemoteAdapter extends BaseAdapter {
-	private List<RemoteList> list;
+	private List<RemoteDevice> list;
 	private LayoutInflater inflater;
-	private ArrayAdapter <String> adapter;
-	private static final String[] SPINNER_REMOTE_TYPE = {"TV","DVD","STB"};
+	private ArrayAdapter<CharSequence> adapter;
+	private static  String[] SPINNER_REMOTE_TYPE;
 	private Context context;
 	private OnAdapterChangeListener listener;
 	
-	public RemoteAdapter(Context context, List<RemoteList> items) {
+	public RemoteAdapter(Context context, List<RemoteDevice> items) {
 		this.list = items;
 		this.context = context;
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);		
+		SPINNER_REMOTE_TYPE = context.getResources().getStringArray(R.array.type_array);
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 		//下拉框的数据适配器
-		adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,SPINNER_REMOTE_TYPE);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,SPINNER_REMOTE_TYPE);
+//		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		 adapter = ArrayAdapter.createFromResource(
+				 context, R.array.type_array,
+	                android.R.layout.simple_spinner_item);
+		 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	}
 	
 	public void setOnAdapterChangeListener(OnAdapterChangeListener listener){    
@@ -73,7 +80,7 @@ public class RemoteAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.adapter_remotelist_item, null);
 			//new一个对象，存放每条item的窗体
 			holder = new ViewHolder();
-			holder.attr = (TextView)convertView.findViewById(R.id.ali_tv_attr1);
+			
 			//下拉框控件
 			holder.type = (Spinner)convertView.findViewById(R.id.remote_type);
 			//设置数据选择的事件
@@ -134,9 +141,9 @@ public class RemoteAdapter extends BaseAdapter {
 		
 		
 		
-		 RemoteList info = list.get(position);
+		RemoteDevice rmtDev = list.get(position);
 		 holder.id.setText(position+1+"");
-		 holder.name.setText(info.getName());
+		 holder.name.setText(rmtDev.getName());
 		 holder.type.setAdapter(adapter);  
 		 int p = getPositionForAdapter(position);
 		 holder.type.setSelection(p, true);
@@ -145,18 +152,18 @@ public class RemoteAdapter extends BaseAdapter {
 	
 	
 
-	public void addItem(RemoteList info){
-		list.add(info);
+	public void addItem(RemoteDevice rmtDev){
+		list.add(rmtDev);
 	}
 	
-	public List<RemoteList> getAllList(){
+	public List<RemoteDevice> getAllList(){
 		return list;
 	}
 	
 	
 	private int getPositionForAdapter(int po){
 		
-		RemoteList  t = list.get(po);
+		RemoteDevice  t = list.get(po);
 		int p = 0;
 		for(int i=0;i<SPINNER_REMOTE_TYPE.length;i++){
 //			if(t.getType().equal(SPINNER_TIME[i])){
@@ -169,7 +176,7 @@ public class RemoteAdapter extends BaseAdapter {
 	
 	private void modifyListType(String type,int p){
 		if(p>=list.size()) return;
-		RemoteList  t = list.get(p);
+		RemoteDevice  t = list.get(p);
 	//	t.setType(type);
 		list.set(p, t);
 		
@@ -178,7 +185,7 @@ public class RemoteAdapter extends BaseAdapter {
 	
 	private void modifyListname(String name ,int p){
 		if(p>=list.size()) return;
-		RemoteList  t = list.get(p);
+		RemoteDevice  t = list.get(p);
 		t.setName(name);
 		list.set(p, t);
 	}

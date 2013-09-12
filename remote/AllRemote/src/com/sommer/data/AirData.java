@@ -9,7 +9,7 @@ public class AirData {
 	private  int mWindAuto=0;
 	private  int mWindDir=1;
 	private  int mWindCount=2;
-	
+	private  int mkey =0;
 	
 	
 	public AirData(int codeType, int mPower, int mTmp, int mMode,
@@ -48,6 +48,17 @@ public class AirData {
 		}
 		return mTmp;
 	}
+	
+	
+	
+	public int getMkey() {
+		return mkey;
+	}
+
+	public void setMkey(int mkey) {
+		this.mkey = mkey;
+	}
+
 	public  int getmPower() {
 		return mPower;
 	}

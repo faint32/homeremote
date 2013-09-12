@@ -50,7 +50,6 @@ public class UserDB extends SQLiteOpenHelper {
 	final static String USERTAB	="user_tab";
 	public static final String USER_ID = "_id";
 	public static final String USER_NAME = "key_name";
-	public static final String USER_LEARN = "is_learned";
 	public static final String USER_DATA = "remote_data";
 
 	//用户数据库文件的版本
@@ -201,52 +200,47 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	public void getUserKeyValue(){
 		
-			Cursor c = myUserDB.query(USERTAB, null, null ,null, null, null, null);
-			c.moveToFirst();
-			do{
-
-
-				Value.keyRemoteTab.put(c.getString(1), c.getString(2));
-				
-			//	Value.keyRemoteTab.put(kv.getKeyName(), kv.getData());
-			}while(c.moveToNext());
-	//		 String name = cursor.getString(cursor.getColumnIndex("name"));
-
-		
-		c.close(); 
-		
-		
-		
-		
-	}
-	
-	
-	@SuppressWarnings("unchecked")
-	public  void saveAllKeyTabValue(){
-		
-		Log.v(TAG, "saveAllKeyTabValue start");
 		Cursor c = myUserDB.query(USERTAB, null, null ,null, null, null, null);
 		c.moveToFirst();
 		do{
-			 ContentValues cvs = new ContentValues();
-
-		//	Value.keyRemoteTab.put(c.getString(1), c.getString(2));
-			 
-			cvs.put(USER_NAME, c.getString(1));
-			
-			String data = RemoteCore.updateRemoteData(c.getString(2));
-		     
-			cvs.put(USER_DATA,data );
-		      
-		  	myUserDB.update(USERTAB, cvs, "key_name=?", new String[] {c.getString(1)});
-			
-		//	Value.keyRemoteTab.put(kv.getKeyName(), kv.getData());
+			Value.keyRemoteTab.put(c.getString(1), c.getString(2));
 		}while(c.moveToNext());
-	
-		c.close(); 
 
 		
+	
+	c.close(); 
+
+}
+
+
+
+public  void saveAllKeyTabValue(){
+	 ContentValues cv = new ContentValues();
+	Log.v(TAG, "saveAllKeyTabValue start");
+	Iterator<String> iterator = Value.keyRemoteTab.keySet().iterator();
+	while(iterator.hasNext()) {
+		String keyName = iterator.next();
+		cv.put(USER_NAME,keyName );
+	//	Log.v(TAG, "key name --->"+ keyName);
+	    cv.put(USER_DATA,Value.keyRemoteTab.get(keyName) );
+	//    Log.v(TAG, "key data --->"+ Value.keyRemoteTab.get(keyName));
+	    myUserDB.update(USERTAB, cv, "name=?", new String[] {keyName});
 	}
+
+}
+
+
+public  void saveSingleKeyTabValue(String keyName,String data){
+	  ContentValues values = new ContentValues();
+	      values.put(USER_NAME, keyName);
+
+	      values.put(USER_DATA,data );
+
+	  	myUserDB.update(USERTAB, values, "name=?", new String[] {keyName});
+
+	  
+}
+
 	
 	public  void getRemoteIndex(){
 		

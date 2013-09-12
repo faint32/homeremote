@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string-array name="menu_name_base">
+　　        <item>选择</item>
+　　        <item>学习</item>
+　　        <item>设置</item>
+　　        <item>关于</item>
+　　        <item>退出</item>
+ 	 <item>返回</item>
+　　    </string-array>
+	
+    
+ <string-array name="menu_image_base">
+　　        <item>@drawable/menu_list</item>
+　　        <item>@drawable/menu_learn</item>
+　　        <item>@drawable/menu_settings</item>
+　　        <item>@drawable/menu_about</item>
+　　        <item>@drawable/menu_quit</item>
+  	 <item>@drawable/menu_return</item>
+　　    </string-array>
+
+	
+ 
+	  
+     <string-array name="type_array">
+        <item>电视</item>
+        <item>影碟机</item>
+        <item>机顶盒</item>
+        <item>风扇</item>
+        <item>投影仪</item>
+         <item>空调</item>
+    </string-array>
+      
+     
+</resources>
+
+
+

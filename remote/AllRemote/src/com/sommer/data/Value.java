@@ -35,6 +35,12 @@ public final class Value {
 	public static HashMap<String, String> keyRemoteTab ;
 	public static ArrayList<KeyValue> keyValueTab  ;
 	
+	
+	
+	public static AirData airData = new AirData();
+	public static RemoteDevice rmtDev = new RemoteDevice();
+	
+	
 	public static class DeviceType {
 		public final static int TYPE_TV = 0x00;
 		public final static int TYPE_STB = 0x02;

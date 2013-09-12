@@ -31,7 +31,13 @@
     <string name="set_menu">SetUp</string>
     <string name="updata_end">Database updata finished</string>
     <string name=" first_updata_end">First  Database initial finished</string>
-   
+    
+    
+     <!--remote list -->
+    <string name="input_name">Input Name</string>
+    <string name="add_remote">Add a new remote device</string>
+    
+    
     <string name="air_power_off">Mode:OFF</string>
     
     <string name="language">
@@ -189,32 +195,7 @@
     <string name="fan_key8">8</string>
     <string name="fan_key9">9</string>
 
-    <!-- Light -->
-    <string name="light">light</string>
-    <string name="str_light">LAMP</string>
-    <string name="light_power_all_on">All On</string>
-    <string name="light_power_all_off">All Off</string>
-    <string name="light_power_on">On</string>
-    <string name="light_power_off">OFF</string>
-    <string name="light_light">Brightness+</string>
-    <string name="light_dark">Brightness-</string>
-    <string name="light_lost">Burglar</string>
-    <string name="light_keyA">A</string>
-    <string name="light_keyB">B</string>
-    <string name="light_keyC">C</string>
-    <string name="light_keyD">D</string>
-    <string name="light_setting">SET</string>
-    <string name="light_study">Learn</string>
-    <string name="light_key1">1</string>
-    <string name="light_key2">2</string>
-    <string name="light_key3">3</string>
-    <string name="light_key4">4</string>
-    <string name="light_key5">5</string>
-    <string name="light_key6">6</string>
-    <string name="light_timer1">Timing1</string>
-    <string name="light_timer2">Timing2</string>
-    <string name="light_timer3">Timing3</string>
-    <string name="light_timer4">Timing4</string>
+  
     <!-- pjt -->
     <string name="pjt">pjt</string>
     <string name="str_pjt">PJT</string>
@@ -271,14 +252,7 @@
     <string name="air_mode_value_5">Heating</string>
     <string name="d">Degree</string>
 
-    <string-array name="type_array">
-        <item>TV</item>
-        <item>DVD</item>
-        <item>STB</item>
-        <item>AIR</item>
-        <item>FAN</item>
-        <item>PJT</item>
-    </string-array>
+   
     
     <!-- MENU -->
     <string name="study">Learn</string>

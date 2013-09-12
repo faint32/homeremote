@@ -1,19 +1,38 @@
 package com.sommer.data;
 
 public class RemoteDevice {
-	private int deviceType;
-	private String deviceIndex;
-	public int getDeviceType() {
-		return deviceType;
+	private int id;
+	private int type;
+	private String code;
+	private String name ;
+	
+	
+	
+	
+	public String getName() {
+		return name;
 	}
-	public void setDeviceType(int deviceType) {
-		this.deviceType = deviceType;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDeviceIndex() {
-		return deviceIndex;
+	public int getId() {
+		return id;
 	}
-	public void setDeviceIndex(String deviceIndex) {
-		this.deviceIndex = deviceIndex;
+	public void setId(int id) {
+		this.id = id;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	
 }

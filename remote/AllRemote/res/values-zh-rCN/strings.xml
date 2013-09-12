@@ -32,7 +32,14 @@
     <string name="updata_end">数据更新完毕</string>
     <string name=" first_updata_end">数据库 初始化 完成</string>
     <string name="air_power_off">模式:关闭</string>
+      <!--remote list -->
+    <string name="input_name">请输入名字</string> 
+    <string name="add_remote">新增加一设备</string>
+    
+    
+    
     <string name="language">
+    
 <![CDATA[
         	软件安装:将“*.apk”文件拷贝或下载到手机存储卡上，通过“文件管理”或“文件管理器”，
 			找到相关目录下的该文件，点击按提示安装，系统会生成：“手机遥控器”图标;\n
@@ -205,32 +212,7 @@
     <string name="pjt_right">右</string>
     <string name="pjt_ok">确定</string>
 
-    <!-- Light -->
-    <string name="light">light</string>
-    <string name="str_light">灯</string>
-    <string name="light_power_all_on">全开</string>
-    <string name="light_power_all_off">全关</string>
-    <string name="light_power_on">开</string>
-    <string name="light_power_off">关</string>
-    <string name="light_light">变亮</string>
-    <string name="light_dark">变暗</string>
-    <string name="light_lost">防盗</string>
-    <string name="light_keyA">A</string>
-    <string name="light_keyB">B</string>
-    <string name="light_keyC">C</string>
-    <string name="light_keyD">D</string>
-    <string name="light_setting">设置</string>
-    <string name="light_study">学习</string>
-    <string name="light_key1">1</string>
-    <string name="light_key2">2</string>
-    <string name="light_key3">3</string>
-    <string name="light_key4">4</string>
-    <string name="light_key5">5</string>
-    <string name="light_key6">6</string>
-    <string name="light_timer1">定时1</string>
-    <string name="light_timer2">定时2</string>
-    <string name="light_timer3">定时3</string>
-    <string name="light_timer4">定时4</string>
+   
     <!-- AIR -->
     <string name="air">air</string>
     <string name="str_air">空调</string>
@@ -262,14 +244,7 @@
     <string name="air_mode_value_5">制热</string>
     <string name="d">度</string>
 
-    <string-array name="type_array">
-        <item>电视</item>
-        <item>影碟机</item>
-        <item>机顶盒</item>
-        <item>空调</item>
-        <item>风扇</item>
-        <item>投影仪</item>
-    </string-array>
+    
 
     <!-- MENU -->
     <string name="study">学习</string>
