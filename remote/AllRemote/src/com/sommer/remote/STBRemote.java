@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class STBActivity extends BaseActivity implements OnClickListener {
+public class STBRemote extends BaseActivity implements OnClickListener {
 
 	//TextView keyValueIndex;
 	public void onCreate(Bundle savedInstanceState) {

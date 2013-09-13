@@ -31,7 +31,128 @@
         <item>PJT</item>
         <item>AIR</item>
  </string-array>
-      
+ <string-array name="tv_key">
+　　        <item>tv_power</item>
+　　        <item>tv_mute</item>
+　　        <item>tv_key0</item>
+　　        <item>tv_key1</item>
+	 <item>tv_key2</item>
+     <item>tv_key3</item>
+     <item>tv_key4</item>
+     <item>tv_key5</item>
+     <item>tv_key6</item>
+     <item>tv_key7</item>
+     <item>tv_key8</item>	
+     <item>tv_key9</item>	
+     <item>tv_key10</item>	
+     <item>tv_menu</item>	
+     <item>tv_chadd</item>	
+     <item>tv_chsub</item>	
+     <item>tv_voladd</item>	
+     <item>tv_volsub</item>	
+     <item>tv_ok</item>	
+     <item>tv_av</item>	
+     <item>tv_back</item>	      
+　　    </string-array>  
+     
+  <string-array name="stb_key">
+    <item>stb_wait</item>
+    <item>stb_watch</item>
+    <item>stb_back</item>
+    <item>stb_key0</item>
+    <item>stb_key1</item>
+    <item>stb_key2</item>
+    <item>stb_key3</item>
+    <item>stb_key4</item>
+    <item>stb_key5</item>
+    <item>stb_key6</item>
+    <item>stb_key7</item>
+    <item>stb_key8</item>
+    <item>stb_key9</item>
+    <item>stb_chadd</item>
+    <item>stb_chsub</item>
+    <item>stb_voladd</item>
+    <item>stb_volsub</item>
+    <item>stb_up</item>
+    <item>stb_down</item>
+    <item>stb_left</item>
+    <item>stb_right</item>
+    <item>stb_ok</item>
+    <item>stb_menu</item>
+　　    </string-array>  
+
+ <string-array name="dvd_key">
+    <item>dvd_power</item>
+    <item>dvd_mute</item>
+    <item>dvd_quickforward</item>
+    <item>dvd_quickback</item>
+    <item>dvd_play</item>
+    <item>dvd_stop</item>
+    <item>dvd_upsong</item>
+    <item>dvd_downsong</item>
+    <item>dvd_pause</item>
+    <item>dvd_av</item>
+    <item>dvd_title</item>
+    <item>dvd_open</item>
+    <item>dvd_menu</item>
+    <item>dvd_back</item>
+    <item>dvd_up</item>
+    <item>dvd_down</item>
+    <item>dvd_left</item>
+    <item>dvd_right</item>
+    <item>dvd_ok</item>
+　　    </string-array>  
+    <!-- fan -->
+ <string-array name="fan_key">
+    <item>fan_power</item>
+    <item>fan_mode</item>
+    <item>fan_li</item>
+    <item>fan_speed</item>
+    <item>fan_key0</item>
+    <item>fan_speedlow</item>
+    <item>fan_speedmiddle</item>
+    <item>fan_speedhight</item>
+    <item>fan_sleep</item>
+    <item>fan_freq</item>
+    <item>fan_cool</item>
+    <item>fan_timer</item>
+    <item>fan_light</item>
+    <item>fan_key1</item>
+    <item>fan_key2</item>
+    <item>fan_key3</item>
+    <item>fan_key4</item>
+    <item>fan_key5</item>
+    <item>fan_key6</item>
+    <item>fan_key7</item>
+    <item>fan_key8</item>
+    <item>fan_key9</item>
+　　    </string-array>  
+   
+    <!-- pjt -->
+ <string-array name="pjt_key">
+    <item>pjt_power_on</item>
+    <item>pjt_power_off</item>
+    <item>pjt_computer</item>
+    <item>pjt_video</item>
+    <item>pjt_sign</item>
+    <item>pjt_zoomadd</item>
+    <item>pjt_zoomsub</item>
+    <item>pjt_pictureadd</item>
+    <item>pjt_picturesub</item>
+    <item>pjt_brightness</item>
+    <item>pjt_auto</item>
+    <item>pjt_exit</item>
+    <item>pjt_menu</item>
+    <item>pjt_pause</item>
+    <item>pjt_mute</item>
+    <item>pjt_voladd</item>
+    <item>pjt_volsub</item>
+    <item>pjt_up</item>
+    <item>pjt_down</item>
+    <item>pjt_left</item>
+    <item>pjt_right</item>
+    <item>pjt_ok</item>
+　　    </string-array>         
 
 </resources>
 

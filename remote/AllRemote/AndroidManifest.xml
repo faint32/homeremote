@@ -45,35 +45,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sommer.remote.STBActivity"
+            android:name="com.sommer.remote.STBRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.TVActivity"
+            android:name="com.sommer.remote.TVRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.DVDActivity"
+            android:name="com.sommer.remote.DVDRemote"
             android:screenOrientation="portrait" >
         </activity>
          <activity
-            android:name="com.sommer.remote.RemoteListOptions"
+            android:name="com.sommer.remote.RemoteDevicesList"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.FanActivity"
+            android:name="com.sommer.remote.FanRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.PJTActivity"
+            android:name="com.sommer.remote.PJTRemote"
             android:screenOrientation="portrait" >
         </activity>
+       
         <activity
-            android:name="com.sommer.remote.LightActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.sommer.remote.AirActivity"
+            android:name="com.sommer.remote.AirRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -81,7 +78,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.ListActivity"
+            android:name="com.sommer.remote.SelectRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity

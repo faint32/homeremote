@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class FanActivity extends BaseActivity implements OnClickListener {
+public class FanRemote extends BaseActivity implements OnClickListener {
 	
 
 	public void onCreate(Bundle savedInstanceState) {

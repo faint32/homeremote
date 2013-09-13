@@ -111,40 +111,39 @@ public static void sendAirRemote(AirData airdata){
 	public static String encodeRemoteData(RemoteData rmtDt){
 		String temp = rmtDt.getCustom()+rmtDt.getData();
 		byte[] data1=Tools.hexStringToBytes(temp);
-		if (data1==null){
+		if (rmtDt.getData()==null){
 			return null;
 		}
 		int length;
 		String data2=rmtDt.getCodetype();
 		byte[] encodeData=Encode ( data1,data2);
 		length = encodeData.length;
-		byte[] toData = new byte[encodeData.length+4];
+		byte[] toData = new byte[encodeData.length+3];
 		
-		toData[0] = _REMOTE_HEAD__;
-		toData[1] = _REMOTE_SEND_NORMAL_;
-		toData[2] = (byte) (length);
-		System.arraycopy(encodeData, 0, toData, 3, length);
+		toData[0] = _REMOTE_SEND_NORMAL_;
+		toData[1] = (byte) (length);
+		System.arraycopy(encodeData, 0, toData, 2, length);
 		String toDataStr = Tools.bytesToHexString(toData);
 		Log.v(TAG, "encode data ->" + toDataStr);
 		return toDataStr;
 	}
 	
 	
-	public static String updateRemoteData(String rmtDt){
-		
-		
-		byte[] encodeData=Tools.hexStringToBytes(rmtDt) ;
-		int length = encodeData.length;
-		byte[] toData = new byte[encodeData.length+4];
-		
-		toData[0] = _REMOTE_HEAD__;
-		toData[1] = _REMOTE_SEND_NORMAL_;
-		toData[2] = (byte) (length);
-		System.arraycopy(encodeData, 0, toData, 3, length);
-		String toDataStr = Tools.bytesToHexString(toData);
-	//	Log.v(TAG, "encode data ->" + toDataStr);
-		return toDataStr;
-	}
+//	public static String updateRemoteData(String rmtDt){
+//		
+//		
+//		byte[] encodeData=Tools.hexStringToBytes(rmtDt) ;
+//		int length = encodeData.length;
+//		byte[] toData = new byte[encodeData.length+4];
+//		
+//		toData[0] = _REMOTE_HEAD__;
+//		toData[1] = _REMOTE_SEND_NORMAL_;
+//		toData[2] = (byte) (length);
+//		System.arraycopy(encodeData, 0, toData, 3, length);
+//		String toDataStr = Tools.bytesToHexString(toData);
+//	//	Log.v(TAG, "encode data ->" + toDataStr);
+//		return toDataStr;
+//	}
 	 
 	
 	

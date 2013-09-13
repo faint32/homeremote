@@ -6,17 +6,17 @@ import java.util.HashMap;
 public final class Value {
 	public static int HEADER = 0x99;
 	public final static String[] RemoteType ={ 
-		"TV","DVD","STB","FAN","PJT","AIR","LIGHT"
+		"TV","DVD","STB","FAN","PJT","AIR"
 	};
 	
 	public static int screenWidth;
 	public static int  screenHeight ;
 	public final static String[] CodeProTab ={ 
-		"code_tv","code_dvd","code_stb","code_fan","code_pjt","code_air","code_light"
+		"code_tv","code_dvd","code_stb","code_fan","code_pjt","code_air"
 	};
 
 	
-	
+	public  static String[] REMOTE_TYPE;
 	
 	public static String tv_index;
 	public static String dvd_index ;
@@ -30,15 +30,14 @@ public final class Value {
 	public static int cKey = 0;
 	
 
-	public static int[] deviceType;
-	public static String[] deviceIndex;
+
 	public static HashMap<String, String> keyRemoteTab ;
 	public static ArrayList<KeyValue> keyValueTab  ;
 	
 	
 	
 	public static AirData airData = new AirData();
-	public static RemoteDevice rmtDev = new RemoteDevice();
+	public static ArrayList<RemoteDevice> rmtDevs = new ArrayList<RemoteDevice>();
 	
 	
 	public static class DeviceType {

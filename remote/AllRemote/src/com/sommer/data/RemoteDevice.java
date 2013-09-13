@@ -5,10 +5,9 @@ public class RemoteDevice {
 	private int type;
 	private String code;
 	private String name ;
-	
-	
-	
-	
+	private String brand ;
+
+
 	public String getName() {
 		return name;
 	}
@@ -33,6 +32,23 @@ public class RemoteDevice {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getInfo() {
+		return   this.name+"   "
+				 +Value.REMOTE_TYPE[this.type] +"   " + this.brand
+				 +"   " +this.code ;
+		
+	}
+
+	public String getShortInfo() {
+		return   this.name+" \n  "
+				 +Value.REMOTE_TYPE[this.type] ;
+		
+	}
 	
 }

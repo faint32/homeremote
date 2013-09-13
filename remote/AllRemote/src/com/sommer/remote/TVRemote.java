@@ -32,7 +32,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class TVActivity extends BaseActivity implements OnClickListener,
+public class TVRemote extends BaseActivity implements OnClickListener,
 		OnLongClickListener {
     final static String TAG = "TVActivity";
 	//NumButton numberButtonWindows;
@@ -46,7 +46,7 @@ public class TVActivity extends BaseActivity implements OnClickListener,
 		setContentView(R.layout.activity_tv);
 		Intent intent = getIntent();   
 		
-		current = intent.getIntExtra("current", 0);   
+		current = intent.getIntExtra("current", 0)*100;   
 		
 		
 		
@@ -54,7 +54,7 @@ public class TVActivity extends BaseActivity implements OnClickListener,
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
 		int screenHeight = dm.heightPixels;
-		Log.v(TAG, "dm widthpixels--->"+screenWidth+"       dm heightPixels ------>"+ screenHeight);
+//		Log.v(TAG, "dm widthpixels--->"+screenWidth+"       dm heightPixels ------>"+ screenHeight);
 		Button tv_key0 = (Button) findViewById(R.id.tv_key0);
 		tv_key0.setOnClickListener(this);
 		
@@ -317,6 +317,7 @@ public class TVActivity extends BaseActivity implements OnClickListener,
 		default:
 			
 			Value.currentKey = null;
+			Value.cKey =  50000;
 			break;
 		}
 		if (Value.currentKey != null) {
@@ -345,30 +346,14 @@ public class TVActivity extends BaseActivity implements OnClickListener,
 		return false;
 	}
 	
-	 private OnClickListener  itemsOnClick = new OnClickListener(){
 
-			public void onClick(View v) {
-			//	numberButtonWindows.dismiss();
-				switch (v.getId()) {
-				case R.id.btn_study:
-
-				
-					break;
-				case R.id.btn_options:		
-					
-					break;
-				case R.id.btn_about:	
-					
-					break;
-				case R.id.btn_quit:	
-				
-					break;	
-				default:
-					break;
-				}
-				
-					
-			}
-	    	
-	    };
+	
+	
+//	public boolean dispatchKeyEvent(KeyEvent event) { 
+//		if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) { 
+//		Log.v(TAG, "key menu ");
+//		return true; 
+//		} 
+//		return super.dispatchKeyEvent(event); 
+//		} 
 }

@@ -18,6 +18,7 @@ import java.util.Set;
 import com.sommer.data.CodeType;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
+import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
 import com.sommer.ircomm.RemoteCore;
 
@@ -41,7 +42,7 @@ public class UserDB extends SQLiteOpenHelper {
 	final static String TAG = "UserDB";
 
 	
-	final static String REMOTE	="remote_index";
+	final static String REMOTEDEVICES	="remote_devices";
 	
 	final static String AIR	="air_data";
 	
@@ -224,7 +225,7 @@ public  void saveAllKeyTabValue(){
 	//	Log.v(TAG, "key name --->"+ keyName);
 	    cv.put(USER_DATA,Value.keyRemoteTab.get(keyName) );
 	//    Log.v(TAG, "key data --->"+ Value.keyRemoteTab.get(keyName));
-	    myUserDB.update(USERTAB, cv, "name=?", new String[] {keyName});
+	//    myUserDB.update(USERTAB, cv, "name=?", new String[] {keyName});
 	}
 
 }
@@ -242,24 +243,28 @@ public  void saveSingleKeyTabValue(String keyName,String data){
 }
 
 	
-	public  void getRemoteIndex(){
+	public  void getRemoteDevices(){
 		
-		Log.v(TAG, "saveAllKeyTabValue start");
-		Cursor c = myUserDB.query(REMOTE, null, null ,null, null, null, null);
-		int size = c.getCount();
-		Value.deviceType = new int[size];
-		Value.deviceIndex = new String[size];
+	//	Log.v(TAG, "saveAllKeyTabValue start");
+		Cursor c = myUserDB.query(REMOTEDEVICES, null, null ,null, null, null, null);
+		
+		
 		c.moveToFirst();
-		int i = 0;
+	
 		do{
-			Value.deviceType[i]=c.getInt(1);
-			Value.deviceIndex[i] = c.getString(2); 
-			i++;
+			RemoteDevice rmtDev = new RemoteDevice();
+			rmtDev.setId(c.getInt(0));
+			rmtDev.setType(c.getInt(1));
+			rmtDev.setCode(c.getString(2));
+			rmtDev.setName(c.getString(3));
+			
+			Value.rmtDevs.add(rmtDev);
+			
 		}while(c.moveToNext());
 	
 		c.close(); 
 
-		Log.v(TAG, "devicetype--->"+ Value.deviceType.toString());
+	//	Log.v(TAG, "devicetype--->"+ Value.rmtDevs.toString());
 	}
 	
 	

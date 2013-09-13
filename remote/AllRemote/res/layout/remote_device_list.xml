@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    >
+
+      <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="5dip"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="26sp"
+                android:text="@string/add_remote"
+                android:textColor="#ffffff" />
+            <Button  
+			android:id="@+id/rdl_add" 
+			android:layout_height="wrap_content" 	
+			android:layout_width="wrap_content"
+			android:background="@drawable/menu_add"
+			android:layout_marginRight="10dp"
+			android:layout_alignParentRight ="true"
+		    />
+      </RelativeLayout>  
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="5dip">
+            <ListView
+		  	android:id="@+id/remote_list"
+		  	android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+		 />
+        </LinearLayout>
+        
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="5dip"
+            >
+            <ImageButton  
+			android:id="@+id/rdl_ok" 
+			android:layout_height="wrap_content" 	
+			android:layout_width="wrap_content"
+			android:src = "@drawable/correct"
+			android:background="@drawable/button"
+			android:layout_marginLeft="20dp"
+			android:layout_alignParentLeft ="true"
+		    />
+		 <ImageButton  
+			android:id="@+id/rdl_cancel" 
+			android:layout_height="wrap_content" 	
+			android:layout_width="wrap_content"
+			android:src = "@drawable/wrong"
+			android:background="@drawable/button"
+			android:layout_marginRight="10dp"
+			android:layout_alignParentRight ="true"
+		    />
+        </RelativeLayout>
+      
+</LinearLayout>

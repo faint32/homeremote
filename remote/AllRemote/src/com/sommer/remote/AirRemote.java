@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class AirActivity extends Activity implements OnClickListener {
+public class AirRemote extends Activity implements OnClickListener {
 	TextView airShow;
 	TextView airMode;
 	TextView airWindDir;	

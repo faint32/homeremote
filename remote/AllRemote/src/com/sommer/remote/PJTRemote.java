@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class PJTActivity extends BaseActivity implements OnClickListener {
+public class PJTRemote extends BaseActivity implements OnClickListener {
 
 
 	public void onCreate(Bundle savedInstanceState) {

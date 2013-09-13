@@ -60,6 +60,7 @@ public class RemoteUpdateService extends IntentService {
 
   @Override
   protected void onHandleIntent(Intent intent) {
+	  Value.REMOTE_TYPE= getResources().getStringArray(R.array.type_array);
 	  Load();
     sendBroadcast(new Intent(remoterListS_REFRESHED));
     stopSelf();
@@ -129,7 +130,7 @@ public class RemoteUpdateService extends IntentService {
 		if (Value.initial){
 		mUserDB.open();
 		mUserDB.getUserKeyValue();
-		mUserDB.getRemoteIndex();
+		mUserDB.getRemoteDevices();
 		mUserDB.close();
 		Log.v(TAG, "updata finished");
 //		Toast toast = Toast.makeText(mContext, R.string.updata_end,

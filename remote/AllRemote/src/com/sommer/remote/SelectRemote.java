@@ -36,12 +36,13 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 //import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
 
-public class ListActivity extends Activity implements OnItemSelectedListener,
+public class SelectRemote extends Activity implements OnItemSelectedListener,
 		OnClickListener {
 	final static String TAG = "ListActivity";
 //	private EffectThread mThread = null;
@@ -53,18 +54,20 @@ public class ListActivity extends Activity implements OnItemSelectedListener,
 	
 	private TextView mDeviceCount = null;
 	private TextView mRemainCount = null;
-	private TextView mCurrentDevice= null;
 	private TextView mCurrentCount = null;
+	private EditText mDeviceName = null;
 	private int mType = Value.DeviceType.TYPE_TV;
 	private String mTypeName =null;
 
-	private int mI = 0;
 
 	private ArrayList<String> list = new ArrayList<String>();
+	private ArrayList<String> nameList = new ArrayList<String>();
+
 	private ArrayList<String> productList = new ArrayList<String>();
 
 	private RemoteDB mRmtDB;
 	private UserDB mUsertDB;
+	private Bundle bundle = new Bundle();  
 	RemoteData rmtData = new RemoteData();
 //	Button autoButton;
 //	Button stopButton;
@@ -75,8 +78,8 @@ public class ListActivity extends Activity implements OnItemSelectedListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_list);
-		ad = new AirData(5000, 1, 20, 1, 1, 1, 1);
+		setContentView(R.layout.activity_select);
+		ad = new AirData(5003, 1, 20, 1, 1, 1, 1);
 		// database instruction
 		mRmtDB = new RemoteDB(getApplicationContext());
 		mUsertDB = new UserDB(getApplicationContext());
@@ -98,9 +101,8 @@ public class ListActivity extends Activity implements OnItemSelectedListener,
 //
 		mDeviceCount = (TextView) findViewById(R.id.count_text);
 		mRemainCount = (TextView) findViewById(R.id.remain_count);
-		mCurrentDevice= (TextView) findViewById(R.id.cur_name);;
 		mCurrentCount = (TextView) findViewById(R.id.cur_count);
-
+		mDeviceName = (EditText) findViewById(R.id.name_input);
 //		autoButton = (Button) findViewById(R.id.str_auto);
 //		autoButton.setOnClickListener(this);
 //		autoButton.setEnabled(false);
@@ -123,11 +125,11 @@ public class ListActivity extends Activity implements OnItemSelectedListener,
 	 private ArrayList<String> getBrand(String _type)
 	    {
 			
-			mRmtDB.open();
+		 mRmtDB.open();
 			list=mRmtDB.getBrand(_type);
-		//	list=mRmtDB.translateBrands(list);
+			nameList=mRmtDB.translateBrands(list);
 			mRmtDB.close();
-	        return list;
+	        return nameList;
 	    }
 
 	 
@@ -261,6 +263,7 @@ void sendTestCode(int count){
 
 	void save(int count){
 		 String index = productList.get(count);
+		 bundle.putString("index", index);
 		 switch(mType){
 		 case Value.DeviceType.TYPE_TV:
 			 Value.tv_index=index;
@@ -424,8 +427,10 @@ void sendTestCode(int count){
 				mTypeName = Value.RemoteType[mType];
 				brandName = list.get(arg2);
 			//	Log.v(TAG, "get brandName of list"+ brandName);
-			
+			    
 				getProducts(Value.RemoteType[mType],brandName);
+				
+				bundle.putString("brand", nameList.get(arg2));
 				mCount =productList.size();	
 				
 
@@ -483,7 +488,10 @@ void sendTestCode(int count){
 //				mThread.cancel();
 //				mThread = null;
 //			}
+			bundle.putString("name", mDeviceName.getText().toString());
+			bundle.putInt("type", mType);
 			save(mCutCount);
+			setResult(RESULT_OK, getIntent().putExtras(bundle)); 
 			finish();
 			break;
 			

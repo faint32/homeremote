@@ -16,7 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 
-public class DVDActivity extends BaseActivity implements OnClickListener {
+public class DVDRemote extends BaseActivity implements OnClickListener {
 //	TextView keyValueIndex;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

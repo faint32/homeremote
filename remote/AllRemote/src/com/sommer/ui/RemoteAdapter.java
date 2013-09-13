@@ -4,9 +4,15 @@ import java.util.List;
 
 import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
+import com.sommer.remote.RemoteDevicesList;
+import com.sommer.remote.StartActivity;
+import com.sommer.remote.StudyActivity;
+import com.sommer.remote.TVRemote;
 
 
+import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -77,41 +83,41 @@ public class RemoteAdapter extends BaseAdapter {
 		ViewHolder holder = null;	
 		if (convertView == null) {
 			//获取布局文件
-			convertView = inflater.inflate(R.layout.adapter_remotelist_item, null);
+			convertView = inflater.inflate(R.layout.adapter_list_item, null);
 			//new一个对象，存放每条item的窗体
 			holder = new ViewHolder();
 			
-			//下拉框控件
-			holder.type = (Spinner)convertView.findViewById(R.id.remote_type);
-			//设置数据选择的事件
-			holder.type.setOnItemSelectedListener(new  MySpinnerListener(holder){
-				@Override
-				public void onNothingSelected(AdapterView<?> arg0) {
-					
-				}
-
-				@Override
-				public void onItemSelected(AdapterView<?> arg0, View arg1,
-						int arg2, long arg3, ViewHolder viewHolder) {
-					TextView tv = (TextView)arg1;
-					int p = (Integer)viewHolder.name.getTag();
-					modifyListType(tv.getText().toString(),p);
-					
-				}} );
+//			//下拉框控件
+//			holder.type = (Spinner)convertView.findViewById(R.id.remote_type);
+//			//设置数据选择的事件
+//			holder.type.setOnItemSelectedListener(new  MySpinnerListener(holder){
+//				@Override
+//				public void onNothingSelected(AdapterView<?> arg0) {
+//					
+//				}
+//
+//				@Override
+//				public void onItemSelected(AdapterView<?> arg0, View arg1,
+//						int arg2, long arg3, ViewHolder viewHolder) {
+//					TextView tv = (TextView)arg1;
+//					int p = (Integer)viewHolder.name.getTag();
+//					modifyListType(tv.getText().toString(),p);
+//					
+//				}} );
 			//获取输入框控件
-			holder.name = (EditText)convertView.findViewById(R.id.remote_name);
+			holder.info = (TextView)convertView.findViewById(R.id.remote_info);
 			//将当前位置放入到tag中
-			holder.name.setTag(position);
+			holder.info.setTag(position);
 			//设置输入框数据发生变化的监听事件
-			holder.name.addTextChangedListener(new MyTextWatcher(holder){
-
-				@Override
-				public void afterTextChanged(Editable s, ViewHolder holder) {
-					int p = (Integer)holder.name.getTag();
-						modifyListname(s.toString(),p);
-				}
-
-			});
+//			holder.info.addTextChangedListener(new MyTextWatcher(holder){
+//
+//				@Override
+//				public void afterTextChanged(Editable s, ViewHolder holder) {
+//					int p = (Integer)holder.info.getTag();
+//						modifyListname(s.toString(),p);
+//				}
+//
+//			});
 			//获取按钮
 			holder.cancel = (Button)convertView.findViewById(R.id.remote_delete);
 			//添加按钮事件
@@ -122,13 +128,17 @@ public class RemoteAdapter extends BaseAdapter {
 //					int p = (Integer)holder.name.getTag();
 //					Toast.makeText(context, "当前是第"+p+"条", Toast.LENGTH_LONG).show();
 					if(list.size()>1){
-						int p = (Integer)holder.name.getTag();
+						int p = (Integer)holder.info.getTag();
 						list.remove(p);
 						if(listener!=null){
 							listener.listRemove(p);
 						}
 					}
 				}});
+			
+		
+			
+			
 			//获取文本控件
 			holder.id =  (TextView)convertView.findViewById(R.id.remote_id);
 			//将每条Item的控件对象放入tag中
@@ -136,17 +146,17 @@ public class RemoteAdapter extends BaseAdapter {
 			
 		}else{
 			holder = (ViewHolder)convertView.getTag();
-			holder.name.setTag(position);
+			holder.info.setTag(position);
 		}
 		
 		
 		
 		RemoteDevice rmtDev = list.get(position);
 		 holder.id.setText(position+1+"");
-		 holder.name.setText(rmtDev.getName());
-		 holder.type.setAdapter(adapter);  
-		 int p = getPositionForAdapter(position);
-		 holder.type.setSelection(p, true);
+		 holder.info.setText(rmtDev.getInfo());
+	//	 holder.type.setAdapter(adapter);  
+	//	 int p = getPositionForAdapter(position);
+	//	 holder.type.setSelection(p, true);
 		 return convertView;
 	}
 	
@@ -174,56 +184,55 @@ public class RemoteAdapter extends BaseAdapter {
 	}
 	
 	
-	private void modifyListType(String type,int p){
-		if(p>=list.size()) return;
-		RemoteDevice  t = list.get(p);
-	//	t.setType(type);
-		list.set(p, t);
-		
-	}
-	
-	
-	private void modifyListname(String name ,int p){
-		if(p>=list.size()) return;
-		RemoteDevice  t = list.get(p);
-		t.setName(name);
-		list.set(p, t);
-	}
+//	private void modifyListType(String type,int p){
+//		if(p>=list.size()) return;
+//		RemoteDevice  t = list.get(p);
+//	//	t.setType(type);
+//		list.set(p, t);
+//		
+//	}
+//	
+//	
+//	private void modifyListname(String name ,int p){
+//		if(p>=list.size()) return;
+//		RemoteDevice  t = list.get(p);
+//		t.setInfo(name);
+//		list.set(p, t);
+//	}
 	
 	 private final class ViewHolder{         
-	    	private Spinner type;      
-	    	private EditText name;   
+	 //   	private Spinner type;      
+	    	private TextView info;   
 	    	private Button cancel;   
 	    	private TextView id;
-	    	private TextView attr;
-	    	private Button index;
+	   
 	 }
 	 
-	 private abstract class MySpinnerListener implements AdapterView.OnItemSelectedListener{
-		 private ViewHolder mViewHolder;
-
-			public MySpinnerListener(ViewHolder holder) {
-				mViewHolder = holder;
-				}
-			
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				onItemSelected (arg0,  arg1,
-						arg2,  arg3,mViewHolder);
-				
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				
-			}
-
-			public abstract void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3,ViewHolder viewHolder);
-
-
-		}
+//	 private abstract class MySpinnerListener implements AdapterView.OnItemSelectedListener{
+//		 private ViewHolder mViewHolder;
+//
+//			public MySpinnerListener(ViewHolder holder) {
+//				mViewHolder = holder;
+//				}
+//			
+//			@Override
+//			public void onItemSelected(AdapterView<?> arg0, View arg1,
+//					int arg2, long arg3) {
+//				onItemSelected (arg0,  arg1,
+//						arg2,  arg3,mViewHolder);
+//				
+//			}
+//
+//			@Override
+//			public void onNothingSelected(AdapterView<?> arg0) {
+//				
+//			}
+//
+//			public abstract void onItemSelected(AdapterView<?> arg0, View arg1,
+//					int arg2, long arg3,ViewHolder viewHolder);
+//
+//
+//		}
 	 private abstract class MyOnClickListener implements View.OnClickListener{
 		 
 		 private ViewHolder mViewHolder;
@@ -238,29 +247,29 @@ public class RemoteAdapter extends BaseAdapter {
 		public abstract void onClick(View v,ViewHolder viewHolder); 
 		 
 	 }
-	 private abstract class MyTextWatcher implements TextWatcher{
-		 private ViewHolder mViewHolder;
-		 public MyTextWatcher(ViewHolder holder) {
-				mViewHolder= holder;
-		 }
-		@Override
-		public void afterTextChanged(Editable s) {
-			afterTextChanged(s,mViewHolder);
-		}
-		
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {
-			
-		}
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before,
-				int count) {
-			
-		}
-		public abstract void  afterTextChanged(Editable s,ViewHolder holder);
-		
-	 }
+//	 private abstract class MyTextWatcher implements TextWatcher{
+//		 private ViewHolder mViewHolder;
+//		 public MyTextWatcher(ViewHolder holder) {
+//				mViewHolder= holder;
+//		 }
+//		@Override
+//		public void afterTextChanged(Editable s) {
+//			afterTextChanged(s,mViewHolder);
+//		}
+//		
+//		@Override
+//		public void beforeTextChanged(CharSequence s, int start, int count,
+//				int after) {
+//			
+//		}
+//		@Override
+//		public void onTextChanged(CharSequence s, int start, int before,
+//				int count) {
+//			
+//		}
+//		public abstract void  afterTextChanged(Editable s,ViewHolder holder);
+//		
+//	 }
 	 
 	
 	 public interface OnAdapterChangeListener {

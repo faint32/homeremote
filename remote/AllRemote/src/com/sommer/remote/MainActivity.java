@@ -4,18 +4,16 @@ package com.sommer.remote;
 
 
 
+
 import com.sommer.allremote.R;
 
+import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 import com.sommer.ircomm.RemoteCore;
 import com.sommer.ircomm.RemoteOut;
 
 import com.sommer.ui.SelectPicPopupWindow;
-
-
-
-
 
 import android.os.Bundle;
 import android.os.Message;
@@ -33,12 +31,11 @@ import android.app.TabActivity;
 
 import android.content.Context;
 
-//import android.content.BroadcastReceiver;
-//import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 
-//import android.content.IntentFilter;
+
 
 
 import android.util.DisplayMetrics;
@@ -61,15 +58,14 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 
-import android.widget.AdapterView;
-import android.widget.GridView;
+
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
+
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
 
 @SuppressLint("HandlerLeak")
 
@@ -80,9 +76,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static final int FLING_MIN_VELOCITY = 0;
 	private static final int STUDY = 1;
 
-	int[] dType ={Value.DeviceType.TYPE_AIR,Value.DeviceType.TYPE_TV,Value.DeviceType.TYPE_DVD,
-			Value.DeviceType.TYPE_STB,Value.DeviceType.TYPE_FAN,Value.DeviceType.TYPE_PJT		
-	};
+
 	
 	
 	private static Context mContext;
@@ -127,7 +121,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		
 		
-		initHostTab(Value.deviceType);
+		initHostTab();
 
 		
 		tabHost.setCurrentTab(0);
@@ -198,66 +192,66 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	
 	
 	
-	void initHostTab(int[] dType){
+	void initHostTab(){
 		tabHost = getTabHost();
 		TabHost.TabSpec spec;
 		tabHost.setup();
 		Intent intent;
-		for (int i=0;i<dType.length;i++){
-			
-		switch (dType[i]){
+		for (int i=0;i<Value.rmtDevs.size();i++){
+			RemoteDevice mDev =Value.rmtDevs.get(i);
+		switch (mDev.getType()){
 		
 		case Value.DeviceType.TYPE_TV:
-			intent = new Intent().setClass(this, TVActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this, TVRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.tv))
-					.setIndicator(this.getString(R.string.str_tv))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
 		case Value.DeviceType.TYPE_DVD:
-			intent = new Intent().setClass(this, DVDActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this, DVDRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.dvd))
-					.setIndicator(this.getString(R.string.str_dvd))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
 		case Value.DeviceType.TYPE_STB:
-			intent = new Intent().setClass(this,STBActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this,STBRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.stb))
-					.setIndicator(this.getString(R.string.str_stb))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
 		case Value.DeviceType.TYPE_PJT:
-			intent = new Intent().setClass(this, PJTActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this, PJTRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.pjt))
-					.setIndicator(this.getString(R.string.str_pjt))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
 		case Value.DeviceType.TYPE_FAN:
-			intent = new Intent().setClass(this, FanActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this, FanRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.fan))
-					.setIndicator(this.getString(R.string.str_fan))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
 		case Value.DeviceType.TYPE_AIR:
-			intent = new Intent().setClass(this, AirActivity.class);
-			intent.putExtra("current",i);  
+			intent = new Intent().setClass(this, AirRemote.class);
+			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.air))
-					.setIndicator(this.getString(R.string.str_air))
+					.setIndicator(mDev.getShortInfo())
 					.setContent(intent);
 			tabHost.addTab(spec);		
 			break;
@@ -541,9 +535,11 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				break;
 			case R.id.MSG_OPTION_LIST:
 				Log.v("test", "btn_options btn_options");
+//				Intent optionsIntent = new Intent(mContext, ListActivity.class);
+//				startActivityForResult(optionsIntent, R.id.REQUEST_OPTIONS);
 				
-				Intent optionsIntent = new Intent(mContext, RemoteListOptions.class);
-				startActivityForResult(optionsIntent, R.id.REQUEST_OPTIONS);
+				Intent optionsIntent = new Intent(mContext, RemoteDevicesList.class);
+				startActivity(optionsIntent);
 				break;
 			case R.id.MSG_OPTION_QUIT:
 			

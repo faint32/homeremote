@@ -12,6 +12,7 @@
     <item name="MSG_OPTION_LIST" type="id"/>
     <item name="MSG_OPTION_ABOUT" type="id"/>
     <item name="MSG_OPTION_QUIT" type="id"/>
+     <item name="REQUEST_STUDY" type="id"/>
     <!-- MainActivity -->
 
 </resources>

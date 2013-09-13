@@ -17,6 +17,7 @@ import java.util.Locale;
 
 
 
+
 import com.sommer.data.CodeType;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
@@ -328,16 +329,14 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	}
 	
-	public int setKeyRemoteData(int _type,String _index){
+	public void setKeyRemoteData(int _type,String _index){
 	//	ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
 		String[] rmtData = new String[35];
 		Set<?> set=Value.keyRemoteTab.entrySet();
 	    Iterator<?> it=set.iterator();
 		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
-		if (c==null){
-		return 0;
-				   }
-		c.moveToFirst();
+		if(c.moveToFirst()){
+		
 			//		Log.v(TAG, "columnCoutn data " + c.getColumnCount());
 		for (int i=4;i<c.getColumnCount();i++){
 		RemoteData rmtData1 = new RemoteData();
@@ -347,18 +346,8 @@ public class RemoteDB extends SQLiteOpenHelper {
 				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
 		rmtData[i-4]=RemoteCore.encodeRemoteData(rmtData1);
 		}
-		 while(it.hasNext()){
-		@SuppressWarnings("unchecked")
-		Map.Entry<String, KeyValue> me=(Map.Entry<String, KeyValue>)it.next();  
-		KeyValue kv = me.getValue();
-		if (kv.getDeviceType()==_type){
-		int temp = kv.getKeyColumn();
-		kv.setIsLearned(0);
-		kv.setData(rmtData[temp]);
-		me.setValue(kv);
+		
 		}
-	}
-		return 1;
 		
 	}
 
@@ -509,6 +498,34 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 		return keyColumn; 
 }
+	
+	
+	
+	public String[] getRemoteData(int _type,String _index){
+		String[] rmtDts = new String[100];
+	
+				Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
+				//	Cursor c = myDataBase.rawQuery("SELECT * FROM " + TV_CODE_TAB + " WHERE custom=20020080"   ,null);
+				   if (c==null){
+					   return null;
+				   }
+					c.moveToFirst();
+			//		Log.v(TAG, "columnCoutn data " + c.getColumnCount());
+					for (int i=4;i<c.getColumnCount();i++){
+					RemoteData rmtData = new RemoteData();
+					rmtData.setIndex(c.getString(1));
+					rmtData.setCodetype(c.getString(2)) ; 
+					rmtData.setMode(Value.RemoteType[_type]);
+					rmtData.setCustom(c.getString(3)) ;
+					rmtData.setData(c.getString(i)) ;
+				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
+				
+					rmtDts[i-4] = RemoteCore.encodeRemoteData(rmtData);
+					}
+					
+		return rmtDts;
+		
+	}
 
 	/**
 	 * compareListValue compare arraylist all members 

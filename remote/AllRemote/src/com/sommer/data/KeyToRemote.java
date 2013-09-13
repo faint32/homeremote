@@ -10,6 +10,8 @@ import android.content.Context;
 import android.util.Log;
 
 
+
+import com.sommer.allremote.R;
 import com.sommer.ircomm.RemoteCore;
 import com.sommer.utils.RemoteDB;
 
@@ -18,100 +20,69 @@ public class KeyToRemote {
 	private static RemoteDB mRmtDB = null;
 	final static String  TAG = "KeyToRemote";	
 
-	public static void allKeyTabSetValue(Context mContext){
-		ArrayList<RemoteData> tempRemotes = new ArrayList<RemoteData>();
-	
-		String[] tvCodeDatas = new String[100];
-		String[] dvdCodeDatas = new String[100];
-		String[] stbCodeDatas = new String[100];
+	public static void keyTabSetValue(int dType,Context mContext){
 		
-		String[] fanCodeDatas = new String[100];
-		String[] pjtCodeDatas = new String[100];
+		  
+		String[] codeDatas = new String[100];
+		int keyColumn;
 		if (mRmtDB==null){
 			mRmtDB = new RemoteDB(mContext);	
 			}
 		mRmtDB.open();
-		tempRemotes=mRmtDB.getRemoteKeyData(Value.DeviceType.TYPE_TV, Value.tv_index);
-		 for (int i=0;i<tempRemotes.size();i++){
-			 tvCodeDatas[i] =	RemoteCore.encodeRemoteData(tempRemotes.get(i));
-			//	Log.v(TAG, "datavalue byte count " + i +"--->" + tempCodeDatas[i]);
-			}
-	   tempRemotes.clear();
-	   tempRemotes=mRmtDB.getRemoteKeyData(Value.DeviceType.TYPE_DVD, Value.dvd_index);
-		 for (int i=0;i<tempRemotes.size();i++){
-			 dvdCodeDatas[i] =	RemoteCore.encodeRemoteData(tempRemotes.get(i));
-			//	Log.v(TAG, "datavalue byte count " + i +"--->" + tempCodeDatas[i]);
-			}
-		 tempRemotes.clear();
-		 tempRemotes=mRmtDB.getRemoteKeyData(Value.DeviceType.TYPE_STB, Value.stb_index);
-		 for (int i=0;i<tempRemotes.size();i++){
-			stbCodeDatas[i] =	RemoteCore.encodeRemoteData(tempRemotes.get(i));
-			//	Log.v(TAG, "datavalue byte count " + i +"--->" + tempCodeDatas[i]);
-			}
-		 tempRemotes.clear();
-		 tempRemotes=mRmtDB.getRemoteKeyData(Value.DeviceType.TYPE_FAN, Value.fan_index);
-		 for (int i=0;i<tempRemotes.size();i++){
-			fanCodeDatas[i] =	RemoteCore.encodeRemoteData(tempRemotes.get(i));
-			//	Log.v(TAG, "datavalue byte count " + i +"--->" + tempCodeDatas[i]);
-			}
-		 tempRemotes.clear();
-		 tempRemotes=mRmtDB.getRemoteKeyData(Value.DeviceType.TYPE_PJT, Value.pjt_index);
-		 for (int i=0;i<tempRemotes.size();i++){
-			pjtCodeDatas[i] =	RemoteCore.encodeRemoteData(tempRemotes.get(i));
-			//	Log.v(TAG, "datavalue byte count " + i +"--->" + tempCodeDatas[i]);
-			}
-		
-		 
-		 
-		 Set<?> set=Value.keyRemoteTab.entrySet();
-	        Iterator<?> it=set.iterator();
-		Log.v(TAG, "keyTabSetValue start");
+		switch (dType){
+		case Value.DeviceType.TYPE_TV:
+			codeDatas=mRmtDB.getRemoteData(dType, Value.tv_index);
+//			for (String code:codeDatas){
+//				Log.v(TAG, "rmt code --->"+ code);	
+//			}
 			
-				       while(it.hasNext()){
-			            @SuppressWarnings("unchecked")
-						Map.Entry<String, KeyValue> me=(Map.Entry<String, KeyValue>)it.next();
-//			            Log.v(TAG, "keyvaluetab index ----->   "  +me.getKey() );	
-//			            Log.v(TAG, "keyvaluetab hashcode ----->   "  +me.hashCode() );	
-			            KeyValue kv = me.getValue();
-			            if(kv.getDeviceType()==Value.DeviceType.TYPE_TV){
-			            	String temp = tvCodeDatas[kv.getKeyColumn()];
-			            	  kv.setData(temp);
-			            	  kv.setIsLearned(0);
-			            	  me.setValue(kv);
-			            	  Log.v(TAG, "keyvaluetab kv ----->   "  +kv.getKeyValue() );	
-			            }
-			            if(kv.getDeviceType()==Value.DeviceType.TYPE_DVD){
-			            	String temp = dvdCodeDatas[kv.getKeyColumn()];
-			            	  kv.setData(temp);
-			            	  kv.setIsLearned(0);
-			            	  me.setValue(kv);
-			            	  Log.v(TAG, "keyvaluetab kv ----->   "  +kv.getKeyValue() );	
-			            }
-			            if(kv.getDeviceType()==Value.DeviceType.TYPE_STB){
-			            	String temp = stbCodeDatas[kv.getKeyColumn()];
-			            	  kv.setData(temp);
-			            	  kv.setIsLearned(0);
-			            	  me.setValue(kv);
-			            	  Log.v(TAG, "keyvaluetab kv ----->   "  +kv.getKeyValue() );	
-			            }
-			            if(kv.getDeviceType()==Value.DeviceType.TYPE_FAN){
-			            	String temp = fanCodeDatas[kv.getKeyColumn()];
-			            	  kv.setData(temp);
-			            	  kv.setIsLearned(0);
-			            	  me.setValue(kv);
-			            	  Log.v(TAG, "keyvaluetab kv ----->   "  +kv.getKeyValue() );	
-			            }
-			            if(kv.getDeviceType()==Value.DeviceType.TYPE_PJT){
-			            	String temp = pjtCodeDatas[kv.getKeyColumn()];
-			            	  kv.setData(temp);
-			            	  kv.setIsLearned(0);
-			            	  me.setValue(kv);
-			            	  Log.v(TAG, "keyvaluetab kv ----->   "  +kv.getKeyValue() );	
-			            }
-			            
-			        }
-				       mRmtDB.close();
+			String[] tv_key = mContext.getResources().getStringArray(R.array.tv_key);
+			for (String key:tv_key){
+				keyColumn= mRmtDB.getKeyColumn(key);
+//				Log.v(TAG, "tv_key--->" + key);
+//				Log.v(TAG, "key column--->" + keyColumn);
+				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+			}
+			break;
+		case Value.DeviceType.TYPE_STB:
+			codeDatas=mRmtDB.getRemoteData(dType, Value.stb_index);
+			String[] stb_key = mContext.getResources().getStringArray(R.array.stb_key);
+			for (String key:stb_key){
+				keyColumn= mRmtDB.getKeyColumn(key);
+				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+			}
+			break;	
+		case Value.DeviceType.TYPE_DVD:
+			codeDatas=mRmtDB.getRemoteData(dType, Value.dvd_index);
+			String[] dvd_key = mContext.getResources().getStringArray(R.array.dvd_key);
+			for (String key:dvd_key){
+				keyColumn= mRmtDB.getKeyColumn(key);
+				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+			}
+			break;	
+		case Value.DeviceType.TYPE_FAN:
+			codeDatas=mRmtDB.getRemoteData(dType, Value.fan_index);
+			String[] fan_key = mContext.getResources().getStringArray(R.array.fan_key);
+			for (String key:fan_key){
+				keyColumn= mRmtDB.getKeyColumn(key);
+				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+			}
+			break;	
+		case Value.DeviceType.TYPE_PJT:
+			codeDatas=mRmtDB.getRemoteData(dType, Value.pjt_index);
+			String[] pjt_key = mContext.getResources().getStringArray(R.array.pjt_key);
+			for (String key:pjt_key){
+				keyColumn= mRmtDB.getKeyColumn(key);
+				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+			}
+			break;	
 		
+		default:
+			break;
+		}
+		
+		mRmtDB.close();
+
 	}
 	
 	
