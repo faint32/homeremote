@@ -47,6 +47,7 @@
 			android:id="@+id/remote_delete" 
 			android:layout_height="60dp" 	
 			android:layout_width="60dp"
+			android:focusable="false"  
 			android:background="@drawable/menu_del"
 		    />
 	</LinearLayout>

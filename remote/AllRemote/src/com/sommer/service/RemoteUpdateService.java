@@ -126,10 +126,10 @@ public class RemoteUpdateService extends IntentService {
   public void Load() {
 		
 		MyRemoteDatabase.getRemoteIndex(mContext);
-		Value.keyRemoteTab = new HashMap<String, String>();
+//		Value.keyRemoteTab = new HashMap<String, String>();
 		if (Value.initial){
 		mUserDB.open();
-		mUserDB.getUserKeyValue();
+//		mUserDB.getUserKeyValue();
 		mUserDB.getRemoteDevices();
 		mUserDB.close();
 		Log.v(TAG, "updata finished");

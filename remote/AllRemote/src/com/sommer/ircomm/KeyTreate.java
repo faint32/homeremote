@@ -47,10 +47,10 @@ public class KeyTreate {
 			}
 			else{
 			//	Log.v(TAG, "keytable----->"+ Value.keyRemoteTab.toString() );
-			String rmtData = Value.keyRemoteTab.get(Value.currentKey);
-			Log.v(TAG, "rmtdata--->"+ rmtData);
-			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
-			RemoteOut.sendRemote(rmtDataByte);
+//			String rmtData = Value.keyRemoteTab.get(Value.currentKey);
+//			Log.v(TAG, "rmtdata--->"+ rmtData);
+//			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
+//			RemoteOut.sendRemote(rmtDataByte);
 			remoteSendUI();
 			}
 		

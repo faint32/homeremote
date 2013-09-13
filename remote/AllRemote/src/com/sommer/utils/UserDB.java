@@ -199,36 +199,8 @@ public class UserDB extends SQLiteOpenHelper {
 		return null;
 	}
 	
-	public void getUserKeyValue(){
-		
-		Cursor c = myUserDB.query(USERTAB, null, null ,null, null, null, null);
-		c.moveToFirst();
-		do{
-			Value.keyRemoteTab.put(c.getString(1), c.getString(2));
-		}while(c.moveToNext());
-
-		
 	
-	c.close(); 
 
-}
-
-
-
-public  void saveAllKeyTabValue(){
-	 ContentValues cv = new ContentValues();
-	Log.v(TAG, "saveAllKeyTabValue start");
-	Iterator<String> iterator = Value.keyRemoteTab.keySet().iterator();
-	while(iterator.hasNext()) {
-		String keyName = iterator.next();
-		cv.put(USER_NAME,keyName );
-	//	Log.v(TAG, "key name --->"+ keyName);
-	    cv.put(USER_DATA,Value.keyRemoteTab.get(keyName) );
-	//    Log.v(TAG, "key data --->"+ Value.keyRemoteTab.get(keyName));
-	//    myUserDB.update(USERTAB, cv, "name=?", new String[] {keyName});
-	}
-
-}
 
 
 public  void saveSingleKeyTabValue(String keyName,String data){

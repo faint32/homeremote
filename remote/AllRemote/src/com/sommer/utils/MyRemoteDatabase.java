@@ -31,13 +31,7 @@ public class MyRemoteDatabase {
 	public static  void saveRemoteIndex(Context _mContext){
 		SharedPreferences  sharedPreferences = _mContext.getSharedPreferences(DB,0);  
 		SharedPreferences.Editor mEditor = sharedPreferences.edit();  
-        mEditor.putString(TVINDEX,Value.tv_index); 
-        mEditor.putString(STBINDEX,Value.stb_index); 
-        mEditor.putString(DVDINDEX,Value.dvd_index); 
-        mEditor.putString(FANINDEX,Value.fan_index); 
-        mEditor.putString(PJTINDEX,Value.pjt_index); 
-
-        mEditor.putString(AIRINDEX,Value.air_index); 
+    
         mEditor.putBoolean(INITIAL,Value.initial); 
         
         mEditor.commit();  
@@ -57,13 +51,7 @@ public class MyRemoteDatabase {
 	
 	public static void getRemoteIndex(Context mContext){
 		SharedPreferences  sharedPreferences = mContext.getSharedPreferences(DB,0);  
-		Value.tv_index  = sharedPreferences.getString(TVINDEX, "0000");
-		Value.stb_index  = sharedPreferences.getString(STBINDEX, "2173");
-		Value.dvd_index  = sharedPreferences.getString(DVDINDEX, "1001");
-		Value.fan_index  = sharedPreferences.getString(FANINDEX, "3001");
-		Value.pjt_index  = sharedPreferences.getString(PJTINDEX, "4000");
-
-		Value.air_index  = sharedPreferences.getString(AIRINDEX, "5003");
+		
 		Value.initial =sharedPreferences.getBoolean(INITIAL, false);
 
 	}

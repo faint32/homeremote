@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 
-public class StartActivity extends Activity {
+public class Start extends Activity {
 	private final int SPLASH_DISPLAY_LENGHT = 2000;//Integer.valueOf(this.getString(R.string.splash_delay_value));
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class StartActivity extends Activity {
         startService(new Intent(this, RemoteUpdateService.class));
         new Handler().postDelayed(new Runnable() {
 			public void run() {
-				Intent mainIntent = new Intent(StartActivity.this,
+				Intent mainIntent = new Intent(Start.this,
 						MainActivity.class);
 				startActivity(mainIntent);
 				finish();

@@ -329,27 +329,26 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	}
 	
-	public void setKeyRemoteData(int _type,String _index){
-	//	ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
-		String[] rmtData = new String[35];
-		Set<?> set=Value.keyRemoteTab.entrySet();
-	    Iterator<?> it=set.iterator();
-		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
-		if(c.moveToFirst()){
-		
-			//		Log.v(TAG, "columnCoutn data " + c.getColumnCount());
-		for (int i=4;i<c.getColumnCount();i++){
-		RemoteData rmtData1 = new RemoteData();
-		rmtData1.setCodetype(c.getString(2)) ; //获取第一列的值,第一列的索引从0开始 
-		rmtData1.setCustom(c.getString(3)) ;
-		rmtData1.setData(c.getString(i)) ;
-				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
-		rmtData[i-4]=RemoteCore.encodeRemoteData(rmtData1);
-		}
-		
-		}
-		
-	}
+//	public void setKeyRemoteData(int _type,String _index){
+//	//	ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
+//		String[] rmtData = new String[35];
+//		
+//		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
+//		if(c.moveToFirst()){
+//		
+//			//		Log.v(TAG, "columnCoutn data " + c.getColumnCount());
+//		for (int i=4;i<c.getColumnCount();i++){
+//		RemoteData rmtData1 = new RemoteData();
+//		rmtData1.setCodetype(c.getString(2)) ; //获取第一列的值,第一列的索引从0开始 
+//		rmtData1.setCustom(c.getString(3)) ;
+//		rmtData1.setData(c.getString(i)) ;
+//				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
+//		rmtData[i-4]=RemoteCore.encodeRemoteData(rmtData1);
+//		}
+//		
+//		}
+//		
+//	}
 
 	
 	

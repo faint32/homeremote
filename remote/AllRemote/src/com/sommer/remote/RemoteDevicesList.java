@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -37,7 +38,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	ImageButton btn_cancel;
 	List<RemoteDevice> list;
 	RemoteAdapter rmtAdapter;
-
+    final static String TAG = "RemoteDevicesList";
 	public static RemoteDevicesList mRmtListOpts;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,12 +111,14 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 		switch (requestCode) {
 		case R.id.REQUEST_OPTIONS:
 			 if (resultCode == RESULT_OK) { 
-				 
+				 int id = rmtAdapter.getCount();
 				 RemoteDevice device = new RemoteDevice();
+				    device.setId(id);
 					device.setType(bundle.getInt("type"));
 					device.setName(bundle.getString("name"));
 					device.setBrand(bundle.getString("brand"));
 					device.setCode(bundle.getString("index") );
+					Log.v(TAG, "id --->"+ id);
 				rmtAdapter.addItem(device);
 				rmtAdapter.notifyDataSetChanged();
 		        }
@@ -131,6 +134,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	public void onItemClick(AdapterView<?> av, View arg1, int position, long arg3) {
 		switch(av.getId()){
 		case R.id.remote_list:
+			Log.v(TAG, "remote"+(position+1)+"ok");
 			Alert(RemoteDevicesList.this, "remote"+(position+1)+"ok");
 //			Toast.makeText(MainActivity.this, "��ǰѡ�е�"+(position+1)+"��", Toast.LENGTH_LONG).show();
 			break;

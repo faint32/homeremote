@@ -266,22 +266,22 @@ void sendTestCode(int count){
 		 bundle.putString("index", index);
 		 switch(mType){
 		 case Value.DeviceType.TYPE_TV:
-			 Value.tv_index=index;
+			
 			 break;
 		 case Value.DeviceType.TYPE_DVD:
-			 Value.dvd_index=index;
+		
 			 break;
 		 case Value.DeviceType.TYPE_STB:
-			 Value.stb_index=index;
+			
 			 break;
 		 case Value.DeviceType.TYPE_PJT:
-			 Value.pjt_index=index;
+			 
 			 break;
 		 case Value.DeviceType.TYPE_FAN:
-			 Value.fan_index=index;
+			
 			 break;
 		 case Value.DeviceType.TYPE_AIR:
-			 Value.air_index=index;
+			
 			 int id=Integer.parseInt(index);
 			 ad.setCodeType(id);
 			 MyRemoteDatabase.saveAirData(getApplicationContext(), ad);
@@ -292,11 +292,11 @@ void sendTestCode(int count){
 		 MyRemoteDatabase.saveRemoteIndex(getApplicationContext());
 		 if(mType!= Value.DeviceType.TYPE_AIR){
 		 mRmtDB.open();
-		 mRmtDB.setKeyRemoteData(mType, index);
+//		 mRmtDB.setKeyRemoteData(mType, index);
 		 mRmtDB.close();
 		 
 		 mUsertDB.open();
-		 mUsertDB.saveAllKeyTabValue();
+//		 mUsertDB.saveAllKeyTabValue();
 		 mUsertDB.close();
 		 }
 	 }

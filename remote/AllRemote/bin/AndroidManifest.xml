@@ -35,7 +35,7 @@
         android:windowSoftInputMode="stateAlwaysHidden" 
          android:configChanges="orientation|keyboardHidden">
         <activity
-            android:name="com.sommer.remote.StartActivity"
+            android:name="com.sommer.remote.Start"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
             <intent-filter>

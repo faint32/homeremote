@@ -18,21 +18,16 @@ public final class Value {
 	
 	public  static String[] REMOTE_TYPE;
 	
-	public static String tv_index;
-	public static String dvd_index ;
-	public static String stb_index;
-	public static String fan_index ;
-	public static String pjt_index ;
-	public static String air_index ;
+
 	public static Boolean initial;
 	public static Boolean isStudying = false;
 	public static String currentKey = null;
-	public static int cKey = 0;
+//	public static int cKey = 0;
 	
 
 
-	public static HashMap<String, String> keyRemoteTab ;
-	public static ArrayList<KeyValue> keyValueTab  ;
+//	public static HashMap<String, String> keyRemoteTab ;
+//	public static ArrayList<KeyValue> keyValueTab  ;
 	
 	
 	

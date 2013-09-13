@@ -5,7 +5,7 @@ import java.util.List;
 import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
 import com.sommer.remote.RemoteDevicesList;
-import com.sommer.remote.StartActivity;
+import com.sommer.remote.Start;
 import com.sommer.remote.StudyActivity;
 import com.sommer.remote.TVRemote;
 
