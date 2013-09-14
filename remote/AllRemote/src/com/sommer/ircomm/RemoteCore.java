@@ -4,7 +4,7 @@ import android.util.Log;
 
 
 import com.sommer.data.AirData;
-import com.sommer.data.CodeType;
+
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
 import com.sommer.utils.Tools;

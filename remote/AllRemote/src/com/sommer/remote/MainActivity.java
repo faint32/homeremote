@@ -502,9 +502,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			case R.id.MESSAGE_WRITE:
 				break;
 			case R.id.MESSAGE_SEND:
-				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
-				 long [] pattern = {100,100};   // 停止 开启 停止 开启   
-				vibrator.vibrate(pattern,1);          
+//				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
+//				 long [] pattern = {100,100};   // 停止 开启 停止 开启   
+//				vibrator.vibrate(pattern,1);          
 				showCodeSending();
 				
 		//		hideCodeSending();

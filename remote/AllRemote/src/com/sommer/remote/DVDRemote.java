@@ -8,6 +8,7 @@ import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -22,6 +23,10 @@ public class DVDRemote extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_dvd);
+		
+		Intent intent = getIntent();   
+		Value.currentDevice = intent.getIntExtra("current", 0);
+		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
@@ -236,7 +241,7 @@ public class DVDRemote extends BaseActivity implements OnClickListener {
 			Value.currentKey = null;
 		}
 		if (Value.currentKey != null) {
-			KeyTreate.getInstance().keyTreate();
+			KeyTreate.getInstance().keyTreate(Value.currentDevice ,Value.currentKey);	
 
 			
 		}

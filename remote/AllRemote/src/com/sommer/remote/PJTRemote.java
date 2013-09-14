@@ -7,6 +7,7 @@ import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -22,6 +23,10 @@ public class PJTRemote extends BaseActivity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pjt);
+		
+		Intent intent = getIntent();   
+		Value.currentDevice = intent.getIntExtra("current", 0);
+		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
@@ -258,7 +263,7 @@ public class PJTRemote extends BaseActivity implements OnClickListener {
 		}
 		if (Value.currentKey != null) {
 			try {
-				KeyTreate.getInstance().keyTreate();
+				KeyTreate.getInstance().keyTreate(Value.currentDevice ,Value.currentKey);	
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

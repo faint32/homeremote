@@ -33,16 +33,16 @@ public class TVRemote extends BaseActivity implements OnClickListener,
     final static String TAG = "TVActivity";
 	//NumButton numberButtonWindows;
 	FuncationButton funButtonWindows;
-	int current;
+	
 //	TextView keyValueIndex;
 //	String TVCodeIndex;
 //	HashMap<String , KeyValue> keyTab = new HashMap<String , KeyValue>();   
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tv);
-		Intent intent = getIntent();   
 		
-		current = intent.getIntExtra("current", 0)*100;   
+		Intent intent = getIntent();   
+		Value.currentDevice = intent.getIntExtra("current", 0);
 		
 		
 		
@@ -317,7 +317,7 @@ public class TVRemote extends BaseActivity implements OnClickListener,
 			break;
 		}
 		if (Value.currentKey != null) {
-			KeyTreate.getInstance().keyTreate();	
+			KeyTreate.getInstance().keyTreate(Value.currentDevice ,Value.currentKey);	
 //			numberButtonWindows = new NumButton(this, itemsOnClick);
 //			numberButtonWindows.showAtLocation(this.findViewById(R.id.tv_main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 //			funButtonWindows = new FuncationButton(this, itemsOnClick);

@@ -8,13 +8,17 @@ import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
+import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
+import com.sommer.utils.RemoteDB;
 import com.sommer.utils.Tools;
+import com.sommer.utils.UserDB;
 
 public class KeyTreate {
 	private final static String TAG ="KeyTreate";
 	private Handler mHandler;
-	private Context mContext;
+	private static Context mContext;
+	private static UserDB userDB;
 	private static int index=0;
 	private static KeyTreate mKeyTreate = null;
 	
@@ -34,7 +38,7 @@ public class KeyTreate {
 	public void setContext(Context _context) {
 		mContext = _context;
 	}
-	public  void keyTreate(){
+	public  void keyTreate(int device, String keyName){
 		
 		try {
 		
@@ -51,7 +55,16 @@ public class KeyTreate {
 //			Log.v(TAG, "rmtdata--->"+ rmtData);
 //			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
 //			RemoteOut.sendRemote(rmtDataByte);
+			if (userDB==null){
+				userDB = new UserDB(mContext);	
+				}
 			remoteSendUI();
+			userDB.open();
+			String	rmtData = userDB.getRemoteData(device,keyName);
+			userDB.close();
+			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
+			RemoteOut.sendRemote(rmtDataByte);	
+			
 			}
 		
 			

@@ -66,6 +66,7 @@ import android.util.Log;
 			-128,-128,-2,2,95,-95
 		};
 		private  static byte[] Signal3250= { 
+			-128,-128,-76,76,-33,33,-6,6,-2,2,-20,20,-57,57,-107,107,95,-95,47,-47,14,-14,1,-1,11,-11,41,-41,
 			-128,-128,-76,76,-33,33,-6,6,-2,2,-20,20,-57,57,-107,107,95,-95,47,-47,14,-14,1,-1,11,-11,41,-41
 		};
 		
@@ -117,8 +118,8 @@ import android.util.Log;
 			
 			// now generate the actual waveform using l to wiggle the DAC and prevent it from zeroing out
 			int point =0;
-//			System.arraycopy(Signal3250, 0, waveform, point, Signal3250.length);
-//			point += Signal3250.length;
+			System.arraycopy(Signal3250, 0, waveform, point, Signal3250.length);
+			point += Signal3250.length;
 			for (int i=0;i<bits.length;i++ ){
 			//	Log.v(TAG, "bits value  " + i + "is " + bits[i] );
 				if (bits[i]==false){

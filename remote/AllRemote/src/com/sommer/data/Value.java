@@ -22,6 +22,7 @@ public final class Value {
 	public static Boolean initial;
 	public static Boolean isStudying = false;
 	public static String currentKey = null;
+	public static int currentDevice = 0;
 //	public static int cKey = 0;
 	
 

@@ -8,6 +8,7 @@ import com.sommer.data.Value;
 import com.sommer.ircomm.KeyTreate;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -25,6 +26,10 @@ public class STBRemote extends BaseActivity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stb);
+		
+		Intent intent = getIntent();   
+		Value.currentDevice = intent.getIntExtra("current", 0);
+		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
@@ -269,7 +274,7 @@ public class STBRemote extends BaseActivity implements OnClickListener {
 			Value.currentKey = null;
 		}
 		if (Value.currentKey != null) {
-			KeyTreate.getInstance().keyTreate();
+			KeyTreate.getInstance().keyTreate(Value.currentDevice ,Value.currentKey);	
 //			KeyValue kv = Value.keyValueTab.get(Value.currentKey);
 //			if (kv.getIsLearned()==1){
 //			keyValueIndex.setText("Learn key value     " +Value.currentKey);

@@ -9,16 +9,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+
 
 import java.util.Locale;
 
 
 
 
-import com.sommer.data.CodeType;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;

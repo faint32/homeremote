@@ -10,6 +10,7 @@ import com.sommer.ircomm.RemoteCore;
 import com.sommer.utils.MyRemoteDatabase;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class AirRemote extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_air);
 		
+		Intent intent = getIntent();   
+		Value.currentDevice = intent.getIntExtra("current", 0);
 		
 		Typeface type= Typeface.createFromAsset(getAssets(),"fonts/lcd.TTF");
 		DisplayMetrics dm = new DisplayMetrics();

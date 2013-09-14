@@ -6,28 +6,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 
-import com.sommer.data.CodeType;
-import com.sommer.data.KeyValue;
-import com.sommer.data.RemoteData;
+
+
+
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
-import com.sommer.ircomm.RemoteCore;
+
 
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.Resources;
+
 import android.database.Cursor;
-import android.database.SQLException;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
@@ -239,7 +232,21 @@ public  void saveSingleKeyTabValue(String keyName,String data){
 	//	Log.v(TAG, "devicetype--->"+ Value.rmtDevs.toString());
 	}
 	
-	
+	public  String getRemoteData(int device,String keyName){
+		String rmtData = null;	
+		//	Log.v(TAG, "saveAllKeyTabValue start");
+			Cursor c = myUserDB.query(USERTAB, null, "device =? and key_name = ? " ,new String[]{String.valueOf(device),keyName}, null, null, null);
+			
+			if (c.moveToFirst()){
+				rmtData =	c.getString(3);
+			}
+			
+		
+		
+			c.close(); 
+			return rmtData;
+		//	Log.v(TAG, "devicetype--->"+ Value.rmtDevs.toString());
+		}
 	
 	
 }
