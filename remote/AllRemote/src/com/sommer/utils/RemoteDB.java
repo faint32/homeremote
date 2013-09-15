@@ -19,7 +19,7 @@ import java.util.Locale;
 import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
-import com.sommer.ircomm.RemoteCore;
+import com.sommer.ircore.RemoteCore;
 
 
 

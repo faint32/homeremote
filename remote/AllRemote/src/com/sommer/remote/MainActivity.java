@@ -9,9 +9,9 @@ import com.sommer.allremote.R;
 
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
-import com.sommer.ircomm.KeyTreate;
-import com.sommer.ircomm.RemoteCore;
-import com.sommer.ircomm.RemoteOut;
+import com.sommer.ircore.KeyTreate;
+import com.sommer.ircore.RemoteCore;
+import com.sommer.ircore.RemoteOut;
 
 import com.sommer.ui.SelectPicPopupWindow;
 
@@ -74,7 +74,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static final String TAG = "MainActivity";
 	private static final int FLING_MIN_DISTANCE = 20;
 	private static final int FLING_MIN_VELOCITY = 0;
-	private static final int STUDY = 1;
+
 
 
 	
@@ -84,17 +84,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private HorizontalScrollView mHs;
 	private GestureDetector mGestureDetector;
 	private Button mBt_menu;
-	
 	private static KeyTreate mKeyTreate = null;
 	SelectPicPopupWindow menuWindow;
 	private Vibrator vibrator;  
-	
-	
-	
-
-	// private boolean mIsExit = false;
-	
-
 
 
 	@Override
@@ -182,16 +174,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		super.onRestart();
 	}
 
-
-	
-	
-
-	
-
-
-	
-	
-	
 	void initHostTab(){
 		tabHost = getTabHost();
 		TabHost.TabSpec spec;
@@ -206,7 +188,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.tv))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
@@ -215,7 +197,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.dvd))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
@@ -224,7 +206,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.stb))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
@@ -233,7 +215,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.pjt))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
@@ -242,7 +224,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.fan))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);
 			break;
@@ -251,7 +233,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			intent.putExtra("current",mDev.getId());  
 			spec = tabHost
 					.newTabSpec(this.getString(R.string.air))
-					.setIndicator(mDev.getShortInfo())
+					.setIndicator(mDev.getName())
 					.setContent(intent);
 			tabHost.addTab(spec);		
 			break;
@@ -263,17 +245,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public boolean onDown(MotionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -282,7 +253,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case STUDY:
+		case R.id.REQUEST_STUDY:
 			 if (resultCode == RESULT_OK) { 
 					Toast t = Toast.makeText(mContext, R.string.study_alert,  Toast.LENGTH_SHORT);
 	            	t.setGravity( Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -378,7 +349,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	}
 	
 	
-	 private OnClickListener  itemsOnClick = new OnClickListener(){
+	private OnClickListener  itemsOnClick = new OnClickListener(){
 
 			public void onClick(View v) {
 				menuWindow.dismiss();
@@ -417,9 +388,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	    	
 	    };
 	
-	
-	
-		
 
 	
 	
@@ -530,7 +498,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				Value.isStudying = true;
 				Intent studyIntent = new Intent(mContext, StudyActivity.class);
 			
-				startActivityForResult(studyIntent, STUDY);  
+				startActivityForResult(studyIntent, R.id.REQUEST_STUDY);  
 				
 				break;
 			case R.id.MSG_OPTION_LIST:

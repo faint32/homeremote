@@ -4,7 +4,7 @@ package com.sommer.remote;
 
 import com.sommer.allremote.R;
 import com.sommer.data.Value;
-import com.sommer.ircomm.RemoteCore;
+import com.sommer.ircore.RemoteCore;
 
 
 import android.annotation.SuppressLint;

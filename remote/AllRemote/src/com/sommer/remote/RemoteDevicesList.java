@@ -107,10 +107,11 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		 Bundle bundle = data.getExtras(); 
+		 Bundle bundle; 
 		switch (requestCode) {
 		case R.id.REQUEST_OPTIONS:
-			 if (resultCode == RESULT_OK) { 
+			 if (resultCode == RESULT_OK) {
+				 bundle = data.getExtras(); 
 				 int id = rmtAdapter.getCount();
 				 RemoteDevice device = new RemoteDevice();
 				    device.setId(id);

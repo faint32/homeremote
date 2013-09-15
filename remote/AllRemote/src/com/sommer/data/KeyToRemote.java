@@ -1,18 +1,15 @@
 package com.sommer.data;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+
 
 
 import android.content.Context;
-import android.util.Log;
+
 
 
 
 import com.sommer.allremote.R;
-import com.sommer.ircomm.RemoteCore;
+
 import com.sommer.utils.RemoteDB;
 
 
@@ -44,6 +41,7 @@ public class KeyToRemote {
 //				Log.v(TAG, "tv_key--->" + key);
 //				Log.v(TAG, "key column--->" + keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
+				
 			}
 			break;
 		case Value.DeviceType.TYPE_STB:

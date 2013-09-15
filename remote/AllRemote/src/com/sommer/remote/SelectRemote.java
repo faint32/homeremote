@@ -12,7 +12,7 @@ import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
-import com.sommer.ircomm.RemoteCore;
+import com.sommer.ircore.RemoteCore;
 
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.RemoteDB;
@@ -37,6 +37,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 //import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -246,9 +247,14 @@ void sendTestCode(int count){
 		}
 		 mRmtDB.close();
 		 Log.v(TAG, "current index ====>   "+ index);
-		 String testCode = RemoteCore.encodeRemoteData(rmtData);
-		 showCodeSending();
-		 RemoteCore.sendTestRemote(testCode);
+		 if (rmtData != null){
+			 String testCode = RemoteCore.encodeRemoteData(rmtData);
+			 showCodeSending();
+			 RemoteCore.sendTestRemote(testCode); 
+		 }else {
+			 Toast.makeText(this, "this device is not make", Toast.LENGTH_SHORT).show();
+		 }
+		
 	//	 hideCodeSending();
 		 }else{
 		Log.v(TAG, "air index data ->"+ index);	 

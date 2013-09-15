@@ -3,6 +3,8 @@ package com.sommer.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.os.Handler;
+
 public final class Value {
 	public static int HEADER = 0x99;
 	public final static String[] RemoteType ={ 
@@ -23,6 +25,7 @@ public final class Value {
 	public static Boolean isStudying = false;
 	public static String currentKey = null;
 	public static int currentDevice = 0;
+	public static Handler mHandler;
 //	public static int cKey = 0;
 	
 

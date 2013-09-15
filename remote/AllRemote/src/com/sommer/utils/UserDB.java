@@ -43,6 +43,7 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	final static String USERTAB	="user_tab";
 	public static final String USER_ID = "_id";
+	public static final String USER_DEVICE= "device";
 	public static final String USER_NAME = "key_name";
 	public static final String USER_DATA = "remote_data";
 
@@ -112,7 +113,7 @@ public class UserDB extends SQLiteOpenHelper {
 		SQLiteDatabase checkDB = null;
 		String myPath = DB_PATH + DB_NAME;
 		try{ 
-		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 		}catch(SQLiteException e){
 		//database does't exist yet.
 		}
@@ -196,7 +197,7 @@ public class UserDB extends SQLiteOpenHelper {
 
 
 
-public  void saveSingleKeyTabValue(String keyName,String data){
+public  void updateKeyValue(String keyName,String data){
 	  ContentValues values = new ContentValues();
 	      values.put(USER_NAME, keyName);
 
@@ -204,6 +205,17 @@ public  void saveSingleKeyTabValue(String keyName,String data){
 
 	  	myUserDB.update(USERTAB, values, "name=?", new String[] {keyName});
 
+	  
+}
+
+
+public  void addKeyValue(String keyName,String data,int device){
+	  ContentValues values = new ContentValues();
+	      values.put(USER_NAME, keyName);
+	      values.put(USER_DEVICE, String.valueOf(device));
+	      values.put(USER_DATA,data );
+
+	  	myUserDB.insert(USERTAB,null, values);
 	  
 }
 
@@ -239,14 +251,20 @@ public  void saveSingleKeyTabValue(String keyName,String data){
 			
 			if (c.moveToFirst()){
 				rmtData =	c.getString(3);
-			}
-			
-		
-		
+			}		
 			c.close(); 
 			return rmtData;
 		//	Log.v(TAG, "devicetype--->"+ Value.rmtDevs.toString());
 		}
 	
+	
+	
+	
+	public void deleteRemoteDevice(int device){
+		
+	     
+	        myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
+	        myUserDB.delete(REMOTEDEVICES, "_id =? ",new String[]{String.valueOf(device)}); 
+	}
 	
 }

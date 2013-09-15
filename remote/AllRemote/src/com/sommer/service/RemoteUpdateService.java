@@ -13,7 +13,7 @@ import java.util.HashMap;
 import com.sommer.allremote.R;
 import com.sommer.data.KeyToRemote;
 import com.sommer.data.Value;
-import com.sommer.ircomm.RemoteCore;
+import com.sommer.ircore.RemoteCore;
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;

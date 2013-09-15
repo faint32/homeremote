@@ -1,4 +1,4 @@
-package com.sommer.ircomm;
+package com.sommer.ircore;
 
 import android.content.Context;
 import android.os.Handler;

@@ -35,6 +35,7 @@
             android:layout_marginTop="5dip">
             <ListView
 		  	android:id="@+id/remote_list"
+		  	android:divider="@drawable/devide_line"
 		  	android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 		 />

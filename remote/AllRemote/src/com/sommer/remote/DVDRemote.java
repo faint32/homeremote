@@ -5,7 +5,7 @@ package com.sommer.remote;
 import com.sommer.allremote.R;
 
 import com.sommer.data.Value;
-import com.sommer.ircomm.KeyTreate;
+import com.sommer.ircore.KeyTreate;
 
 
 import android.content.Intent;
