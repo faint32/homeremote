@@ -18,6 +18,7 @@ import com.sommer.utils.RemoteDB;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import android.util.Log;
@@ -78,7 +79,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		ad = new AirData(5003, 1, 20, 1, 1, 1, 1);
 		// database instruction
 		mRmtDB = new RemoteDB(getApplicationContext());
-		
+		mType = Value.rmtDev.getType();
 		mTypeName = Value.RemoteType[mType];
 
 		typeSp = (Spinner) findViewById(R.id.typeSp);
@@ -88,7 +89,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		typeSp.setAdapter(type_adapter);
-		typeSp.setSelection(Value.rmtDev.getType());
+		typeSp.setSelection(mType);
 		typeSp.setOnItemSelectedListener(this);
 		
 		
@@ -161,7 +162,8 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 				}
 			}
 		};
-	 private void showCodeSending()
+	 @SuppressLint("HandlerLeak")
+	private void showCodeSending()
 		  {
 		    mHandler.post(new Runnable()
 		    {
@@ -293,7 +295,7 @@ void sendTestCode(int count){
 		if (arg0 == typeSp) {
 //			autoButton.setEnabled(false);
 //			stopButton.setEnabled(false);
-			
+			mCutCount =0;
 			saveButton.setEnabled(true);
 			upButton.setEnabled(true);
 			downButton.setEnabled(true);
@@ -306,7 +308,7 @@ void sendTestCode(int count){
 				deviceSp.setAdapter(tv_adapter);
 
 				mCount = tv_adapter.getCount();
-		
+				
 				Value.rmtDev.setType(mType);
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");

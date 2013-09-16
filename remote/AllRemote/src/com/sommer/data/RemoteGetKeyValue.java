@@ -39,6 +39,8 @@ public class RemoteGetKeyValue {
 		codeDatas=mRmtDB.getRemoteData(dType,index);
 		if(isUpdate){
 		mUsrDB.updateRemoteDevice(id);
+		} else {
+		mUsrDB.addRemoteDevice(id);	
 		}
 		switch (dType){
 		case Value.DeviceType.TYPE_TV:

@@ -122,20 +122,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 
 		
 		tabHost.setCurrentTab(0);
-		TabWidget tabWidget = tabHost.getTabWidget();
-		int count = tabWidget.getChildCount();
-	
-		
-	
-		if (count > 4) {
-			for (int i = 0; i < count; i++) {
-				tabWidget.getChildTabViewAt(i).setMinimumWidth(screenWidth / 4);
-			}
-		}
-		for (int i = 0; i < tabWidget.getChildCount(); i++) {
-			tabWidget.getChildAt(i).getLayoutParams().height = (screenHeight) / 18;
-			tabWidget.getChildAt(i).getLayoutParams().width = screenWidth / 4;
-		}
 		
 		
 		
@@ -151,6 +137,13 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			mKeyTreate.setHandler(mHandler);
 		}
 		RemoteOut.activate();
+		
+		
+		tabHost = getTabHost();
+		tabHost.setCurrentTab(0);//这是上面需要注意到的问题
+		tabHost.clearAllTabs();//清空（就是这个代码让我悲剧了一天！！！！！！！！）
+		initHostTab();//（重新载入tabhost）
+      
 	//	RemoteComm.initRemote();
 	
 	}
@@ -158,7 +151,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-	
+		
 		
 	
 		
@@ -245,6 +238,21 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			break;
 		}
 	}
+		TabWidget tabWidget = tabHost.getTabWidget();
+		int count = tabWidget.getChildCount();
+	
+		
+	
+		if (count > 4) {
+			for (int i = 0; i < count; i++) {
+				tabWidget.getChildTabViewAt(i).setMinimumWidth(Value.screenWidth / 4);
+			}
+		}
+		for (int i = 0; i < tabWidget.getChildCount(); i++) {
+			tabWidget.getChildAt(i).getLayoutParams().height = (Value.screenHeight) / 18;
+			tabWidget.getChildAt(i).getLayoutParams().width = Value.screenWidth / 4;
+		}
+		
 		
 }
 	

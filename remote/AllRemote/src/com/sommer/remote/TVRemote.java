@@ -32,7 +32,7 @@ public class TVRemote extends BaseActivity implements OnClickListener,
 		OnLongClickListener {
     final static String TAG = "TVActivity";
 	//NumButton numberButtonWindows;
-	FuncationButton funButtonWindows;
+//	FuncationButton funButtonWindows;
 	
 //	TextView keyValueIndex;
 //	String TVCodeIndex;

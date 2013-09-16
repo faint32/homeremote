@@ -293,6 +293,24 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	    
 	}
 	
+	
+	public void addRemoteDevice(int device){
+		
+		
+		  ContentValues values = new ContentValues();
+	      values.put(REMOTE_ID, Value.rmtDev.getId());
+	      values.put(REMOTE_TYPE,Value.rmtDev.getType());
+	      values.put(REMOTE_CODE,Value.rmtDev.getCode());
+	      values.put(REMOTE_NAME,Value.rmtDev.getName());
+	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
+	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
+	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
+	      values.put(REMOTE_TYPE,Value.rmtDev.getCode());
+		 myUserDB.insert(REMOTEDEVICES, null,values); 
+		 
+	    
+	}
+	
 	public void deleteRemoteDevice(boolean isSmart,int device){
 		 ContentValues cv = new ContentValues();
 //	     
