@@ -1,12 +1,7 @@
 package com.sommer.remote;
 
-import java.sql.Array;
+
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
 
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
@@ -16,15 +11,15 @@ import com.sommer.ircore.RemoteCore;
 
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.RemoteDB;
-import com.sommer.utils.UserDB;
 
 
-import android.R.integer;
+
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
-import android.content.res.Resources;
+
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -67,7 +62,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private ArrayList<String> productList = new ArrayList<String>();
 
 	private RemoteDB mRmtDB;
-	private UserDB mUsertDB;
+
 	private Bundle bundle = new Bundle();  
 	RemoteData rmtData = new RemoteData();
 //	Button autoButton;
@@ -83,27 +78,30 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		ad = new AirData(5003, 1, 20, 1, 1, 1, 1);
 		// database instruction
 		mRmtDB = new RemoteDB(getApplicationContext());
-		mUsertDB = new UserDB(getApplicationContext());
+		
 		mTypeName = Value.RemoteType[mType];
 
 		typeSp = (Spinner) findViewById(R.id.typeSp);
 		ArrayAdapter<CharSequence> type_adapter = ArrayAdapter
 				.createFromResource(this, R.array.type_array,
 						R.layout.option_item);
-		 
+		
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		typeSp.setAdapter(type_adapter);
+		typeSp.setSelection(Value.rmtDev.getType());
 		typeSp.setOnItemSelectedListener(this);
 		
 		
 		deviceSp = (Spinner) findViewById(R.id.nameSp);
 		deviceSp.setOnItemSelectedListener(this);
+		deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 
 //
 		mDeviceCount = (TextView) findViewById(R.id.count_text);
 		mRemainCount = (TextView) findViewById(R.id.remain_count);
 		mCurrentCount = (TextView) findViewById(R.id.cur_count);
 		mDeviceName = (EditText) findViewById(R.id.name_input);
+		mDeviceName.setText(Value.rmtDev.getName());
 //		autoButton = (Button) findViewById(R.id.str_auto);
 //		autoButton.setOnClickListener(this);
 //		autoButton.setEnabled(false);
@@ -146,12 +144,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 			}
 		
 			mRmtDB.close();
-			Log.v(TAG, "CODE DATA ->"+ _type +"BRAND DATA ->" + _brand);
-			 for(int i=0;i<productList.size();i++)
-			  {
-				 Log.v(TAG, "productlist ( "+ i +") data->" + productList.get(i));
-			  
-			  }
+
 			 mCount =productList.size();
 	    }
 	 private final Handler mHandler = new Handler() {
@@ -168,7 +161,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 				}
 			}
 		};
-		private void showCodeSending()
+	 private void showCodeSending()
 		  {
 		    mHandler.post(new Runnable()
 		    {
@@ -201,41 +194,12 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		    });
 		  }
 
-		public void hideCodeSending()
-		  {
-		    mHandler.post(new Runnable()
-		    {
-		      public void run()
-		      {
-		        final View localView = findViewById(R.id.testcode_sending);
-		        if (localView.getVisibility() != 0)
-		          return;
-		        AlphaAnimation localAlphaAnimation = new AlphaAnimation(1.0F, 0.0F);
-		        localAlphaAnimation.setInterpolator(new AccelerateInterpolator());
-		        localAlphaAnimation.setDuration(100);
-		        localAlphaAnimation.setAnimationListener(new Animation.AnimationListener()
-		        {
-		          public void onAnimationEnd(Animation paramAnimation)
-		          {
-		        	  localView.setVisibility(0);
-		          }
-
-		          public void onAnimationRepeat(Animation paramAnimation)
-		          {
-		          }
-
-		          public void onAnimationStart(Animation paramAnimation)
-		          {
-		        	  localView.setVisibility(8); 
-		          }
-		        });
-		        localView.startAnimation(localAlphaAnimation);
-		      }
-		    });
-		  }	 
+		
 	
 void sendTestCode(int count){
 		 String index = productList.get(count);
+		 Value.rmtDev.setCode(index);
+		 Value.rmtDev.setCodeIndex(count);
 		 if (mType!= Value.DeviceType.TYPE_AIR){
 		 mRmtDB.open();
 		 RemoteData rmtData = null;
@@ -301,9 +265,7 @@ void sendTestCode(int count){
 //		 mRmtDB.setKeyRemoteData(mType, index);
 		 mRmtDB.close();
 		 
-		 mUsertDB.open();
-//		 mUsertDB.saveAllKeyTabValue();
-		 mUsertDB.close();
+
 		 }
 	 }
 	 
@@ -331,6 +293,7 @@ void sendTestCode(int count){
 		if (arg0 == typeSp) {
 //			autoButton.setEnabled(false);
 //			stopButton.setEnabled(false);
+			
 			saveButton.setEnabled(true);
 			upButton.setEnabled(true);
 			downButton.setEnabled(true);
@@ -344,13 +307,14 @@ void sendTestCode(int count){
 
 				mCount = tv_adapter.getCount();
 		
-				
+				Value.rmtDev.setType(mType);
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 
 				return;
 			case 1:
 				mType = Value.DeviceType.TYPE_DVD;
+				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> dvd_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
@@ -367,11 +331,13 @@ void sendTestCode(int count){
 				return;
 			case 2:
 				mType = Value.DeviceType.TYPE_STB;
+				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> stb_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(stb_adapter);
+				mCount = stb_adapter.getCount();
 				
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
@@ -393,6 +359,7 @@ void sendTestCode(int count){
 				return;
 			case 4:
 				mType = Value.DeviceType.TYPE_FAN;
+				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> fans_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
@@ -400,14 +367,13 @@ void sendTestCode(int count){
 				deviceSp.setAdapter(fans_adapter);
 				mCount = fans_adapter.getCount();
 				
-			
-				
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 				
 				return;
 			case 5:
 				mType = Value.DeviceType.TYPE_PJT;
+				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> pjt_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
@@ -428,18 +394,13 @@ void sendTestCode(int count){
 			saveButton.setEnabled(true);
 			upButton.setEnabled(true);
 			downButton.setEnabled(true);
-			Log.v(TAG, "arg2 --->" + arg2);
-//			if (mType == Value.DeviceType.TYPE_TV) {
-				mTypeName = Value.RemoteType[mType];
-				brandName = list.get(arg2);
-			//	Log.v(TAG, "get brandName of list"+ brandName);
-			    
-				getProducts(Value.RemoteType[mType],brandName);
-				
-				bundle.putString("brand", nameList.get(arg2));
-				mCount =productList.size();	
-				
-
+			Value.rmtDev.setBrandIndex(arg2);
+			Value.rmtDev.setBrand(nameList.get(arg2));
+//			Log.v(TAG, "arg2 --->" + arg2);
+			mTypeName = Value.RemoteType[mType];
+			brandName = list.get(arg2); 
+			getProducts(Value.RemoteType[mType],brandName);
+			mCount =productList.size();		
 			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 		}
@@ -494,8 +455,10 @@ void sendTestCode(int count){
 //				mThread.cancel();
 //				mThread = null;
 //			}
-			bundle.putString("name", mDeviceName.getText().toString());
-			bundle.putInt("type", mType);
+//			bundle.putString("name", mDeviceName.getText().toString());
+//			bundle.putInt("type", mType);
+			Value.rmtDev.setName(mDeviceName.getText().toString());
+			
 			save(mCutCount);
 			setResult(RESULT_OK, getIntent().putExtras(bundle)); 
 			finish();

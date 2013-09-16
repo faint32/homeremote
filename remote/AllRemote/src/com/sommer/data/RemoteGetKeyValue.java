@@ -4,6 +4,7 @@ package com.sommer.data;
 
 
 import android.content.Context;
+import android.util.Log;
 
 
 
@@ -11,68 +12,78 @@ import android.content.Context;
 import com.sommer.allremote.R;
 
 import com.sommer.utils.RemoteDB;
+import com.sommer.utils.UserDB;
 
 
-public class KeyToRemote {
+public class RemoteGetKeyValue {
 	private static RemoteDB mRmtDB = null;
-	final static String  TAG = "KeyToRemote";	
+	private static UserDB mUsrDB = null;
+	final static String  TAG = "RemoteGetKeyValue";	
 
-	public static void keyTabSetValue(RemoteDevice rmtDev,Context mContext){
+	public static void remoteUpdateOrAddKeyValue(RemoteDevice rmtDev,Context mContext,boolean isUpdate){
 		
 		  
 		String[] codeDatas = new String[100];
 		int keyColumn;
+		int id = rmtDev.getId();
 		if (mRmtDB==null){
 			mRmtDB = new RemoteDB(mContext);	
 			}
 		mRmtDB.open();
+		if (mUsrDB==null){
+			mUsrDB = new UserDB(mContext);	
+			}
+		mUsrDB.open();
 		int dType=rmtDev.getType();
 		String index = rmtDev.getCode();
+		codeDatas=mRmtDB.getRemoteData(dType,index);
+		if(isUpdate){
+		mUsrDB.updateRemoteDevice(id);
+		}
 		switch (dType){
 		case Value.DeviceType.TYPE_TV:
-			codeDatas=mRmtDB.getRemoteData(dType, index);
-//			for (String code:codeDatas){
-//				Log.v(TAG, "rmt code --->"+ code);	
-//			}
-			
+				
 			String[] tv_key = mContext.getResources().getStringArray(R.array.tv_key);
 			for (String key:tv_key){
 				keyColumn= mRmtDB.getKeyColumn(key);
-//				Log.v(TAG, "tv_key--->" + key);
-//				Log.v(TAG, "key column--->" + keyColumn);
-//				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
-				
+				Log.v(TAG, "add key ---->"+ key + "key value --->" +codeDatas[keyColumn]);
+				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
+
 			}
 			break;
 		case Value.DeviceType.TYPE_STB:
-			codeDatas=mRmtDB.getRemoteData(dType,index);
+			
 			String[] stb_key = mContext.getResources().getStringArray(R.array.stb_key);
 			for (String key:stb_key){
 				keyColumn= mRmtDB.getKeyColumn(key);
+				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
 			}
 			break;	
 		case Value.DeviceType.TYPE_DVD:
-			codeDatas=mRmtDB.getRemoteData(dType,index);
+			
 			String[] dvd_key = mContext.getResources().getStringArray(R.array.dvd_key);
 			for (String key:dvd_key){
 				keyColumn= mRmtDB.getKeyColumn(key);
+				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
 			}
 			break;	
 		case Value.DeviceType.TYPE_FAN:
-			codeDatas=mRmtDB.getRemoteData(dType, index);
+		
 			String[] fan_key = mContext.getResources().getStringArray(R.array.fan_key);
 			for (String key:fan_key){
 				keyColumn= mRmtDB.getKeyColumn(key);
+				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
 			}
 			break;	
 		case Value.DeviceType.TYPE_PJT:
-			codeDatas=mRmtDB.getRemoteData(dType, index);
+		
 			String[] pjt_key = mContext.getResources().getStringArray(R.array.pjt_key);
 			for (String key:pjt_key){
 				keyColumn= mRmtDB.getKeyColumn(key);
+				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
 			}
 			break;	
@@ -82,7 +93,7 @@ public class KeyToRemote {
 		}
 		
 		mRmtDB.close();
-
+		mUsrDB.close();
 	}
 	
 	

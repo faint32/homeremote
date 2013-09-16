@@ -3,7 +3,7 @@ package com.sommer.remote;
 
 
 import com.sommer.allremote.R;
-import com.sommer.data.KeyValue;
+
 import com.sommer.data.Value;
 import com.sommer.ircore.KeyTreate;
 

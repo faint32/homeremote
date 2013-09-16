@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
-import com.sommer.data.KeyValue;
+
 import com.sommer.data.RemoteData;
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;

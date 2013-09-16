@@ -30,12 +30,23 @@ import android.util.Log;
 
 
 
+/**
+ * @author work
+ *
+ */
 public class UserDB extends SQLiteOpenHelper {
 	
 	final static String TAG = "UserDB";
 
 	
 	final static String REMOTEDEVICES	="remote_devices";
+	public static final String REMOTE_ID = "_id";
+	public static final String REMOTE_TYPE= "type";
+	public static final String REMOTE_CODE = "code";
+	public static final String REMOTE_NAME = "name";
+	public static final String REMOTE_BRAND = "brand";
+	public static final String REMOTE_CODE_ID = "code_index";
+	public static final String REMOTE_BRAND_ID = "brand_index";
 	
 	final static String AIR	="air_data";
 	
@@ -45,12 +56,12 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String USER_ID = "_id";
 	public static final String USER_DEVICE= "device";
 	public static final String USER_NAME = "key_name";
-	public static final String USER_DATA = "remote_data";
-
+	public static final String USER_DATA = "data";
+	public static final String USER_LEARN = "is_learn";
 	//用户数据库文件的版本
 	private static final int DB_VERSION = 1;
 	//数据库文件目标存放路径为系统默认位置，
-	private static String DB_PATH = "/data/data/com.sommer.allremote/files/databases/";
+	private static String DB_PATH = "/data/data/com.sommer.allremote/databases/";
 	
 	//如果你想把数据库文件存放在SD卡的话
 	// private static String DB_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -209,13 +220,21 @@ public  void updateKeyValue(String keyName,String data){
 }
 
 
-public  void addKeyValue(String keyName,String data,int device){
-	  ContentValues values = new ContentValues();
-	      values.put(USER_NAME, keyName);
-	      values.put(USER_DEVICE, String.valueOf(device));
-	      values.put(USER_DATA,data );
+public  void addKeyValue(String keyName,String data,int device, int column){
+	  try {
+		ContentValues value = new ContentValues();
+		    
+		      value.put(USER_NAME, keyName);
+		      value.put(USER_DEVICE, String.valueOf(device));
+		      value.put(USER_DATA,data );
+		      value.put(USER_LEARN, 0);
 
-	  	myUserDB.insert(USERTAB,null, values);
+		  long newData   = 	myUserDB.insert(USERTAB,null, value);
+		  Log.v(TAG, "new id --->"+ newData);
+	} catch (Exception e) {
+		Log.v(TAG, e.toString());
+		e.printStackTrace();
+	}
 	  
 }
 
@@ -224,7 +243,6 @@ public  void addKeyValue(String keyName,String data,int device){
 		
 	//	Log.v(TAG, "saveAllKeyTabValue start");
 		Cursor c = myUserDB.query(REMOTEDEVICES, null, null ,null, null, null, null);
-		
 		
 		c.moveToFirst();
 	
@@ -258,13 +276,44 @@ public  void addKeyValue(String keyName,String data,int device){
 		}
 	
 	
-	
-	
-	public void deleteRemoteDevice(int device){
+	public void updateRemoteDevice(int device){
 		
-	     
-	        myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
-	        myUserDB.delete(REMOTEDEVICES, "_id =? ",new String[]{String.valueOf(device)}); 
+		 myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
+		  ContentValues values = new ContentValues();
+	      values.put(REMOTE_ID, Value.rmtDev.getId());
+	      values.put(REMOTE_TYPE,Value.rmtDev.getType());
+	      values.put(REMOTE_CODE,Value.rmtDev.getCode());
+	      values.put(REMOTE_NAME,Value.rmtDev.getName());
+	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
+	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
+	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
+	      values.put(REMOTE_TYPE,Value.rmtDev.getCode());
+		 myUserDB.update(REMOTEDEVICES, values,"_id =? ",new String[]{String.valueOf(device)}); 
+		 
+	    
+	}
+	
+	public void deleteRemoteDevice(boolean isSmart,int device){
+		 ContentValues cv = new ContentValues();
+//	     
+        
+	    myUserDB.delete(REMOTEDEVICES, "_id =? ",new String[]{String.valueOf(device)}); 
+	    if (!isSmart){
+	    
+	    myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
+	        Cursor c = myUserDB.query(USERTAB, null, "device > ?" ,new String[]{String.valueOf(device)}, null, null, null);
+			
+			if (c.moveToFirst()){
+				do {
+				int newDevice =	c.getInt(1);
+				newDevice -= 1;
+				cv.put(USER_DEVICE, newDevice);
+			  	myUserDB.update(USERTAB, cv, "_id=?", new String[] {String.valueOf(c.getInt(0))});
+				}
+				while (c.moveToNext());
+			}		
+			c.close(); 
+	    }
 	}
 	
 }

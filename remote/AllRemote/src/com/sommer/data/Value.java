@@ -11,8 +11,7 @@ public final class Value {
 		"TV","DVD","STB","FAN","PJT","AIR"
 	};
 	
-	public static int screenWidth;
-	public static int  screenHeight ;
+
 	public final static String[] CodeProTab ={ 
 		"code_tv","code_dvd","code_stb","code_fan","code_pjt","code_air"
 	};
@@ -26,9 +25,11 @@ public final class Value {
 	public static String currentKey = null;
 	public static int currentDevice = 0;
 	public static Handler mHandler;
+	public static Handler listHandler;
 //	public static int cKey = 0;
 	
-
+	public static int screenWidth ;
+	public static int screenHeight;
 
 //	public static HashMap<String, String> keyRemoteTab ;
 //	public static ArrayList<KeyValue> keyValueTab  ;
@@ -37,7 +38,8 @@ public final class Value {
 	
 	public static AirData airData = new AirData();
 	public static ArrayList<RemoteDevice> rmtDevs = new ArrayList<RemoteDevice>();
-	
+	public static RemoteDevice rmtDev = new RemoteDevice();
+
 	
 	public static class DeviceType {
 		public final static int TYPE_TV = 0x00;

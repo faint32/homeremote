@@ -100,16 +100,21 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		line.setOnTouchListener(this);
 		line.setLongClickable(true);
 		mContext = this;
-	
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int screenWidth = dm.widthPixels;
+		int screenHeight = dm.heightPixels;
+		Value.screenHeight = screenHeight;
+		Value.screenWidth  = screenWidth;
 		mHs = (HorizontalScrollView) findViewById(R.id.hs);
 //		Value.keyRemoteTab = new  HashMap<String, String> ();
 		mBt_menu = (Button) findViewById(R.id.btn_menu);
 		mBt_menu.setOnClickListener(new OnClickListener() {			
-				public void onClick(View v) {
-					menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
-					menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
-				}
-			});
+		public void onClick(View v) {
+			menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
+			menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
+			}
+		});
 		
 		
 		
@@ -119,10 +124,8 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		tabHost.setCurrentTab(0);
 		TabWidget tabWidget = tabHost.getTabWidget();
 		int count = tabWidget.getChildCount();
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int screenWidth = dm.widthPixels;
-		int screenHeight = dm.heightPixels;
+	
+		
 	
 		if (count > 4) {
 			for (int i = 0; i < count; i++) {

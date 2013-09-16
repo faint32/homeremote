@@ -6,8 +6,22 @@ public class RemoteDevice {
 	private String code;
 	private String name ;
 	private String brand ;
+	private int codeIndex;
+	private int brandIndex;
 
-
+	
+	public int getCodeIndex() {
+		return codeIndex;
+	}
+	public void setCodeIndex(int codeIndex) {
+		this.codeIndex = codeIndex;
+	}
+	public int getBrandIndex() {
+		return brandIndex;
+	}
+	public void setBrandIndex(int brandIndex) {
+		this.brandIndex = brandIndex;
+	}
 	public String getName() {
 		return name;
 	}

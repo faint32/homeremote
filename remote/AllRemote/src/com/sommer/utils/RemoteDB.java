@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-
-
-import com.sommer.data.KeyValue;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
@@ -51,7 +48,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 	private static final int DB_VERSION = 1;
 	//数据库文件目标存放路径为系统默认位置，
 	@SuppressLint("SdCardPath")
-	private static String DB_PATH = "/data/data/com.sommer.allremote/files/databases/";
+	private static String DB_PATH = "/data/data/com.sommer.allremote/databases/";
 	
 	//如果你想把数据库文件存放在SD卡的话
 	// private static String DB_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()

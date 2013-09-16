@@ -4,10 +4,12 @@ import java.util.List;
 
 import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
+import com.sommer.data.Value;
 import com.sommer.remote.RemoteDevicesList;
 import com.sommer.remote.Start;
 import com.sommer.remote.StudyActivity;
 import com.sommer.remote.TVRemote;
+import com.sommer.utils.UserDB;
 
 
 import android.app.ListActivity;
@@ -38,16 +40,9 @@ public class RemoteAdapter extends BaseAdapter {
 	public RemoteAdapter(Context context, List<RemoteDevice> items) {
 		this.list = items;
 		this.context = context;
-//		SPINNER_REMOTE_TYPE = context.getResources().getStringArray(R.array.type_array);
+
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
-//		//下拉框的数据适配器
-////		adapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,SPINNER_REMOTE_TYPE);
-////		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		
-//		 adapter = ArrayAdapter.createFromResource(
-//				 context, R.array.type_array,
-//	                android.R.layout.simple_spinner_item);
-//		 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 	}
 	
 	public void setOnAdapterChangeListener(OnAdapterChangeListener listener){    
@@ -107,14 +102,24 @@ public class RemoteAdapter extends BaseAdapter {
 
 				@Override
 				public void onClick(View v, ViewHolder holder) {
-//					int p = (Integer)holder.name.getTag();
-//					Toast.makeText(context, "当前是第"+p+"条", Toast.LENGTH_LONG).show();
+
 					if(list.size()>1){
 						int p = (Integer)holder.info.getTag();
+						UserDB mUsrDB = new UserDB(context);
+						mUsrDB.open();
+						RemoteDevice rmtDev = list.get(p);
+						Boolean isSmart = false;
+						if (rmtDev.getType()==Value.DeviceType.TYPE_AIR)
+						{
+							isSmart = true;
+						}
+						mUsrDB.deleteRemoteDevice(isSmart,p);
+						mUsrDB.close();	
 						list.remove(p);
 						if(listener!=null){
 							listener.listRemove(p);
 						}
+						
 					}
 				}});
 			
@@ -147,17 +152,19 @@ public class RemoteAdapter extends BaseAdapter {
 	public void addItem(RemoteDevice rmtDev){
 		list.add(rmtDev);
 	}
+	public void updateItem(RemoteDevice rmtDev,int id){
+		list.set(id,rmtDev);
+	}
 	
 	public List<RemoteDevice> getAllList(){
 		return list;
 	}
 	
-	
 
 	
 
 	 private final class ViewHolder{         
-	 //   	private Spinner type;      
+  
 	    	private TextView info;   
 	    	private Button cancel;   
 	    	private TextView id;

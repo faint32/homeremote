@@ -50,14 +50,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" 
-            android:layout_marginBottom="10dip"
+            android:layout_marginTop="5dip"
             >
           <ImageButton  
 			android:id="@+id/rdl_ok" 
 			android:layout_height="wrap_content" 	
 			android:layout_width="wrap_content"
 			android:src = "@drawable/button_icon_cursor_enter"
-			android:background="@drawable/button_green_con"
+			android:background="@drawable/button"
 			android:layout_marginLeft="20dp"
 			android:layout_alignParentLeft ="true"
 		    />
@@ -66,7 +66,7 @@
 			android:layout_height="wrap_content" 	
 			android:layout_width="wrap_content"
 			android:src = "@drawable/button_icon_exit"
-			android:background="@drawable/button_red_con"
+			android:background="@drawable/button"
 			android:layout_marginRight="20dp"
 			android:layout_alignParentRight ="true"
 		    />

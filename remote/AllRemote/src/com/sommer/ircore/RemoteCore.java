@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.sommer.data.AirData;
 
-import com.sommer.data.KeyValue;
+
 import com.sommer.data.RemoteData;
 import com.sommer.utils.Tools;
 
@@ -59,7 +59,7 @@ public static void sendAirRemote(AirData airdata){
 	//	Log.v(TAG, "send learn data null");
 		return ;
 	}
-	byte[] sendData = new byte[128];
+	byte[] sendData = new byte[129];
 	int[] tempData = Tools.airDataToByte(airdata);
 //	for (byte t: tempData){
 //		Log.v(TAG, "get byte i("+ i + ")data =========>"+ t);
