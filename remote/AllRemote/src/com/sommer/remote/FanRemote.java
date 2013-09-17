@@ -6,7 +6,7 @@ import com.sommer.allremote.R;
 import com.sommer.data.Value;
 import com.sommer.ircore.KeyTreate;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,8 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.Toast;
+
 
 public class FanRemote extends BaseActivity implements OnClickListener {
 	

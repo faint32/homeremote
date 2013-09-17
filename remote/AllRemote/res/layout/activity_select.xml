@@ -143,6 +143,14 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:text="@string/down_text" />
+         <Button
+            android:id="@+id/str_cancel"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/button_yellow_con"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:text="@string/cancel_text" />
     </LinearLayout>
 
  

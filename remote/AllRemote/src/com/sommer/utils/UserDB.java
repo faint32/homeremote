@@ -113,7 +113,7 @@ public class UserDB extends SQLiteOpenHelper {
 			copyDataBase();
 			//copyBigDataBase();
 			} catch (IOException e) {
-			throw new Error("数据库创建失败");
+			throw new Error("user database create failed");
 			}
 		}
 		
@@ -139,10 +139,10 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	public UserDB open(){
 		String myPath = DB_PATH + DB_NAME;
-	//	Log.v(TAG, "数据库已经...");
+
 		
 		myUserDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-	//	Log.v(TAG, "数据库打开");
+
 		return this;
 	
 	}
@@ -230,7 +230,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 		      value.put(USER_LEARN, 0);
 
 		  long newData   = 	myUserDB.insert(USERTAB,null, value);
-		  Log.v(TAG, "new id --->"+ newData);
+	//	  Log.v(TAG, "new id --->"+ newData);
 	} catch (Exception e) {
 		Log.v(TAG, e.toString());
 		e.printStackTrace();
@@ -252,7 +252,9 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 			rmtDev.setType(c.getInt(1));
 			rmtDev.setCode(c.getString(2));
 			rmtDev.setName(c.getString(3));
-			
+			rmtDev.setBrand(c.getString(4));
+			rmtDev.setCodeIndex(c.getInt(5));
+			rmtDev.setBrandIndex(c.getInt(6));
 			Value.rmtDevs.add(rmtDev);
 			
 		}while(c.moveToNext());
@@ -287,7 +289,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
 	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
 	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
-	      values.put(REMOTE_TYPE,Value.rmtDev.getCode());
+	
 		 myUserDB.update(REMOTEDEVICES, values,"_id =? ",new String[]{String.valueOf(device)}); 
 		 
 	    
@@ -305,7 +307,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
 	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
 	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
-	      values.put(REMOTE_TYPE,Value.rmtDev.getCode());
+
 		 myUserDB.insert(REMOTEDEVICES, null,values); 
 		 
 	    

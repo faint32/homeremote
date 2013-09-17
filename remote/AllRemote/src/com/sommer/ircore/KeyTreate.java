@@ -19,7 +19,7 @@ public class KeyTreate {
 	private Handler mHandler;
 	private static Context mContext;
 	private static UserDB userDB;
-	private static int index=0;
+
 	private static KeyTreate mKeyTreate = null;
 	
 	

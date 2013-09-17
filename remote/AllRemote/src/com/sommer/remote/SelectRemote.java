@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Typeface;
 
 import android.util.Log;
 import android.view.KeyEvent;
@@ -41,7 +42,7 @@ import android.widget.TextView;
 
 public class SelectRemote extends Activity implements OnItemSelectedListener,
 		OnClickListener {
-	final static String TAG = "ListActivity";
+	final static String TAG = "SelectRemote";
 //	private EffectThread mThread = null;
 	private Spinner deviceSp = null;
 	private Spinner typeSp = null;
@@ -71,6 +72,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	Button saveButton;
 	Button upButton;
 	Button downButton;
+	Button cancelButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,15 +80,17 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		setContentView(R.layout.activity_select);
 		ad = new AirData(5003, 1, 20, 1, 1, 1, 1);
 		// database instruction
+		
+		Typeface type= Typeface.createFromAsset(getAssets(),"fonts/font_bold.ttf");
 		mRmtDB = new RemoteDB(getApplicationContext());
 		mType = Value.rmtDev.getType();
 		mTypeName = Value.RemoteType[mType];
-
+		
 		typeSp = (Spinner) findViewById(R.id.typeSp);
 		ArrayAdapter<CharSequence> type_adapter = ArrayAdapter
 				.createFromResource(this, R.array.type_array,
 						R.layout.option_item);
-		
+		Log.v(TAG, "start --->"+ Value.rmtDev.getFullInfo());
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		typeSp.setAdapter(type_adapter);
 		typeSp.setSelection(mType);
@@ -95,7 +99,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		
 		deviceSp = (Spinner) findViewById(R.id.nameSp);
 		deviceSp.setOnItemSelectedListener(this);
-		deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+		
 
 //
 		mDeviceCount = (TextView) findViewById(R.id.count_text);
@@ -109,14 +113,17 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 //		stopButton = (Button) findViewById(R.id.str_stop);
 //		stopButton.setOnClickListener(this);
 //		stopButton.setEnabled(false);
-		 saveButton = (Button) findViewById(R.id.str_save);
+		saveButton = (Button) findViewById(R.id.str_save);
 		saveButton.setOnClickListener(this);
-		 upButton = (Button) findViewById(R.id.str_up);
+		upButton = (Button) findViewById(R.id.str_up);
 		upButton.setOnClickListener(this);
-		upButton.setEnabled(false);
-		 downButton = (Button) findViewById(R.id.str_down);
+		upButton.setEnabled(true);
+		cancelButton = (Button) findViewById(R.id.str_cancel);
+		cancelButton.setOnClickListener(this);
+		cancelButton.setTypeface(type);
+		downButton = (Button) findViewById(R.id.str_down);
 		downButton.setOnClickListener(this);
-		downButton.setEnabled(false);
+		downButton.setEnabled(true);
 	//	Locale.getDefault().getLanguage();
 	}
 	
@@ -223,7 +230,7 @@ void sendTestCode(int count){
 		
 	//	 hideCodeSending();
 		 }else{
-		Log.v(TAG, "air index data ->"+ index);	 
+	//	Log.v(TAG, "air index data ->"+ index);	 
 		int id=	 Integer.parseInt(index);
 		Log.v(TAG, "air index data ->"+ id);
 			 ad.setCodeType(id);
@@ -263,10 +270,7 @@ void sendTestCode(int count){
 		 }
 		 MyRemoteDatabase.saveRemoteIndex(getApplicationContext());
 		 if(mType!= Value.DeviceType.TYPE_AIR){
-		 mRmtDB.open();
-//		 mRmtDB.setKeyRemoteData(mType, index);
-		 mRmtDB.close();
-		 
+
 
 		 }
 	 }
@@ -295,10 +299,8 @@ void sendTestCode(int count){
 		if (arg0 == typeSp) {
 //			autoButton.setEnabled(false);
 //			stopButton.setEnabled(false);
-			mCutCount =0;
-			saveButton.setEnabled(true);
-			upButton.setEnabled(true);
-			downButton.setEnabled(true);
+			mCutCount = Value.rmtDev.getCodeIndex();
+			
 			switch (arg2) {
 			case 0:				// tv
 				mType = Value.DeviceType.TYPE_TV;
@@ -306,7 +308,7 @@ void sendTestCode(int count){
 				ArrayAdapter<String> tv_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 				deviceSp.setAdapter(tv_adapter);
-
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 				mCount = tv_adapter.getCount();
 				
 				Value.rmtDev.setType(mType);
@@ -322,7 +324,7 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(dvd_adapter);
-			
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 				mCount = dvd_adapter.getCount();
 
 				
@@ -339,19 +341,22 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(stb_adapter);
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+				
 				mCount = stb_adapter.getCount();
 				
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 				
 				return;
-			case 3:
+			case 5:
 				mType = Value.DeviceType.TYPE_AIR;
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> air_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(air_adapter);
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 				
 				mCount = air_adapter.getCount();
 				
@@ -359,27 +364,29 @@ void sendTestCode(int count){
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 				
 				return;
-			case 4:
+			case 3:
 				mType = Value.DeviceType.TYPE_FAN;
 				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> fans_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
-
+				
 				deviceSp.setAdapter(fans_adapter);
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 				mCount = fans_adapter.getCount();
 				
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 				
 				return;
-			case 5:
+			case 4:
 				mType = Value.DeviceType.TYPE_PJT;
 				Value.rmtDev.setType(mType);
 				mTypeName = Value.RemoteType[mType];
 				ArrayAdapter<String> pjt_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 				deviceSp.setAdapter(pjt_adapter);
+				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
 				mCount = pjt_adapter.getCount();
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
@@ -398,10 +405,12 @@ void sendTestCode(int count){
 			downButton.setEnabled(true);
 			Value.rmtDev.setBrandIndex(arg2);
 			Value.rmtDev.setBrand(nameList.get(arg2));
+			mCutCount = 0;
 //			Log.v(TAG, "arg2 --->" + arg2);
 			mTypeName = Value.RemoteType[mType];
 			brandName = list.get(arg2); 
 			getProducts(Value.RemoteType[mType],brandName);
+			sendTestCode(mCutCount);	
 			mCount =productList.size();		
 			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
@@ -462,17 +471,22 @@ void sendTestCode(int count){
 			Value.rmtDev.setName(mDeviceName.getText().toString());
 			
 			save(mCutCount);
+			Log.v(TAG, "end --->"+ Value.rmtDev.getFullInfo());
 			setResult(RESULT_OK, getIntent().putExtras(bundle)); 
 			finish();
 			break;
-			
+		case R.id.str_cancel:
+					
+			setResult(RESULT_CANCELED, getIntent().putExtras(bundle)); 
+			finish();
+			break;
 		case R.id.str_up:
 			mCutCount++;
 			if (mCutCount >mCount-1){
 				mCutCount=0;
 			}
 			sendTestCode(mCutCount);	
-			mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
+			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 			
 			break;
@@ -482,7 +496,7 @@ void sendTestCode(int count){
 				mCutCount=mCount-1;
 			}
 			sendTestCode(mCutCount);	
-			mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
+			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 			break;
 		}

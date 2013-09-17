@@ -26,6 +26,7 @@
     <string name="stop_text">Stop</string>
     <string name="up_text">Up</string>
     <string name="down_text">Down</string>
+    <string name="cancel_text">Cancel</string>
     <string name="manual_text">manually</string>
     <string name="save_text">Save</string>
     <string name="set_menu">SetUp</string>
@@ -262,5 +263,6 @@
     <string name="dialog_ok">OK</string>
     
     <string name="option_info"><![CDATA[The first use of the code operation: turn on the device, select the device type, brand or region name and then press automatic Jianniu, paired device reaction: such as switch machines, and out of positions, the volume change action, press the stopthen save the check button is normal, not normal, repeat operation can also manually upward, downward search single brand or a single area to search for matching less than All brand or region within the search code.]]></string>
+    <string name="max_devices">The devices is out of Max devices capacity</string>
 
 </resources>

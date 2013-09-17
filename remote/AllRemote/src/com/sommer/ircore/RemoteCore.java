@@ -1,7 +1,5 @@
 package com.sommer.ircore;
 
-import android.util.Log;
-
 
 import com.sommer.data.AirData;
 
@@ -48,13 +46,13 @@ public static void sendTestRemote(String testCode){
 		byte[] tempData = Tools.hexStringToBytes(testCode);
 			sendData[0] = _REMOTE_SEND_NORMAL_;
 			System.arraycopy(tempData, 0, sendData, 1, tempData.length);	
-			Log.v(TAG, "send normal data =====>"+ sendData);
+//			Log.v(TAG, "send normal data =====>"+ sendData);
 		
 
 	}
 
 public static void sendAirRemote(AirData airdata){
-	int i =0;
+	
 	if (airdata== null){
 	//	Log.v(TAG, "send learn data null");
 		return ;
@@ -76,7 +74,7 @@ public static void sendAirRemote(AirData airdata){
 	
 	sendData[0] = _REMOTE_SEND_NORMAL_;
 	System.arraycopy(temp1Data, 0, sendData, 1, temp1Data.length);	
-	Log.v(TAG, "send normal data =====>"+ sendData);
+//	Log.v(TAG, "send normal data =====>"+ sendData);
 	
 }
 
@@ -124,7 +122,7 @@ public static void sendAirRemote(AirData airdata){
 		toData[1] = (byte) (length);
 		System.arraycopy(encodeData, 0, toData, 2, length);
 		String toDataStr = Tools.bytesToHexString(toData);
-		Log.v(TAG, "encode data ->" + toDataStr);
+//		Log.v(TAG, "encode data ->" + toDataStr);
 		return toDataStr;
 	}
 	

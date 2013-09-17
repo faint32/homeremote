@@ -5,10 +5,11 @@ import java.util.HashMap;
 
 import com.sommer.allremote.R;
 import com.sommer.data.Value;
-import com.sommer.ircore.RemoteCore;
 
 
 
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,11 +18,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnKeyListener;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Vibrator;
-import android.util.Log;
-import android.view.Gravity;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +26,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
+
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -49,6 +46,7 @@ public class BaseActivity extends Activity {
 	private final int ITEM_ABOUT = 3;
 	private final int ITEM_QUIT = 4;
 	private final int ITEM_RETURN = 5;
+	@SuppressLint("Recycle")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

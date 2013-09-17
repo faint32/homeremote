@@ -32,7 +32,7 @@
        
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dip"
             android:orientation="horizontal" 
             android:layout_marginTop="5dip"
             android:layout_weight="1"
@@ -58,18 +58,9 @@
 			android:layout_width="wrap_content"
 			android:src = "@drawable/button_icon_cursor_enter"
 			android:background="@drawable/button_green_con"
-			android:layout_marginLeft="20dp"
-			android:layout_alignParentLeft ="true"
+			android:layout_centerInParent ="true"
 		    />
-		 <ImageButton  
-			android:id="@+id/rdl_cancel" 
-			android:layout_height="wrap_content" 	
-			android:layout_width="wrap_content"
-			android:src = "@drawable/button_icon_exit"
-			android:background="@drawable/button_red_con"
-			android:layout_marginRight="20dp"
-			android:layout_alignParentRight ="true"
-		    />
+		
         </RelativeLayout>
       
 </LinearLayout>

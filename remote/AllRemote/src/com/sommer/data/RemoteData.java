@@ -48,7 +48,7 @@ public class RemoteData {
 	}
 	
 	
-	public String getRemoteData(){
+	public String getRemoteDataInfo(){
 		return 	"index --->" +this.index
 				+"  codetype --->" +this.codetype
 				+"  mode --->" +this.mode

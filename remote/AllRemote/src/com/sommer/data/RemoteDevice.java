@@ -58,6 +58,13 @@ public class RemoteDevice {
 				 +"   " +this.code ;
 		
 	}
+	
+	public String getFullInfo() {
+		return   this.name+"   "
+				 +Value.REMOTE_TYPE[this.type] +"   " + this.brand
+				 +"   " +this.code +"codeindex->"+ this.codeIndex  +"brandindex->"+ this.brandIndex ;
+		
+	}
 
 	public String getShortInfo() {
 		return   this.name+" \n  "

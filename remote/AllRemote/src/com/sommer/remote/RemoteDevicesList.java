@@ -66,10 +66,6 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
         btn_ok.setMinimumHeight((Value.screenHeight) / 10);
         btn_ok.setOnClickListener(this);
 
-        btn_cancel = (ImageButton)findViewById(R.id.rdl_cancel);
-        btn_cancel.setOnClickListener(this);
-        btn_cancel.setMinimumWidth((Value.screenWidth) / 4);
-        btn_cancel.setMinimumHeight((Value.screenHeight) / 10);
         
         
 		listView=(ListView)findViewById(R.id.remote_list); 
@@ -96,10 +92,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 			//save();
 			finish();
 			break;
-		case R.id.rdl_cancel:
-			//save();
-			finish();
-			break;	
+		
 			
     	default:
     		break;
@@ -143,21 +136,26 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 		
 	} 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		 Bundle bundle; 
+	
 		 RemoteDevice device = new RemoteDevice();
 		switch (requestCode) {
 			case R.id.REQUEST_OPTIONS:
 			 if (resultCode == RESULT_OK) {
-				 bundle = data.getExtras(); 
+			
 				
 				if(status==LISTSTATUS.ADD){
 					int id = rmtAdapter.getCount();
+					if (id<10){
 					device = Value.rmtDev;
 					device.setId(id);
-					Log.v(TAG, "add id --->"+ id);
+					Log.v(TAG, "add id --->"+ Value.rmtDev.getInfo());
+					
 					RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,false);
 					rmtAdapter.addItem(device);
 					rmtAdapter.notifyDataSetChanged();
+					}else {
+					Toast.makeText(this, R.string.max_devices, Toast.LENGTH_LONG).show();	
+					}
 			
 		        }else {
 		        	int id = this.position;
