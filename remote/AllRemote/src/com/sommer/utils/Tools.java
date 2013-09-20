@@ -68,7 +68,7 @@ public final class Tools {
 	}
 	public static int[] airDataToByte(AirData data) {
 		int[] temp = new int[10];
-		temp[0] = (int) data.getCodeType();
+		temp[0] = (int) data.getCode();
 		temp[1] = (int) data.getmPower();
 		temp[2] = (int) data.getmMode();
 		temp[3] = (int) data.getmWindCount();

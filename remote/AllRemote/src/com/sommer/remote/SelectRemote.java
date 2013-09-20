@@ -48,8 +48,8 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private Spinner typeSp = null;
 	private int mCount = 0;
 	private int mCutCount = 0;
+//	private AirData ad  = new AirData(5003, 1, 20, 1, 1, 1, 1);
 	private AirData ad;
-	
 	private TextView mDeviceCount = null;
 	private TextView mRemainCount = null;
 	private TextView mCurrentCount = null;
@@ -78,7 +78,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_select);
-		ad = new AirData(5003, 1, 20, 1, 1, 1, 1);
+		
 		// database instruction
 		
 		Typeface type= Typeface.createFromAsset(getAssets(),"fonts/font_bold.ttf");
@@ -103,7 +103,9 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 
 //
 		mDeviceCount = (TextView) findViewById(R.id.count_text);
+		mDeviceCount.setTypeface(type);
 		mRemainCount = (TextView) findViewById(R.id.remain_count);
+		mRemainCount.setTypeface(type);
 		mCurrentCount = (TextView) findViewById(R.id.cur_count);
 		mDeviceName = (EditText) findViewById(R.id.name_input);
 		mDeviceName.setText(Value.rmtDev.getName());
@@ -231,9 +233,9 @@ void sendTestCode(int count){
 	//	 hideCodeSending();
 		 }else{
 	//	Log.v(TAG, "air index data ->"+ index);	 
-		int id=	 Integer.parseInt(index);
-		Log.v(TAG, "air index data ->"+ id);
-			 ad.setCodeType(id);
+		int code=	 Integer.parseInt(index);
+		Log.v(TAG, "air code data ->"+ code);
+			 ad.setCode(code);
 			 
 		 RemoteCore.sendAirRemote(ad);
 		 }
@@ -261,9 +263,15 @@ void sendTestCode(int count){
 			 break;
 		 case Value.DeviceType.TYPE_AIR:
 			
-			 int id=Integer.parseInt(index);
-			 ad.setCodeType(id);
-			 MyRemoteDatabase.saveAirData(getApplicationContext(), ad);
+			 int code=Integer.parseInt(index);
+			 
+			 try {
+				ad.setCode(code);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			 break;
 		 default:
 			 break;

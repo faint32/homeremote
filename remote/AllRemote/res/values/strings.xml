@@ -18,9 +18,9 @@
     <string name="study_exit">Quit learning</string>
     <string name="about_ok">OK</string>
     <string name="device_type">Device Type</string>
-    <string name="name_text">Device Name</string>
+    <string name="name_text">Brand Name</string>
     <string name="cur_name">Current Device</string>
-    
+    <string name="remote_name">Device Name</string>
     <string name="count_text"></string>
     <string name="auto_text">Auto</string>
     <string name="stop_text">Stop</string>

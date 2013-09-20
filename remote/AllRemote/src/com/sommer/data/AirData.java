@@ -2,7 +2,8 @@ package com.sommer.data;
 
 
 public class AirData {
-	private  int codeType = 0;
+	private  int device = 0;
+	private  int code = 0;
 	private  int mPower=1;
 	private  int mTmp=25;
 	private  int mMode=1;
@@ -12,18 +13,30 @@ public class AirData {
 	private  int mkey =0;
 	
 	
-	public AirData(int codeType, int mPower, int mTmp, int mMode,
-			int mWindAutoDir, int mWindDir, int mWindCount) {
+	public int getDevice() {
+		return device;
+	}
+
+	public void setDevice(int device) {
+		this.device = device;
+	}
+
+	
+	
+	public AirData(int device, int code, int mPower, int mTmp, int mMode,
+			int mWindAuto, int mWindDir, int mWindCount, int mkey) {
 		super();
-		this.setCodeType(codeType);
+		this.device = device;
+		this.code = code;
 		this.mPower = mPower;
 		this.mTmp = mTmp;
 		this.mMode = mMode;
-		this.mWindAuto = mWindAutoDir;
+		this.mWindAuto = mWindAuto;
 		this.mWindDir = mWindDir;
 		this.mWindCount = mWindCount;
+		this.mkey = mkey;
 	}
-	
+
 	public AirData() {
 		super();
 		
@@ -89,11 +102,11 @@ public class AirData {
 	public  void setmWindCount(int mWindCount) {
 		this.mWindCount = mWindCount;
 	}
-	public int getCodeType() {
-		return codeType;
+	public int getCode() {
+		return code;
 	}
-	public void setCodeType(int codeType) {
-		this.codeType = codeType;
+	public void setCode(int code) {
+		this.code = code;
 	}
 	
 	

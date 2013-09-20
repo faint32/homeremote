@@ -18,8 +18,10 @@
     <string name="study_exit">退出学习</string>
     <string name="study_timeout">学习超时退出</string>
     <string name="about_ok">确定</string>
+    
     <string name="device_type">设备类型</string>
-    <string name="name_text">设备名称</string>
+    <string name="name_text">品牌名称</string>
+    <string name="remote_name">设备名称</string>
     <string name="cur_name">当前设备</string>
     <string name="count_text"></string>
     <string name="auto_text">自动</string>

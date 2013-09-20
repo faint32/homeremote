@@ -48,9 +48,16 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String REMOTE_CODE_ID = "code_index";
 	public static final String REMOTE_BRAND_ID = "brand_index";
 	
-	final static String AIR	="air_data";
-	
-	
+	final static String AIRDATA	="air_data";
+	public static final String AIR_ID = "_id";
+	public static final String AIR_DEVICE= "device";
+	public static final String AIR_CODE  = "code";
+	public static final String AIR_POWER = "power";
+	public static final String AIR_TEMP = "temp";
+	public static final String AIR_MODE = "mode";
+	public static final String AIR_AUTO = "auto";
+	public static final String AIR_WDIR = "winddirect";
+	public static final String AIR_WCOUNT = "windcount";
 	
 	final static String USERTAB	="user_tab";
 	public static final String USER_ID = "_id";
@@ -335,5 +342,54 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 			c.close(); 
 	    }
 	}
+
 	
+	public void getAirData(int device){
+//		Log.v(TAG, "saveAllKeyTabValue start");
+			Cursor c = myUserDB.query(AIRDATA, null, "device =?  " ,new String[]{String.valueOf(device)}, null, null, null);
+			if (c.moveToFirst()){
+				Value.airData.setDevice(device); 	
+				Value.airData.setCode(c.getInt(2));
+				Value.airData.setmPower(c.getInt(3));
+				Value.airData.setmTmp(c.getInt(4));
+				Value.airData.setmMode(c.getInt(5));
+				Value.airData.setmWindAuto(c.getInt(6));
+				Value.airData.setmWindDir(c.getInt(7));
+				Value.airData.setmWindCount(c.getInt(8));
+			}
+			c.close(); 	
+	}
+	
+	public void moveAirData(int device){
+//		Log.v(TAG, "saveAllKeyTabValue start");
+		myUserDB.delete(AIRDATA, "device =? ",new String[]{String.valueOf(device)});
+	}
+	
+	public void updateAirData(int device){
+		
+		  ContentValues values = new ContentValues();
+	      values.put(AIR_DEVICE,  Value.airData.getDevice());
+	      values.put(AIR_CODE,Value.airData.getCode());
+	      values.put(AIR_POWER,Value.airData.getmPower());
+	      values.put(AIR_TEMP,Value.airData.getmTmp());
+	      values.put(AIR_MODE,Value.airData.getmMode());
+	      values.put(AIR_AUTO,Value.airData.getmWindAuto());
+	      values.put(AIR_WDIR,Value.airData.getmWindDir());
+	      values.put(AIR_WCOUNT,Value.airData.getmWindCount());
+		 myUserDB.update(AIRDATA, values,"device =? ",new String[]{String.valueOf(device)}); 
+	}
+	
+	
+	public void addAirData(int device){
+		 ContentValues values = new ContentValues();
+	      values.put(AIR_DEVICE,  Value.airData.getDevice());
+	      values.put(AIR_CODE,Value.airData.getCode());
+	      values.put(AIR_POWER,Value.airData.getmPower());
+	      values.put(AIR_TEMP,Value.airData.getmTmp());
+	      values.put(AIR_MODE,Value.airData.getmMode());
+	      values.put(AIR_AUTO,Value.airData.getmWindAuto());
+	      values.put(AIR_WDIR,Value.airData.getmWindDir());
+	      values.put(AIR_WCOUNT,Value.airData.getmWindCount());
+	      myUserDB.insert(AIRDATA, null,values); 
+	}
 }

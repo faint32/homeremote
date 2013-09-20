@@ -7,7 +7,7 @@ import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.RemoteGetKeyValue;
 import com.sommer.data.Value;
-import com.sommer.ircore.RemoteCore;
+
 import com.sommer.ui.RemoteAdapter;
 import com.sommer.ui.RemoteAdapter.OnAdapterChangeListener;
 import com.sommer.utils.UserDB;

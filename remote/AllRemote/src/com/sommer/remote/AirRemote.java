@@ -8,6 +8,7 @@ import com.sommer.data.AirData;
 import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.UserDB;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -106,10 +107,37 @@ public class AirRemote extends Activity implements OnClickListener {
 	public void onStart()
 	{
 		super.onStart();
+		UserDB mUserDB = new UserDB(this);
+		mUserDB.open();
+		mUserDB.getAirData(Value.currentDevice);
 		airShow.setText(getTempStr(Value.airData));
 		airMode.setText(getModeStr(Value.airData));
 		airWindDir.setText(getWindDirStr(Value.airData));
 		airWind.setText(getWindStr(Value.airData));
+		mUserDB.close();
+	}
+	
+	
+	
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		UserDB mUserDB = new UserDB(this);
+		mUserDB.open();
+		mUserDB.updateAirData(Value.currentDevice);
+		mUserDB.close();
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		UserDB mUserDB = new UserDB(this);
+		mUserDB.open();
+		mUserDB.updateAirData(Value.currentDevice);
+		mUserDB.close();
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -222,7 +250,7 @@ public class AirRemote extends Activity implements OnClickListener {
 			
 			
 		}
-		MyRemoteDatabase.saveAirData(getApplicationContext(), Value.airData);
+	
 		airShow.setText(getTempStr(Value.airData));
 		airMode.setText(getModeStr(Value.airData));
 		airWindDir.setText(getWindDirStr(Value.airData));
