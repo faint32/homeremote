@@ -288,7 +288,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 			Cursor c = myDataBase.query(Value.CodeProTab[_type], null,  " code_index =?" ,new String[]{_index}, null, null, null);
 			c.moveToFirst();
 			rmtData.setIndex(c.getString(1));
-			rmtData.setCodetype(c.getString(2)) ; //获取第一列的值,第一列的索引从0开始 
+			rmtData.setCodetype(c.getString(2)) ; 
 			rmtData.setMode(Value.RemoteType[_type]);
 			rmtData.setCustom(c.getString(3)) ;
 			rmtData.setData(c.getString(keyColumn)) ;

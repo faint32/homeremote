@@ -21,6 +21,7 @@ public final class Value {
 	
 
 	public static Boolean initial;
+	public static Boolean audio= true;
 	public static Boolean isStudying = false;
 	public static String currentKey = null;
 	public static int currentDevice = 0;

@@ -4,7 +4,7 @@
 #include "logo.h"
 #include "AirEncode.h"
 
-#define DEBUG
+//#define DEBUG
 
 
 

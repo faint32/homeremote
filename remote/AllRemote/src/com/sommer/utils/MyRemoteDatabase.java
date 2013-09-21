@@ -16,7 +16,7 @@ public class MyRemoteDatabase {
 //	final static String LIGHTINDEX ="lightindex";
 //	final static String AIRINDEX ="airindex";
 	final static String INITIAL ="initial";
-	
+	final static String AUDIO ="audio";
 	final static String DB = "REMOTEINDEX";
 	
 //	final static String AIRDATA = "AIRDATA";
@@ -33,7 +33,7 @@ public class MyRemoteDatabase {
 		SharedPreferences.Editor mEditor = sharedPreferences.edit();  
     
         mEditor.putBoolean(INITIAL,Value.initial); 
-        
+        mEditor.putBoolean(AUDIO,Value.audio); 
         mEditor.commit();  
 	}
 
@@ -42,6 +42,7 @@ public class MyRemoteDatabase {
 		SharedPreferences  sharedPreferences = mContext.getSharedPreferences(DB,0);  
 		
 		Value.initial =sharedPreferences.getBoolean(INITIAL, false);
+		Value.audio =sharedPreferences.getBoolean(AUDIO, false);
 
 	}
 
