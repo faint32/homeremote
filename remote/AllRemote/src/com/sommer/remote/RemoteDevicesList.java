@@ -3,13 +3,13 @@ package com.sommer.remote;
 
 import java.util.List;
 
+import com.sommer.adapt.RemoteAdapter;
+import com.sommer.adapt.RemoteAdapter.OnAdapterChangeListener;
 import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.RemoteGetKeyValue;
 import com.sommer.data.Value;
 
-import com.sommer.ui.RemoteAdapter;
-import com.sommer.ui.RemoteAdapter.OnAdapterChangeListener;
 import com.sommer.utils.UserDB;
 
 
@@ -62,7 +62,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
         btn_add.setOnClickListener(this);
         
         btn_ok = (ImageButton)findViewById(R.id.rdl_ok);
-        btn_ok.setMinimumWidth((Value.screenWidth) / 4);
+        btn_ok.setMinimumWidth((Value.screenWidth) / 6);
         btn_ok.setMinimumHeight((Value.screenHeight) / 10);
         btn_ok.setOnClickListener(this);
 

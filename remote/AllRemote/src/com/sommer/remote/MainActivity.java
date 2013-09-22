@@ -5,6 +5,7 @@ package com.sommer.remote;
 
 
 
+import com.sommer.adapt.SelectPicPopupWindow;
 import com.sommer.allremote.R;
 
 import com.sommer.data.RemoteDevice;
@@ -13,7 +14,6 @@ import com.sommer.ircore.KeyTreate;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.ircore.RemoteOut;
 
-import com.sommer.ui.SelectPicPopupWindow;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -136,8 +136,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			mKeyTreate.setContext(this);
 			mKeyTreate.setHandler(mHandler);
 		}
+		if(Value.audio){
 		RemoteOut.activate();
-		
+		}
 		
 		tabHost = getTabHost();
 		tabHost.setCurrentTab(0);//这是上面需要注意到的问题

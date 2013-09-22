@@ -1,4 +1,4 @@
-package com.sommer.ui;
+package com.sommer.adapt;
 
 import java.util.List;
 

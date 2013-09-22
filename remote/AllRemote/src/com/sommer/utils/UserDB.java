@@ -131,7 +131,7 @@ public class UserDB extends SQLiteOpenHelper {
 		SQLiteDatabase checkDB = null;
 		String myPath = DB_PATH + DB_NAME;
 		try{ 
-		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 		}catch(SQLiteException e){
 		//database does't exist yet.
 		}

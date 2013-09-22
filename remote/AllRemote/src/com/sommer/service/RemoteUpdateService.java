@@ -94,22 +94,6 @@ public class RemoteUpdateService extends IntentService {
   public void onCreate() {
     super.onCreate();
     mContext = getApplicationContext();
-    mRmtDB = new RemoteDB(mContext);
-	try {
-		mRmtDB.createDataBase();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
-	
-	mUserDB = new UserDB(mContext);
-	try {
-		mUserDB.createDataBase();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
   }
 
   @Override
@@ -124,7 +108,9 @@ public class RemoteUpdateService extends IntentService {
   
   
   public void Load() {
-		
+	  mRmtDB = new RemoteDB(mContext);
+	  mUserDB = new UserDB(mContext);
+	  mContext = getApplicationContext();
 		MyRemoteDatabase.getRemoteIndex(mContext);
 //		Value.keyRemoteTab = new HashMap<String, String>();
 		if (Value.initial){

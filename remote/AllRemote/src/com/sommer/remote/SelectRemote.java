@@ -3,6 +3,7 @@ package com.sommer.remote;
 
 import java.util.ArrayList;
 
+import com.sommer.adapt.DeviceAdapter;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.RemoteData;
@@ -20,6 +21,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 
 import android.util.Log;
@@ -73,6 +75,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	Button upButton;
 	Button downButton;
 	Button cancelButton;
+	Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,15 +88,19 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		mRmtDB = new RemoteDB(getApplicationContext());
 		mType = Value.rmtDev.getType();
 		mTypeName = Value.RemoteType[mType];
+		String[]	typeDevices = getResources().getStringArray(R.array.type_array);
+		int[] typeCheck = {R.drawable.check_off,R.drawable.check_off,R.drawable.check_off,
+				R.drawable.check_off,R.drawable.check_off,R.drawable.check_off		
+		};
 		
 		typeSp = (Spinner) findViewById(R.id.typeSp);
-		ArrayAdapter<CharSequence> type_adapter = ArrayAdapter
-				.createFromResource(this, R.array.type_array,
-						R.layout.option_item);
+		mContext = this;
+		DeviceAdapter type_adapter = new DeviceAdapter(mContext,typeDevices,typeCheck);
 		Log.v(TAG, "start --->"+ Value.rmtDev.getFullInfo());
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		typeSp.setAdapter(type_adapter);
-		typeSp.setSelection(mType);
+	//	typeSp.setSelection(mType);
+		type_adapter.changeSelected(mType);
 		typeSp.setOnItemSelectedListener(this);
 		
 		
@@ -131,7 +138,11 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	
 	
 	
-	 private ArrayList<String> getBrand(String _type)
+	 
+
+
+
+	private ArrayList<String> getBrand(String _type)
 	    {
 			
 		 mRmtDB.open();
