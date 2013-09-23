@@ -4,7 +4,7 @@
 	android:layout_width="fill_parent" android:layout_height="wrap_content"
 	android:orientation="horizontal" 
     android:gravity="center_vertical"
-	android:background="@drawable/device_list">
+	android:background="@drawable/corner_bg">
 	<TextView android:id="@+id/device_name"
 		android:layout_centerHorizontal="true" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text=""

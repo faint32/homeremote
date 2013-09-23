@@ -5,6 +5,11 @@ package com.sommer.remote;
 
 
 
+import java.util.ArrayList;
+
+
+import com.sommer.adapt.MenuAdapter;
+import com.sommer.adapt.MenuList;
 import com.sommer.adapt.SelectPicPopupWindow;
 import com.sommer.allremote.R;
 
@@ -34,6 +39,9 @@ import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 
 
@@ -55,8 +63,11 @@ import android.view.View.OnTouchListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ListView;
+import android.widget.SlidingDrawer;
 
 
 import android.widget.RelativeLayout;
@@ -65,6 +76,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 @SuppressLint("HandlerLeak")
@@ -83,11 +95,14 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private TabHost tabHost;
 	private HorizontalScrollView mHs;
 	private GestureDetector mGestureDetector;
-	private Button mBt_menu;
+//	private Button mBt_menu;
 	private static KeyTreate mKeyTreate = null;
 	SelectPicPopupWindow menuWindow;
 	private Vibrator vibrator;  
-
+	private SlidingDrawer sd;
+	private MenuAdapter myListAdapter;
+	private ListView listView;
+	private ArrayList<MenuList> menulists;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -108,15 +123,15 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		Value.screenWidth  = screenWidth;
 		mHs = (HorizontalScrollView) findViewById(R.id.hs);
 //		Value.keyRemoteTab = new  HashMap<String, String> ();
-		mBt_menu = (Button) findViewById(R.id.btn_menu);
-		mBt_menu.setOnClickListener(new OnClickListener() {			
-		public void onClick(View v) {
-			menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
-			menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
-			}
-		});
+//		mBt_menu = (Button) findViewById(R.id.btn_menu);
+//		mBt_menu.setOnClickListener(new OnClickListener() {			
+//		public void onClick(View v) {
+//			menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
+//			menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
+//			}
+//		});
 		
-		
+		menuLoading();
 		
 		initHostTab();
 
@@ -136,9 +151,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			mKeyTreate.setContext(this);
 			mKeyTreate.setHandler(mHandler);
 		}
-		if(Value.audio){
+		
 		RemoteOut.activate();
-		}
+		
 		
 		tabHost = getTabHost();
 		tabHost.setCurrentTab(0);//这是上面需要注意到的问题
@@ -361,46 +376,110 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	}
 	
 	
-	private OnClickListener  itemsOnClick = new OnClickListener(){
-
-			public void onClick(View v) {
-				menuWindow.dismiss();
-				switch (v.getId()) {
-				case R.id.btn_study:
+//	private OnClickListener  itemsOnClick = new OnClickListener(){
+//
+//			public void onClick(View v) {
+//				menuWindow.dismiss();
+//				switch (v.getId()) {
+//				case R.id.btn_study:
+////				
+////					Log.v(TAG, "btn_study btn_study");
+////					Value.isStudying = true;
+////					
+////					RemoteComm.learnRemoteMain();
+////					Toast toast = Toast.makeText(getApplicationContext(), R.string.study_alert,
+////							Toast.LENGTH_SHORT);
+////					toast.setGravity( Gravity.CENTER_HORIZONTAL, 0, 0);
+////					toast.show();
+//					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
+//					.sendToTarget();
+//					break;
+//				case R.id.btn_options:		
+//					mHandler.obtainMessage(R.id.MSG_OPTION_LIST, 1, -1)
+//					.sendToTarget();
+//					break;
+//				case R.id.btn_about:	
+//					mHandler.obtainMessage(R.id.MSG_OPTION_ABOUT, 1, -1)
+//					.sendToTarget();
+//					break;
+//				case R.id.btn_quit:	
+//					mHandler.obtainMessage(R.id.MSG_OPTION_QUIT, 1, -1)
+//					.sendToTarget();
+//					break;	
+//				default:
+//					break;
+//				}
 //				
-//					Log.v(TAG, "btn_study btn_study");
-//					Value.isStudying = true;
 //					
-//					RemoteComm.learnRemoteMain();
-//					Toast toast = Toast.makeText(getApplicationContext(), R.string.study_alert,
-//							Toast.LENGTH_SHORT);
-//					toast.setGravity( Gravity.CENTER_HORIZONTAL, 0, 0);
-//					toast.show();
+//			}
+//	    	
+//	    };
+	
+	
+    void menuLoading(){
+    	listView = (ListView) findViewById(R.id.menu_list);
+		menulists = new ArrayList<MenuList>();
+		Resources res = getResources();
+		Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.menu_list);  
+		String str = res.getString(R.string.options);
+		MenuList ml = new MenuList(bmp,str);
+		menulists.add(ml);
+		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_learn);
+		str = res.getString(R.string.study);
+		ml = new MenuList(bmp,str);
+		menulists.add(ml);
+		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_about);
+		str = res.getString(R.string.about);
+		ml = new MenuList(bmp,str);
+		menulists.add(ml);
+		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_quit);
+		str = res.getString(R.string.quit);
+		ml = new MenuList(bmp,str);
+		menulists.add(ml);
+		sd = (SlidingDrawer) findViewById(R.id.sliding);  
+	
+
+		myListAdapter = new MenuAdapter(this, menulists);
+
+		listView.setAdapter(myListAdapter);
+
+		
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+		    @Override
+		    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+		            long arg3)
+		    {
+		    	
+		    	
+		    	sd.close();
+		    	switch (arg2) {
+		    	
+				case 1:
+					
 					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
 					.sendToTarget();
+					
 					break;
-				case R.id.btn_options:		
+				case 0:		
 					mHandler.obtainMessage(R.id.MSG_OPTION_LIST, 1, -1)
 					.sendToTarget();
 					break;
-				case R.id.btn_about:	
+				case 2:	
 					mHandler.obtainMessage(R.id.MSG_OPTION_ABOUT, 1, -1)
 					.sendToTarget();
+					
 					break;
-				case R.id.btn_quit:	
+				case 3:	
 					mHandler.obtainMessage(R.id.MSG_OPTION_QUIT, 1, -1)
 					.sendToTarget();
 					break;	
 				default:
 					break;
 				}
-				
-					
-			}
-	    	
-	    };
-	
-
+		    }
+		});
+    }
 	
 	
 	public static Context getContext() {

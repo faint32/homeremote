@@ -12,6 +12,7 @@ import com.sommer.ircore.RemoteCore;
 
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.RemoteDB;
+import com.sommer.utils.UserDB;
 
 
 
@@ -58,7 +59,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private EditText mDeviceName = null;
 	private int mType = Value.DeviceType.TYPE_TV;
 	private String mTypeName =null;
-
+    private boolean isInitial = false;
 
 	private ArrayList<String> list = new ArrayList<String>();
 	private ArrayList<String> nameList = new ArrayList<String>();
@@ -93,14 +94,16 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 				R.drawable.check_off,R.drawable.check_off,R.drawable.check_off		
 		};
 		
+		
 		typeSp = (Spinner) findViewById(R.id.typeSp);
 		mContext = this;
-		DeviceAdapter type_adapter = new DeviceAdapter(mContext,typeDevices,typeCheck);
+		DeviceAdapter typeAdapter = new DeviceAdapter(mContext,typeDevices,typeCheck);
+	//	type_adapter.setDropDownViewResource(R.layout.myspinner_dropdown);  
 		Log.v(TAG, "start --->"+ Value.rmtDev.getFullInfo());
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
-		typeSp.setAdapter(type_adapter);
+		typeSp.setAdapter(typeAdapter);
 	//	typeSp.setSelection(mType);
-		type_adapter.changeSelected(mType);
+		typeAdapter.changeSelected(mType);
 		typeSp.setOnItemSelectedListener(this);
 		
 		
@@ -297,7 +300,12 @@ void sendTestCode(int count){
 	@Override
 	public void onStart() {
 		super.onStart();
-	//	mRmtDB.open();
+		UserDB mUserDB = new UserDB(this);
+		mUserDB.open();
+		mUserDB.getAirData(Value.rmtDev.getId());
+		mUserDB.close();
+		ad = Value.airData;
+		isInitial = true;
 	}
 
 	@Override
@@ -422,9 +430,13 @@ void sendTestCode(int count){
 			saveButton.setEnabled(true);
 			upButton.setEnabled(true);
 			downButton.setEnabled(true);
+			if (isInitial = false){
 			Value.rmtDev.setBrandIndex(arg2);
 			Value.rmtDev.setBrand(nameList.get(arg2));
 			mCutCount = 0;
+			}else {
+				
+			}
 //			Log.v(TAG, "arg2 --->" + arg2);
 			mTypeName = Value.RemoteType[mType];
 			brandName = list.get(arg2); 

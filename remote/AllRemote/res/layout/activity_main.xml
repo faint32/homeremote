@@ -44,20 +44,46 @@
       android:contentDescription="code_sending"
       android:src="@drawable/code_sending" />
    
-  <LinearLayout
-      android:id="@+id/pop_layout"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_alignParentBottom="true"
-      >
-        <Button
-            android:id="@+id/btn_menu"
-          
-            android:layout_width="wrap_content"
+ <SlidingDrawer  
+        android:id="@+id/sliding"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:content="@+id/menu_content"  
+        android:handle="@+id/imageViewIcon"  
+        android:orientation="vertical" >  
+      
+	       
+        <Button  
+            android:id="@+id/imageViewIcon"  
+            android:layout_width="match_parent"  
+            android:layout_height="wrap_content"  
+            
+            android:background="@drawable/menubox" /> 
+        <LinearLayout
+            android:id="@+id/menu_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_control"
-         	          
-            android:contentDescription="@string/set_menu" />
-    </LinearLayout>
+            android:background="@drawable/setup_final_list_bg_plain"  
+            android:orientation="vertical" >    
+       
+             <LinearLayout
+            android:id="@+id/menu_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="40dp"
+            android:orientation="vertical" >    
+	        <ListView  
+	            android:id="@+id/menu_list"  
+	            android:divider="@drawable/devide_line"
+	            android:dividerHeight="5dp"
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"  
+	            android:gravity="center"  
+	             />  
+	        </LinearLayout>	     
+		</LinearLayout>	
+    </SlidingDrawer>  
 </RelativeLayout>
