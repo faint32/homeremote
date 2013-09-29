@@ -63,9 +63,9 @@ public class KeyTreate {
 			String	rmtData = userDB.getRemoteData(device,keyName);
 			userDB.close();
 			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
-			if(Value.audio){
+		
 			RemoteOut.sendRemote(rmtDataByte);	
-			}
+			
 			}
 		
 			
