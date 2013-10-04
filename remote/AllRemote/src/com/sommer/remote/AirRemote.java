@@ -7,6 +7,7 @@ import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
+import com.sommer.ircore.RemoteOut;
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.UserDB;
 
@@ -247,7 +248,7 @@ public class AirRemote extends Activity implements OnClickListener {
 		}
 		if (Value.currentKey != null) {
 		RemoteCore.sendAirRemote(Value.airData);	
-			
+
 			
 		}
 	

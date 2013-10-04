@@ -1,6 +1,8 @@
 package com.sommer.ircore;
 
 
+import android.util.Log;
+
 import com.sommer.data.AirData;
 
 
@@ -48,7 +50,7 @@ public static void sendTestRemote(String testCode){
 			System.arraycopy(tempData, 0, sendData, 1, tempData.length);	
 //			Log.v(TAG, "send normal data =====>"+ sendData);
 		
-
+			
 	}
 
 public static void sendAirRemote(AirData airdata){
@@ -57,23 +59,20 @@ public static void sendAirRemote(AirData airdata){
 	//	Log.v(TAG, "send learn data null");
 		return ;
 	}
-	byte[] sendData = new byte[129];
+	byte[] sendData = new byte[130];
+	
 	int[] tempData = Tools.airDataToByte(airdata);
-//	for (byte t: tempData){
-//		Log.v(TAG, "get byte i("+ i + ")data =========>"+ t);
-//		i++;
-//	}
+
 
 	byte[] temp1Data = getAirData(tempData);
-//	i=0;
-//	for (byte t: temp1Data){
-//		Log.v(TAG, "get byte i("+ i + ")data =========>"+ t);
-//		i++;
-//	}
+	
 
 	
 	sendData[0] = _REMOTE_SEND_NORMAL_;
-	System.arraycopy(temp1Data, 0, sendData, 1, temp1Data.length);	
+	sendData[2] = 120;	
+	System.arraycopy(temp1Data, 0, sendData, 2, temp1Data.length);	
+	Log.v(TAG, "air remote data =====>"+Tools.bytesToHexString(sendData));
+	RemoteOut.sendRemote(sendData);	
 //	Log.v(TAG, "send normal data =====>"+ sendData);
 	
 }

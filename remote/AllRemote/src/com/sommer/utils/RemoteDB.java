@@ -109,7 +109,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 			if(dbf.exists()){
 			dbf.delete();
 		}
-			SQLiteDatabase.openOrCreateDatabase(dbf, null);
+		//	SQLiteDatabase.openOrCreateDatabase(dbf, null);
 			// 复制asseets中的db文件到DB_PATH下
 			copyDataBase();
 			//copyBigDataBase();
