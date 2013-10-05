@@ -435,7 +435,7 @@ void sendTestCode(int count){
 			Value.rmtDev.setBrand(nameList.get(arg2));
 			mCutCount = 0;
 			}else {
-				
+			isInitial = false;	
 			}
 //			Log.v(TAG, "arg2 --->" + arg2);
 			mTypeName = Value.RemoteType[mType];
