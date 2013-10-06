@@ -35,8 +35,10 @@ public class RemoteGetKeyValue {
 			}
 		mUsrDB.open();
 		int dType=rmtDev.getType();
+		if (dType!=Value.DeviceType.TYPE_AIR){
 		String index = rmtDev.getCode();
 		codeDatas=mRmtDB.getRemoteData(dType,index);
+		}
 		if(isUpdate){
 		mUsrDB.updateRemoteDevice(id);
 		} else {
@@ -88,6 +90,10 @@ public class RemoteGetKeyValue {
 				mUsrDB.addKeyValue(key, codeDatas[keyColumn],id,keyColumn);
 //				Value.keyRemoteTab.put(key, codeDatas[keyColumn]);
 			}
+			break;	
+		case Value.DeviceType.TYPE_AIR:
+			
+			
 			break;	
 		
 		default:

@@ -2,8 +2,11 @@ package com.sommer.adapt;
 
 import com.sommer.allremote.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+@SuppressLint("ResourceAsColor")
 public class DeviceAdapter extends BaseAdapter {
 	 String textstr[];
 	 int picid[];
@@ -68,7 +72,8 @@ public class DeviceAdapter extends BaseAdapter {
 	  
 	  return super.getDropDownView(position, convertView, parent);
 	 }
-	 @Override
+	 @SuppressLint("ResourceAsColor")
+	@Override
 	 public View getView(int position, View convertView, ViewGroup parent) {
 	  if(convertView==null){
 	   convertView=inflater.inflate(R.layout.option_device, null);
@@ -76,12 +81,18 @@ public class DeviceAdapter extends BaseAdapter {
 	  
 	  ImageView image=(ImageView)convertView.findViewById(R.id.device_select);
 	  TextView text=(TextView)convertView.findViewById(R.id.device_name);
+	  Resources resource = (Resources) context.getResources();  
+	  ColorStateList csl;
 	  image.setImageResource(picid[position]);
 	  text.setText(textstr[position]);
 	  if(selectedposition==position){
+		  csl  = (ColorStateList) resource.getColorStateList(R.color.deviceSelect);  
+		  text.setTextColor(csl);
 		  image.setImageResource(R.drawable.check_on);
 		  }else{
-			  image.setImageResource(R.drawable.check_off);
+		 csl = (ColorStateList) resource.getColorStateList(R.color.deviceNoSelect);  
+		 text.setTextColor(csl);
+		 image.setImageResource(R.drawable.check_off);
 		   
 		  }
 	  return convertView;

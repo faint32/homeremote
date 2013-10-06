@@ -19,18 +19,7 @@
     <string name="study_timeout">学习超时退出</string>
     <string name="about_ok">确定</string>
     
-    <string name="device_type">设备类型</string>
-    <string name="name_text">品牌名称</string>
-    <string name="remote_name">设备名称</string>
-    <string name="cur_name">当前设备</string>
-    <string name="count_text"></string>
-    <string name="auto_text">自动</string>
-    <string name="stop_text">停止</string>
-    <string name="up_text">向上</string>
-    <string name="down_text">向下</string>
-    <string name="cancel_text">取消</string>
-    <string name="manual_text">手动</string>
-    <string name="save_text">保存</string>
+    
     <string name="set_menu">设置</string>
     <string name="updata_end">数据更新完毕</string>
     <string name=" first_updata_end">数据库 初始化 完成</string>
@@ -85,9 +74,23 @@
     <string name="str_message">退出系统?</string>
     <string name="str_ok">确定</string>
     <string name="str_back">返回</string>
-
- 
-
+    <!-- select -->
+ 	<string name="device_type">设备类型</string>
+    <string name="name_text">品牌名称</string>
+    <string name="remote_name">设备名称</string>
+    <string name="cur_name">当前设备</string>
+    <string name="count_text"></string>
+    <string name="auto_text">自动</string>
+    <string name="stop_text">停止</string>
+    <string name="up_text">向上</string>
+    <string name="down_text">向下</string>
+    <string name="cancel_text">取消</string>
+    <string name="manual_text">手动</string>
+    <string name="save_text">保存</string>
+	<string name="change_name">更改</string>
+	<!--  dialog_inputname -->
+    <string name="textinputname">请输入设备名称</string> 
+	 
     <!-- TV -->
     <string name="tv">tv</string>
     <string name="str_tv">电视</string>

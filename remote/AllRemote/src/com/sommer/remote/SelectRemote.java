@@ -10,6 +10,7 @@ import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
 
+import com.sommer.ui.InputNameDialog;
 import com.sommer.utils.MyRemoteDatabase;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
@@ -22,6 +23,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 
@@ -56,7 +58,8 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private TextView mDeviceCount = null;
 	private TextView mRemainCount = null;
 	private TextView mCurrentCount = null;
-	private EditText mDeviceName = null;
+	private TextView mDeviceName = null;
+	private Button mChangeName = null;
 	private int mType = Value.DeviceType.TYPE_TV;
 	private String mTypeName =null;
     private boolean isInitial = false;
@@ -90,14 +93,14 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		mType = Value.rmtDev.getType();
 		mTypeName = Value.RemoteType[mType];
 		String[]	typeDevices = getResources().getStringArray(R.array.type_array);
-		int[] typeCheck = {R.drawable.check_off,R.drawable.check_off,R.drawable.check_off,
+		int[] typeChecks = {R.drawable.check_off,R.drawable.check_off,R.drawable.check_off,
 				R.drawable.check_off,R.drawable.check_off,R.drawable.check_off		
 		};
 		
 		
 		typeSp = (Spinner) findViewById(R.id.typeSp);
 		mContext = this;
-		DeviceAdapter typeAdapter = new DeviceAdapter(mContext,typeDevices,typeCheck);
+		DeviceAdapter typeAdapter = new DeviceAdapter(mContext,typeDevices,typeChecks);
 	//	type_adapter.setDropDownViewResource(R.layout.myspinner_dropdown);  
 		Log.v(TAG, "start --->"+ Value.rmtDev.getFullInfo());
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
@@ -117,8 +120,10 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		mRemainCount = (TextView) findViewById(R.id.remain_count);
 		mRemainCount.setTypeface(type);
 		mCurrentCount = (TextView) findViewById(R.id.cur_count);
-		mDeviceName = (EditText) findViewById(R.id.name_input);
+		mDeviceName = (TextView) findViewById(R.id.remote_name);
 		mDeviceName.setText(Value.rmtDev.getName());
+		mChangeName = (Button) findViewById(R.id.name_change);
+		mChangeName.setOnClickListener(this);
 //		autoButton = (Button) findViewById(R.id.str_auto);
 //		autoButton.setOnClickListener(this);
 //		autoButton.setEnabled(false);
@@ -145,32 +150,27 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 
 
 
-	private ArrayList<String> getBrand(String _type)
-	    {
-			
-		 mRmtDB.open();
-			list=mRmtDB.getBrand(_type);
-			nameList=mRmtDB.translateBrands(list);
-			mRmtDB.close();
-	        return nameList;
+	private ArrayList<String> getBrand(String _type){	
+		mRmtDB.open();
+		list=mRmtDB.getBrand(_type);
+		nameList=mRmtDB.translateBrands(list);
+		mRmtDB.close();
+	    return nameList;
 	    }
 
 	 
-	 private void getProducts(String _type,String _brand)
-	    {
-			
-			mRmtDB.open();
-			try {
-				productList=mRmtDB.getProducts(_type,_brand);
+	 private void getProducts(String _type,String _brand){
+		mRmtDB.open();
+		try {
+			productList=mRmtDB.getProducts(_type,_brand);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+			e.printStackTrace();
 			}
-		
-			mRmtDB.close();
-
-			 mCount =productList.size();
+		mRmtDB.close();
+		mCount =productList.size();
 	    }
+	 
 	 private final Handler mHandler = new Handler() {
 
 			@Override
@@ -315,7 +315,7 @@ void sendTestCode(int count){
 //			mThread.cancel();
 //		}
 		mRmtDB.close();
-	//	mRmtDB.close();
+	
 	}
 
 	
@@ -335,7 +335,15 @@ void sendTestCode(int count){
 				ArrayAdapter<String> tv_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 				deviceSp.setAdapter(tv_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+			
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+				isInitial =false;
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				mCount = tv_adapter.getCount();
 				
 				Value.rmtDev.setType(mType);
@@ -529,6 +537,22 @@ void sendTestCode(int count){
 			sendTestCode(mCutCount);	
 			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
+			break;
+		case R.id.name_change:	
+			  Dialog dialog = new InputNameDialog(this, 0  ,new InputNameDialog.PriorityListener() {  
+                  
+              
+
+				@Override
+				public void refreshDeviceName(String string) {
+					// TODO Auto-generated method stub
+					  mDeviceName.setText(string);	
+				}  
+            });  
+              dialog.show();
+            
+              break;
+			default :
 			break;
 		}
 

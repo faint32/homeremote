@@ -17,18 +17,7 @@
     <string name="study_save">Save data</string>
     <string name="study_exit">Quit learning</string>
     <string name="about_ok">OK</string>
-    <string name="device_type">Device Type</string>
-    <string name="name_text">Brand Name</string>
-    <string name="cur_name">Current Device</string>
-    <string name="remote_name">Device Name</string>
-    <string name="count_text"></string>
-    <string name="auto_text">Auto</string>
-    <string name="stop_text">Stop</string>
-    <string name="up_text">Up</string>
-    <string name="down_text">Down</string>
-    <string name="cancel_text">Cancel</string>
-    <string name="manual_text">manually</string>
-    <string name="save_text">Save</string>
+
     <string name="set_menu">SetUp</string>
     <string name="updata_end">Database updata finished</string>
     <string name=" first_updata_end">First  Database initial finished</string>
@@ -63,13 +52,13 @@
 	Version: V0.0.1Beta\n
 	\n
 	Contact:\n
-	Company: SOMMER CO.,LTD.\n
+	Company: SOMMER \n
 	
 	
 	]]>
     </string>
     <string name="LongAbout">
-<![CDATA[  SOMMER CO.,LTD.\n]]>
+<![CDATA[  SOMMER  \n]]>
     </string>
     <string name="Clean"></string>
    
@@ -82,6 +71,24 @@
     <string name="str_message">Quit?</string>
     <string name="str_ok">OK</string>
     <string name="str_back">Return</string>
+      <!-- Select -->
+    <string name="device_type">Device Type</string>
+    <string name="name_text">Brand Name</string>
+    <string name="cur_name">Current Device</string>
+    <string name="remote_name">Device Name</string>
+    <string name="count_text"></string>
+    <string name="auto_text">Auto</string>
+    <string name="stop_text">Stop</string>
+    <string name="up_text">Up</string>
+    <string name="down_text">Down</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="manual_text">manually</string>
+    <string name="save_text">Save</string>
+    <string name="change_name">Update</string>
+    
+    <!--  dialog_inputname -->
+    <string name="textinputname">Please input  name</string>
+    
 	<!-- NUM -->
 	<string name="bt_num0">0</string>
     <string name="bt_num1">1</string>

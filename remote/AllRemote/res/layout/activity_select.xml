@@ -20,29 +20,28 @@
       android:src="@drawable/code_sending" 
       />
     </LinearLayout>
- <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
+   <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_marginTop="10dip"
+            >
         <TextView
             android:id="@+id/remote_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/remote_name"
             android:textSize="20sp" />
-
-          <EditText
-            android:id="@+id/name_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/input_name"
-            android:inputType="text"
-            android:text=""
-            android:textSize="20sp" />
-    </LinearLayout>
-    
+	     <Button
+            android:id="@+id/name_change"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:background="@drawable/button_green_con"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_alignParentRight ="true"
+            android:text="@string/change_name" /> 
+     </RelativeLayout> 
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="fill_parent"

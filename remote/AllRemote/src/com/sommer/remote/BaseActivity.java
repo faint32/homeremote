@@ -99,7 +99,7 @@ public class BaseActivity extends Activity {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog, int which) {
 									dialog.dismiss();
-								
+									menuDialog.dismiss();
 									finish();
 								}
 							});
@@ -127,7 +127,7 @@ public class BaseActivity extends Activity {
 					aboutDialog.show();
 					break;
 				case ITEM_RETURN:
-					finish();
+					menuDialog.dismiss();
 					break;
 				default:
 					break;
