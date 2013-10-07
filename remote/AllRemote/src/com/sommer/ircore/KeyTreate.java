@@ -59,9 +59,17 @@ public class KeyTreate {
 				userDB = new UserDB(mContext);	
 				}
 			remoteSendUI();
-			userDB.open();
-			String	rmtData = userDB.getRemoteData(device,keyName);
-			userDB.close();
+			Log.v(TAG,"device=====>" + device +"      keyName=====>" + keyName);
+			String rmtData = null;
+			try {
+				userDB.open();
+				rmtData = userDB.getRemoteData(device,keyName);
+				userDB.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Log.v(TAG, rmtData);
 			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
 		
 			RemoteOut.sendRemote(rmtDataByte);	

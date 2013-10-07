@@ -41,7 +41,7 @@ public class MyRemoteDatabase {
 	public static void getRemoteIndex(Context mContext){
 		SharedPreferences  sharedPreferences = mContext.getSharedPreferences(DB,0);  
 		
-		Value.initial =sharedPreferences.getBoolean(INITIAL, false);
+		Value.initial =sharedPreferences.getBoolean(INITIAL, true);
 		Value.audio =sharedPreferences.getBoolean(AUDIO, false);
 
 	}

@@ -1,83 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFFFFF"
+    android:layout_height="wrap_content"
+    android:background="#0F000000"
+    android:gravity="center"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/text_about"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/textLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/logo" />
-		
-        <!--
-        <TextView
-            android:id="@+id/textLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Long" />
-        -->
-
-        <!--  <TextView
-            android:id="@+id/textLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Clean" />
-        -->
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="bottom"
-        android:orientation="vertical" >
-
-        
-    <EditText
-            android:id="@+id/edit_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="textMultiLine"
-            android:text="@string/about_info" >
-            <requestFocus />
-    </EditText>
-        
-        <!--
-        <EditText
-            android:id="@+id/edit_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textMultiLine"
-            android:text="@string/LongAbout" >
-
-            <requestFocus />
-        </EditText>
-        -->
-  <!--  
-        <EditText
-            android:id="@+id/edit_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="text"
-            android:text="@string/CleanAbout" >
-
-            <requestFocus />
-            
-        </EditText>
-  -->
-    </LinearLayout>
-
+        android:layout_height="match_parent"
+        android:autoLink="web"
+        android:text="@string/str_about" />
 </LinearLayout>

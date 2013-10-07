@@ -101,9 +101,9 @@ public class UserDB extends SQLiteOpenHelper {
 	}
 	
 	public void createDataBase() throws IOException{
-		boolean dbExist = checkDataBase();
+	//	boolean dbExist = checkDataBase();
 		
-		if (dbExist==false){
+		if (Value.initial==true){
 		
 		//创建数据库
 		try {

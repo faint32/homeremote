@@ -4,5 +4,6 @@
      <color name="colorSend">#00303030</color>  
      <color name="colorButton">#30000000</color>
      <color name="deviceSelect">#ffffff</color>
-     <color name="deviceNoSelect">#ffffff</color>  
+     <color name="deviceNoSelect">#ffffff</color>
+     <color name="buttonText">#000000</color>  
 </resources>

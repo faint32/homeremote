@@ -62,7 +62,7 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private Button mChangeName = null;
 	private int mType = Value.DeviceType.TYPE_TV;
 	private String mTypeName =null;
-    private boolean isInitial = false;
+    private boolean isInitial = true;
 
 	private ArrayList<String> list = new ArrayList<String>();
 	private ArrayList<String> nameList = new ArrayList<String>();
@@ -105,16 +105,14 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		Log.v(TAG, "start --->"+ Value.rmtDev.getFullInfo());
 	//	type_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); 
 		typeSp.setAdapter(typeAdapter);
-	//	typeSp.setSelection(mType);
+		typeSp.setSelection(mType);
 		typeAdapter.changeSelected(mType);
 		typeSp.setOnItemSelectedListener(this);
 		
 		
 		deviceSp = (Spinner) findViewById(R.id.nameSp);
 		deviceSp.setOnItemSelectedListener(this);
-		
 
-//
 		mDeviceCount = (TextView) findViewById(R.id.count_text);
 		mDeviceCount.setTypeface(type);
 		mRemainCount = (TextView) findViewById(R.id.remain_count);
@@ -241,7 +239,7 @@ void sendTestCode(int count){
 			 showCodeSending();
 			 RemoteCore.sendTestRemote(testCode); 
 		 }else {
-			 Toast.makeText(this, "this device is not make", Toast.LENGTH_SHORT).show();
+			 Toast.makeText(this, "this device is not valid", Toast.LENGTH_SHORT).show();
 		 }
 		
 	//	 hideCodeSending();
@@ -339,7 +337,7 @@ void sendTestCode(int count){
 				if (isInitial){
 				mCutCount =Value.rmtDev.getBrandIndex();
 				deviceSp.setSelection(mCutCount);
-				isInitial =false;
+				
 				}else {
 					mCutCount =0;
 				deviceSp.setSelection(mCutCount);	
@@ -349,7 +347,7 @@ void sendTestCode(int count){
 				Value.rmtDev.setType(mType);
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
-
+				Log.v(TAG, "typesp");
 				return;
 			case 1:
 				mType = Value.DeviceType.TYPE_DVD;
@@ -359,7 +357,16 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(dvd_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+				
+
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+				
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				mCount = dvd_adapter.getCount();
 
 				
@@ -376,7 +383,16 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(stb_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+				
+
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+				
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				
 				mCount = stb_adapter.getCount();
 				
@@ -391,7 +407,15 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 
 				deviceSp.setAdapter(air_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+				
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				
 				mCount = air_adapter.getCount();
 				
@@ -407,7 +431,15 @@ void sendTestCode(int count){
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 				
 				deviceSp.setAdapter(fans_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+				
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				mCount = fans_adapter.getCount();
 				
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
@@ -421,7 +453,15 @@ void sendTestCode(int count){
 				ArrayAdapter<String> pjt_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 				deviceSp.setAdapter(pjt_adapter);
-				deviceSp.setSelection(Value.rmtDev.getBrandIndex());
+
+				if (isInitial){
+				mCutCount =Value.rmtDev.getBrandIndex();
+				deviceSp.setSelection(mCutCount);
+			
+				}else {
+					mCutCount =0;
+				deviceSp.setSelection(mCutCount);	
+				}
 				mCount = pjt_adapter.getCount();
 				mDeviceCount.setText("(" + String.valueOf(mCount) + ")");
 				mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
@@ -433,22 +473,20 @@ void sendTestCode(int count){
 		}
 		if (arg0 == deviceSp) {
 		
-//			autoButton.setEnabled(false);
-//			stopButton.setEnabled(false);
-			saveButton.setEnabled(true);
-			upButton.setEnabled(true);
-			downButton.setEnabled(true);
-			if (isInitial = false){
+			if (!isInitial){
 			Value.rmtDev.setBrandIndex(arg2);
 			Value.rmtDev.setBrand(nameList.get(arg2));
 			mCutCount = 0;
 			}else {
 			isInitial = false;	
+			Value.rmtDev.setBrand(nameList.get(arg2));
+			mCutCount = 0;
 			}
+			Log.v(TAG, "deviceSp");
 //			Log.v(TAG, "arg2 --->" + arg2);
-			mTypeName = Value.RemoteType[mType];
-			brandName = list.get(arg2); 
-			getProducts(Value.RemoteType[mType],brandName);
+
+			Value.rmtDev.setBrand(nameList.get(arg2));
+			getProducts(Value.RemoteType[mType],list.get(arg2));
 			sendTestCode(mCutCount);	
 			mCount =productList.size();		
 			mDeviceCount.setText("(" + String.valueOf(mCount) + ")          ");
@@ -539,9 +577,7 @@ void sendTestCode(int count){
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount+1) + ")     ");
 			break;
 		case R.id.name_change:	
-			  Dialog dialog = new InputNameDialog(this, 0  ,new InputNameDialog.PriorityListener() {  
-                  
-              
+			  Dialog dialog = new InputNameDialog(this, R.style.QuitDialog  ,new InputNameDialog.PriorityListener() {  
 
 				@Override
 				public void refreshDeviceName(String string) {

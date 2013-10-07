@@ -5,12 +5,7 @@
     android:background="@drawable/bg"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical" >
+  
 
         <TextView
             android:id="@+id/textinputname"
@@ -20,25 +15,20 @@
             android:textSize="30sp"
             android:textColor="@color/deviceNoSelect"
             />
-		
-    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical" >
 
   		<EditText
             android:id="@+id/dlg_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="30sp"
             android:inputType="textMultiLine"
              > 
     	</EditText>
+    	
       <ImageButton  
 			android:id="@+id/dlg_confirm" 
+			android:layout_marginTop="100dp"
 			android:layout_height="wrap_content" 	
 			android:layout_width="wrap_content"
 			android:src = "@drawable/button_icon_cursor_enter"
@@ -46,6 +36,6 @@
 			android:layout_centerInParent ="true"
 		/>
      
-    </RelativeLayout>
+  
 
 </LinearLayout>

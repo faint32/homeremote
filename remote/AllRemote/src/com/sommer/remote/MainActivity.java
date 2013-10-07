@@ -5,6 +5,7 @@ package com.sommer.remote;
 
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -18,6 +19,10 @@ import com.sommer.data.Value;
 import com.sommer.ircore.KeyTreate;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.ircore.RemoteOut;
+import com.sommer.ui.QuitDialog;
+import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.RemoteDB;
+import com.sommer.utils.UserDB;
 
 
 import android.os.Bundle;
@@ -30,7 +35,9 @@ import android.os.Handler;
 
 import android.annotation.SuppressLint;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 
 import android.app.TabActivity;
 
@@ -68,6 +75,7 @@ import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
+import android.widget.TabHost.OnTabChangeListener;
 
 
 import android.widget.RelativeLayout;
@@ -87,9 +95,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static final int FLING_MIN_DISTANCE = 20;
 	private static final int FLING_MIN_VELOCITY = 0;
 
-
-
-	
 	
 	private static Context mContext;
 	private TabHost tabHost;
@@ -103,6 +108,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private MenuAdapter myListAdapter;
 	private ListView listView;
 	private ArrayList<MenuList> menulists;
+	 private RemoteDB mRmtDB = null;
+	private UserDB mUserDB = null;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -135,11 +143,30 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		initHostTab();
 
+		tabHost.setCurrentTab(0);	
 		
-		tabHost.setCurrentTab(0);
+		 MyRemoteDatabase.getRemoteIndex(mContext);
+	        mRmtDB = new RemoteDB(mContext);
+	        mUserDB = new UserDB(mContext);
+	        if(Value.initial){
+		    	try {
+		    		mRmtDB.createDataBase();
+		    	} catch (IOException e) {
+		    		// TODO Auto-generated catch block
+		    		e.printStackTrace();
+		    	}
 		
-		
-		
+		    	
+		    	
+		    	try {
+		    		mUserDB.createDataBase();
+		    	} catch (IOException e) {
+		    		// TODO Auto-generated catch block
+		    		e.printStackTrace();
+		    	}
+	        }
+	    	Value.initial=false;
+	    	MyRemoteDatabase.saveRemoteIndex(mContext);
 		
 	}
 
@@ -157,9 +184,16 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		tabHost = getTabHost();
 		tabHost.setCurrentTab(0);//这是上面需要注意到的问题
-		tabHost.clearAllTabs();//清空（就是这个代码让我悲剧了一天！！！！！！！！）
+		tabHost.clearAllTabs();//清空
 		initHostTab();//（重新载入tabhost）
-      
+		tabHost.setOnTabChangedListener(new OnTabChangeListener()  
+        {  
+            public void onTabChanged(String tabId)  
+            {  
+            	Value.currentDevice = tabHost.getCurrentTab();
+           //    Toast.makeText(getApplicationContext(), "现在是"+tabHost.getCurrentTab()	, Toast.LENGTH_SHORT).show();  
+            }  
+        });  
 	//	RemoteComm.initRemote();
 	
 	}
@@ -167,9 +201,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
-		
-	
 		
 	}
 	
@@ -269,8 +300,10 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			tabWidget.getChildAt(i).getLayoutParams().width = Value.screenWidth / 4;
 		}
 		
-		
+		tabHost.setCurrentTab(0);	
 }
+	
+
 	
 
 	public boolean onDown(MotionEvent arg0) {
@@ -602,26 +635,16 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				break;
 			case R.id.MSG_OPTION_QUIT:
 			
-				AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-				builder.setTitle(getString(R.string.str_title));
-				builder.setMessage(getString(R.string.str_message));
-				builder.setPositiveButton(getString(R.string.str_ok),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							
-								finish();
-							}
-						});
-				builder.setNeutralButton(getString(R.string.str_back),
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						});
-				builder.show();
-			
-			//	finish();
+				 Dialog dialog = new QuitDialog(mContext, R.style.QuitDialog  ,new QuitDialog.PriorityListener() {  
+						
+						
+						@Override
+						public void quitApplication() {
+							// TODO Auto-generated method stub
+							finish();
+						}  
+		            });  
+		              dialog.show();
 			
 				break;
 			case R.id.MSG_OPTION_ABOUT:
@@ -630,7 +653,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 //				dialog.setTitle(R.string.title_about);
 //				dialog.show();
 				LayoutInflater mInflater = LayoutInflater.from(mContext);
-				View settingView = mInflater.inflate(R.layout.about_dialog, null);
+				View settingView = mInflater.inflate(R.layout.dialog_about, null);
 				AlertDialog aboutDialog = new AlertDialog.Builder(mContext)
 						.setIcon(R.drawable.ic_launcher)
 						.setTitle(R.string.title_about)

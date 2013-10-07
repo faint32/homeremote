@@ -191,7 +191,7 @@ public class TVRemote extends BaseActivity implements OnClickListener,
 	public void onStart()
 	{
 		super.onStart();
-	
+		
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

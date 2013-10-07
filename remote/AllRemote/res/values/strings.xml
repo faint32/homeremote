@@ -88,6 +88,9 @@
     
     <!--  dialog_inputname -->
     <string name="textinputname">Please input  name</string>
+     <!--  dialog_quit -->
+     <string name="textQuitWarning">Quit remote</string>
+    
     
 	<!-- NUM -->
 	<string name="bt_num0">0</string>

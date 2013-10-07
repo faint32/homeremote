@@ -20,7 +20,7 @@ public final class Value {
 	public  static String[] REMOTE_TYPE;
 	
 
-	public static Boolean initial;
+	public static Boolean initial=true;
 	public static Boolean audio= true;
 	public static Boolean isStudying = false;
 	public static String currentKey = null;

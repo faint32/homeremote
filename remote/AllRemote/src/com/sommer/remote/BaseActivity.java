@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import com.sommer.allremote.R;
 import com.sommer.data.Value;
+import com.sommer.ui.InputNameDialog;
+import com.sommer.ui.QuitDialog;
 
 
 
@@ -12,6 +14,7 @@ import com.sommer.data.Value;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -91,29 +94,21 @@ public class BaseActivity extends Activity {
 					
 					break;
 				case ITEM_QUIT:
-
-					AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-					builder.setTitle(getString(R.string.str_title));
-					builder.setMessage(getString(R.string.str_message));
-					builder.setPositiveButton(getString(R.string.str_ok),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-									menuDialog.dismiss();
-									finish();
-								}
-							});
-					builder.setNeutralButton(getString(R.string.str_back),
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							});
-					builder.show();
+					  Dialog dialog = new QuitDialog(mContext, R.style.QuitDialog  ,new QuitDialog.PriorityListener() {  
+	
+						
+							@Override
+							public void quitApplication() {
+								// TODO Auto-generated method stub
+								menuDialog.dismiss();
+								finish();
+							}  
+			            });  
+			              dialog.show();
 					break;
 				case ITEM_ABOUT:
 					LayoutInflater mInflater = LayoutInflater.from(mContext);
-					View settingView = mInflater.inflate(R.layout.about_dialog, null);
+					View settingView = mInflater.inflate(R.layout.dialog_about, null);
 					AlertDialog aboutDialog = new AlertDialog.Builder(mContext)
 							.setIcon(R.drawable.ic_launcher)
 							.setTitle(R.string.title_about)

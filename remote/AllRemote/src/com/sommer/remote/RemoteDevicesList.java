@@ -10,12 +10,14 @@ import com.sommer.data.RemoteDevice;
 import com.sommer.data.RemoteGetKeyValue;
 import com.sommer.data.Value;
 
+import com.sommer.ui.InputNameDialog;
 import com.sommer.utils.UserDB;
 
 
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -109,9 +111,19 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	
 	private void addDevice(){
 		Value.rmtDev = new RemoteDevice();
-		Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectRemote.class);
-		RemoteDevicesList.mRmtListOpts.startActivityForResult(i, R.id.REQUEST_OPTIONS);
-		status = LISTSTATUS.ADD;
+		Dialog dialog = new InputNameDialog(this, R.style.QuitDialog  ,new InputNameDialog.PriorityListener() {  
+
+			@Override
+			public void refreshDeviceName(String string) {
+				// TODO Auto-generated method stub
+				Value.rmtDev.setName(string);
+				Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectRemote.class);
+				RemoteDevicesList.mRmtListOpts.startActivityForResult(i, R.id.REQUEST_OPTIONS);
+				status = LISTSTATUS.ADD;
+			}  
+        });  
+          dialog.show();
+		
 	}
 	
 

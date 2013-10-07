@@ -106,9 +106,7 @@ public class RemoteOut {
 
 
 	public static void sendRemote(byte[] data) {
-		// TODO Auto-generated method stub
-//		if (keyValue==null)
-//			return;
+
 	//	playque.add(EncoderCore.getRemoteFrameData( keyValue));
 		playque.add(EncoderCore.getComData(data));
 		synchronized(audiothread) {audiothread.notify();}

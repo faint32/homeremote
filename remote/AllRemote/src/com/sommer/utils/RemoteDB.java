@@ -95,9 +95,9 @@ public class RemoteDB extends SQLiteOpenHelper {
 	}
 	
 	public void createDataBase() throws IOException{
-		boolean dbExist = checkDataBase();
+	//	boolean dbExist = checkDataBase();
 		
-		if (dbExist==false){
+	
 		
 		//创建数据库
 		try {
@@ -116,7 +116,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 			} catch (IOException e) {
 			throw new Error("create database failed");
 			}
-		}
+		
 		
 	}
 
