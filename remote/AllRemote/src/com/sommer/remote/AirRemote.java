@@ -8,7 +8,7 @@ import com.sommer.data.AirData;
 import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.ircore.RemoteOut;
-import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.UserDB;
 
 import android.app.Activity;

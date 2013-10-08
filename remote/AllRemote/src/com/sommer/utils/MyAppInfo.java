@@ -7,7 +7,7 @@ import com.sommer.data.Value;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class MyRemoteDatabase {
+public class MyAppInfo {
 //	final static String TVINDEX ="tvindex";
 //	final static String STBINDEX ="stbindex";
 //	final static String DVDINDEX ="dvdindex";
@@ -28,7 +28,7 @@ public class MyRemoteDatabase {
 //	final static String WINDA = "airauto";
 //	final static String CODETYPE = "airtype";
 	
-	public static  void saveRemoteIndex(Context _mContext){
+	public static  void saveInfo(Context _mContext){
 		SharedPreferences  sharedPreferences = _mContext.getSharedPreferences(DB,0);  
 		SharedPreferences.Editor mEditor = sharedPreferences.edit();  
     
@@ -38,7 +38,7 @@ public class MyRemoteDatabase {
 	}
 
 	
-	public static void getRemoteIndex(Context mContext){
+	public static void getInfo(Context mContext){
 		SharedPreferences  sharedPreferences = mContext.getSharedPreferences(DB,0);  
 		
 		Value.initial =sharedPreferences.getBoolean(INITIAL, true);

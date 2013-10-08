@@ -11,7 +11,7 @@ import com.sommer.data.Value;
 import com.sommer.ircore.RemoteCore;
 
 import com.sommer.ui.InputNameDialog;
-import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
 
@@ -288,7 +288,7 @@ void sendTestCode(int count){
 		 default:
 			 break;
 		 }
-		 MyRemoteDatabase.saveRemoteIndex(getApplicationContext());
+		 MyAppInfo.saveInfo(getApplicationContext());
 		 if(mType!= Value.DeviceType.TYPE_AIR){
 
 

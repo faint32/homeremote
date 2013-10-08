@@ -20,7 +20,7 @@ import com.sommer.ircore.KeyTreate;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.ircore.RemoteOut;
 import com.sommer.ui.QuitDialog;
-import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
 
@@ -145,28 +145,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 
 		tabHost.setCurrentTab(0);	
 		
-		 MyRemoteDatabase.getRemoteIndex(mContext);
-	        mRmtDB = new RemoteDB(mContext);
-	        mUserDB = new UserDB(mContext);
-	        if(Value.initial){
-		    	try {
-		    		mRmtDB.createDataBase();
-		    	} catch (IOException e) {
-		    		// TODO Auto-generated catch block
-		    		e.printStackTrace();
-		    	}
-		
-		    	
-		    	
-		    	try {
-		    		mUserDB.createDataBase();
-		    	} catch (IOException e) {
-		    		// TODO Auto-generated catch block
-		    		e.printStackTrace();
-		    	}
-	        }
-	    	Value.initial=false;
-	    	MyRemoteDatabase.saveRemoteIndex(mContext);
+		 
 		
 	}
 

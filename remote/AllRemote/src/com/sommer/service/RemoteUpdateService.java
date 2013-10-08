@@ -14,7 +14,7 @@ import com.sommer.allremote.R;
 
 import com.sommer.data.Value;
 
-import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
 
@@ -111,38 +111,53 @@ public class RemoteUpdateService extends IntentService {
 	  mRmtDB = new RemoteDB(mContext);
 	  mUserDB = new UserDB(mContext);
 	  mContext = getApplicationContext();
-		MyRemoteDatabase.getRemoteIndex(mContext);
+		MyAppInfo.getInfo(mContext);
 //		Value.keyRemoteTab = new HashMap<String, String>();
 		if (Value.initial){
+			try {
+	    		mRmtDB.createDataBase();
+	    	} catch (IOException e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}
+	
+	    	
+	    	
+	    	try {
+	    		mUserDB.createDataBase();
+	    	} catch (IOException e) {
+	    		// TODO Auto-generated catch block
+	    		e.printStackTrace();
+	    	}	
+			
 		mUserDB.open();
 //		mUserDB.getUserKeyValue();
 		mUserDB.getRemoteDevices();
 		mUserDB.close();
 		Log.v(TAG, "updata finished");
+		Toast toast = Toast.makeText(mContext, R.string.first_updata_end,
+				Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+		toast.show();
 //		Toast toast = Toast.makeText(mContext, R.string.updata_end,
 //				Toast.LENGTH_SHORT);
 //		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 //		toast.show();
 		}
 		else{
-//		mRmtDB.open();
-//		mRmtDB.getKeyInitialTable();
-//		
-//		mRmtDB.close();
-//		KeyToRemote.allKeyTabSetValue(this);
-//		mUserDB.open();
-//		mUserDB.saveAllKeyTabValue();
-//		mUserDB.close();
+			
+		    	
+		}
+	       
+	    Value.initial=false;
+	    MyAppInfo.saveInfo(mContext);
 		Value.initial=true;
 		Save();
-		Toast toast = Toast.makeText(mContext, R.string.first_updata_end,
-				Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-		toast.show();
+		
 	
-		}
+		
   }
   public void Save() {
-		MyRemoteDatabase.saveRemoteIndex(mContext);
+		MyAppInfo.saveInfo(mContext);
 	}
 }

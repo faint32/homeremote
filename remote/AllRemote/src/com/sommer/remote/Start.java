@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.sommer.allremote.R;
 import com.sommer.data.Value;
 import com.sommer.service.RemoteUpdateService;
-import com.sommer.utils.MyRemoteDatabase;
+import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
 
