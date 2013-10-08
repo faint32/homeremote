@@ -144,20 +144,12 @@ public class RemoteUpdateService extends IntentService {
 //		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 //		toast.show();
 		}
-		else{
-			
-		    	
-		}
+	
 	       
 	    Value.initial=false;
 	    MyAppInfo.saveInfo(mContext);
-		Value.initial=true;
-		Save();
-		
-	
-		
+	    stopSelf();
+
   }
-  public void Save() {
-		MyAppInfo.saveInfo(mContext);
-	}
+ 
 }
