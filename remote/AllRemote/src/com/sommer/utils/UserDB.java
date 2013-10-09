@@ -250,7 +250,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 		
 	//	Log.v(TAG, "saveAllKeyTabValue start");
 		Cursor c = myUserDB.query(REMOTEDEVICES, null, null ,null, null, null, null);
-		
+		Value.rmtDevs.clear();
 		c.moveToFirst();
 	
 		do{

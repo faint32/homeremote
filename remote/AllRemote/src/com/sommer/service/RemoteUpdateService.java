@@ -143,6 +143,12 @@ public class RemoteUpdateService extends IntentService {
 //				Toast.LENGTH_SHORT);
 //		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 //		toast.show();
+		}else {
+			mUserDB.open();
+//			mUserDB.getUserKeyValue();
+			mUserDB.getRemoteDevices();
+			mUserDB.close();
+			Log.v(TAG, "updata devices finished");
 		}
 	
 	       
