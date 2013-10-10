@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := RemoteCore
-LOCAL_SRC_FILES :=  Encode.c AirEncode.c
+LOCAL_SRC_FILES :=  Encode.c AirEncode.c AirCode.c
 LOCAL_LDLIBS += -L$(SYSROOT)/usr/lib -llog
 
 include $(BUILD_SHARED_LIBRARY)
