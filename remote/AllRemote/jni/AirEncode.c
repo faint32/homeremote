@@ -4,10 +4,13 @@
 #include "logo.h"
 #include "AirEncode.h"
 
-#define DEBUG
+//#define DEBUG
+
+
+
 
 jbyteArray
-Java_com_sommer_ircore_RemoteCore_getAirData( JNIEnv*  env, jobject jobj, jintArray data ){
+Java_com_sommer_ircore_RemoteCore_getAirData( JNIEnv*  env,jobject jobj,jintArray data ){
 	AIR_status airStatus;
 //	unsigned char airDatas[20];
 	unsigned char airSendData[128];
@@ -46,6 +49,20 @@ Java_com_sommer_ircore_RemoteCore_getAirData( JNIEnv*  env, jobject jobj, jintAr
 	return byteArray;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

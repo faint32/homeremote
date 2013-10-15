@@ -3,134 +3,9 @@
 #include <fcntl.h>
 #include "logo.h"
 #include "AirEncode.h"
+#include "FormData.h"
+#include "AirCode.h"
 
-
-
-
-typedef struct
-{
-	unsigned char CARR;
-	unsigned char STRU;
-	unsigned char LDH_h;
-	unsigned char LDH_l;
-	unsigned char LDL_h;
-	unsigned char LDL_l;
-	unsigned char HIG_h;
-	unsigned char HIG_l;
-	unsigned char ZER_h;
-	unsigned char ZER_l;
-	unsigned char ONE_h;
-	unsigned char ONE_l;
-	unsigned char STO_h;
-	unsigned char STO_l;
-	unsigned char BIC0;
-	unsigned char BIC1;
-	unsigned char BIC2;
-	unsigned char BIC3;
-	unsigned char COD[64];
-}Air_para;
-
-
-unsigned char CountBit(unsigned char air_byte){
-	unsigned char i,temp=0;
-
-	for(i=0;i<8;i++){
-		if((air_byte>>i)&0x01){
-			temp++;
-		}
-	}
-
-	return temp;
-}
-
-unsigned char HiBitFst(unsigned char low_first)
-{
-	unsigned char i,j,temp=0;
-	j = low_first;
-	for(i=0;i!=8;i++)
-	{
-		temp<<=1;
-		if(j&0x01)temp++;
-		j>>= 1;				   
-	}
-	return temp;
-}
-
-
-void HBarray(unsigned char length, Air_para *Ch_para)
-{
-	unsigned char i;
-	for(i=0;i<length;i++)Ch_para->COD[i]=HiBitFst(Ch_para->COD[i]);
-}
-
-
-unsigned char GetZeron(unsigned char air_code)
-{
-	unsigned char i,j,temp;
-	j = air_code;
-	for(i=0,temp=8;i!=8;i++)
-	{
-		if(j&0x01)
-			temp--;
-		j >>= 1;
-	}
-	return temp;
-}
-void AdjustZero(Air_para *rmt_array)
-{
-	unsigned char i,j,temp;
-	temp = GetZeron(rmt_array->COD[0]);
-	temp += GetZeron(rmt_array->COD[1]);
-	temp += GetZeron(rmt_array->COD[2]);
-	temp += GetZeron(rmt_array->COD[4]);
-	temp += GetZeron(rmt_array->COD[5]);
-	temp += GetZeron(rmt_array->COD[6]);
-	i = rmt_array->COD[1];
-	i >>= 4;
-	j = temp;
-	j <<= 4;
-	rmt_array->COD[1] += j;
-	temp += i;
-	temp >>= 4;
-	rmt_array->COD[2] += temp;
-}
-
-unsigned char Sumarray(unsigned char codnum, Air_para *air_para){
-	unsigned char i,sum;
-	for(i=0,sum=0;i<codnum;i++)
-		sum+=air_para->COD[i];					
-	return sum;
-}
-
-void ShBitLft(unsigned char length,Air_para *Ch_para)
-{
-	unsigned char i;
-	for(i=0;i<length;i++)
-	{
-		Ch_para->COD[i]<<=1;
-		if(Ch_para->COD[i+1]&0x80)
-			Ch_para->COD[i]++;
-	}
-}
-
-unsigned char NSarray(unsigned char length,Air_para *Ch_para)
-{
-	unsigned char i,temp;
-	for(i=0,temp=0;i<length;i++)
-	{
-		temp+=Ch_para->COD[i]&0x0f;
-		temp+=Ch_para->COD[i]>>4;
-	}
-	return temp;
-}
-
-unsigned char SBarray(unsigned char length,Air_para *Ch_para)
-{
-	unsigned char i,sum;
-	for(i=0,sum=0;i<length;i++)
-		sum+=CountBit(Ch_para->COD[i]);
-	return sum;
-}
 
 
 
@@ -18718,7 +18593,7 @@ void Air_key_10dd(AIR_status *air_status,Air_para *air_para){
 			default:
 				break;
 		}
-
+		break;
 	default:
 		break;
 	}
@@ -20637,6 +20512,7 @@ void Air_key_00aa(AIR_status *air_status,Air_para *air_para){
 	case POWER_KEY:
 		air_para->COD[0]&=0xf0;
 		air_para->COD[0]|=0x03;
+		break;
 	default:
 		break;
 	}
@@ -22876,6 +22752,1308 @@ void AirRemote571(AIR_status *air_status , Air_para *air_para){
 	air_para->COD[5]+=NSarray(6,air_para)<<4;
 }
 
+/**************		格力9 subroutine		***************/
+void Air_cust_2050_3(Air_para *air_para){
+	air_para->COD[2]=0x20;
+	air_para->COD[3]=0x50;
+	air_para->COD[4]=0x02;
+	air_para->COD[6]=0x20;
+	air_para->COD[8]=air_para->COD[1]+air_para->COD[0];
+	air_para->COD[8]-=4;
+	air_para->COD[8]<<=4;
+}
+void Air_cust_2050_4(AIR_status *air_status ,Air_para *air_para){
+	air_para->COD[2]=0x20;
+		air_para->COD[3]=0x70;
+		air_para->COD[4]=0x02;
+		air_para->COD[5]=0x00;
+		air_para->COD[6]=0x00;
+
+		switch(air_status->vSpeed)
+		{
+			case SPEED_AUTO:
+				air_para->COD[7]|=0x00;
+				break;
+			case SPEED_LOW:
+				air_para->COD[7]|=0x10;
+				break;
+			case SPEED_MEDIUM:
+				air_para->COD[7]|=0x20;
+				break;
+			case SPEED_HIGH:
+				air_para->COD[7]|=0x30;
+				break;
+			default:
+				break;
+		}
+
+		air_para->COD[8]=(air_para->COD[1])+((air_para->COD[0])&0x0f);
+		air_para->COD[8]-=6;
+		air_para->COD[8]+=((air_para->COD[7])>>4);
+		air_para->COD[8]<<=4;
+
+}
+
+
+
+/**************		格力9 		***************/
+/******      CODE 5572(027)		*************/
+void AirRemote572(AIR_status *air_status , Air_para *air_para){
+	Air_spca_2050(air_para);
+	Air_mode_2050(air_status , air_para);
+	Air_wind_2050(air_status , air_para);
+	Air_sptr_2050(air_status , air_para);
+	Air_cust_2050_3(air_para);
+}
+/******      CODE 5573(027)		*************/
+void AirRemote573(AIR_status *air_status , Air_para *air_para){
+	Air_spca_2050(air_para);
+	Air_mode_2050(air_status , air_para);
+	Air_wind_2050(air_status , air_para);
+	Air_sptr_2050(air_status , air_para);
+	Air_cust_2050_4(air_status, air_para);
+}
+/**************		志高(ZH/JT-03)(无)	***************/
+/*************     5574        **************/
+void AirRemote574(AIR_status *air_status , Air_para *air_para){
+	air_para->CARR=0x20;
+	air_para->STRU=0x01;
+
+	air_para->LDH_h=0x07;
+	air_para->LDH_l=0x72;
+
+	air_para->LDL_h=0x08;
+	air_para->LDL_l=0xff;
+
+	air_para->HIG_h=0x00;
+	air_para->HIG_l=0xaf;
+
+	air_para->ZER_h=0x00;
+	air_para->ZER_l=0xaf;
+
+	air_para->ONE_h=0x01;
+	air_para->ONE_l=0xff;
+
+	air_para->STO_h=0x08;
+	air_para->STO_l=0xff;
+
+	air_para->BIC0=96;
+
+	switch(air_status->vKey)
+	{
+		case POWER_KEY:
+			air_para->COD[5]=0x00;
+			break;
+		case MODE_KEY:
+			air_para->COD[5]=0x01;
+			break;
+		case SPEED_KEY:
+			air_para->COD[5]=0x05;
+			break;
+		case TEMPER_INC_KEY:
+			air_para->COD[5]=0x02;
+			break;
+		case TEMPER_DEC_KEY:
+			air_para->COD[5]=0x03;
+			break;
+		case WIND_MANUAL_KEY:
+			air_para->COD[5]=0x07;
+			break;
+		case WIND_AUTO_KEY:
+			air_para->COD[5]=0x04;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vPower){
+		case POWER_OFF:
+			air_para->COD[7]|=0x00;
+			break;
+		case POWER_ON:
+			air_para->COD[7]|=0x02;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vMode){
+		case MODE_AUTO:
+			air_para->COD[9]|=0x00;
+			break;
+		case MODE_COLD:
+			air_para->COD[9]|=0x20;
+			break;
+		case MODE_WET:
+			air_para->COD[9]|=0x40;
+			break;
+		case MODE_WIND:
+			air_para->COD[9]|=0x60;
+			break;
+		case MODE_HOT:
+			air_para->COD[9]|=0x80;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vSpeed){
+		case SPEED_AUTO:
+			air_para->COD[7]|=0x00;
+			break;
+		case SPEED_LOW:
+			air_para->COD[7]|=0x60;
+			break;
+		case SPEED_MEDIUM:
+			air_para->COD[7]|=0x40;
+			break;
+		case SPEED_HIGH:
+			air_para->COD[7]|=0x20;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vTemper){
+		case TEMPER_16:
+			air_para->COD[9]|=0x00;
+			break;
+		case TEMPER_17:
+			air_para->COD[9]|=0x01;
+			break;
+		case TEMPER_18:
+			air_para->COD[9]|=0x02;
+			break;
+		case TEMPER_19:
+			air_para->COD[9]|=0x03;
+			break;
+		case TEMPER_20:
+			air_para->COD[9]|=0x04;
+			break;
+		case TEMPER_21:
+			air_para->COD[9]|=0x05;
+			break;
+		case TEMPER_22:
+			air_para->COD[9]|=0x06;
+			break;
+		case TEMPER_23:
+			air_para->COD[9]|=0x07;
+			break;
+		case TEMPER_24:
+			air_para->COD[9]|=0x08;
+			break;
+		case TEMPER_25:
+			air_para->COD[9]|=0x09;
+			break;
+		case TEMPER_26:
+			air_para->COD[9]|=0x0a;
+			break;
+		case TEMPER_27:
+			air_para->COD[9]|=0x0b;
+			break;
+		case TEMPER_28:
+			air_para->COD[9]|=0x0c;
+			break;
+		case TEMPER_29:
+			air_para->COD[9]|=0x0d;
+			break;
+		case TEMPER_30:
+			air_para->COD[9]|=0x0e;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vWind){
+		case WIND_AUTO:
+			air_para->COD[7]|=0x00;
+			break;
+		case WIND_MANUAL:
+			air_para->COD[7]|=0x10;
+			break;
+		default:
+			break;
+	}
+
+	switch(air_status->vManualWind){
+		case MANUAL_WIND_1:
+			air_para->COD[7]|=0x00;
+			break;
+		case MANUAL_WIND_2:
+			air_para->COD[7]|=0x04;
+			break;
+		case MANUAL_WIND_3:
+			air_para->COD[7]|=0x08;
+			break;
+		case MANUAL_WIND_4:
+			air_para->COD[7]|=0x00;
+			break;
+		default:
+			break;
+	}
+	air_para->COD[11]=0xd5;
+	air_para->COD[0]=~(air_para->COD[1]);
+	air_para->COD[2]=~(air_para->COD[3]);
+	air_para->COD[4]=~(air_para->COD[5]);
+	air_para->COD[6]=~(air_para->COD[7]);
+	air_para->COD[8]=~(air_para->COD[9]);
+	air_para->COD[10]=~(air_para->COD[11]);
+}
+/**************		����2 (����ң����)	***************/
+/*************     5575        **************/
+void AirRemote575(AIR_status *air_status , Air_para *air_para){
+	air_para->CARR=0x20;
+	air_para->STRU=0x00;
+	air_para->LDH_h=0x0b;
+	air_para->LDH_l=0x03;
+	air_para->LDL_h=0x05;
+	air_para->LDL_l=0x86;
+	air_para->HIG_h=0x00;
+	air_para->HIG_l=0xc1;
+	air_para->ZER_h=0x00;
+	air_para->ZER_l=0xa8;
+	air_para->ONE_h=0x01;
+	air_para->ONE_l=0xf0;
+	air_para->BIC0=72;
+
+	switch(air_status->vKey)
+	{
+		case POWER_KEY:
+			air_para->COD[0]|=0x80;
+			break;
+		case MODE_KEY:
+			air_para->COD[0]|=0x80;
+			break;
+		case SPEED_KEY:
+			air_para->COD[0]|=0x80;
+			break;
+		case TEMPER_INC_KEY:
+			air_para->COD[0]|=0x80;
+			break;
+		case TEMPER_DEC_KEY:
+			air_para->COD[0]|=0x80;
+			break;
+		case WIND_MANUAL_KEY:
+			air_para->COD[0]|=0xa0;
+			break;
+		case WIND_AUTO_KEY:
+			air_para->COD[0]|=0xa0;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vPower){
+		case POWER_OFF:
+			air_para->COD[0]|=0x00;
+			break;
+		case POWER_ON:
+			air_para->COD[0]|=0x08;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vMode){
+		case MODE_AUTO:
+			air_para->COD[0]|=0x00;
+			break;
+		case MODE_COLD:
+			air_para->COD[0]|=0x00;
+			break;
+		case MODE_WET:
+			air_para->COD[0]|=0x01;
+			break;
+		case MODE_WIND:
+			air_para->COD[0]|=0x02;
+			break;
+		case MODE_HOT:
+			air_para->COD[0]|=0x03;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vSpeed){
+	
+		case SPEED_AUTO:
+			air_para->COD[2]|=0x00;
+			break;
+			
+		case SPEED_LOW:
+			air_para->COD[2]|=0x03;
+			break;
+			
+		case SPEED_MEDIUM:
+			air_para->COD[2]|=0x02;
+			break;
+			
+		case SPEED_HIGH:
+			air_para->COD[2]|=0x01;
+			break;
+			
+		default:
+			break;
+	}
+	
+	switch(air_status->vTemper){
+		case TEMPER_16:
+			air_para->COD[1]=0x19;
+			break;
+		case TEMPER_17:
+			air_para->COD[1]=0x1a;
+			break;
+		case TEMPER_18:
+			air_para->COD[1]=0x1b;
+			break;
+		case TEMPER_19:
+			air_para->COD[1]=0x1c;
+			break;
+		case TEMPER_20:
+			air_para->COD[1]=0x1d;
+			break;
+		case TEMPER_21:
+			air_para->COD[1]=0x1e;
+			break;
+		case TEMPER_22:
+			air_para->COD[1]=0x1f;
+			break;
+		case TEMPER_23:
+			air_para->COD[1]=0x20;
+			break;
+		case TEMPER_24:
+			air_para->COD[1]=0x21;
+			break;
+		case TEMPER_25:
+			air_para->COD[1]=0x22;
+			break;
+		case TEMPER_26:
+			air_para->COD[1]=0x23;
+			break;
+		case TEMPER_27:
+			air_para->COD[1]=0x24;
+			break;
+		case TEMPER_28:
+			air_para->COD[1]=0x25;
+			break;
+		case TEMPER_29:
+			air_para->COD[1]=0x26;
+			break;
+		case TEMPER_30:
+			air_para->COD[1]=0x27;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vWind){
+		case WIND_AUTO:
+			air_para->COD[2]|=0x08;
+			break;
+		case WIND_MANUAL:
+			air_para->COD[2]|=0x00;
+			break;
+		default:
+			break;
+	}
+	
+	air_para->COD[3]=0x00;
+	air_para->COD[4]=0x30;
+	air_para->COD[5]=0x03;
+	air_para->COD[6]=0x00;
+	air_para->COD[7]=0x00;
+	air_para->COD[8]=0x0c;
+}
+
+
+
+
+/**************		����1	***************/
+/*************     5576        **************/
+void AirRemote576(AIR_status *air_status , Air_para *air_para){
+	air_para->CARR=0x20;
+	air_para->STRU=0x00;
+	air_para->LDH_h=0x0a;
+	air_para->LDH_l=0xf5;
+	air_para->LDL_h=0x05;
+	air_para->LDL_l=0x86;
+	air_para->HIG_h=0x00;
+	air_para->HIG_l=0xb1;
+	air_para->ZER_h=0x00;
+	air_para->ZER_l=0xb8;
+	air_para->ONE_h=0x01;
+	air_para->ONE_l=0xf0;
+	air_para->BIC0=40;
+	
+	switch(air_status->vKey)
+		{
+			case POWER_KEY:
+				air_para->COD[0]|=0x03;
+				break;
+			default:
+				air_para->COD[0]|=0x0c;
+				break;
+		}
+	
+	switch(air_status->vPower){
+		case POWER_OFF:
+			air_para->COD[0]|=0x00;
+			break;
+		case POWER_ON:
+			air_para->COD[0]|=0x80;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vMode){
+		case MODE_AUTO:
+			air_para->COD[0]|=0x40;
+			break;
+		case MODE_COLD:
+			air_para->COD[0]|=0x00;
+			break;
+		case MODE_WET:
+			air_para->COD[0]|=0x10;
+			break;
+		case MODE_WIND:
+			air_para->COD[0]|=0x20;
+			break;
+		case MODE_HOT:
+			air_para->COD[0]|=0x30;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vSpeed){
+		case SPEED_AUTO:
+			air_para->COD[1]|=0x00;
+			break;
+		case SPEED_LOW:
+			air_para->COD[1]|=0x30;
+			break;
+		case SPEED_MEDIUM:
+			air_para->COD[1]|=0x20;
+			break;
+		case SPEED_HIGH:
+			air_para->COD[1]|=0x10;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vTemper){
+		case TEMPER_16:
+			air_para->COD[1]|=0x01;
+			break;
+		case TEMPER_17:
+			air_para->COD[1]|=0x02;
+			break;
+		case TEMPER_18:
+			air_para->COD[1]|=0x03;
+			break;
+		case TEMPER_19:
+			air_para->COD[1]|=0x04;
+			break;
+		case TEMPER_20:
+			air_para->COD[1]|=0x05;
+			break;
+		case TEMPER_21:
+			air_para->COD[1]|=0x06;
+			break;
+		case TEMPER_22:
+			air_para->COD[1]|=0x07;
+			break;
+		case TEMPER_23:
+			air_para->COD[1]|=0x08;
+			break;
+		case TEMPER_24:
+			air_para->COD[1]|=0x09;
+			break;
+		case TEMPER_25:
+			air_para->COD[1]|=0x0a;
+			break;
+		case TEMPER_26:
+			air_para->COD[1]|=0x0b;
+			break;
+		case TEMPER_27:
+			air_para->COD[1]|=0x0c;
+			break;
+		case TEMPER_28:
+			air_para->COD[1]|=0x0d;
+			break;
+		case TEMPER_29:
+			air_para->COD[1]|=0x0e;
+			break;
+		case TEMPER_30:
+			air_para->COD[1]|=0x0f;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vWind){
+		case WIND_AUTO:
+			air_para->COD[1]|=0x80;
+			break;
+		case WIND_MANUAL:
+			air_para->COD[1]|=0x00;
+			break;
+		default:
+			break;
+	}
+	
+	air_para->COD[2]=0x0c;
+	air_para->COD[3]=0x10;
+	air_para->COD[4]=0xaa;
+}
+
+
+/**************		����1	***************/
+/*************     5577        **************/
+void AirRemote577(AIR_status *air_status , Air_para *air_para){
+	air_para->CARR=0x20;
+	air_para->STRU=0x00;
+	air_para->LDH_h=0x0a;
+	air_para->LDH_l=0xf5;
+	air_para->LDL_h=0x05;
+	air_para->LDL_l=0x86;
+	air_para->HIG_h=0x00;
+	air_para->HIG_l=0xb1;
+	air_para->ZER_h=0x00;
+	air_para->ZER_l=0xb8;
+	air_para->ONE_h=0x01;
+	air_para->ONE_l=0xf0;
+	air_para->BIC0=40;
+	
+	switch(air_status->vPower){
+		case POWER_OFF:
+			air_para->COD[0]|=0x00;
+			break;
+		case POWER_ON:
+			air_para->COD[0]|=0x08;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vMode){
+		case MODE_AUTO:
+			air_para->COD[0]|=0x04;
+			break;
+		case MODE_COLD:
+			air_para->COD[0]|=0x00;
+			break;
+		case MODE_WET:
+			air_para->COD[0]|=0x01;
+			break;
+		case MODE_WIND:
+			air_para->COD[0]|=0x02;
+			break;
+		case MODE_HOT:
+			air_para->COD[0]|=0x03;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vSpeed){
+	
+		case SPEED_AUTO:
+			air_para->COD[2]|=0x00;
+			break;
+			
+		case SPEED_LOW:
+			air_para->COD[2]|=0x03;
+			break;
+			
+		case SPEED_MEDIUM:
+			air_para->COD[2]|=0x02;
+			break;
+			
+		case SPEED_HIGH:
+			air_para->COD[2]|=0x01;
+			break;
+			
+		default:
+			break;
+	}
+	
+	switch(air_status->vTemper){
+		case TEMPER_16:
+			air_para->COD[1]=0x10;
+			break;
+		case TEMPER_17:
+			air_para->COD[1]=0x11;
+			break;
+		case TEMPER_18:
+			air_para->COD[1]=0x12;
+			break;
+		case TEMPER_19:
+			air_para->COD[1]=0x13;
+			break;
+		case TEMPER_20:
+			air_para->COD[1]=0x14;
+			break;
+		case TEMPER_21:
+			air_para->COD[1]=0x15;
+			break;
+		case TEMPER_22:
+			air_para->COD[1]=0x16;
+			break;
+		case TEMPER_23:
+			air_para->COD[1]=0x17;
+			break;
+		case TEMPER_24:
+			air_para->COD[1]=0x18;
+			break;
+		case TEMPER_25:
+			air_para->COD[1]=0x19;
+			break;
+		case TEMPER_26:
+			air_para->COD[1]=0x1a;
+			break;
+		case TEMPER_27:
+			air_para->COD[1]=0x1b;
+			break;
+		case TEMPER_28:
+			air_para->COD[1]=0x1c;
+			break;
+		case TEMPER_29:
+			air_para->COD[1]=0x1d;
+			break;
+		case TEMPER_30:
+			air_para->COD[1]=0x1e;
+			break;
+		default:
+			break;
+	}
+	
+	switch(air_status->vWind){
+		case WIND_AUTO:
+			air_para->COD[2]|=0x08;
+			break;
+		case WIND_MANUAL:
+			air_para->COD[2]|=0x00;
+			break;
+		default:
+			break;
+	}
+	
+	air_para->COD[3]=0x10;
+	air_para->COD[4]=0x0c;
+}
+
+
+/*************     5740        **************/
+//���1  (740)
+/*************     5740        **************/
+//���1
+ void Air_spc_dajin1(Air_para *air_para){
+	air_para->CARR=0x20;
+		air_para->STRU=0x02;
+	
+		air_para->LDH_h=0x06;
+		air_para->LDH_l=0x3c;
+	
+		air_para->LDL_h=0x02;
+		air_para->LDL_l=0xa9;
+	
+		air_para->HIG_h=0x00;
+		air_para->HIG_l=0x70;
+	
+		air_para->ZER_h=0x00;
+		air_para->ZER_l=0xe4;
+	
+		air_para->ONE_h=0x02;
+		air_para->ONE_l=0x38;
+	
+		air_para->STO_h=0x23;
+		air_para->STO_l=0xbe;
+	
+		air_para->BIC0=56;
+		air_para->BIC1=104;
+}
+//���6
+ void Air_spc_dajin6(Air_para *air_para){
+	air_para->CARR=0x20;
+		air_para->STRU=0x02;
+	
+		air_para->LDH_h=0x06;
+		air_para->LDH_l=0x3c;
+	
+		air_para->LDL_h=0x02;
+		air_para->LDL_l=0xa9;
+	
+		air_para->HIG_h=0x00;
+		air_para->HIG_l=0x70;
+	
+		air_para->ZER_h=0x00;
+		air_para->ZER_l=0xe4;
+	
+		air_para->ONE_h=0x02;
+		air_para->ONE_l=0x38;
+	
+		air_para->STO_h=0x23;
+		air_para->STO_l=0xbe;
+	
+		air_para->BIC0=56;
+		air_para->BIC1=120;
+}
+ void Air_spc_dajin03(Air_para *air_para){
+	air_para->CARR=0x20;
+		air_para->STRU=0x02;
+	
+		air_para->LDH_h=0x04;
+		air_para->LDH_l=0x52;
+	
+		air_para->LDL_h=0x01;
+		air_para->LDL_l=0xfa;
+	
+		air_para->HIG_h=0x00;
+		air_para->HIG_l=0xa2;
+	
+		air_para->ZER_h=0x00;
+		air_para->ZER_l=0x8f;
+	
+		air_para->ONE_h=0x01;
+		air_para->ONE_l=0x75;
+	
+		air_para->STO_h=0x21;
+		air_para->STO_l=0xdf;
+	
+		air_para->BIC0=64;
+		air_para->BIC1=152;
+}
+  void Air_spc_dajin02(Air_para *air_para){
+	 air_para->CARR=0x20;
+		 air_para->STRU=0x00;
+	 
+		 air_para->LDH_h=0x05;
+		 air_para->LDH_l=0xd9;
+	 
+		 air_para->LDL_h=0x02;
+		 air_para->LDL_l=0xe5;
+	 
+		 air_para->HIG_h=0x00;
+		 air_para->HIG_l=0x7b;
+	 
+		 air_para->ZER_h=0x00;
+		 air_para->ZER_l=0xfa;
+	 
+		 air_para->ONE_h=0x01;
+		 air_para->ONE_l=0xdd;
+	 
+		 air_para->BIC0=56;
+ }
+
+
+
+
+void AirRemote740(AIR_status *air_status , Air_para *air_para){
+	
+		Air_spc_dajin1(air_para);
+
+		memcpy(air_para->COD,air_dakin1_data,sizeof(air_dakin1_data));
+		air_para->COD[12] |=air_dakin1_power[air_status->vPower];
+		air_para->COD[12] |=air_dakin1_mode[air_status->vMode];
+		air_para->COD[16] =air_dakin1_temp[air_status->vTemper];
+		air_para->COD[17] =air_dakin1_speed[air_status->vSpeed];
+
+		air_para->COD[19] = air_para->COD[7] +air_para->COD[8]+air_para->COD[9] +air_para->COD[10] +air_para->COD[11] 
+			+air_para->COD[12] +air_para->COD[13] +air_para->COD[14] +air_para->COD[15] +air_para->COD[16] +air_para->COD[17]
+			+air_para->COD[18];
+
+}
+
+void AirRemote741(AIR_status *air_status , Air_para *air_para){
+
+		Air_spc_dajin1(air_para);
+		memcpy(air_para->COD,air_dakin2_data,sizeof(air_dakin2_data));
+		air_para->COD[12] |=air_dakin1_power[air_status->vPower];
+		air_para->COD[12] |=air_dakin1_mode[air_status->vMode];
+		air_para->COD[16] =air_dakin1_temp[air_status->vTemper];
+		air_para->COD[17] =air_dakin1_speed[air_status->vSpeed];
+
+		air_para->COD[19] = air_para->COD[7] +air_para->COD[8]+air_para->COD[9] +air_para->COD[10] +air_para->COD[11] 
+			+air_para->COD[12] +air_para->COD[13] +air_para->COD[14] +air_para->COD[15] +air_para->COD[16] +air_para->COD[17]
+			+air_para->COD[18];
+
+		
+}
+
+void AirRemote744(AIR_status *air_status , Air_para *air_para){
+		int size;
+		
+		Air_spc_dajin1(air_para);
+		memcpy(air_para->COD,air_dakin3_data,sizeof(air_dakin3_data));
+		air_para->COD[12] |=air_dakin1_power[air_status->vPower];
+		air_para->COD[12] |=air_dakin1_mode[air_status->vMode];
+		air_para->COD[16] =air_dakin1_temp[air_status->vTemper];
+		air_para->COD[17] =air_dakin1_speed[air_status->vSpeed];
+		
+
+		air_para->COD[19] = air_para->COD[7] +air_para->COD[8]+air_para->COD[9] +air_para->COD[10] +air_para->COD[11] 
+			+air_para->COD[12] +air_para->COD[13] +air_para->COD[14] +air_para->COD[15] +air_para->COD[16] +air_para->COD[17]
+			+air_para->COD[18];
+
+		
+}
+
+void AirRemote748(AIR_status *air_status , Air_para *air_para){
+
+		int size;
+		
+		Air_spc_dajin6(air_para);
+	
+	//	Air_data_initial(air_para,air_dakin3_data,20);
+		memcpy(air_para->COD,air_dakin6_data,sizeof(air_dakin6_data));
+		air_para->COD[13] =air_dakin6_key[air_status->vKey];
+		air_para->COD[14] |=air_dakin1_power[air_status->vPower];
+		air_para->COD[14] |=air_dakin6_mode[air_status->vMode];
+		air_para->COD[17] =air_dakin1_temp[air_status->vTemper];
+		air_para->COD[18] |=air_dakin6_speed[air_status->vSpeed];
+		air_para->COD[18] |=air_dakin6_wind[air_status->vManualWind];	
+		
+		air_para->COD[21] = air_para->COD[7] +air_para->COD[8]+air_para->COD[9] +air_para->COD[10] +air_para->COD[11] 
+			+air_para->COD[12] +air_para->COD[13] +air_para->COD[14] +air_para->COD[15] +air_para->COD[16] +air_para->COD[17]
+			+air_para->COD[18]+air_para->COD[19]+air_para->COD[20]+air_para->COD[21]-1;
+
+		
+}
+
+void AirRemote752(AIR_status *air_status , Air_para *air_para){
+
+	
+		Air_spc_dajin03(air_para);
+	//	Air_data_initial(air_para,air_dakin3_data,20);
+		memcpy(air_para->COD,air_dakin03_data,sizeof(air_dakin03_data));
+	
+		air_para->COD[13] |=air_dakin1_power[air_status->vPower];
+		air_para->COD[13] |=air_dakin03_mode[air_status->vMode];
+		air_para->COD[14] =air_dakin03_temp[air_status->vTemper];
+		air_para->COD[16] =air_dakin03_speed[air_status->vSpeed];
+		air_para->COD[17] =air_dakin03_wind[air_status->vManualWind];	
+		
+		air_para->COD[26] = air_para->COD[8]+air_para->COD[9] +air_para->COD[10] +air_para->COD[11] 
+			+air_para->COD[12] +air_para->COD[13] +air_para->COD[14] +air_para->COD[15] +air_para->COD[16] +air_para->COD[17]
+			+air_para->COD[18]+air_para->COD[19]+air_para->COD[20]+air_para->COD[21]+air_para->COD[22]+air_para->COD[23]
+			+air_para->COD[24]+air_para->COD[25];
+
+		
+}
+
+void AirRemote753(AIR_status *air_status , Air_para *air_para){
+
+	int i;
+	char temp;
+		Air_spc_dajin02(air_para);
+	//	Air_data_initial(air_para,air_dakin3_data,20);
+		memcpy(air_para->COD,air_dakin02_data,sizeof(air_dakin02_data));
+	
+	
+		air_para->COD[1] |=air_dakin02_mode[air_status->vMode];
+		if (air_status->vPower==POWER_OFF){
+		air_para->COD[1] -=0xc0;	
+			}
+		air_para->COD[4] =air_dakin02_temp[air_status->vTemper];
+		air_para->COD[5] =air_dakin02_speed[air_status->vSpeed];
+		if (air_status->vManualWind==WIND_MANUAL){
+		air_para->COD[5] =air_dakin02_wind[air_status->vManualWind]+air_para->COD[5];	
+		
+			}
+		else{
+			air_para->COD[5] =0x1c+air_para->COD[5];	
+			}
+		temp = air_para->COD[1];
+		temp = (temp>>4)&0x0f;
+		air_para->COD[6] += temp;
+		temp = air_para->COD[1];
+		temp = temp&0x0f;
+		air_para->COD[6] += temp;
+		temp = air_para->COD[4];
+		temp = (temp>>4)&0x0f;
+		air_para->COD[6] += temp;
+		temp = air_para->COD[4];
+		temp = temp&0x0f;
+		air_para->COD[6] += temp;
+		temp = air_para->COD[5];
+		temp = (temp>>4)&0x0f;
+		air_para->COD[6] += temp;
+		temp = air_para->COD[5];
+		temp = temp&0x0f;
+		air_para->COD[6] += temp;
+		
+	     air_para->COD[6] = (~air_para->COD[6] )&0x0f;
+		 for (i=0;i<7;i++){
+		 air_para->COD[i] =	HiBitFst(air_para->COD[i]);
+		 LOGD(" COD[%d]  =====> 0X%X  ",i,air_para->COD[i]);
+		 	}
+		
+}
+
+
+#define SPECIAL_Airet4003	0x00
+#define LOGIC_Airet4003	0x01
+#define END_Airet4003	0x02
+
+
+void AirRemote900(AIR_status *air_status, unsigned char *vAirBuffer)
+{
+	memset(vAirBuffer,0,128);
+
+	switch(air_status->vMode){
+		case MODE_AUTO:
+			vAirBuffer[30]=0x00;
+			break;
+
+		case MODE_COLD:
+			vAirBuffer[30]=0x01;
+			break;
+
+		case MODE_WET:
+			vAirBuffer[30]=0x02;
+			break;
+
+		case MODE_WIND:
+			vAirBuffer[30]=0x03;
+			break;
+
+		case MODE_HOT:
+			vAirBuffer[30]=0x04;
+			break;
+
+		default:
+			break;
+	}
+
+
+	switch(air_status->vWind){
+
+		case WIND_AUTO:
+			vAirBuffer[30]|= 0x40;
+			vAirBuffer[41]= 0x01;
+			break;
+
+		case WIND_MANUAL:
+			switch(air_status->vManualWind){
+				case MANUAL_WIND_1:
+					vAirBuffer[41]=0x02;
+					break;
+				case MANUAL_WIND_2:
+					vAirBuffer[41]=0x03;
+					break;
+				case MANUAL_WIND_3:
+					vAirBuffer[41]=0x04;
+					break;
+				case MANUAL_WIND_4:
+					vAirBuffer[41]=0x05;
+					break;
+				default:
+					break;
+			}
+			break;
+
+		default:
+			break;
+	}
+
+
+	switch(air_status->vSpeed){
+
+		case SPEED_AUTO:
+			vAirBuffer[30]|=0x00;
+			vAirBuffer[65]|=0x00;
+			break;
+
+		case SPEED_LOW:
+			vAirBuffer[30]|=0x10;
+			vAirBuffer[65]|=0x10;
+			break;
+
+		case SPEED_MEDIUM:
+			vAirBuffer[30]|=0x20;
+			vAirBuffer[65]|=0x20;
+			break;
+
+		case SPEED_HIGH:
+			vAirBuffer[30]|=0x30;
+			vAirBuffer[65]|=0x30;
+			break;
+
+		default:
+			break;
+	}
+
+
+	switch(air_status->vPower){
+
+		case POWER_ON:
+			vAirBuffer[30]|=0x08;
+			break;
+
+		default:
+			break;
+	}
+
+	switch(air_status->vTemper){
+
+		case TEMPER_16:
+			vAirBuffer[31]=0x00;
+			break;
+
+		case TEMPER_17:
+			vAirBuffer[31]=0x01;
+			break;
+
+		case TEMPER_18:
+			vAirBuffer[31]=0x02;
+			break;
+
+		case TEMPER_19:
+			vAirBuffer[31]=0x03;
+			break;
+
+		case TEMPER_20:
+			vAirBuffer[31]=0x04;
+			break;
+
+		case TEMPER_21:
+			vAirBuffer[31]=0x05;
+			break;
+
+		case TEMPER_22:
+			vAirBuffer[31]=0x06;
+			break;
+
+		case TEMPER_23:
+			vAirBuffer[31]=0x07;
+			break;
+
+		case TEMPER_24:
+			vAirBuffer[31]=0x08;
+			break;
+
+		case TEMPER_25:
+			vAirBuffer[31]=0x09;
+			break;
+
+		case TEMPER_26:
+			vAirBuffer[31]=0x0a;
+			break;
+
+		case TEMPER_27:
+			vAirBuffer[31]=0x0b;
+			break;
+
+		case TEMPER_28:
+			vAirBuffer[31]=0x0c;
+			break;
+
+		case TEMPER_29:
+			vAirBuffer[31]=0x0d;
+			break;
+
+		case TEMPER_30:
+			vAirBuffer[31]=0x0e;
+			break;
+
+		default:
+			break;
+	}
+
+
+	vAirBuffer[0]=0x7e;
+	vAirBuffer[1]=0x20;
+	vAirBuffer[2]=0x00;
+	vAirBuffer[3]=0x98;
+
+	vAirBuffer[4]=0x80;
+	vAirBuffer[5]=0xcb;
+	vAirBuffer[6]=0x00;
+	vAirBuffer[7]=0xaf;
+
+	vAirBuffer[8]=0x80;
+	vAirBuffer[9]=0xcb;
+	vAirBuffer[10]=0x02;
+	vAirBuffer[11]=0x06;
+
+	vAirBuffer[12]=0x0a;
+	vAirBuffer[13]=0xfc;
+	vAirBuffer[14]=0x05;
+	vAirBuffer[15]=0x7e;
+
+	vAirBuffer[16]=0x00;
+	vAirBuffer[17]=0xcb;
+	vAirBuffer[18]=0x18;
+	vAirBuffer[19]=0x6a;
+
+	vAirBuffer[20]=0x00;
+	vAirBuffer[21]=0xcb;
+	vAirBuffer[22]=0x30;
+	vAirBuffer[23]=0xd4;
+
+	vAirBuffer[24]=SPECIAL_Airet4003;
+	vAirBuffer[25]=1;
+	vAirBuffer[26]=0<<2;
+
+	vAirBuffer[27]=LOGIC_Airet4003;
+	vAirBuffer[28]=4;
+	vAirBuffer[29]=3;
+	//vAirBuffer[30]=;
+	//vAirBuffer[31]=;
+	vAirBuffer[32]=0x20;
+	vAirBuffer[33]=0x50;
+	vAirBuffer[34]=0x02;
+
+	vAirBuffer[35]=SPECIAL_Airet4003;
+	vAirBuffer[36]=1;
+	vAirBuffer[37]=1<<2;
+
+	vAirBuffer[38]=LOGIC_Airet4003;
+	vAirBuffer[39]=4;
+	vAirBuffer[40]=0;
+	//vAirBuffer[41]=;
+	vAirBuffer[42]=0x20;
+	vAirBuffer[43]=0x00;
+	//vAirBuffer[44]=;
+	vAirBuffer[44]=vAirBuffer[31]+vAirBuffer[30];
+	vAirBuffer[44]-=4;
+	vAirBuffer[44]+=(vAirBuffer[41]>>4);
+	vAirBuffer[44]<<=4;
+
+
+	vAirBuffer[45]=SPECIAL_Airet4003;
+	vAirBuffer[46]=2;
+	vAirBuffer[47]=2<<2;
+	vAirBuffer[48]=0<<2;
+
+	vAirBuffer[49]=LOGIC_Airet4003;
+	vAirBuffer[50]=4;
+	vAirBuffer[51]=3;
+	vAirBuffer[52]=vAirBuffer[30];
+	vAirBuffer[53]=vAirBuffer[31];
+	vAirBuffer[54]=0x20;
+	vAirBuffer[55]=0x70;
+	vAirBuffer[56]=0x02;
+
+	vAirBuffer[57]=SPECIAL_Airet4003;
+	vAirBuffer[58]=1;
+	vAirBuffer[59]=1<<2;
+
+	vAirBuffer[60]=LOGIC_Airet4003;
+	vAirBuffer[61]=4;
+	vAirBuffer[62]=0;
+	vAirBuffer[63]=0x00;
+	vAirBuffer[64]=0x00;
+	//vAirBuffer[65]=0x10;
+	//vAirBuffer[66]=;
+	vAirBuffer[66]=vAirBuffer[53]+(vAirBuffer[52]&0x0f);
+	vAirBuffer[66]-=6;
+	vAirBuffer[66]+=(vAirBuffer[65]>>4);
+	vAirBuffer[66]<<=4;
+
+	vAirBuffer[67]=SPECIAL_Airet4003;
+	vAirBuffer[68]=1;
+	vAirBuffer[69]=1<<2;
+
+	vAirBuffer[70]=END_Airet4003;
+
+
+
+
+}
+
+unsigned char vAirBuffer6122G[]={0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x20,0x0a,0xfc,0x05,0x7e,0x00,0xaf,0x00,0xaf,0x02,0x0d,0x02,0xbf,0x00,0x00,0x00,0x00,0x32,0x6a,0x73,0x4c};
+
+/**************		�¿�˹6121G	***************/
+/*************     5901        **************/
+void AirRemote901(AIR_status *air_status, unsigned char *vAirBuffer)
+{
+	memset(vAirBuffer,0,128);
+	memcpy(vAirBuffer,vAirBuffer6122G,sizeof(vAirBuffer6122G));
+	vAirBuffer[1]=0x01;
+	vAirBuffer[2]=0x7e;
+	switch(air_status->vKey)
+	{
+		case POWER_KEY:
+			vAirBuffer[3]=0x08;
+			break;
+		case MODE_KEY:
+		
+		switch(air_status->vMode)
+			{
+			case MODE_COLD:
+			vAirBuffer[3]=0x12;
+			break;
+			case MODE_WET:
+			vAirBuffer[3]=0x11;
+			break;
+			case MODE_HOT:
+			vAirBuffer[3]=0x10;
+			break;
+			default:
+			break;
+			}
+		
+		break;
+		case SPEED_KEY:
+			vAirBuffer[3]=0x04;
+			break;
+		case TEMPER_INC_KEY:
+			vAirBuffer[3]=0x0d;
+			break;
+		case TEMPER_DEC_KEY:
+			vAirBuffer[3]=0x05;
+			break;
+		case WIND_MANUAL_KEY:
+			vAirBuffer[3]=0x0c;
+			break;
+		//case WIND_AUTO_KEY:
+		//	vAirBuffer[3]=0x04;
+		//	break;
+		default:
+			break;
+	}
+	
+
+}
+
+/**************	����6121G	***************/
+/*************     5902    (173)    **************/
+void AirRemote902(AIR_status *air_status, unsigned char *vAirBuffer)
+{
+	memset(vAirBuffer,0,128);
+	memcpy(vAirBuffer,vAirBuffer6122G,sizeof(vAirBuffer6122G));
+
+	vAirBuffer[1]=0x08;
+	vAirBuffer[2]=0xf7;
+
+	switch(air_status->vKey)
+	{
+		case POWER_KEY:
+			vAirBuffer[3]=0x38;
+			break;
+		case MODE_KEY:
+			vAirBuffer[3]=0xb0;
+			break;
+		case SPEED_KEY:
+			vAirBuffer[3]=0x30;
+			break;
+		case TEMPER_INC_KEY:
+			vAirBuffer[3]=0x28;
+			break;
+		case TEMPER_DEC_KEY:
+			vAirBuffer[3]=0x18;
+			break;
+		case WIND_MANUAL_KEY:
+			vAirBuffer[3]=0x08;
+			break;
+		default:
+			break;
+	}
+}
 
 
 
@@ -22884,9 +24062,39 @@ unsigned char HandleAirRemote(AIR_status air_status , unsigned char *vAirBuffer)
 	unsigned char i;
 
 	Air_para *air_para;
+
+	if(air_status.nAirCode>5899)
+	{
+		switch(air_status.nAirCode)
+		{
+			case 5900:
+			//	LOGD("code ----> %d /n ",5900);
+				AirRemote900(&air_status, vAirBuffer);
+				for (i=0;i<70;i++){
+			//		LOGD("vAirBuffer[%d] ----> 0x%x /n ",i,vAirBuffer[i]);
+				}
+				break;
+			
+			case 5901:
+				AirRemote901(&air_status, vAirBuffer);
+				break;
+			case 5902:
+				AirRemote902(&air_status, vAirBuffer);
+				break;
+
+			default:
+				return 0xff;
+		}
+
+		return 0x00;
+	}
+
+
 	
 	if((air_para=malloc(82))==NULL)return 0xff;
 	
+
+
 	memset(air_para, 0, 82);
 
 	switch(air_status.nAirCode){
@@ -23473,6 +24681,45 @@ unsigned char HandleAirRemote(AIR_status air_status , unsigned char *vAirBuffer)
 		AirRemote571(&air_status,air_para);
 		break;
 		
+	case 5572:
+		AirRemote572(&air_status,air_para);
+		break;
+
+	case 5573:
+		AirRemote573(&air_status,air_para);
+		break;
+
+	case 5574:
+		AirRemote574(&air_status,air_para);
+		break;
+	case 5575:
+		AirRemote575(&air_status,air_para);
+		break;
+	case 5576:
+		AirRemote576(&air_status,air_para);
+		break;
+	case 5577:
+		AirRemote577(&air_status,air_para);
+		break;
+	case 5740:
+		AirRemote740(&air_status,air_para);
+		break;
+	case 5741:
+		AirRemote741(&air_status,air_para);
+		break;
+	case 5744:
+		AirRemote744(&air_status,air_para);
+		break;
+	case 5748:
+		AirRemote748(&air_status,air_para);
+		break;
+	case 5752:
+		AirRemote752(&air_status,air_para);
+		break;
+	case 5753:
+		AirRemote753(&air_status,air_para);
+		break;
+
 	default:
 		free(air_para);
 		return 0xff;
@@ -23513,7 +24760,22 @@ unsigned char HandleAirRemote(AIR_status air_status , unsigned char *vAirBuffer)
 	for(i=0;i<64;i++){
 		vAirBuffer[29+i]=air_para->COD[i];
 	}
-
+#ifdef DEBUG
+		LOGD("air_para->LDH_h  ----->0x%x  ",air_para->LDH_h);
+		LOGD("air_para->LDH_l  ----->0x%x  ",air_para->LDH_l);
+		LOGD("air_para->LDL_h  ----->0x%x  ",air_para->LDL_h);
+		LOGD("air_para->LDL_l  ----->0x%x  ",air_para->LDL_l);
+		LOGD("air_para->HIG_h  ----->0x%x  ",air_para->HIG_h);
+		LOGD("air_para->HIG_l  ----->0x%x  ",air_para->HIG_l);
+		LOGD("air_para->ZER_h  ----->0x%x  ",air_para->ZER_h);
+		LOGD("air_para->ZER_l  ----->0x%x  ",air_para->ZER_l);
+		LOGD("air_para->ONE_h  ----->0x%x  ",air_para->ONE_h);
+		LOGD("air_para->ONE_l  ----->0x%x  ",air_para->ONE_l);
+		LOGD("air_para->STO_h  ----->0x%x  ",air_para->STO_h);
+		LOGD("air_para->STO_l  ----->0x%x  ",air_para->STO_l);
+		LOGD("air_para->BIC0  ----->0x%x  ",air_para->BIC0);
+		LOGD("air_para->BIC1  ----->0x%x  ",air_para->BIC1);
+#endif
 	free(air_para);
 
 	return 0x00;
