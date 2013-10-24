@@ -174,9 +174,11 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 		        	device = Value.rmtDev;
 					device.setId(id);
 					Log.v(TAG, "update id --->"+ id);
-					RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,true);
-					rmtAdapter.updateItem(device, id);
-					rmtAdapter.notifyDataSetChanged();
+					
+						RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,true);
+						rmtAdapter.updateItem(device, id);
+						rmtAdapter.notifyDataSetChanged();
+						
 			        }
 			break;
 			

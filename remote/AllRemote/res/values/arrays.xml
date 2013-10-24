@@ -104,28 +104,28 @@
 　　    </string-array>  
     <!-- fan -->
  <string-array name="fan_key">
-    <item>fan_power</item>
-    <item>fan_mode</item>
-    <item>fan_li</item>
-    <item>fan_speed</item>
-    <item>fan_key0</item>
-    <item>fan_speedlow</item>
-    <item>fan_speedmiddle</item>
-    <item>fan_speedhight</item>
-    <item>fan_sleep</item>
-    <item>fan_freq</item>
-    <item>fan_cool</item>
-    <item>fan_timer</item>
-    <item>fan_light</item>
-    <item>fan_key1</item>
-    <item>fan_key2</item>
-    <item>fan_key3</item>
-    <item>fan_key4</item>
-    <item>fan_key5</item>
-    <item>fan_key6</item>
-    <item>fan_key7</item>
-    <item>fan_key8</item>
-    <item>fan_key9</item>
+    <item>fans_power</item>
+    <item>fans_mode</item>
+    <item>fans_li</item>
+    <item>fans_speed</item>
+    <item>fans_key0</item>
+    <item>fans_speedlow</item>
+    <item>fans_speedmiddle</item>
+    <item>fans_speedhight</item>
+    <item>fans_sleep</item>
+    <item>fans_freq</item>
+    <item>fans_cool</item>
+    <item>fans_timer</item>
+    <item>fans_light</item>
+    <item>fans_key1</item>
+    <item>fans_key2</item>
+    <item>fans_key3</item>
+    <item>fans_key4</item>
+    <item>fans_key5</item>
+    <item>fans_key6</item>
+    <item>fans_key7</item>
+    <item>fans_key8</item>
+    <item>fans_key9</item>
 　　    </string-array>  
    
     <!-- pjt -->

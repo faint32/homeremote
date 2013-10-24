@@ -263,23 +263,23 @@ public class RemoteDB extends SQLiteOpenHelper {
 
 	public RemoteData getKeyData(int _type,String _index){
 		RemoteData rmtData = new RemoteData();
-		int keyColumn = 0;
+		int keyColumn = 4;
 		switch (_type){
 		case Value.DeviceType.TYPE_TV:
-			keyColumn = 6;
+			keyColumn = 10;
 			break;
 		case Value.DeviceType.TYPE_DVD:
-			keyColumn = 0;
-			break;
-		case Value.DeviceType.TYPE_STB:
 			keyColumn = 4;
 			break;
+		case Value.DeviceType.TYPE_STB:
+			keyColumn = 10;
+			break;
 		case Value.DeviceType.TYPE_FAN:
-			keyColumn = 0;
+			keyColumn = 4;
 			break;
 	
 		case Value.DeviceType.TYPE_PJT:
-			keyColumn = 0;
+			keyColumn = 4;
 			break;
 
 		default:
@@ -519,6 +519,9 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return rmtDts;
 		
 	}
+	
+	
+	
 
 	/**
 	 * compareListValue compare arraylist all members 

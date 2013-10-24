@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 
 
@@ -377,6 +378,27 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	      values.put(AIR_WDIR,Value.airData.getmWindDir());
 	      values.put(AIR_WCOUNT,Value.airData.getmWindCount());
 		 myUserDB.update(AIRDATA, values,"device =? ",new String[]{String.valueOf(device)}); 
+	}
+	
+	public Boolean isAirDeviceExist(String device){
+		Cursor c = myUserDB.query(AIRDATA, null, null ,null, null, null, null);
+		
+		if (c.moveToFirst()== false){
+		return false;
+		}
+		do{
+			String dev = c.getString(1);
+			Log.v(TAG, "airdevice ---->"+dev );
+		    if (device == dev){
+		    	c.close();
+		    	return true;
+		    }
+			
+		}while(c.moveToNext());
+		
+		c.close(); 
+	
+		return false;
 	}
 	
 	

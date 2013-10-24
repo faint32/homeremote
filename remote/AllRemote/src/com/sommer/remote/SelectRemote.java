@@ -403,6 +403,7 @@ void sendTestCode(int count){
 			case 5:
 				mType = Value.DeviceType.TYPE_AIR;
 				mTypeName = Value.RemoteType[mType];
+				Value.rmtDev.setType(mType);
 				ArrayAdapter<String> air_adapter =new  
 				ArrayAdapter<String>(this, R.layout.option_item, getBrand(mTypeName));
 

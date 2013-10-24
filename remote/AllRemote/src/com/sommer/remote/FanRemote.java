@@ -188,70 +188,70 @@ public class FanRemote extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 		
 		case R.id.fan_key0:
-			Value.currentKey = "fan_key0";
+			Value.currentKey = "fans_key0";
 			break;
 		case R.id.fan_key1:
-			Value.currentKey = "fan_key1";
+			Value.currentKey = "fans_key1";
 			break;
 		case R.id.fan_key2:
-			Value.currentKey = "fan_key2";
+			Value.currentKey = "fans_key2";
 			break;
 		case R.id.fan_key3:
-			Value.currentKey = "fan_key3";
+			Value.currentKey = "fans_key3";
 			break;
 		case R.id.fan_key4:
-			Value.currentKey = "fan_key4";
+			Value.currentKey = "fans_key4";
 			break;
 		case R.id.fan_key5:
-			Value.currentKey = "fan_key5";
+			Value.currentKey = "fans_key5";
 			break;
 		case R.id.fan_key6:
-			Value.currentKey = "fan_key6";
+			Value.currentKey = "fans_key6";
 			break;
 		case R.id.fan_key7:
-			Value.currentKey = "fan_key7";
+			Value.currentKey = "fans_key7";
 			break;
 		case R.id.fan_key8:
-			Value.currentKey = "fan_key8";
+			Value.currentKey = "fans_key8";
 			break;
 		case R.id.fan_key9:
-			Value.currentKey = "fan_key9";
+			Value.currentKey = "fans_key9";
 			break;
 		case R.id.fan_sleep:
-			Value.currentKey = "fan_sleep";
+			Value.currentKey = "fans_sleep";
 			break;
 		case R.id.fan_power:
-			Value.currentKey = "fan_power";
+			Value.currentKey = "fans_power";
 			break;
 		case R.id.fan_mode:
-			Value.currentKey = "fan_mode";
+			Value.currentKey = "fans_mode";
 			break;
 		case R.id.fan_cool:
-			Value.currentKey = "fan_cool";
+			Value.currentKey = "fans_cool";
 			break;
 		case R.id.fan_li:
-			Value.currentKey = "fan_li";
+			Value.currentKey = "fans_li";
 			break;
 		case R.id.fan_timer:
-			Value.currentKey = "fan_timer";
+			Value.currentKey = "fans_timer";
 			break;
 		case R.id.fan_speed:
-			Value.currentKey = "fan_speed";
+			Value.currentKey = "fans_speed";
 			break;
 		case R.id.fan_light:
-			Value.currentKey = "fan_light";
+			Value.currentKey = "fans_light";
 			break;
 		case R.id.fan_speedlow:
-			Value.currentKey = "fan_speedlow";
+			Value.currentKey = "fans_speedlow";
 			break;
 		case R.id.fan_speedmiddle:
-			Value.currentKey = "fan_speedmiddle";
+			Value.currentKey = "fans_speedmiddle";
 			break;
 		case R.id.fan_speedhight:
-			Value.currentKey = "fan_speedhight";
+			Value.currentKey = "fans_speedhight";
 			break;
 		case R.id.fan_freq:
-			Value.currentKey = "fan_freq";
+			Value.currentKey = "fans_freq";
 			break;
 		default:
 			Value.currentKey = null;

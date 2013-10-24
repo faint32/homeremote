@@ -1161,6 +1161,28 @@ Java_com_sommer_ircore_RemoteCore_Encode( JNIEnv*  env,jobject jobj,jbyteArray d
 
 
 		}
+		////////////////////////////////////////////////////////////////////////
+				if (strcmp(type,T12AAB)==0){
+					#ifdef DEBUG
+					LOGD("code type ======= T12AAB \n ");
+					#endif
+
+					length =  sizeof(T12AAB) / sizeof(char);
+
+					for (i=0;i<length;i++){
+					sendCode[i]= T12AAB_FORM[i];
+								//	LOGD("sendData %d ----> 0x%x \n ",i,sendCode[i]);
+					}
+					sendCode[1]= *sendData;
+					sendData++;
+					sendCode[2]= *sendData;
+					sendData++;
+					sendCode[3]= *sendData;
+					sendData++;
+					sendCode[4]= *sendData;
+
+
+				}
 ////////////////////////////////////////////////////////////////////////
 		if (strcmp(type,P36AAE)==0){
 			#ifdef DEBUG

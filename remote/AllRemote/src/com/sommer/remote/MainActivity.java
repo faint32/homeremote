@@ -5,7 +5,7 @@ package com.sommer.remote;
 
 
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 
@@ -20,11 +20,12 @@ import com.sommer.ircore.KeyTreate;
 import com.sommer.ircore.RemoteCore;
 import com.sommer.ircore.RemoteOut;
 import com.sommer.ui.QuitDialog;
-import com.sommer.utils.MyAppInfo;
+
 import com.sommer.utils.RemoteDB;
 import com.sommer.utils.UserDB;
 
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Vibrator;
@@ -35,7 +36,7 @@ import android.os.Handler;
 
 import android.annotation.SuppressLint;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 
@@ -65,13 +66,13 @@ import android.view.LayoutInflater;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+
 import android.view.View.OnTouchListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
-import android.widget.Button;
+
 import android.widget.HorizontalScrollView;
 import android.widget.ListView;
 import android.widget.SlidingDrawer;
@@ -130,14 +131,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		Value.screenHeight = screenHeight;
 		Value.screenWidth  = screenWidth;
 		mHs = (HorizontalScrollView) findViewById(R.id.hs);
-//		Value.keyRemoteTab = new  HashMap<String, String> ();
-//		mBt_menu = (Button) findViewById(R.id.btn_menu);
-//		mBt_menu.setOnClickListener(new OnClickListener() {			
-//		public void onClick(View v) {
-//			menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
-//			menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.main_view), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
-//			}
-//		});
+		
+		AudioManager am=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+		am.adjustStreamVolume (AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
 		
 		menuLoading();
 		

@@ -5,7 +5,7 @@ package com.sommer.remote;
 
 
 
-import com.sommer.adapt.FuncationButton;
+
 import com.sommer.allremote.R;
 
 import com.sommer.data.Value;

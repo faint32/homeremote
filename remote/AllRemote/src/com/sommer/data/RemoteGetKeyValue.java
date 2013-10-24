@@ -3,6 +3,8 @@ package com.sommer.data;
 
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -35,8 +37,10 @@ public class RemoteGetKeyValue {
 			}
 		mUsrDB.open();
 		int dType=rmtDev.getType();
+		Log.v(TAG, "new type ---->"+ dType);
 		if (dType!=Value.DeviceType.TYPE_AIR){
 		String index = rmtDev.getCode();
+		
 		codeDatas=mRmtDB.getRemoteData(dType,index);
 		}
 		if(isUpdate){
@@ -92,7 +96,13 @@ public class RemoteGetKeyValue {
 			}
 			break;	
 		case Value.DeviceType.TYPE_AIR:
-			
+			if (mUsrDB.isAirDeviceExist(String.valueOf(Value.airData.getDevice()))){
+				Log.v(TAG, "airdata is exist");
+				mUsrDB.updateAirData(Value.airData.getDevice());
+			}else {
+				Log.v(TAG, "airdata is new");
+				mUsrDB.addAirData(Value.airData.getDevice());	
+			}
 			
 			break;	
 		
