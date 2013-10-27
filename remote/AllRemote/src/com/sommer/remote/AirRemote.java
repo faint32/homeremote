@@ -3,10 +3,11 @@ package com.sommer.remote;
 
 
 
+import com.etek.ircomm.RemoteCore;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.Value;
-import com.sommer.ircore.RemoteCore;
+
 import com.sommer.ircore.RemoteOut;
 import com.sommer.utils.MyAppInfo;
 import com.sommer.utils.UserDB;

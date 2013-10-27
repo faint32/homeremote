@@ -9,6 +9,7 @@ package com.sommer.remote;
 import java.util.ArrayList;
 
 
+import com.etek.ircomm.RemoteCore;
 import com.sommer.adapt.MenuAdapter;
 import com.sommer.adapt.MenuList;
 import com.sommer.adapt.SelectPicPopupWindow;
@@ -17,7 +18,7 @@ import com.sommer.allremote.R;
 import com.sommer.data.RemoteDevice;
 import com.sommer.data.Value;
 import com.sommer.ircore.KeyTreate;
-import com.sommer.ircore.RemoteCore;
+
 import com.sommer.ircore.RemoteOut;
 import com.sommer.ui.QuitDialog;
 

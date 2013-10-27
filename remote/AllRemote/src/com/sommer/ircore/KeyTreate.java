@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.etek.ircomm.RemoteCore;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 

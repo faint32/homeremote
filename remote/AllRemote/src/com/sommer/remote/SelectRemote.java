@@ -3,12 +3,13 @@ package com.sommer.remote;
 
 import java.util.ArrayList;
 
+import com.etek.ircomm.RemoteCore;
 import com.sommer.adapt.DeviceAdapter;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
-import com.sommer.ircore.RemoteCore;
+
 
 import com.sommer.ui.InputNameDialog;
 import com.sommer.utils.MyAppInfo;

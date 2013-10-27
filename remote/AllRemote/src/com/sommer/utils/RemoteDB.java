@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
+import com.etek.ircomm.RemoteCore;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
-import com.sommer.ircore.RemoteCore;
+
 
 
 
