@@ -3,7 +3,7 @@ package com.sommer.remote;
 
 
 
-import com.etek.ircomm.RemoteCore;
+import com.etek.ircomm.RemoteComm;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
 import com.sommer.data.Value;
@@ -248,7 +248,7 @@ public class AirRemote extends Activity implements OnClickListener {
 			break;
 		}
 		if (Value.currentKey != null) {
-		RemoteCore.sendAirRemote(Value.airData);	
+		RemoteComm.sendAirRemote(Value.airData);	
 
 			
 		}
@@ -358,7 +358,7 @@ public class AirRemote extends Activity implements OnClickListener {
 	public  String getTempStr(AirData airdata) {
 		String mWindStr = null;
 		if (airdata.getmPower() == 0x01) {
-			mWindStr=String.valueOf(Value.airData.getmTmp())+" â„ƒ";
+			mWindStr=String.valueOf(Value.airData.getmTmp())+"¡æ";
 					
 		}
 		else{

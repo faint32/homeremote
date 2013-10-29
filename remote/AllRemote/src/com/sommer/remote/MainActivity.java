@@ -9,7 +9,7 @@ package com.sommer.remote;
 import java.util.ArrayList;
 
 
-import com.etek.ircomm.RemoteCore;
+import com.etek.ircomm.RemoteComm;
 import com.sommer.adapt.MenuAdapter;
 import com.sommer.adapt.MenuList;
 import com.sommer.adapt.SelectPicPopupWindow;
@@ -159,15 +159,15 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		
 		tabHost = getTabHost();
-		tabHost.setCurrentTab(0);//这是上面需要注意到的问题
-		tabHost.clearAllTabs();//清空
-		initHostTab();//（重新载入tabhost）
+		tabHost.setCurrentTab(0);//杩欐槸涓婇潰闇�娉ㄦ剰鍒扮殑闂
+		tabHost.clearAllTabs();//娓呯┖
+		initHostTab();//锛堥噸鏂拌浇鍏abhost锛�		
 		tabHost.setOnTabChangedListener(new OnTabChangeListener()  
         {  
             public void onTabChanged(String tabId)  
             {  
             	Value.currentDevice = tabHost.getCurrentTab();
-           //    Toast.makeText(getApplicationContext(), "现在是"+tabHost.getCurrentTab()	, Toast.LENGTH_SHORT).show();  
+           //    Toast.makeText(getApplicationContext(), "鐜板湪鏄�+tabHost.getCurrentTab()	, Toast.LENGTH_SHORT).show();  
             }  
         });  
 	//	RemoteComm.initRemote();
@@ -571,7 +571,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				break;
 			case R.id.MESSAGE_SEND:
 //				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
-//				 long [] pattern = {100,100};   // 停止 开启 停止 开启   
+//				 long [] pattern = {100,100};   // 鍋滄 寮�惎 鍋滄 寮�惎   
 //				vibrator.vibrate(pattern,1);          
 				showCodeSending();
 				
@@ -585,7 +585,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			
 				break;
 			case R.id.MSG_LEARN_END:
-				RemoteCore.remoteLearnStop();
+				RemoteComm.remoteLearnStop();
 				Value.isStudying=false;
 				Toast toast = Toast.makeText(getApplicationContext(), R.string.study_save,
 						Toast.LENGTH_SHORT);

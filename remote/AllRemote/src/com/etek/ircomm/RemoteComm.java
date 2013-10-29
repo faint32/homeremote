@@ -8,7 +8,7 @@ import android.util.Log;
 
 
 
-public class RemoteCore {
+public class RemoteComm {
 	final static String	_ET4003_CONTROL_SEND_CODE_1_=	"53";
 	final static int	_ET4003_CONTROL_SEND_CODE   =	0x53;
 	final static String	_ET4003_CONTROL_SEND_CODE_2_=		"55";

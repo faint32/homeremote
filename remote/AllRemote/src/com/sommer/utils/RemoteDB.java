@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-import com.etek.ircomm.RemoteCore;
+import com.etek.ircomm.RemoteComm;
 import com.sommer.data.RemoteData;
 import com.sommer.data.Value;
 
@@ -45,13 +45,13 @@ public class RemoteDB extends SQLiteOpenHelper {
 	final static String BRAND_TAB	="brand";
 	
 	final static String KEY_TAB	="key_tab";
-	//用户数据库文件的版本
+	//鐢ㄦ埛鏁版嵁搴撴枃浠剁殑鐗堟湰
 	private static final int DB_VERSION = 1;
-	//数据库文件目标存放路径为系统默认位置，
+	//鏁版嵁搴撴枃浠剁洰鏍囧瓨鏀捐矾寰勪负绯荤粺榛樿浣嶇疆锛�
 	@SuppressLint("SdCardPath")
 	private static String DB_PATH = "/data/data/com.sommer.allremote/databases/";
 	
-	//如果你想把数据库文件存放在SD卡的话
+	//濡傛灉浣犳兂鎶婃暟鎹簱鏂囦欢瀛樻斁鍦⊿D鍗＄殑璇�
 	// private static String DB_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath()
 	// + "/arthurcn/drivertest/packfiles/";
 	
@@ -62,23 +62,23 @@ public class RemoteDB extends SQLiteOpenHelper {
 	private final Context myContext;
 	
 	/** 
-	* 如果数据库文件较大，使用FileSplit分割为小于1M的小文件
-	* 此例中分割为 data.db.100 data.db.101 data.db.102....
+	* 濡傛灉鏁版嵁搴撴枃浠惰緝澶э紝浣跨敤FileSplit鍒嗗壊涓哄皬浜�M鐨勫皬鏂囦欢
+	* 姝や緥涓垎鍓蹭负 data.db.100 data.db.101 data.db.102....
 	*/
-//	//第一个文件名后缀
+//	//绗竴涓枃浠跺悕鍚庣紑
 //	private static final int ASSETS_SUFFIX_BEGIN = 100;
-//	//最后一个文件名后缀
+//	//鏈�悗涓�釜鏂囦欢鍚嶅悗缂�
 //	private static final int ASSETS_SUFFIX_END = 110;
 
 	/**
-	* 在SQLiteOpenHelper的子类当中，必须有该构造函数
-	* @param context 上下文对象
-	* @param name 数据库名称
-	* @param factory 一般都是null
-	* @param version 当前数据库的版本，值必须是整数并且是递增的状态
+	* 鍦⊿QLiteOpenHelper鐨勫瓙绫诲綋涓紝蹇呴』鏈夎鏋勯�鍑芥暟
+	* @param context 涓婁笅鏂囧璞�
+	* @param name 鏁版嵁搴撳悕绉�
+	* @param factory 涓�埇閮芥槸null
+	* @param version 褰撳墠鏁版嵁搴撶殑鐗堟湰锛屽�蹇呴』鏄暣鏁板苟涓旀槸閫掑鐨勭姸鎬�
 	*/
 	public RemoteDB(Context context, String name, CursorFactory factory, int version) {
-	//必须通过super调用父类当中的构造函数
+	//蹇呴』閫氳繃super璋冪敤鐖剁被褰撲腑鐨勬瀯閫犲嚱鏁�
 		super(context, name, null, version);
 		this.myContext = context;
 	}
@@ -100,7 +100,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	
 		
-		//创建数据库
+		//鍒涘缓鏁版嵁搴�
 		try {
 			File dir = new File(DB_PATH);
 			if(!dir.exists()){
@@ -111,7 +111,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 			dbf.delete();
 		}
 		//	SQLiteDatabase.openOrCreateDatabase(dbf, null);
-			// 复制asseets中的db文件到DB_PATH下
+			// 澶嶅埗asseets涓殑db鏂囦欢鍒癉B_PATH涓�
 			copyDataBase();
 			//copyBigDataBase();
 			} catch (IOException e) {
@@ -121,7 +121,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		
 	}
 
-	//检查数据库是否有效
+	//妫�煡鏁版嵁搴撴槸鍚︽湁鏁�
 	private boolean checkDataBase(){
 		SQLiteDatabase checkDB = null;
 		String myPath = DB_PATH + DB_NAME;
@@ -141,7 +141,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return checkDB != null ? true : false;
 	}
 	
-	//检查数据库是否有更新版本
+	//妫�煡鏁版嵁搴撴槸鍚︽湁鏇存柊鐗堟湰
 	private boolean checkDataBaseTime() throws IOException{
 		String myPath = DB_PATH + DB_NAME;
 		 
@@ -178,10 +178,10 @@ public class RemoteDB extends SQLiteOpenHelper {
 	
 	public RemoteDB open(){
 		String myPath = DB_PATH + DB_NAME;
-	//	Log.v(TAG, "数据库已经...");
+	//	Log.v(TAG, "鏁版嵁搴撳凡缁�..");
 		
 		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-	//	Log.v(TAG, "数据库打开");
+	//	Log.v(TAG, "鏁版嵁搴撴墦寮�);
 		Log.v(TAG, "database opened");
 		return this;
 	
@@ -211,7 +211,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		myInput.close();
 	}
 
-//	//复制assets下的大数据库文件时用这个
+//	//澶嶅埗assets涓嬬殑澶ф暟鎹簱鏂囦欢鏃剁敤杩欎釜
 //	private void copyBigDataBase() throws IOException{
 //		InputStream myInput;
 //		String outFileName = DB_PATH + DB_NAME;
@@ -242,15 +242,15 @@ public class RemoteDB extends SQLiteOpenHelper {
 	}
 
 	/**
-	* 该函数是在第一次创建的时候执行，
-	* 实际上是第一次得到SQLiteDatabase对象的时候才会调用这个方法
+	* 璇ュ嚱鏁版槸鍦ㄧ涓�鍒涘缓鐨勬椂鍊欐墽琛岋紝
+	* 瀹為檯涓婃槸绗竴娆″緱鍒癝QLiteDatabase瀵硅薄鐨勬椂鍊欐墠浼氳皟鐢ㄨ繖涓柟娉�
 	*/
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 	}
 
 	/**
-	* 数据库表结构有变化时采用
+	* 鏁版嵁搴撹〃缁撴瀯鏈夊彉鍖栨椂閲囩敤
 	*/
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -312,7 +312,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 					for (int i=4;i<c.getColumnCount();i++){
 					RemoteData rmtData = new RemoteData();
 					rmtData.setIndex(c.getString(1));
-					rmtData.setCodetype(c.getString(2)) ; //获取第一列的值,第一列的索引从0开始 
+					rmtData.setCodetype(c.getString(2)) ; //鑾峰彇绗竴鍒楃殑鍊�绗竴鍒楃殑绱㈠紩浠�寮� 
 					rmtData.setMode(Value.RemoteType[_type]);
 					rmtData.setCustom(c.getString(3)) ;
 					rmtData.setData(c.getString(i)) ;
@@ -334,7 +334,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 //			//		Log.v(TAG, "columnCoutn data " + c.getColumnCount());
 //		for (int i=4;i<c.getColumnCount();i++){
 //		RemoteData rmtData1 = new RemoteData();
-//		rmtData1.setCodetype(c.getString(2)) ; //获取第一列的值,第一列的索引从0开始 
+//		rmtData1.setCodetype(c.getString(2)) ; //鑾峰彇绗竴鍒楃殑鍊�绗竴鍒楃殑绱㈠紩浠�寮� 
 //		rmtData1.setCustom(c.getString(3)) ;
 //		rmtData1.setData(c.getString(i)) ;
 //				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
@@ -514,7 +514,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 					rmtData.setData(c.getString(i)) ;
 				//	Log.v(TAG, "remote data " + rmtData.getRemoteData());
 				
-					rmtDts[i-4] = RemoteCore.encodeRemoteData(rmtData);
+					rmtDts[i-4] = RemoteComm.encodeRemoteData(rmtData);
 					}
 					
 		return rmtDts;

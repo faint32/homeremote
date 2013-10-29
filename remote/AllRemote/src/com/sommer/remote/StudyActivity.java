@@ -2,7 +2,7 @@ package com.sommer.remote;
 
 
 
-import com.etek.ircomm.RemoteCore;
+import com.etek.ircomm.RemoteComm;
 import com.sommer.allremote.R;
 import com.sommer.data.Value;
 
@@ -63,7 +63,7 @@ public class StudyActivity extends Activity implements OnClickListener{
 		{
 	
 		case R.id.button_study_exit:
-			RemoteCore.remoteLearnStop();
+			RemoteComm.remoteLearnStop();
 		Value.isStudying = false;
 			finish();
 			break;
@@ -82,12 +82,12 @@ public class StudyActivity extends Activity implements OnClickListener{
 	            Bundle bundle = msg.getData();  
 	            int status = bundle.getInt("status");
 	          if (status==-1){
-	        	  RemoteCore.remoteLearnStop();
+	        	  RemoteComm.remoteLearnStop();
 	      		Value.isStudying = false;
 	      		setResult(RESULT_CANCELED, getIntent().putExtras(bundle)); 
 	      		finish();
 	          }else if(status==0){
-	        	  RemoteCore.remoteLearnStop();
+	        	  RemoteComm.remoteLearnStop();
 		      		Value.isStudying = false;
 		      		setResult(RESULT_CANCELED, getIntent().putExtras(bundle)); 
 		      		finish();  
@@ -101,7 +101,7 @@ public class StudyActivity extends Activity implements OnClickListener{
 	    	int status;
 	        @Override  
 	        public void run() {  
-	            status=	RemoteCore.learnRemoteLoop(30);  
+	            status=	RemoteComm.learnRemoteLoop(30);  
 	          
 	            Message msg = new Message();  
 	            Bundle bundle = new Bundle();  

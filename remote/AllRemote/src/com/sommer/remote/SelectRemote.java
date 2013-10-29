@@ -3,7 +3,7 @@ package com.sommer.remote;
 
 import java.util.ArrayList;
 
-import com.etek.ircomm.RemoteCore;
+import com.etek.ircomm.RemoteComm;
 import com.sommer.adapt.DeviceAdapter;
 import com.sommer.allremote.R;
 import com.sommer.data.AirData;
@@ -236,9 +236,9 @@ void sendTestCode(int count){
 		 mRmtDB.close();
 		 Log.v(TAG, "current index ====>   "+ index);
 		 if (rmtData != null){
-			 String testCode = RemoteCore.encodeRemoteData(rmtData);
+			 String testCode = RemoteComm.encodeRemoteData(rmtData);
 			 showCodeSending();
-			 RemoteCore.sendTestRemote(testCode); 
+			 RemoteComm.sendTestRemote(testCode); 
 		 }else {
 			 Toast.makeText(this, "this device is not valid", Toast.LENGTH_SHORT).show();
 		 }
@@ -250,7 +250,7 @@ void sendTestCode(int count){
 		Log.v(TAG, "air code data ->"+ code);
 			 ad.setCode(code);
 			 
-		 RemoteCore.sendAirRemote(ad);
+			 RemoteComm.sendAirRemote(ad);
 		 }
 		 
 	 }
