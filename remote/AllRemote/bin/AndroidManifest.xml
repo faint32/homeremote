@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sommer.allremote"
+    package="com.deco.allremote"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -35,7 +35,7 @@
         android:windowSoftInputMode="stateAlwaysHidden" 
          android:configChanges="orientation|keyboardHidden">
         <activity
-            android:name="com.sommer.remote.Start"
+            android:name="com.deco.remote.Start"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -45,54 +45,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sommer.remote.STBRemote"
+            android:name="com.deco.remote.STBRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.TVRemote"
+            android:name="com.deco.remote.TVRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.DVDRemote"
+            android:name="com.deco.remote.DVDRemote"
             android:screenOrientation="portrait" >
         </activity>
          <activity
-            android:name="com.sommer.remote.RemoteDevicesList"
+            android:name="com.deco.remote.RemoteDevicesList"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.FanRemote"
+            android:name="com.deco.remote.FanRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.PJTRemote"
+            android:name="com.deco.remote.PJTRemote"
             android:screenOrientation="portrait" >
         </activity>
        
         <activity
-            android:name="com.sommer.remote.AirRemote"
+            android:name="com.deco.remote.AirRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.DeviceActivity"
+            android:name="com.deco.remote.DeviceActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.SelectRemote"
+            android:name="com.deco.remote.SelectRemote"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.sommer.remote.StudyActivity"
+            android:name="com.deco.remote.StudyActivity"
             android:screenOrientation="portrait" >
         </activity>
       
         <activity
-            android:name="com.sommer.remote.MainActivity"
+            android:name="com.deco.remote.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait" >
         </activity>
         
-          <service android:enabled="true" android:name="com.sommer.service.RemoteUpdateService"/>
+          <service android:enabled="true" android:name="com.deco.service.RemoteUpdateService"/>
         
         
         

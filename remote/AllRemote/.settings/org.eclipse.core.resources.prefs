@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/com/sommer/adapt/MenuAdapter.java=UTF-8
-encoding//src/com/sommer/adapt/RemoteAdapter.java=UTF-8
-encoding//src/com/sommer/remote/MainActivity.java=UTF-8
-encoding//src/com/sommer/utils/RemoteDB.java=UTF-8
+encoding//src/com/deco/adapt/MenuAdapter.java=UTF-8
+encoding//src/com/deco/adapt/RemoteAdapter.java=UTF-8
+encoding//src/com/deco/remote/MainActivity.java=UTF-8
+encoding//src/com/deco/utils/RemoteDB.java=UTF-8
+encoding/<project>=UTF-8

@@ -41,10 +41,10 @@
     </string>
     
     <string name="about_info">
-<![CDATA[ SOMMER CO.,LTD.\n
+<![CDATA[ deco CO.,LTD.\n
         							   ]]>
     </string>
-    <string name="Long"><![CDATA[ SOMMER CO.,LTD.]]></string>
+    <string name="Long"><![CDATA[ deco CO.,LTD.]]></string>
     <string name="str_about">
 	<![CDATA[
 	Software information:\n
@@ -52,13 +52,13 @@
 	Version: V0.0.1Beta\n
 	\n
 	Contact:\n
-	Company: SOMMER \n
+	Company: deco \n
 	
 	
 	]]>
     </string>
     <string name="LongAbout">
-<![CDATA[  SOMMER  \n]]>
+<![CDATA[  deco  \n]]>
     </string>
     <string name="Clean"></string>
    
