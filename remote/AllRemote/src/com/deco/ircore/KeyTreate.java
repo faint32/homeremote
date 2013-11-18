@@ -71,9 +71,9 @@ public class KeyTreate {
 				e.printStackTrace();
 			}
 		//	Log.v(TAG, rmtData);
-			byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
+		//	byte[] rmtDataByte = Tools.hexStringToBytes(rmtData);
 		
-			RemoteOut.sendRemote(rmtDataByte);	
+			RemoteCommunicate.sendDECORemote(rmtData);	
 			
 			}
 		

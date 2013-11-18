@@ -20,7 +20,7 @@ import com.deco.data.Value;
 import com.deco.ircore.KeyTreate;
 import com.deco.ircore.RemoteCommunicate;
 
-import com.deco.ircore.RemoteOut;
+
 import com.deco.ui.QuitDialog;
 
 import com.deco.utils.RemoteDB;
@@ -126,6 +126,11 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		line.setOnTouchListener(this);
 		line.setLongClickable(true);
 		mContext = this;
+		if (RemoteCommunicate.initDECORemote()){
+			Toast.makeText(mContext, "device de6008 ready", Toast.LENGTH_SHORT).show();
+			}else {
+				Toast.makeText(mContext, " de6008 is not ready", Toast.LENGTH_SHORT).show();	
+			}
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		int screenWidth = dm.widthPixels;
@@ -134,8 +139,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		Value.screenWidth  = screenWidth;
 		mHs = (HorizontalScrollView) findViewById(R.id.hs);
 		
-		AudioManager am=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-		am.adjustStreamVolume (AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+		
 		
 		menuLoading();
 		
@@ -156,7 +160,6 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			mKeyTreate.setHandler(mHandler);
 		}
 		
-		RemoteOut.activate();
 		
 		
 		tabHost = getTabHost();

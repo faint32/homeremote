@@ -9,7 +9,7 @@ import com.deco.data.AirData;
 import com.deco.data.Value;
 
 import com.deco.ircore.RemoteCommunicate;
-import com.deco.ircore.RemoteOut;
+
 import com.deco.utils.MyAppInfo;
 import com.deco.utils.UserDB;
 
