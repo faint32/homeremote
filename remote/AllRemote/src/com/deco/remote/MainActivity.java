@@ -163,9 +163,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		
 		tabHost = getTabHost();
-		tabHost.setCurrentTab(0);//杩欐槸涓婇潰闇�娉ㄦ剰鍒扮殑闂
-		tabHost.clearAllTabs();//娓呯┖
-		initHostTab();//锛堥噸鏂拌浇鍏abhost锛�		
+		tabHost.setCurrentTab(0);
+		tabHost.clearAllTabs();
+		initHostTab();
 		tabHost.setOnTabChangedListener(new OnTabChangeListener()  
         {  
             public void onTabChanged(String tabId)  
