@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import com.deco.allremote.R;
 
+import com.deco.data.RemoteDevice;
+import com.deco.data.RemoteGetKeyValue;
 import com.deco.data.Value;
 
 import com.deco.utils.MyAppInfo;
@@ -132,7 +134,12 @@ public class RemoteUpdateService extends IntentService {
 		mUserDB.open();
 //		mUserDB.getUserKeyValue();
 		mUserDB.getRemoteDevices();
+		mUserDB.cleanKeyTab();
 		mUserDB.close();
+		for (RemoteDevice rmtDev : Value.rmtDevs){
+			RemoteGetKeyValue.keyTabSetValue(rmtDev,mContext);	
+		}
+		
 //		Log.v(TAG, "updata finished");
 //		Toast toast = Toast.makeText(mContext, R.string.first_updata_end,
 //				Toast.LENGTH_SHORT);
