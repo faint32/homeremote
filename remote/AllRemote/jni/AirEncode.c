@@ -4,7 +4,7 @@
 #include "logo.h"
 #include "AirEncode.h"
 
-#define DEBUG
+//#define DEBUG
 //#define EETEST
 
 int dataLen;
@@ -1300,7 +1300,7 @@ int airRemoteEncode(char* airData) {
 	return length;
 }
 
-jbyteArray Java_com_deco_ircomm_RemoteCommunicate_getAirData(JNIEnv* env, jobject jobj,
+jbyteArray Java_com_deco_ircore_RemoteCommunicate_getAirData(JNIEnv* env, jobject jobj,
 		jintArray data) {
 	AIR_status airStatus;
 //	unsigned char airDatas[20];
@@ -1357,12 +1357,12 @@ jbyteArray Java_com_deco_ircomm_RemoteCommunicate_getAirData(JNIEnv* env, jobjec
 	LOGD("vKey ----> %d ", airStatus.vKey);
 #endif
 	err = HandleAirRemote(airStatus, airData);
-	if (err == 0xff) {
-		LOGD("encode error ----> %d ", airStatus.nAirCode);
-	}
-	for (i = 0; i < 80; i++) {
-		LOGD("airData[%d ] ----> 0x%x ", i, airData[i]);
-	}
+//	if (err == 0xff) {
+//		LOGD("encode error ----> %d ", airStatus.nAirCode);
+//	}
+//	for (i = 0; i < 80; i++) {
+//		LOGD("airData[%d ] ----> 0x%x ", i, airData[i]);
+//	}
 
 	length = airRemoteEncode(airData);
 

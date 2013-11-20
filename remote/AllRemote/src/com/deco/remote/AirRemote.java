@@ -111,13 +111,14 @@ public class AirRemote extends Activity implements OnClickListener {
 	{
 		super.onStart();
 		UserDB mUserDB = new UserDB(this);
-		mUserDB.open();
-		mUserDB.getAirData(Value.currentDevice);
+		Value.airData = Value.rmtDevs.get(Value.currentDevice).getAirData();
+//		mUserDB.open();
+//		mUserDB.getAirData(Value.currentDevice);
 		airShow.setText(getTempStr(Value.airData));
 		airMode.setText(getModeStr(Value.airData));
 		airWindDir.setText(getWindDirStr(Value.airData));
 		airWind.setText(getWindStr(Value.airData));
-		mUserDB.close();
+//		mUserDB.close();
 	}
 	
 	
@@ -129,7 +130,7 @@ public class AirRemote extends Activity implements OnClickListener {
 		super.onDestroy();
 		UserDB mUserDB = new UserDB(this);
 		mUserDB.open();
-		mUserDB.updateAirData(Value.currentDevice);
+//		mUserDB.updateAirData(Value.currentDevice);
 		mUserDB.close();
 	}
 	
@@ -139,7 +140,7 @@ public class AirRemote extends Activity implements OnClickListener {
 		super.onDestroy();
 		UserDB mUserDB = new UserDB(this);
 		mUserDB.open();
-		mUserDB.updateAirData(Value.currentDevice);
+	//	mUserDB.updateAirData(Value.currentDevice);
 		mUserDB.close();
 	}
 	@Override
@@ -196,7 +197,7 @@ public class AirRemote extends Activity implements OnClickListener {
 			data++;
 			
 			if(data>30){
-				data = 16;
+				data = 30;
 			}
 			Value.airData.setmTmp(data);
 			airKey = 3;
@@ -208,7 +209,7 @@ public class AirRemote extends Activity implements OnClickListener {
 			data--;
 			
 			if(data<16){
-				data = 30;
+				data = 16;
 			}
 			Value.airData.setmTmp(data);
 			airKey =4 ;
@@ -341,10 +342,10 @@ public class AirRemote extends Activity implements OnClickListener {
 		if (airdata.getmPower() == 0x01) {
 		
 			if (airdata.getmWindDir() == 0x00) {
-				mWindStr += getString(R.string.air_wind_auto_dir_value_0);
+		//		mWindStr += getString(R.string.air_wind_dir_value_1);
 			}
 			if (airdata.getmWindDir()  == 0x01) {
-				mWindStr += getString(R.string.air_wind_auto_dir_value_1);
+		//		mWindStr += getString(R.string.air_wind_dir_value_2);
 			}
 					
 		}

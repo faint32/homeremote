@@ -2,7 +2,7 @@ package com.deco.data;
 
 
 public class AirData {
-	private  int device = 0;
+	
 	private  int code = 0;
 	private  int mPower=1;
 	private  int mTmp=25;
@@ -13,20 +13,13 @@ public class AirData {
 	private  int mkey =0;
 	
 	
-	public int getDevice() {
-		return device;
-	}
-
-	public void setDevice(int device) {
-		this.device = device;
-	}
-
 	
 	
-	public AirData(int device, int code, int mPower, int mTmp, int mMode,
+	
+	public AirData(int code, int mPower, int mTmp, int mMode,
 			int mWindAuto, int mWindDir, int mWindCount, int mkey) {
 		super();
-		this.device = device;
+	
 		this.code = code;
 		this.mPower = mPower;
 		this.mTmp = mTmp;

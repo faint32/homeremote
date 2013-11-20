@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_remote"
+    >
+
+      <RelativeLayout
+        android:id="@+id/dtl_select"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="20.0dip"
+        >
+
+        <ImageButton
+            android:id="@+id/dtl_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/remote_select_right_selector" />
+
+        <ImageButton
+            android:id="@+id/dtl_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/remote_select_left_selector" />
+
+        <TextView
+            android:id="@+id/dtl_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/dtl_right"
+            android:layout_toRightOf="@id/dtl_left"
+            android:background="@drawable/control_topbox_selector"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="5.0dip"
+            android:text="tv"
+            android:textSize="16.0sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/dtl_right"
+            android:layout_toRightOf="@id/dtl_left"
+            android:background="@color/back_black" />
+    </RelativeLayout>
+       
+    
+       
+        <RelativeLayout
+            android:layout_width="fill_parent"
+           
+            android:layout_height="0dip"
+            android:background="@drawable/bg"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            > 
+            <ListView
+		  	android:id="@+id/dtl_list"
+		  	android:divider="@drawable/devide_line"
+		  	android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			
+		 />
+      </RelativeLayout>  
+    
+</LinearLayout>

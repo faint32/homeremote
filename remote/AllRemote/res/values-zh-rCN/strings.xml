@@ -261,5 +261,8 @@
     <string name="option_info"><![CDATA[首次使用对码操作：打开设备电源，选相应的设备类型，品牌或地区名称，然后按上下键钮，进行配对，当设备有反应：如开关机，进出仓，音量变化动作时，按停止然后按保存，检查各按键是否正常，不正常则重复操作，也可以手动向上，向下搜索，如果单品牌或单地区范围搜索配对不到，可以在全部品牌或地区范围内进行搜索对码。]]></string>
 
     
+    
+    <string name="device_type_title">选择设备类型</string>
+    
     <string name="max_devices">超出遥控设备容量</string>
 </resources>

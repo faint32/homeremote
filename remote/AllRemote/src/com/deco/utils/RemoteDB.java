@@ -280,7 +280,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		for (int i = 4; i < c.getColumnCount(); i++) {
 			RemoteData rmtData = new RemoteData();
 			rmtData.setIndex(c.getString(1));
-			rmtData.setCodetype(c.getString(2)); // 鑾峰彇绗竴鍒楃殑鍊�绗竴鍒楃殑绱㈠紩浠�寮�
+			rmtData.setCodetype(c.getString(2)); 
 			rmtData.setMode(Value.RemoteType[_type]);
 			rmtData.setCustom(c.getString(3));
 			rmtData.setData(c.getString(i));
@@ -420,7 +420,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 				byte[] val = c.getBlob(column);
 				if (val != null && localeLanguage.equals("zh")) {
 					try {
-						newBrands.add(new String(val, "GBK"));
+						newBrands.add(new String(val, "UTF-8"));
 					} catch (UnsupportedEncodingException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -481,7 +481,32 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return rmtDts;
 
 	}
+	
+	public String[] getKeyValueTAB(int _type) {
+		String[] keyTable;
+		Cursor c = myDataBase.query(KEY_TAB, null, " device_type =?",
+				new String[] { String.valueOf(_type) }, null, null, null);
 
+		Log.v(TAG, "device type ------>" + String.valueOf(_type));
+
+		if (c.moveToFirst()) {
+			int t = c.getCount();
+			keyTable = new String[t];
+			int i = 0;
+			do {
+				keyTable[i] = c.getString(1);
+				i++;
+			} while (c.moveToNext());
+
+		} else {
+			keyTable = new String[10];
+		}
+
+		c.close();
+
+		return keyTable;
+
+	}
 	/**
 	 * compareListValue compare arraylist all members
 	 * 

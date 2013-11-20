@@ -12,7 +12,7 @@
 
 
 jbyteArray
-Java_com_deco_ircomm_RemoteCommunicate_remoteEncode( JNIEnv*  env,jobject jobj,jbyteArray data,jstring codeType )
+Java_com_deco_ircore_RemoteCommunicate_remoteEncode( JNIEnv*  env,jobject jobj,jbyteArray data,jstring codeType )
 {
 	int i,length=0;
 	char* uData = (char*)  (*env)->GetByteArrayElements(env, data, NULL);

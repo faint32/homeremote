@@ -6,22 +6,9 @@ public class RemoteDevice {
 	private String code;
 	private String name ;
 	private String brand ;
-	private int codeIndex;
-	private int brandIndex;
-
+	private AirData airData;
 	
-	public int getCodeIndex() {
-		return codeIndex;
-	}
-	public void setCodeIndex(int codeIndex) {
-		this.codeIndex = codeIndex;
-	}
-	public int getBrandIndex() {
-		return brandIndex;
-	}
-	public void setBrandIndex(int brandIndex) {
-		this.brandIndex = brandIndex;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -62,7 +49,7 @@ public class RemoteDevice {
 	public String getFullInfo() {
 		return   this.name+"   "
 				 +Value.REMOTE_TYPE[this.type] +"   " + this.brand
-				 +"   " +this.code +"codeindex->"+ this.codeIndex  +"brandindex->"+ this.brandIndex ;
+				 +"   " +this.code ;
 		
 	}
 
@@ -70,6 +57,12 @@ public class RemoteDevice {
 		return   this.name+" \n  "
 				 +Value.REMOTE_TYPE[this.type] ;
 		
+	}
+	public AirData getAirData() {
+		return airData;
+	}
+	public void setAirData(AirData airData) {
+		this.airData = airData;
 	}
 	
 }

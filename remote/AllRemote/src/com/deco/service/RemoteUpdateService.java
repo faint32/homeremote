@@ -111,48 +111,41 @@ public class RemoteUpdateService extends IntentService {
 	  mRmtDB = new RemoteDB(mContext);
 	  mUserDB = new UserDB(mContext);
 	  mContext = getApplicationContext();
-		MyAppInfo.getInfo(mContext);
-//		Value.keyRemoteTab = new HashMap<String, String>();
-		if (Value.initial){
-			try {
-	    		mRmtDB.createDataBase();
-	    	} catch (IOException e) {
-	    		// TODO Auto-generated catch block
-	    		e.printStackTrace();
-	    	}
-	
-	    	
-	    	
-	    	try {
-	    		mUserDB.createDataBase();
-	    	} catch (IOException e) {
-	    		// TODO Auto-generated catch block
-	    		e.printStackTrace();
-	    	}	
+	  MyAppInfo.getInfo(mContext);
+		try {
+    		mRmtDB.createDataBase();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+
+    	
+    	
+    	try {
+    		mUserDB.createDataBase();
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}	
+
 			
 		mUserDB.open();
 //		mUserDB.getUserKeyValue();
 		mUserDB.getRemoteDevices();
 		mUserDB.close();
-		Log.v(TAG, "updata finished");
-		Toast toast = Toast.makeText(mContext, R.string.first_updata_end,
-				Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-		toast.show();
+//		Log.v(TAG, "updata finished");
+//		Toast toast = Toast.makeText(mContext, R.string.first_updata_end,
+//				Toast.LENGTH_SHORT);
+//		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+//		toast.show();
 //		Toast toast = Toast.makeText(mContext, R.string.updata_end,
 //				Toast.LENGTH_SHORT);
 //		toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
 //		toast.show();
-		}else {
-			mUserDB.open();
-//			mUserDB.getUserKeyValue();
-			mUserDB.getRemoteDevices();
-			mUserDB.close();
-			Log.v(TAG, "updata devices finished");
-		}
+		
 	
 	       
-	    Value.initial=false;
+	    Value.initial=true;
 	    MyAppInfo.saveInfo(mContext);
 	    stopSelf();
 

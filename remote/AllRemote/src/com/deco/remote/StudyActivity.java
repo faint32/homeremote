@@ -65,7 +65,10 @@ public class StudyActivity extends Activity implements OnClickListener{
 	
 		case R.id.button_study_exit:
 			RemoteCommunicate.remoteDECOLearnStop();
+			  Bundle bundle = new Bundle();  
+			  bundle.putInt("status", -1);
 		Value.isStudying = false;
+		setResult(RESULT_CANCELED, getIntent().putExtras(bundle)); 
 			finish();
 			break;
 		}

@@ -19,7 +19,7 @@ public final class Value {
 
 	
 	public  static String[] REMOTE_TYPE;
-	
+	public  static int listStatus = 0;
 
 	public static Boolean initial=true;
 	public static Boolean audio= true;

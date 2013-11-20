@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_remote"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -28,6 +28,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal" >
  	<Button  
 			android:id="@+id/quit_ok" 
@@ -36,7 +37,8 @@
 			android:background="@drawable/button_red_con"
 			android:text="@string/str_ok"
 			android:textSize="30sp"
-			android:textColor="@color/buttonText"
+			android:textColor="@color/button_white"
+			android:layout_marginLeft="20dp"
 			android:layout_alignParentLeft="true"
 		/>
   		
@@ -47,7 +49,8 @@
 			android:background="@drawable/button_green_con"
 			android:text="@string/str_back"
 			android:textSize="30sp"
-			android:textColor="@color/buttonText"
+			android:textColor="@color/button_white"
+			android:layout_marginRight="20dp"
 			android:layout_alignParentRight="true"
 		/>
      

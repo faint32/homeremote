@@ -6,12 +6,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
 
 
 
 
+
+import com.deco.data.AirData;
 import com.deco.data.RemoteDevice;
 import com.deco.data.Value;
 
@@ -46,19 +47,13 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String REMOTE_CODE = "code";
 	public static final String REMOTE_NAME = "name";
 	public static final String REMOTE_BRAND = "brand";
-	public static final String REMOTE_CODE_ID = "code_index";
-	public static final String REMOTE_BRAND_ID = "brand_index";
 	
-	final static String AIRDATA	="air_data";
-	public static final String AIR_ID = "_id";
-	public static final String AIR_DEVICE= "device";
-	public static final String AIR_CODE  = "code";
 	public static final String AIR_POWER = "power";
 	public static final String AIR_TEMP = "temp";
 	public static final String AIR_MODE = "mode";
 	public static final String AIR_AUTO = "auto";
-	public static final String AIR_WDIR = "winddirect";
-	public static final String AIR_WCOUNT = "windcount";
+	public static final String AIR_WDIR = "wind_direct";
+	public static final String AIR_WCOUNT = "wind_count";
 	
 	final static String USERTAB	="user_tab";
 	public static final String USER_ID = "_id";
@@ -103,8 +98,10 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	public void createDataBase() throws IOException{
 	//	boolean dbExist = checkDataBase();
-		
-		if (Value.initial==true){
+		File dbf = new File(DB_PATH + DB_NAME);
+		if(dbf.exists()==false){
+			
+	//	if (Value.initial==true){
 		
 		//创建数据库
 		try {
@@ -112,7 +109,7 @@ public class UserDB extends SQLiteOpenHelper {
 			if(!dir.exists()){
 			dir.mkdirs();
 			}
-			File dbf = new File(DB_PATH + DB_NAME);
+	//		dbf = new File(DB_PATH + DB_NAME);
 			if(dbf.exists()){
 			dbf.delete();
 		}
@@ -128,21 +125,21 @@ public class UserDB extends SQLiteOpenHelper {
 	}
 
 	//检查数据库是否有效
-	private boolean checkDataBase(){
-		SQLiteDatabase checkDB = null;
-		String myPath = DB_PATH + DB_NAME;
-		try{ 
-		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-		}catch(SQLiteException e){
-		//database does't exist yet.
-		}
-		if(checkDB != null){
-		checkDB.close();
-		Log.v(TAG, "db  close");
-	
-		}
-		return checkDB != null ? true : false;
-	}
+//	private boolean checkDataBase(){
+//		SQLiteDatabase checkDB = null;
+//		String myPath = DB_PATH + DB_NAME;
+//		try{ 
+//		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+//		}catch(SQLiteException e){
+//		//database does't exist yet.
+//		}
+//		if(checkDB != null){
+//		checkDB.close();
+//		Log.v(TAG, "db  close");
+//	
+//		}
+//		return checkDB != null ? true : false;
+//	}
 	
 	
 	public UserDB open(){
@@ -253,6 +250,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 		Cursor c = myUserDB.query(REMOTEDEVICES, null, null ,null, null, null, null);
 		Value.rmtDevs.clear();
 		c.moveToFirst();
+		AirData ad = new AirData();
 	
 		do{
 			RemoteDevice rmtDev = new RemoteDevice();
@@ -261,8 +259,16 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 			rmtDev.setCode(c.getString(2));
 			rmtDev.setName(c.getString(3));
 			rmtDev.setBrand(c.getString(4));
-			rmtDev.setCodeIndex(c.getInt(5));
-			rmtDev.setBrandIndex(c.getInt(6));
+			if (rmtDev.getType()==Value.DeviceType.TYPE_AIR){
+			ad.setCode(Integer.valueOf(c.getString(2)));
+			ad.setmPower(c.getInt(5));
+			ad.setmTmp(c.getInt(6));
+			ad.setmMode(c.getInt(7));
+			ad.setmWindAuto(c.getInt(8));
+			ad.setmWindDir(c.getInt(9));
+			ad.setmWindCount(c.getInt(10));
+			rmtDev.setAirData(ad);
+			}
 			Value.rmtDevs.add(rmtDev);
 			
 		}while(c.moveToNext());
@@ -287,22 +293,89 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	
 	
 	public void updateRemoteDevice(int device){
+		RemoteDevice rmtDev = Value.rmtDevs.get(device);
 		
-		 myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
 		  ContentValues values = new ContentValues();
-	      values.put(REMOTE_ID, Value.rmtDev.getId());
-	      values.put(REMOTE_TYPE,Value.rmtDev.getType());
-	      values.put(REMOTE_CODE,Value.rmtDev.getCode());
-	      values.put(REMOTE_NAME,Value.rmtDev.getName());
-	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
-	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
-	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
+	      values.put(REMOTE_ID, rmtDev.getId());
+	      values.put(REMOTE_TYPE,rmtDev.getType());
+	      values.put(REMOTE_CODE,rmtDev.getCode());
+	      values.put(REMOTE_NAME,rmtDev.getName());
+	      values.put(REMOTE_BRAND,rmtDev.getBrand());
+	  
 	
 		 myUserDB.update(REMOTEDEVICES, values,"_id =? ",new String[]{String.valueOf(device)}); 
+		 
+	//	 myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
 		 
 	    
 	}
 	
+	public void saveRemoteDevice(RemoteDevice rmtDev){
+		
+		
+		  ContentValues values = new ContentValues();
+	      values.put(REMOTE_ID, rmtDev.getId());
+	      values.put(REMOTE_TYPE,rmtDev.getType());
+	      values.put(REMOTE_CODE,rmtDev.getCode());
+	      values.put(REMOTE_NAME,rmtDev.getName());
+	      values.put(REMOTE_BRAND,rmtDev.getBrand());
+	      if (rmtDev.getType()==Value.DeviceType.TYPE_AIR){
+	    	  AirData ad = rmtDev.getAirData();
+	    	  values.put(AIR_POWER, ad.getmPower());
+		      values.put(AIR_TEMP, ad.getmTmp());
+		      values.put(AIR_MODE, ad.getmMode());
+		      values.put(AIR_AUTO, ad.getmWindAuto());
+		      values.put(AIR_WDIR, ad.getmWindDir());
+		      values.put(AIR_WCOUNT, ad.getmWindCount());
+	      }
+	     if (isDeviceExist(rmtDev.getId())){ 
+	    	 Log.v(TAG, "updata" + rmtDev.getFullInfo());
+		 myUserDB.update(REMOTEDEVICES, values,"_id = ? ",new String[]{String.valueOf(rmtDev.getId())}); 
+	     }	else {
+	    	 Log.v(TAG, "insert database");
+	     myUserDB.insert(REMOTEDEVICES, null,values); 
+		     	 
+	     }
+	     
+	//	 myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
+		 
+	    
+	}
+	public void saveRmtDevKeyTab(RemoteDevice rmtDev){
+		
+		 if (rmtDev.getType()==Value.DeviceType.TYPE_AIR)
+			 return;
+		
+		  ContentValues values = new ContentValues();
+	      values.put(REMOTE_ID, rmtDev.getId());
+	      values.put(REMOTE_TYPE,rmtDev.getType());
+	      values.put(REMOTE_CODE,rmtDev.getCode());
+	      values.put(REMOTE_NAME,rmtDev.getName());
+	      values.put(REMOTE_BRAND,rmtDev.getBrand());
+	      
+	     if (isDeviceExist(rmtDev.getId())){ 
+	    	 Log.v(TAG, "updata" + rmtDev.getFullInfo());
+		 myUserDB.update(REMOTEDEVICES, values,"_id = ? ",new String[]{String.valueOf(rmtDev.getId())}); 
+	     }	else {
+	    	 Log.v(TAG, "insert database");
+	     myUserDB.insert(REMOTEDEVICES, null,values); 
+		     	 
+	     }
+	     
+	//	 myUserDB.delete(USERTAB, "device =? ",new String[]{String.valueOf(device)});  
+		 
+	    
+	}
+	public boolean isDeviceExist(int device){
+		Cursor c = myUserDB.query(REMOTEDEVICES, null, "_id = ? " ,new String[]{String.valueOf(device)}, null, null, null);
+		
+		if (c.moveToFirst()){
+			c.close(); 
+			return true;
+		}		
+		c.close();
+		return false;
+	}
 	
 	public void addRemoteDevice(int device){
 		
@@ -313,9 +386,7 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	      values.put(REMOTE_CODE,Value.rmtDev.getCode());
 	      values.put(REMOTE_NAME,Value.rmtDev.getName());
 	      values.put(REMOTE_BRAND,Value.rmtDev.getBrand());
-	      values.put(REMOTE_CODE_ID,Value.rmtDev.getCodeIndex());
-	      values.put(REMOTE_BRAND_ID,Value.rmtDev.getBrandIndex());
-
+	     
 		 myUserDB.insert(REMOTEDEVICES, null,values); 
 		 
 	    
@@ -345,73 +416,25 @@ public  void addKeyValue(String keyName,String data,int device, int column){
 	}
 
 	
-	public void getAirData(int device){
-//		Log.v(TAG, "saveAllKeyTabValue start");
-			Cursor c = myUserDB.query(AIRDATA, null, "device =?  " ,new String[]{String.valueOf(device)}, null, null, null);
-			if (c.moveToFirst()){
-				Value.airData.setDevice(device); 	
-				Value.airData.setCode(c.getInt(2));
-				Value.airData.setmPower(c.getInt(3));
-				Value.airData.setmTmp(c.getInt(4));
-				Value.airData.setmMode(c.getInt(5));
-				Value.airData.setmWindAuto(c.getInt(6));
-				Value.airData.setmWindDir(c.getInt(7));
-				Value.airData.setmWindCount(c.getInt(8));
-			}
-			c.close(); 	
-	}
 	
-	public void moveAirData(int device){
-//		Log.v(TAG, "saveAllKeyTabValue start");
-		myUserDB.delete(AIRDATA, "device =? ",new String[]{String.valueOf(device)});
-	}
 	
-	public void updateAirData(int device){
+	public  void deviceKeyTabInitial( int device,String keyName,String data){
 		
-		  ContentValues values = new ContentValues();
-	      values.put(AIR_DEVICE,  Value.airData.getDevice());
-	      values.put(AIR_CODE,Value.airData.getCode());
-	      values.put(AIR_POWER,Value.airData.getmPower());
-	      values.put(AIR_TEMP,Value.airData.getmTmp());
-	      values.put(AIR_MODE,Value.airData.getmMode());
-	      values.put(AIR_AUTO,Value.airData.getmWindAuto());
-	      values.put(AIR_WDIR,Value.airData.getmWindDir());
-	      values.put(AIR_WCOUNT,Value.airData.getmWindCount());
-		 myUserDB.update(AIRDATA, values,"device =? ",new String[]{String.valueOf(device)}); 
-	}
-	
-	public Boolean isAirDeviceExist(String device){
-		Cursor c = myUserDB.query(AIRDATA, null, null ,null, null, null, null);
-		
-		if (c.moveToFirst()== false){
-		return false;
+		 ContentValues cvs = new ContentValues();
+	     
+	      cvs.put(USER_DEVICE,device);
+	      cvs.put(USER_NAME,keyName);
+	      cvs.put(USER_DATA,data);
+	      cvs.put(USER_LEARN,0);
+	      myUserDB.insert(USERTAB, null,cvs); 
+	      Log.v(TAG, cvs.toString());
 		}
-		do{
-			String dev = c.getString(1);
-			Log.v(TAG, "airdevice ---->"+dev );
-		    if (device == dev){
-		    	c.close();
-		    	return true;
-		    }
-			
-		}while(c.moveToNext());
+	
+	public  void cleanKeyTab(){
 		
-		c.close(); 
-	
-		return false;
+		
+		// myUserDB.delete(USERTAB, "_id =? ",new String[]{String.valueOf(device)}); 
+		myUserDB.execSQL("DELETE FROM "+USERTAB);  
 	}
 	
-	
-	public void addAirData(int device){
-		 ContentValues values = new ContentValues();
-	      values.put(AIR_DEVICE,  Value.airData.getDevice());
-	      values.put(AIR_CODE,Value.airData.getCode());
-	      values.put(AIR_POWER,Value.airData.getmPower());
-	      values.put(AIR_TEMP,Value.airData.getmTmp());
-	      values.put(AIR_MODE,Value.airData.getmMode());
-	      values.put(AIR_AUTO,Value.airData.getmWindAuto());
-	      values.put(AIR_WDIR,Value.airData.getmWindDir());
-	      values.put(AIR_WCOUNT,Value.airData.getmWindCount());
-	      myUserDB.insert(AIRDATA, null,values); 
-	}
 }

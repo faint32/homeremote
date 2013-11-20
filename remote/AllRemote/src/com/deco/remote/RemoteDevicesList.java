@@ -63,10 +63,10 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
         btn_add = (Button)findViewById(R.id.rdl_add);
         btn_add.setOnClickListener(this);
         
-        btn_ok = (ImageButton)findViewById(R.id.rdl_ok);
-        btn_ok.setMinimumWidth((Value.screenWidth) / 6);
-        btn_ok.setMinimumHeight((Value.screenHeight) / 10);
-        btn_ok.setOnClickListener(this);
+//        btn_ok = (ImageButton)findViewById(R.id.rdl_ok);
+//        btn_ok.setMinimumWidth((Value.screenWidth) / 6);
+//        btn_ok.setMinimumHeight((Value.screenHeight) / 10);
+//        btn_ok.setOnClickListener(this);
 
         
         
@@ -78,8 +78,18 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 		mRmtListOpts=this;
 		
 		
-		rmtAdapter = new RemoteAdapter(this, list);
-	
+//		rmtAdapter = new RemoteAdapter(this, list);
+//	
+//		rmtAdapter.setOnAdapterChangeListener(this);
+//		
+//		listView.setAdapter(rmtAdapter);
+    }
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    	rmtAdapter = new RemoteAdapter(this, Value.rmtDevs);
+    	
 		rmtAdapter.setOnAdapterChangeListener(this);
 		
 		listView.setAdapter(rmtAdapter);
@@ -136,7 +146,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 			this.position = position;
 			status = LISTSTATUS.UPDATE;
 			Value.rmtDev = (RemoteDevice) rmtAdapter.getItem(position);
-			Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectRemote.class);
+			Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectDeviceType.class);
 			RemoteDevicesList.mRmtListOpts.startActivityForResult(i, R.id.REQUEST_OPTIONS);
 			
 			
@@ -162,7 +172,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 					device.setId(id);
 					Log.v(TAG, "add id --->"+ Value.rmtDev.getInfo());
 					
-					RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,false);
+			//		RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,false);
 					rmtAdapter.addItem(device);
 					rmtAdapter.notifyDataSetChanged();
 					}else {
@@ -175,7 +185,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 					device.setId(id);
 					Log.v(TAG, "update id --->"+ id);
 					
-						RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,true);
+			//			RemoteGetKeyValue.remoteUpdateOrAddKeyValue(device,this,true);
 						rmtAdapter.updateItem(device, id);
 						rmtAdapter.notifyDataSetChanged();
 						

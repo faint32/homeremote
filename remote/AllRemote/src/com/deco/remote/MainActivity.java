@@ -10,9 +10,6 @@ import java.util.ArrayList;
 
 
 
-import com.deco.adapt.MenuAdapter;
-import com.deco.adapt.MenuList;
-import com.deco.adapt.SelectPicPopupWindow;
 import com.deco.allremote.R;
 
 import com.deco.data.RemoteDevice;
@@ -22,6 +19,7 @@ import com.deco.ircore.RemoteCommunicate;
 
 
 import com.deco.ui.QuitDialog;
+import com.deco.ui.SelectPicPopupWindow;
 
 import com.deco.utils.RemoteDB;
 import com.deco.utils.UserDB;
@@ -49,9 +47,6 @@ import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 
 
@@ -68,26 +63,28 @@ import android.view.LayoutInflater;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 
 import android.view.View.OnTouchListener;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.AdapterView;
+
 
 import android.widget.HorizontalScrollView;
-import android.widget.ListView;
-import android.widget.SlidingDrawer;
+import android.widget.ImageButton;
+
 import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TextView;
 
 
 import android.widget.RelativeLayout;
 
 import android.widget.TabHost;
-import android.widget.TabWidget;
+
 
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+
 
 
 @SuppressLint("HandlerLeak")
@@ -107,13 +104,16 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	private static KeyTreate mKeyTreate = null;
 	SelectPicPopupWindow menuWindow;
 	private Vibrator vibrator;  
-	private SlidingDrawer sd;
-	private MenuAdapter myListAdapter;
-	private ListView listView;
-	private ArrayList<MenuList> menulists;
-	 private RemoteDB mRmtDB = null;
+//	private SlidingDrawer sd;
+//	private MenuAdapter myListAdapter;
+//	private ListView listView;
+//	private ArrayList<MenuList> menulists;
+	private RemoteDB mRmtDB = null;
 	private UserDB mUserDB = null;
-	
+	TextView devicesTV;
+	private ImageButton mBt_menu;
+	private ImageButton mBT_next;
+	private ImageButton mBT_previous;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -122,7 +122,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		
 		
 		mGestureDetector = new GestureDetector(this);
-		RelativeLayout line = (RelativeLayout) findViewById(R.id.main_view);
+		RelativeLayout line = (RelativeLayout) findViewById(R.id.parent);
 		line.setOnTouchListener(this);
 		line.setLongClickable(true);
 		mContext = this;
@@ -137,15 +137,60 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		int screenHeight = dm.heightPixels;
 		Value.screenHeight = screenHeight;
 		Value.screenWidth  = screenWidth;
-		mHs = (HorizontalScrollView) findViewById(R.id.hs);
+		devicesTV = (TextView) findViewById(R.id.selectRemote);
+	//	mHs = (HorizontalScrollView) findViewById(R.id.hs);
+		mBt_menu = (ImageButton) findViewById(R.id.settings);
+		mBt_menu.setOnClickListener(new OnClickListener() {			
+				public void onClick(View v) {
+					menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
+					menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.parent), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
+				}
+			});
+		mBT_next = (ImageButton) findViewById(R.id.selectRight);
+		mBT_next.setOnClickListener(new OnClickListener() {			
+			private RemoteDevice mDev;
+
+			public void onClick(View v) {
+				int total = tabHost.getTabWidget().getChildCount();
+				int current = tabHost.getCurrentTab();
+				if (current + 1 >= total) {
+					current = total - 1;
+				} 
+				else {
+					current = current + 1;
+				}
+//				Log.v(TAG, "total ====>" + total);
+//				Log.v(TAG, "current ====>" + current);
+				mDev =Value.rmtDevs.get(current);
+				tabHost.setCurrentTab(current);
+				devicesTV.setText(mDev.getName());
+			}
+		});
+		mBT_previous = (ImageButton) findViewById(R.id.selectLeft);
+		mBT_previous.setOnClickListener(new OnClickListener() {			
+			private RemoteDevice mDev;
+
+			public void onClick(View v) {
+				int total = tabHost.getTabWidget().getChildCount();
+				int current = tabHost.getCurrentTab();
+				if (current - 1 < 0) {
+					current = 0;
+				} else {
+					current = current - 1;
+				}
+				tabHost.setCurrentTab(current);
+				mDev =Value.rmtDevs.get(current);
+				devicesTV.setText(mDev.getName());
+
 		
+			}
+		});
 		
-		
-		menuLoading();
+	//	menuLoading();
 		
 		initHostTab();
 
-		tabHost.setCurrentTab(0);	
+	
 		
 		 
 		
@@ -176,6 +221,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
         });  
 	//	RemoteComm.initRemote();
 	
+
 	}
 
 	@Override
@@ -202,8 +248,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 		TabHost.TabSpec spec;
 		tabHost.setup();
 		Intent intent;
+		RemoteDevice mDev;
 		for (int i=0;i<Value.rmtDevs.size();i++){
-			RemoteDevice mDev =Value.rmtDevs.get(i);
+			mDev =Value.rmtDevs.get(i);
 		switch (mDev.getType()){
 		
 		case Value.DeviceType.TYPE_TV:
@@ -265,22 +312,25 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			break;
 		}
 	}
-		TabWidget tabWidget = tabHost.getTabWidget();
-		int count = tabWidget.getChildCount();
+//		TabWidget tabWidget = tabHost.getTabWidget();
+//		int count = tabWidget.getChildCount();
 	
 		
 	
-		if (count > 4) {
-			for (int i = 0; i < count; i++) {
-				tabWidget.getChildTabViewAt(i).setMinimumWidth(Value.screenWidth / 4);
-			}
-		}
-		for (int i = 0; i < tabWidget.getChildCount(); i++) {
-			tabWidget.getChildAt(i).getLayoutParams().height = (Value.screenHeight) / 18;
-			tabWidget.getChildAt(i).getLayoutParams().width = Value.screenWidth / 4;
-		}
+//		if (count > 4) {
+//			for (int i = 0; i < count; i++) {
+//				tabWidget.getChildTabViewAt(i).setMinimumWidth(Value.screenWidth / 4);
+//			}
+//		}
+//		for (int i = 0; i < tabWidget.getChildCount(); i++) {
+//			tabWidget.getChildAt(i).getLayoutParams().height = (Value.screenHeight) / 18;
+//			tabWidget.getChildAt(i).getLayoutParams().width = Value.screenWidth / 4;
+//		}
 		
 		tabHost.setCurrentTab(0);	
+		mDev =Value.rmtDevs.get(0);
+	
+		devicesTV.setText(mDev.getName());
 }
 	
 
@@ -327,26 +377,31 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 			float velocityY) {
+		RemoteDevice mDev; 
 		// TODO Auto-generated method stub
 		int total = tabHost.getTabWidget().getChildCount();
 		int current = tabHost.getCurrentTab();
 		// TODO Auto-generated method stub
 		if (e1.getX() - e2.getX() > FLING_MIN_DISTANCE
 				&& Math.abs(velocityX) > FLING_MIN_VELOCITY) {
-			if (current + 1 > total) {
+			if (current + 1 >= total) {
 				current = total - 1;
 			} 
 			else {
 				current = current + 1;
 			}
+//			Log.v(TAG, "total ====>" + total);
+//			Log.v(TAG, "current ====>" + current);
+			mDev =Value.rmtDevs.get(current);
 			tabHost.setCurrentTab(current);
-			if (current % 4 != 0 || current == 0) {
-				mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current - (current % 4))
-						.getLeft(), mHs.getHeight());
-			} else {
-				mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current)
-						.getLeft(), mHs.getHeight());
-			}
+			devicesTV.setText(mDev.getName());
+//			if (current % 4 != 0 || current == 0) {
+//				mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current - (current % 4))
+//						.getLeft(), mHs.getHeight());
+//			} else {
+//				mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current)
+//						.getLeft(), mHs.getHeight());
+//			}
 
 		} else if (e2.getX() - e1.getX() > FLING_MIN_DISTANCE
 				&& Math.abs(velocityX) > FLING_MIN_VELOCITY) {
@@ -356,8 +411,10 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 				current = current - 1;
 			}
 			tabHost.setCurrentTab(current);
-			mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current)
-					.getLeft(), mHs.getHeight());
+			mDev =Value.rmtDevs.get(current);
+			devicesTV.setText(mDev.getName());
+//			mHs.scrollTo(tabHost.getTabWidget().getChildTabViewAt(current)
+//					.getLeft(), mHs.getHeight());
 		}
 		return false;
 	}
@@ -389,110 +446,112 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	}
 	
 	
-//	private OnClickListener  itemsOnClick = new OnClickListener(){
-//
-//			public void onClick(View v) {
-//				menuWindow.dismiss();
-//				switch (v.getId()) {
-//				case R.id.btn_study:
-////				
-////					Log.v(TAG, "btn_study btn_study");
-////					Value.isStudying = true;
-////					
-////					RemoteComm.learnRemoteMain();
-////					Toast toast = Toast.makeText(getApplicationContext(), R.string.study_alert,
-////							Toast.LENGTH_SHORT);
-////					toast.setGravity( Gravity.CENTER_HORIZONTAL, 0, 0);
-////					toast.show();
-//					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
-//					.sendToTarget();
-//					break;
-//				case R.id.btn_options:		
-//					mHandler.obtainMessage(R.id.MSG_OPTION_LIST, 1, -1)
-//					.sendToTarget();
-//					break;
-//				case R.id.btn_about:	
-//					mHandler.obtainMessage(R.id.MSG_OPTION_ABOUT, 1, -1)
-//					.sendToTarget();
-//					break;
-//				case R.id.btn_quit:	
-//					mHandler.obtainMessage(R.id.MSG_OPTION_QUIT, 1, -1)
-//					.sendToTarget();
-//					break;	
-//				default:
-//					break;
-//				}
+	private OnClickListener  itemsOnClick = new OnClickListener(){
+
+			public void onClick(View v) {
+				menuWindow.dismiss();
+				switch (v.getId()) {
+				case R.id.btn_study:
 //				
+//					Log.v(TAG, "btn_study btn_study");
+//					Value.isStudying = true;
 //					
-//			}
-//	    	
-//	    };
-	
-	
-    void menuLoading(){
-    	listView = (ListView) findViewById(R.id.menu_list);
-		menulists = new ArrayList<MenuList>();
-		Resources res = getResources();
-		Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.menu_list);  
-		String str = res.getString(R.string.options);
-		MenuList ml = new MenuList(bmp,str);
-		menulists.add(ml);
-		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_learn);
-		str = res.getString(R.string.study);
-		ml = new MenuList(bmp,str);
-		menulists.add(ml);
-		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_about);
-		str = res.getString(R.string.about);
-		ml = new MenuList(bmp,str);
-		menulists.add(ml);
-		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_quit);
-		str = res.getString(R.string.quit);
-		ml = new MenuList(bmp,str);
-		menulists.add(ml);
-		sd = (SlidingDrawer) findViewById(R.id.sliding);  
-	
-
-		myListAdapter = new MenuAdapter(this, menulists);
-
-		listView.setAdapter(myListAdapter);
-
-		
-		listView.setOnItemClickListener(new OnItemClickListener()
-		{
-		    @Override
-		    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-		            long arg3)
-		    {
-		    	
-		    	
-		    	sd.close();
-		    	switch (arg2) {
-		    	
-				case 1:
-					
+//					RemoteComm.learnRemoteMain();
+//					Toast toast = Toast.makeText(getApplicationContext(), R.string.study_alert,
+//							Toast.LENGTH_SHORT);
+//					toast.setGravity( Gravity.CENTER_HORIZONTAL, 0, 0);
+//					toast.show();
 					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
 					.sendToTarget();
-					
 					break;
-				case 0:		
+				case R.id.btn_options:		
 					mHandler.obtainMessage(R.id.MSG_OPTION_LIST, 1, -1)
 					.sendToTarget();
 					break;
-				case 2:	
+				case R.id.btn_about:	
 					mHandler.obtainMessage(R.id.MSG_OPTION_ABOUT, 1, -1)
 					.sendToTarget();
-					
 					break;
-				case 3:	
+				case R.id.btn_quit:	
 					mHandler.obtainMessage(R.id.MSG_OPTION_QUIT, 1, -1)
 					.sendToTarget();
 					break;	
 				default:
 					break;
 				}
-		    }
-		});
-    }
+				
+					
+			}
+	    	
+	    };
+	
+	void popMenuLoad(){
+		
+	}
+//    void menuLoading(){
+ //   	listView = (ListView) findViewById(R.id.menu_list);
+//		menulists = new ArrayList<MenuList>();
+//		Resources res = getResources();
+//		Bitmap bmp=BitmapFactory.decodeResource(res, R.drawable.menu_list);  
+//		String str = res.getString(R.string.options);
+//		MenuList ml = new MenuList(bmp,str);
+//		menulists.add(ml);
+//		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_learn);
+//		str = res.getString(R.string.study);
+//		ml = new MenuList(bmp,str);
+//		menulists.add(ml);
+//		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_about);
+//		str = res.getString(R.string.about);
+//		ml = new MenuList(bmp,str);
+//		menulists.add(ml);
+//		bmp=BitmapFactory.decodeResource(res, R.drawable.menu_quit);
+//		str = res.getString(R.string.quit);
+//		ml = new MenuList(bmp,str);
+//		menulists.add(ml);
+////		sd = (SlidingDrawer) findViewById(R.id.sliding);  
+//	
+//
+//		myListAdapter = new MenuAdapter(this, menulists);
+//
+//		listView.setAdapter(myListAdapter);
+//
+//		
+//		listView.setOnItemClickListener(new OnItemClickListener()
+//		{
+//		    @Override
+//		    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//		            long arg3)
+//		    {
+//		    	
+//		    	
+//		    	sd.close();
+//		    	switch (arg2) {
+//		    	
+//				case 1:
+//					
+//					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
+//					.sendToTarget();
+//					
+//					break;
+//				case 0:		
+//					mHandler.obtainMessage(R.id.MSG_OPTION_LIST, 1, -1)
+//					.sendToTarget();
+//					break;
+//				case 2:	
+//					mHandler.obtainMessage(R.id.MSG_OPTION_ABOUT, 1, -1)
+//					.sendToTarget();
+//					
+//					break;
+//				case 3:	
+//					mHandler.obtainMessage(R.id.MSG_OPTION_QUIT, 1, -1)
+//					.sendToTarget();
+//					break;	
+//				default:
+//					break;
+//				}
+//		    }
+//		});
+//    }
 	
 	
 	public static Context getContext() {

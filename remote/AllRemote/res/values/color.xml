@@ -6,4 +6,7 @@
      <color name="deviceSelect">#ffffff</color>
      <color name="deviceNoSelect">#ffffff</color>
      <color name="buttonText">#000000</color>  
+      <color name="back_black">#00000000</color> 
+        <color name="button_white">#ffffff</color>  
+       <color name="background_black">#ff000000</color>   
 </resources>

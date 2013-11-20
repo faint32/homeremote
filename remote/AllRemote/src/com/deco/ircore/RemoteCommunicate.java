@@ -24,7 +24,7 @@ public class RemoteCommunicate {
 		}
 		
 		byte[] sendData = Tools.hexStringToBytes(remoteData);
-		
+		Log.v(TAG, "airdata ----> " + Tools.bytesToHexString(sendData));
 		if (sendData[0]==0x51&&sendData[1]<128){
 		sendIRCode(sendData);
 		} 
@@ -125,7 +125,7 @@ public static boolean initDECORemote(){
 		String temp = rmtDt.getCustom()+rmtDt.getData();
 		 Log.v(TAG, "getData ---->"+ temp);
 		byte[] data=Tools.hexStringToBytes(temp);
-		byte[] encodeData=remoteEncode (data,rmtDt.getCodetype());
+		byte[] encodeData= remoteEncode(data,rmtDt.getCodetype());
 //		for(byte t:encodeData){
 //			saveStr = "0x" +Tools.bytesToHex(t) + "   \n";
 //		}

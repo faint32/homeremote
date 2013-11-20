@@ -32,7 +32,7 @@ void IR_Send_Data(char *data,int Length){
 
 
 
-void Java_com_deco_ircomm_RemoteCommunicate_sendIRCode(JNIEnv* env, jobject jobj, jbyteArray datas){
+void Java_com_deco_ircore_RemoteCommunicate_sendIRCode(JNIEnv* env, jobject jobj, jbyteArray datas){
 	int i;
 	jbyte *sendDatasOld = (*env)->GetByteArrayElements(env, datas, NULL);
 	char *sendDatas = (char*)sendDatasOld;
@@ -49,7 +49,7 @@ void Java_com_deco_ircomm_RemoteCommunicate_sendIRCode(JNIEnv* env, jobject jobj
 	}
 }
 
-void Java_com_deco_ircomm_RemoteCommunicate_sendLearnCode(JNIEnv* env, jobject jobj, jbyteArray datas,jint arrayLength){
+void Java_com_deco_ircore_RemoteCommunicate_sendLearnCode(JNIEnv* env, jobject jobj, jbyteArray datas,jint arrayLength){
 	int i;
 	jbyte *sendDatasOld = (*env)->GetByteArrayElements(env, datas, NULL);
 
@@ -62,7 +62,7 @@ void Java_com_deco_ircomm_RemoteCommunicate_sendLearnCode(JNIEnv* env, jobject j
 
 }
 
-void Java_com_deco_ircomm_RemoteCommunicatesetLearnTimeout(JNIEnv* env, jobject jobj,jint setTime){
+void Java_com_deco_ircore_RemoteCommunicate_setLearnTimeout(JNIEnv* env, jobject jobj,jint setTime){
 	int i;
 
 	int time = (int)setTime;
@@ -70,7 +70,7 @@ void Java_com_deco_ircomm_RemoteCommunicatesetLearnTimeout(JNIEnv* env, jobject 
 
 }
 
-jbyteArray Java_com_deco_ircomm_RemoteCommunicate_readLearnIRCode(JNIEnv* env, jobject jobj,jint length){
+jbyteArray Java_com_deco_ircore_RemoteCommunicate_readLearnIRCode(JNIEnv* env, jobject jobj,jint length){
 	int i;
 	char readDatas[128];
 	int err;
@@ -91,9 +91,9 @@ jbyteArray Java_com_deco_ircomm_RemoteCommunicate_readLearnIRCode(JNIEnv* env, j
 
 
 jint
-Java_com_deco_ircomm_RemoteCommunicate_IRinit( JNIEnv*  env )
+Java_com_deco_ircore_RemoteCommunicate_IRinit( JNIEnv*  env )
 {
-  // LOGD("ircomm_Init() /n");
+  // LOGD("ircore_Init() /n");
    fd = open(DEVICE_NAME,O_RDWR);
    LOGD("ircontrol_init()-> fd = %d  /n",fd);
    if(fd == -1)
@@ -108,7 +108,7 @@ Java_com_deco_ircomm_RemoteCommunicate_IRinit( JNIEnv*  env )
 }
 
 jint
-Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeStop( JNIEnv*  env ){
+Java_com_deco_ircore_RemoteCommunicate_learnIRCodeStop( JNIEnv*  env ){
 	 int err;
 	 err = ioctl(fd,DC_CMD_STOP_LEARN,_DC6008_STOP_LEARN_);
 	  if(err == -1)
@@ -123,7 +123,7 @@ Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeStop( JNIEnv*  env ){
 
 
 jint
-Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeMain( JNIEnv*  env ){
+Java_com_deco_ircore_RemoteCommunicate_learnIRCodeMain( JNIEnv*  env ){
 	int rc;
 	fd_set fds;
 	int dev;
@@ -160,7 +160,7 @@ Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeMain( JNIEnv*  env ){
 
 
 jint
-Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeStart( JNIEnv*  env ) {
+Java_com_deco_ircore_RemoteCommunicate_learnIRCodeStart( JNIEnv*  env ) {
 	int err;
 	err = ioctl(fd,DC_CMD_START_LEARN,_DC6008_START_LEARND_);
 	 if(err == -1){
@@ -172,7 +172,7 @@ Java_com_deco_ircomm_RemoteCommunicate_learnIRCodeStart( JNIEnv*  env ) {
 	 	 }
 }
 jint
-Java_com_deco_ircomm_RemoteCommunicate_sendIRRepeat( JNIEnv*  env ){
+Java_com_deco_ircore_RemoteCommunicate_sendIRRepeat( JNIEnv*  env ){
 	 	 	 int err;
 	 	 	 err = ioctl(fd,DC_CMD_REPEAT,_DC6008_SEND_REPEAT_);
 	 	 	    if(err == -1)
@@ -187,8 +187,8 @@ Java_com_deco_ircomm_RemoteCommunicate_sendIRRepeat( JNIEnv*  env ){
 	 	 	 }
 
 void
-Java_com_deco_ircomm_RemoteCommunicate_Finish( JNIEnv*  env ){
-	   LOGD("ircomm_finish /n");
+Java_com_deco_ircore_RemoteCommunicate_Finish( JNIEnv*  env ){
+	   LOGD("ircore_finish /n");
 	   close(fd);
 
 	}
