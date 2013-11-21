@@ -228,69 +228,6 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return null;
 	}
 
-	public RemoteData getKeyData(int _type, String _index) {
-		RemoteData rmtData = new RemoteData();
-		int keyColumn = 4;
-		switch (_type) {
-		case Value.DeviceType.TYPE_TV:
-			keyColumn = 10;
-			break;
-		case Value.DeviceType.TYPE_DVD:
-			keyColumn = 4;
-			break;
-		case Value.DeviceType.TYPE_STB:
-			keyColumn = 10;
-			break;
-		case Value.DeviceType.TYPE_FAN:
-			keyColumn = 4;
-			break;
-
-		case Value.DeviceType.TYPE_PJT:
-			keyColumn = 4;
-			break;
-
-		default:
-			break;
-		}
-		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,
-				" code_index =?", new String[] { _index }, null, null, null);
-		c.moveToFirst();
-		rmtData.setIndex(c.getString(1));
-		rmtData.setCodetype(c.getString(2));
-		rmtData.setMode(Value.RemoteType[_type]);
-		rmtData.setCustom(c.getString(3));
-		rmtData.setData(c.getString(keyColumn));
-		return rmtData;
-
-	}
-
-	public ArrayList<RemoteData> getRemoteKeyData(int _type, String _index) {
-		ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
-
-		rmtDts.clear();
-		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,
-				" code_index =?", new String[] { _index }, null, null, null);
-		// Cursor c = myDataBase.rawQuery("SELECT * FROM " + TV_CODE_TAB +
-		// " WHERE custom=20020080" ,null);
-		if (c == null) {
-			return null;
-		}
-		c.moveToFirst();
-		// Log.v(TAG, "columnCoutn data " + c.getColumnCount());
-		for (int i = 4; i < c.getColumnCount(); i++) {
-			RemoteData rmtData = new RemoteData();
-			rmtData.setIndex(c.getString(1));
-			rmtData.setCodetype(c.getString(2)); 
-			rmtData.setMode(Value.RemoteType[_type]);
-			rmtData.setCustom(c.getString(3));
-			rmtData.setData(c.getString(i));
-			// Log.v(TAG, "remote data " + rmtData.getRemoteData());
-			rmtDts.add(rmtData);
-		}
-
-		return rmtDts;
-
-	}
 
 	// public void setKeyRemoteData(int _type,String _index){
 	// // ArrayList<RemoteData> rmtDts = new ArrayList<RemoteData>();
@@ -454,33 +391,7 @@ public class RemoteDB extends SQLiteOpenHelper {
 		return keyColumn;
 	}
 
-	public String[] getRemoteData(int _type, String _index) {
-		String[] rmtDts = new String[100];
-
-		Cursor c = myDataBase.query(Value.CodeProTab[_type], null,
-				" code_index =?", new String[] { _index }, null, null, null);
-		// Cursor c = myDataBase.rawQuery("SELECT * FROM " + TV_CODE_TAB +
-		// " WHERE custom=20020080" ,null);
-		if (c == null) {
-			return null;
-		}
-		c.moveToFirst();
-		// Log.v(TAG, "columnCoutn data " + c.getColumnCount());
-		for (int i = 4; i < c.getColumnCount(); i++) {
-			RemoteData rmtData = new RemoteData();
-			rmtData.setIndex(c.getString(1));
-			rmtData.setCodetype(c.getString(2));
-			rmtData.setMode(Value.RemoteType[_type]);
-			rmtData.setCustom(c.getString(3));
-			rmtData.setData(c.getString(i));
-			// Log.v(TAG, "remote data " + rmtData.getRemoteData());
-
-			rmtDts[i - 4] = RemoteCommunicate.encodeDECORemoteData(rmtData);
-		}
-
-		return rmtDts;
-
-	}
+	
 	
 	public String[] getKeyValueTAB(int _type) {
 		String[] keyTable;

@@ -8,5 +8,7 @@
      <color name="buttonText">#000000</color>  
       <color name="back_black">#00000000</color> 
         <color name="button_white">#ffffff</color>  
+        <color name="button_red">#ff0000</color>  
+        <color name="text_white">#ffffff</color>  
        <color name="background_black">#ff000000</color>   
 </resources>

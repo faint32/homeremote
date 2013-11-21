@@ -6,7 +6,9 @@ import com.deco.allremote.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,11 +28,15 @@ public class SelectPicPopupWindow extends PopupWindow {
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		Typeface type= Typeface.createFromAsset(context.getAssets(),"fonts/font_bold.ttf");
 		mMenuView = inflater.inflate(R.layout.popup_window, null);
 		btn_study = (Button) mMenuView.findViewById(R.id.btn_study);
 		btn_options = (Button) mMenuView.findViewById(R.id.btn_options);
 		btn_quit = (Button) mMenuView.findViewById(R.id.btn_quit);
-		btn_about =(Button) mMenuView.findViewById(R.id.btn_about);
+		btn_study.setTypeface(type);
+		btn_options.setTypeface(type);
+		btn_quit.setTypeface(type);
+//		btn_about =(Button) mMenuView.findViewById(R.id.btn_about);
 //		btn_quit.setOnClickListener(new OnClickListener() {
 //
 //			public void onClick(View v) {
@@ -39,7 +45,7 @@ public class SelectPicPopupWindow extends PopupWindow {
 //			}
 //		});
 		btn_quit.setOnClickListener(itemsOnClick);
-		btn_about.setOnClickListener(itemsOnClick);
+//		btn_about.setOnClickListener(itemsOnClick);
 		btn_study.setOnClickListener(itemsOnClick);
 		btn_options.setOnClickListener(itemsOnClick);
 

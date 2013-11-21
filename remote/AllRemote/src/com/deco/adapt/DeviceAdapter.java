@@ -24,7 +24,7 @@ public class DeviceAdapter extends BaseAdapter {
 	 LayoutInflater inflater;;
 	 int selectedposition=0;
 	 int color=0;
-	public DeviceAdapter(Context c,String[] text,int[] pic){
+	 public DeviceAdapter(Context c,String[] text,int[] pic){
 	 length=text.length;
 	 textstr=text;
 	 picid=pic;

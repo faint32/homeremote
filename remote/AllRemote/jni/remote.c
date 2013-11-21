@@ -197,10 +197,10 @@ int remoteEncode_NEC6122_C1(char* sendData,char* code){
 	memcpy(tempData,NEC6122_C1,length);
 
 	//get remote custom&data get code length
-	for (i=0;i<4;i++){
-		  
-		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
-	   }
+//	for (i=0;i<4;i++){
+//
+//		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
+//	   }
 
 	bitLen[0] = 8;
 	bitLen[1] = 8;
@@ -218,17 +218,17 @@ int remoteEncode_NEC6122_C1(char* sendData,char* code){
 	dataLen++;
 	bits[dataLen]=0;		//end frame
 	dataLen++;
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
+//	   }
 
 	dataLen=compressData(tempData,bits,dataLen,length);
 
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//	   }
 
 
 	length += dataLen;
@@ -259,10 +259,10 @@ int remoteEncode_TC9028_C1(char* sendData,char* code){
 	memcpy(tempData,TC9028_C1,length);
 
 	//get remote custom&data get code length
-	for (i=0;i<4;i++){
-		  
-		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
-	   }
+//	for (i=0;i<4;i++){
+//
+//		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
+//	   }
 
 	bitLen[0] = 8;
 	bitLen[1] = 8;
@@ -280,17 +280,17 @@ int remoteEncode_TC9028_C1(char* sendData,char* code){
 	dataLen++;
 	bits[dataLen]=0;		//end frame
 	dataLen++;
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
+//	   }
 
 	dataLen=compressData(tempData,bits,dataLen,length);
 
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//	   }
 
 
 	length += dataLen;
@@ -298,10 +298,10 @@ int remoteEncode_TC9028_C1(char* sendData,char* code){
 	tempData[length]=1;
 	length ++;
 
-	for (i=0;i<length;i++){
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-		  
-	   }
+//	for (i=0;i<length;i++){
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//
+//	   }
 	length =WrapUpSendData(sendData,tempData,REMOTE_SEND_1,length);
 	return length;
 }
@@ -321,10 +321,10 @@ int remoteEncode_TC9012_C1(char* sendData,char* code){
 	memcpy(tempData,TC9012_C1,length);
 
 	//get remote custom&data get code length
-	for (i=0;i<4;i++){
-		  
-		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
-	   }
+//	for (i=0;i<4;i++){
+//
+//		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
+//	   }
 
 	bitLen[0] = 8;
 	bitLen[1] = 8;
@@ -344,17 +344,17 @@ int remoteEncode_TC9012_C1(char* sendData,char* code){
 	dataLen++;
 	bits[dataLen]=0;		//end frame
 	dataLen++;
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("bits [%d] ======= 0x%x ",i,bits[i]);
+//	   }
 
 	dataLen=compressData(tempData,bits,dataLen,length);
 
-	for (i=0;i<dataLen;i++){
-		  
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-	   }
+//	for (i=0;i<dataLen;i++){
+//
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//	   }
 
 
 	length += dataLen;
@@ -362,10 +362,10 @@ int remoteEncode_TC9012_C1(char* sendData,char* code){
 	tempData[length]=1;
 	length ++;
 
-	for (i=0;i<length;i++){
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-		  
-	   }
+//	for (i=0;i<length;i++){
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//
+//	   }
 	length =WrapUpSendData(sendData,tempData,REMOTE_SEND_1,length);
 	return length;
 }
@@ -3190,10 +3190,10 @@ int remoteEncode_UPD6124_D7C13(char* sendData,char* code){
 	tempData[length]=1;
 	length ++;
 
-	for (i=0;i<length;i++){
-		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
-		  
-	   }
+//	for (i=0;i<length;i++){
+//		   LOGD("tempData [%d] ======= 0x%x ",i,tempData[i]);
+//
+//	   }
 	length =WrapUpSendData(sendData,tempData,REMOTE_SEND_1,length);
 	return length;
 }
@@ -3219,10 +3219,10 @@ int remoteEncode_PIONEER(char* sendData,char* code){
 	memcpy(tempData,PIONEER,length);
 
 	//get remote custom&data get code length
-	for (i=0;i<3;i++){
-		  
-		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
-	   }
+//	for (i=0;i<3;i++){
+//
+//		   LOGD("codeData [%d] ======= 0x%x ",i,codeData[i]);
+//	   }
 
 	bitLen[0] = 8;
 	bitLen[1] = 8;

@@ -5,7 +5,51 @@
     android:background="@drawable/bg_remote"
     android:orientation="vertical" >
 
+   
+ <RelativeLayout
+        android:id="@+id/asl_select"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
+        android:layout_marginTop="20.0dip"
+        >
+
+        <ImageButton
+            android:id="@+id/asl_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/remote_select_right_selector" />
+
+        <ImageButton
+            android:id="@+id/asl_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/remote_select_left_selector" />
+
+        <TextView
+            android:id="@+id/asl_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/asl_right"
+            android:layout_toRightOf="@id/asl_left"
+            android:background="@drawable/control_topbox_selector"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="5.0dip"
+            android:text="@string/title_remote_select"
+            android:textSize="24.0sp"
+            android:textStyle="bold" />
+
+       
+    </RelativeLayout>
     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:gravity="center"
@@ -19,7 +63,6 @@
             android:src="@drawable/code_sending"
             android:visibility="gone" />
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -77,35 +120,20 @@
             android:layout_height="60dp"
             android:background="@drawable/button_blue_con"
             android:text="@string/up_text"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/button_white"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/str_save"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:background="@drawable/button_red_con"
-            android:text="@string/save_text"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-
+      
         <Button
             android:id="@+id/str_down"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:background="@drawable/button_green_con"
             android:text="@string/down_text"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/button_white"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/str_cancel"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:background="@drawable/button_yellow_con"
-            android:text="@string/cancel_text"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+      
     </LinearLayout>
 
     <ScrollView
@@ -121,8 +149,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/option_info"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_white"
             android:textSize="20sp" />
     </ScrollView>
-
+ </LinearLayout>
 </LinearLayout>

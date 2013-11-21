@@ -48,7 +48,7 @@ public class TVRemote extends BaseActivity implements OnClickListener,
 		
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int screenWidth = (int) (dm.widthPixels/4.2);
+		int screenWidth = (int) (dm.widthPixels/4.5);
 		int screenHeight = dm.heightPixels;
 		
 //		Log.v(TAG, "dm widthpixels--->"+screenWidth+"       dm heightPixels ------>"+ screenHeight);
@@ -194,16 +194,7 @@ public class TVRemote extends BaseActivity implements OnClickListener,
 		super.onStart();
 		
 	}
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-			return true;
-		} else {
-			return super.onKeyDown(keyCode, event);
-		}
-	}
+	
 
 	public void onClick(View _view) {
 		switch (_view.getId()) {

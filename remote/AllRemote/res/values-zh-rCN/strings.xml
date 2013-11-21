@@ -4,13 +4,11 @@
  
     <string name="dialog_ok">确定</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">万能遥控器</string>
+    
     <string name="device_name">AllRemote</string>
     <string name="toast">TOAST</string>
     <string name="timeout">数据接收超时</string>
-    <string name="title_studying"><![CDATA[正在学习...]]></string>
-    <string name="title_studyed">学习成功</string>
-    <string name="title_about">关于</string>
+   
     <string name="study_alert"><![CDATA[请指定一个要学习的按键"]]></string>
     <string name="study_info"><![CDATA[请将被学遥控器发射头贴近对准接收器发射头，距离约3CM，并长按被学习的按键1到2S]]></string>
    <string name="study_loading">学习 载入中</string>
@@ -259,10 +257,21 @@
     <string name="about">关于</string>
     <string name="quit">退出</string>
     <string name="option_info"><![CDATA[首次使用对码操作：打开设备电源，选相应的设备类型，品牌或地区名称，然后按上下键钮，进行配对，当设备有反应：如开关机，进出仓，音量变化动作时，按停止然后按保存，检查各按键是否正常，不正常则重复操作，也可以手动向上，向下搜索，如果单品牌或单地区范围搜索配对不到，可以在全部品牌或地区范围内进行搜索对码。]]></string>
-
+	
+	<!--  dialog_quit -->
+     <string name="textQuitWarning">即将要离开遥控控制</string>
+   <!-- title --> 
+   <string name="title_activity_main">万能遥控器</string>
+     <string name="title_studying"><![CDATA[正在学习...]]></string>
+    <string name="title_studyed">学习成功</string>
+    <string name="title_about">关于</string>
+    <string name="title_device_type">选择设备类型</string>
+     <string name="title_devices_list">设备列表</string>
+       <string name="title_remote_select">选择遥控码</string>
     
-    
-    <string name="device_type_title">选择设备类型</string>
-    
+     
+     <string name="delete">删除</string> 
+     <string name="input">输入</string> 
+     <string name="name">设备名</string> 
     <string name="max_devices">超出遥控设备容量</string>
 </resources>

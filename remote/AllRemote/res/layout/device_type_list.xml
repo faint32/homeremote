@@ -8,10 +8,10 @@
 
       <RelativeLayout
         android:id="@+id/dtl_select"
-        android:layout_alignParentTop="true"
         android:layout_width="fill_parent"
         android:layout_height="45.0dip"
         android:layout_marginLeft="20.0dip"
+        android:layout_marginRight="20.0dip"
         android:layout_marginTop="20.0dip"
         >
 
@@ -38,8 +38,8 @@
             android:gravity="center"
             android:lines="1"
             android:padding="5.0dip"
-            android:text="tv"
-            android:textSize="16.0sp"
+            android:text="@string/title_device_type"
+            android:textSize="24.0sp"
             android:textStyle="bold" />
 
         <TextView
@@ -49,14 +49,42 @@
             android:layout_toRightOf="@id/dtl_left"
             android:background="@color/back_black" />
     </RelativeLayout>
-       
-    
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/control_midbox"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+          	
+            > 
+            <TextView
+		  	android:id="@+id/dtl_name"
+		  	android:layout_width="wrap_content"
+		  	android:layout_marginLeft="10dp"
+			android:layout_height="wrap_content"
+			android:hint="@string/name"
+			android:layout_centerVertical="true"
+			android:textColor="@color/text_white"
+			android:textSize="24sp"
+		 />
+            <Button
+		  	android:id="@+id/dtl_change_name"
+		  	android:layout_alignParentRight="true"
+		    android:layout_marginRight="20dp"
+		  	android:layout_width="80dp"
+			android:layout_height="wrap_content"
+			android:text="@string/input"
+			android:textColor="@color/button_white"
+			android:background="@drawable/button_red_con"
+		 />
+     </RelativeLayout>  
        
         <RelativeLayout
             android:layout_width="fill_parent"
            
             android:layout_height="0dip"
-            android:background="@drawable/bg"
+            android:background="@drawable/control_midbox"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
@@ -65,6 +93,8 @@
             > 
             <ListView
 		  	android:id="@+id/dtl_list"
+		  	android:layout_marginTop="10dp"
+		  	android:listSelector="@android:color/transparent"
 		  	android:divider="@drawable/devide_line"
 		  	android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

@@ -10,7 +10,7 @@ import com.deco.utils.Tools;
 
 
 public class RemoteCommunicate {
-	final static String TAG = "RemoteComm";
+	final static String TAG = "RemoteCommunicate";
 	Boolean trig=false;
 	private static final String libSoName = "IRCore";
 	static {  
@@ -24,7 +24,7 @@ public class RemoteCommunicate {
 		}
 		
 		byte[] sendData = Tools.hexStringToBytes(remoteData);
-		Log.v(TAG, "airdata ----> " + Tools.bytesToHexString(sendData));
+		Log.v(TAG, "sendDECORemote ----> " + Tools.bytesToHexString(sendData));
 		if (sendData[0]==0x51&&sendData[1]<128){
 		sendIRCode(sendData);
 		} 

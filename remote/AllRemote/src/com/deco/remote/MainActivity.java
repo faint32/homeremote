@@ -1,15 +1,5 @@
 package com.deco.remote;
 
-//import java.io.File;
-
-
-
-
-
-import java.util.ArrayList;
-
-
-
 import com.deco.allremote.R;
 
 import com.deco.data.RemoteDevice;
@@ -21,11 +11,9 @@ import com.deco.ircore.RemoteCommunicate;
 import com.deco.ui.QuitDialog;
 import com.deco.ui.SelectPicPopupWindow;
 
-import com.deco.utils.RemoteDB;
-import com.deco.utils.UserDB;
+//import com.deco.utils.RemoteDB;
+//import com.deco.utils.UserDB;
 
-
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Vibrator;
@@ -56,6 +44,7 @@ import android.util.Log;
 
 import android.view.GestureDetector;
 import android.view.Gravity;
+import android.view.KeyEvent;
 
 import android.view.LayoutInflater;
 
@@ -71,7 +60,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 
-import android.widget.HorizontalScrollView;
+//import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 
 import android.widget.TabHost.OnTabChangeListener;
@@ -98,7 +87,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 	
 	private static Context mContext;
 	private TabHost tabHost;
-	private HorizontalScrollView mHs;
+//	private HorizontalScrollView mHs;
 	private GestureDetector mGestureDetector;
 //	private Button mBt_menu;
 	private static KeyTreate mKeyTreate = null;
@@ -108,8 +97,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 //	private MenuAdapter myListAdapter;
 //	private ListView listView;
 //	private ArrayList<MenuList> menulists;
-	private RemoteDB mRmtDB = null;
-	private UserDB mUserDB = null;
+
 	TextView devicesTV;
 	private ImageButton mBt_menu;
 	private ImageButton mBT_next;
@@ -171,7 +159,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			private RemoteDevice mDev;
 
 			public void onClick(View v) {
-				int total = tabHost.getTabWidget().getChildCount();
+				
 				int current = tabHost.getCurrentTab();
 				if (current - 1 < 0) {
 					current = 0;
@@ -633,9 +621,9 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			case R.id.MESSAGE_WRITE:
 				break;
 			case R.id.MESSAGE_SEND:
-//				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
-//				 long [] pattern = {100,100};   // 鍋滄 寮�惎 鍋滄 寮�惎   
-//				vibrator.vibrate(pattern,1);          
+				vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
+				 long [] pattern = {100,100};   
+				vibrator.vibrate(pattern,1);          
 				showCodeSending();
 				
 		//		hideCodeSending();
@@ -659,7 +647,7 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 
 				Log.v(TAG, "msg study");
 				Value.isStudying = true;
-				Intent studyIntent = new Intent(mContext, StudyActivity.class);
+				Intent studyIntent = new Intent(mContext, Studying.class);
 			
 				startActivityForResult(studyIntent, R.id.REQUEST_STUDY);  
 				
@@ -712,6 +700,32 @@ public class MainActivity extends TabActivity implements OnTouchListener,
 			}
 		}
 	};
-
+	public boolean dispatchKeyEvent(KeyEvent event) { 
+	    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) { 
+	        if (event.getAction() == KeyEvent.ACTION_DOWN 
+	                && event.getRepeatCount() == 0) { 
+	        	 Dialog dialog = new QuitDialog(mContext, R.style.QuitDialog  ,new QuitDialog.PriorityListener() {  
+						
+						
+						@Override
+						public void quitApplication() {
+							// TODO Auto-generated method stub
+							finish();
+						}  
+		            });  
+		              dialog.show();
+	            return true; 
+	        } 
+	    } 
+	    if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) { 
+	        if (event.getAction() == KeyEvent.ACTION_DOWN 
+	                && event.getRepeatCount() == 0) { 
+	        	menuWindow = new SelectPicPopupWindow(MainActivity.this, itemsOnClick);
+				menuWindow.showAtLocation(MainActivity.this.findViewById(R.id.parent), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0); 
+	            return true; 
+	        } 
+	    } 
+	    return super.dispatchKeyEvent(event); 
+	} 
 
 }

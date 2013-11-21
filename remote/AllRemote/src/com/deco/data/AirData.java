@@ -101,6 +101,16 @@ public class AirData {
 	public void setCode(int code) {
 		this.code = code;
 	}
+	public String getInfo() {
+		return   "code==>" + this.code+"   "
+				 +"power==>" + this.mPower+"   " 
+				 +"mMode==>"+ this.mMode +"   " 
+				 +"mWindAuto==>"+ this.mWindAuto +"   " 
+				 +"mWindDir==>"+ this.mWindDir +"   " 
+				 +"mWindCount==>"+ this.mWindCount +"   " 
+				 +"mkey==>"+ this.mkey +"   " ;
+		
+	}
 	
 	
 }

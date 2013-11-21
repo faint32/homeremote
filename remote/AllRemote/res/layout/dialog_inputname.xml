@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_remote"
     android:orientation="vertical" >
 
   
@@ -13,6 +13,7 @@
             android:layout_height="wrap_content"
             android:text="@string/textinputname"
             android:textSize="30sp"
+            android:layout_gravity="center"
             android:textColor="@color/deviceNoSelect"
             />
 
@@ -22,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:inputType="textMultiLine"
+            android:hint="@string/name"
+            android:inputType="text"
              > 
     	</EditText>
     	
@@ -33,7 +35,7 @@
 			android:layout_width="wrap_content"
 			android:src = "@drawable/button_icon_cursor_enter"
 			android:background="@drawable/button_green_con"
-			android:layout_centerInParent ="true"
+			android:layout_gravity="center"
 		/>
      
   

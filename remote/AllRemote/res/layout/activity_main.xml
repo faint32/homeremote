@@ -47,7 +47,7 @@
             android:gravity="center"
             android:lines="1"
             android:padding="5.0dip"
-            android:text="@string/device_type_title"
+            android:text="@string/title_activity_main"
             android:textSize="16.0sp"
             android:textStyle="bold" />
 <!-- 
@@ -65,17 +65,17 @@
         android:id="@android:id/tabhost"
         android:layout_below="@id/devicesSelector"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/control_midbox" >
 
         <LinearLayout
             android:id="@+id/gallerylayout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@drawable/bg_remote"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
             <HorizontalScrollView

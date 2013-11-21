@@ -6,35 +6,57 @@
     android:background="@drawable/bg_remote"
     >
 
-      <RelativeLayout
+       <RelativeLayout
+        android:id="@+id/rdl_select"
+        android:layout_width="fill_parent"
+        android:layout_height="45.0dip"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginRight="20.0dip"
+        >
+
+        <ImageButton
+            android:id="@+id/rdl_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/remote_select_right_selector" />
+
+        <ImageButton
+            android:id="@+id/rdl_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/remote_select_left_selector" />
+
+        <TextView
+            android:id="@+id/rdl_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:layout_marginTop="5dip"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="26sp"
-                android:text="@string/add_remote"
-                android:textColor="#ffffff" />
-            <Button  
-			android:id="@+id/rdl_add" 
-			android:layout_height="wrap_content" 	
-			android:layout_width="wrap_content"
-			android:background="@drawable/menu_add"
-			android:layout_marginRight="10dp"
-			android:layout_alignParentRight ="true"
-		    />
+            android:layout_toLeftOf="@id/rdl_right"
+            android:layout_toRightOf="@id/rdl_left"
+            android:background="@drawable/control_topbox_selector"
+            android:gravity="center"
+            android:lines="1"
+            android:padding="5.0dip"
+            android:text="@string/title_devices_list"
+            android:textSize="16.0sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/rdl_right"
+            android:layout_toRightOf="@id/rdl_left"
+            android:background="@color/back_black" />
+    </RelativeLayout>
        
-      </RelativeLayout> 
+
        
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="0dip"
             android:orientation="horizontal" 
-            android:background="@drawable/bg"
+            android:background="@drawable/control_midbox"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
@@ -43,6 +65,8 @@
             > 
             <ListView
 		  	android:id="@+id/remote_list"
+		  	android:layout_marginTop="20dp"
+		  	android:listSelector="@android:color/transparent"
 		  	android:divider="@drawable/devide_line"
 		  	android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

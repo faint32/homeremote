@@ -82,7 +82,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.deco.remote.StudyActivity"
+            android:name="com.deco.remote.Studying"
             android:screenOrientation="portrait" >
         </activity>
       

@@ -5,7 +5,7 @@
 #include "Calculate.h"
 
 
-#define DEBUG
+//#define DEBUG
 
 
 

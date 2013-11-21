@@ -7,7 +7,7 @@ import com.deco.data.RemoteDevice;
 import com.deco.data.Value;
 import com.deco.remote.RemoteDevicesList;
 import com.deco.remote.Start;
-import com.deco.remote.StudyActivity;
+import com.deco.remote.Studying;
 import com.deco.remote.TVRemote;
 import com.deco.utils.UserDB;
 
@@ -105,15 +105,12 @@ public class RemoteAdapter extends BaseAdapter {
 
 					if(list.size()>1){
 						int p = (Integer)holder.info.getTag();
+						
 						UserDB mUsrDB = new UserDB(context);
 						mUsrDB.open();
 						RemoteDevice rmtDev = list.get(p);
-						Boolean isSmart = false;
-						if (rmtDev.getType()==Value.DeviceType.TYPE_AIR)
-						{
-							isSmart = true;
-						}
-						mUsrDB.deleteRemoteDevice(isSmart,p);
+						
+						mUsrDB.deleteRemoteDevice(rmtDev.getType(),p);
 						mUsrDB.close();	
 						list.remove(p);
 						if(listener!=null){

@@ -7,7 +7,7 @@ import com.deco.adapt.RemoteAdapter;
 import com.deco.adapt.RemoteAdapter.OnAdapterChangeListener;
 import com.deco.allremote.R;
 import com.deco.data.RemoteDevice;
-import com.deco.data.RemoteGetKeyValue;
+
 import com.deco.data.Value;
 
 import com.deco.ui.InputNameDialog;
@@ -15,23 +15,21 @@ import com.deco.utils.UserDB;
 
 
 
+
 import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+
 import android.view.View;
-import android.view.Window;
+
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
+
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,11 +39,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class RemoteDevicesList extends Activity implements OnClickListener,OnAdapterChangeListener,OnItemClickListener{
 	ListView listView;
-	Button btn_add;
-	ImageButton btn_ok;
+	ImageButton btn_add;
+
 	ImageButton btn_cancel;
 	List<RemoteDevice> list;
 	RemoteAdapter rmtAdapter;
+	public static RemoteDevicesList instance;
 	enum LISTSTATUS {
 	ADD,
 	UPDATE,
@@ -53,20 +52,19 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	};
 	LISTSTATUS status = LISTSTATUS.ADD;
 	int position;
+	private ImageButton btn_bck;
     final static String TAG = "RemoteDevicesList";
-	public static RemoteDevicesList mRmtListOpts;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.remote_device_list);
         
-        btn_add = (Button)findViewById(R.id.rdl_add);
+        btn_add = (ImageButton)findViewById(R.id.rdl_right);
         btn_add.setOnClickListener(this);
         
-//        btn_ok = (ImageButton)findViewById(R.id.rdl_ok);
-//        btn_ok.setMinimumWidth((Value.screenWidth) / 6);
-//        btn_ok.setMinimumHeight((Value.screenHeight) / 10);
-//        btn_ok.setOnClickListener(this);
+        btn_bck = (ImageButton)findViewById(R.id.rdl_left);
+
+        btn_bck.setOnClickListener(this);
 
         
         
@@ -74,9 +72,13 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 		listView.setCacheColorHint(0);
 		listView.setOnItemClickListener(this);
 	
-		list = Value.rmtDevs;
-		mRmtListOpts=this;
+//		list = Value.rmtDevs;
+		instance=this;
+		rmtAdapter = new RemoteAdapter(this, Value.rmtDevs);
+    	
+		rmtAdapter.setOnAdapterChangeListener(this);
 		
+		listView.setAdapter(rmtAdapter);
 		
 //		rmtAdapter = new RemoteAdapter(this, list);
 //	
@@ -88,19 +90,20 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
     protected void onStart() {
     	// TODO Auto-generated method stub
     	super.onStart();
-    	rmtAdapter = new RemoteAdapter(this, Value.rmtDevs);
     	
-		rmtAdapter.setOnAdapterChangeListener(this);
-		
-		listView.setAdapter(rmtAdapter);
+    	
+//		for (RemoteDevice rd :Value.rmtDevs){
+//			Log.v(TAG, rd.getFullInfo());
+//		}
+//		Log.v(TAG, Value.rmtDev.getFullInfo());
     }
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.rdl_add:
+		case R.id.rdl_right:
 			addDevice();
     		break;
-		case R.id.rdl_ok:
+		case R.id.rdl_left:
 			//save();
 			finish();
 			break;
@@ -120,6 +123,7 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 	}
 	
 	private void addDevice(){
+		if (Value.rmtDevs.size()<11){
 		Value.rmtDev = new RemoteDevice();
 		Dialog dialog = new InputNameDialog(this, R.style.QuitDialog  ,new InputNameDialog.PriorityListener() {  
 
@@ -127,13 +131,14 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 			public void refreshDeviceName(String string) {
 				// TODO Auto-generated method stub
 				Value.rmtDev.setName(string);
-				Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectRemote.class);
-				RemoteDevicesList.mRmtListOpts.startActivityForResult(i, R.id.REQUEST_OPTIONS);
-				status = LISTSTATUS.ADD;
+				Value.rmtDev.setId(Value.rmtDevs.size());
+				Intent i = new Intent(RemoteDevicesList.instance, SelectDeviceType.class);
+				RemoteDevicesList.instance.startActivity(i);
+				Value.selectStatus = 1;
 			}  
         });  
           dialog.show();
-		
+		}
 	}
 	
 
@@ -146,8 +151,8 @@ public class RemoteDevicesList extends Activity implements OnClickListener,OnAda
 			this.position = position;
 			status = LISTSTATUS.UPDATE;
 			Value.rmtDev = (RemoteDevice) rmtAdapter.getItem(position);
-			Intent i = new Intent(RemoteDevicesList.mRmtListOpts, SelectDeviceType.class);
-			RemoteDevicesList.mRmtListOpts.startActivityForResult(i, R.id.REQUEST_OPTIONS);
+			Intent i = new Intent(RemoteDevicesList.instance, SelectDeviceType.class);
+			RemoteDevicesList.instance.startActivity(i);
 			
 			
 //			Toast.makeText(MainActivity.this, "��ǰѡ�е�"+(position+1)+"��", Toast.LENGTH_LONG).show();

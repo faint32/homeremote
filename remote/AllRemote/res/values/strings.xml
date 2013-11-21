@@ -3,13 +3,9 @@
     <string name="app_name">Remote</string>
     <string name="action_setting">Remote</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">All Remote Control </string>
     <string name="device_name">CTRL</string>
     <string name="toast">TOAST</string>
     <string name="timeout">Timeout</string>
-    <string name="title_studying"><![CDATA[Are learning...]]></string>
-    <string name="title_studyed">Learning success</string>
-    <string name="title_about">About</string>
     <string name="study_alert"><![CDATA[Please specify a button to learn"]]></string>
     <string name="study_info"><![CDATA[Please be learned remote control transmitter head close alignment receiver transmitter head, a distance of about 3CM, and long learning keys 1 to 2S]]></string>
     <string name="study_loading">study loading</string>
@@ -17,36 +13,29 @@
     <string name="study_save">Save data</string>
     <string name="study_exit">Quit learning</string>
     <string name="about_ok">OK</string>
-
     <string name="set_menu">SetUp</string>
     <string name="updata_end">Database updata finished</string>
     <string name=" first_updata_end">First  Database initial finished</string>
-    
-    
-     <!--remote list -->
+
+    <!-- remote list -->
     <string name="input_name">Input Name</string>
     <string name="add_remote">Add a new remote device</string>
-    
-    
     <string name="air_power_off">Mode:OFF</string>
-    
     <string name="language">
-        
-	<![CDATA[
+<![CDATA[
 	Software installation:"*. Apk" files copied or downloaded to the phone memory card 
     through the "document management" or "File Manager" to find the file, 
     click on the relevant directory follow the prompts to install, 
     the system will generate: "mobile phone remote control icon;\n
-	]]>		
+	]]>
     </string>
-    
     <string name="about_info">
 <![CDATA[ deco CO.,LTD.\n
         							   ]]>
     </string>
     <string name="Long"><![CDATA[ deco CO.,LTD.]]></string>
     <string name="str_about">
-	<![CDATA[
+<![CDATA[
 	Software information:\n
 	Name: all remote \n
 	Version: V0.0.1Beta\n
@@ -57,13 +46,10 @@
 	
 	]]>
     </string>
-    <string name="LongAbout">
-<![CDATA[  deco  \n]]>
-    </string>
+    <string name="LongAbout"><![CDATA[  deco  \n]]></string>
     <string name="Clean"></string>
-   
- 	 <string name="show">Show the key value</string>
- 
+    <string name="show">Show the key value</string>
+
     <!-- Splash -->
     <string name="start_loading"><![CDATA[Loading...]]></string>
     <!-- MainActivity -->
@@ -71,7 +57,7 @@
     <string name="str_message">Quit?</string>
     <string name="str_ok">OK</string>
     <string name="str_back">Return</string>
-      <!-- Select -->
+    <!-- Select -->
     <string name="device_type">Device Type</string>
     <string name="name_text">Brand Name</string>
     <string name="cur_name">Current Device</string>
@@ -85,15 +71,14 @@
     <string name="manual_text">manually</string>
     <string name="save_text">Save</string>
     <string name="change_name">Update</string>
-    
-    <!--  dialog_inputname -->
+
+    <!-- dialog_inputname -->
     <string name="textinputname">Please input  name</string>
-     <!--  dialog_quit -->
-     <string name="textQuitWarning">Quit remote</string>
-    
-    
-	<!-- NUM -->
-	<string name="bt_num0">0</string>
+    <!-- dialog_quit -->
+    <string name="textQuitWarning">Quit remote control</string>
+
+    <!-- NUM -->
+    <string name="bt_num0">0</string>
     <string name="bt_num1">1</string>
     <string name="bt_num2">2</string>
     <string name="bt_num3">3</string>
@@ -103,7 +88,7 @@
     <string name="bt_num7">7</string>
     <string name="bt_num8">8</string>
     <string name="bt_num9">9</string>
-   <string name="bt_num10"><![CDATA[-/]]></string>
+    <string name="bt_num10"><![CDATA[-/]]></string>
     <string name="bt_bck">Return</string>
     <!-- TV -->
     <string name="tv">tv</string>
@@ -129,7 +114,6 @@
     <string name="tv_ok">OK</string>
     <string name="tv_av">AV/TV</string>
     <string name="tv_back">Return</string>
-    
 
     <!-- STB -->
     <string name="stb">stb</string>
@@ -206,7 +190,6 @@
     <string name="fan_key8">8</string>
     <string name="fan_key9">9</string>
 
-  
     <!-- pjt -->
     <string name="pjt">pjt</string>
     <string name="str_pjt">PJT</string>
@@ -263,17 +246,26 @@
     <string name="air_mode_value_5">Heating</string>
     <string name="d">Degree</string>
 
-   
-    
     <!-- MENU -->
     <string name="study">Learn</string>
     <string name="options">select</string>
     <string name="about">About</string>
     <string name="quit">exit</string>
     <string name="dialog_ok">OK</string>
-    <string name="device_type_title">Select Device Type</string>
-    
-    
+
+    <!-- title -->
+    <string name="title_activity_main">All Remote Control </string>
+    <string name="title_studying"><![CDATA[Are learning...]]></string>
+    <string name="title_studyed">Learning success</string>
+    <string name="title_about">About</string>
+    <string name="title_device_type">Select Device Type</string>
+    <string name="title_devices_list"> Devices List</string>
+    <string name="title_remote_select">Select Remote　Code</string>
+
+    <!-- other -->
+    <string name="name">Device Name</string>
+    <string name="delete">Delete</string>
+    <string name="input">Input</string>
     <string name="option_info"><![CDATA[The first use of the code operation: turn on the device, select the device type, brand or region name and then press automatic Jianniu, paired device reaction: such as switch machines, and out of positions, the volume change action, press the stopthen save the check button is normal, not normal, repeat operation can also manually upward, downward search single brand or a single area to search for matching less than All brand or region within the search code.]]></string>
     <string name="max_devices">The devices is out of Max devices capacity</string>
 

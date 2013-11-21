@@ -6,11 +6,12 @@
 	android:gravity="center"
 	android:padding="5dip"
 	
+	android:baselineAligned="false"
 	>
 	<!-- android:descendantFocusability= "blocksDescendants"  -->
 	<LinearLayout 
 		android:orientation="horizontal"
-		android:layout_width="fill_parent" 
+		android:layout_width="0dp" 
 		android:layout_height="wrap_content"
 		android:layout_weight="1"
 		 >
@@ -18,6 +19,7 @@
 		 		android:id="@+id/remote_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
                 android:layout_marginRight="5dip"
                 android:textSize="24sp"
                 android:text=""
@@ -48,9 +50,12 @@
 		<Button  
 			android:id="@+id/remote_delete" 
 			android:layout_height="wrap_content" 	
-			android:layout_width="wrap_content"
+			android:layout_width="80dp"
 			android:focusable="false"  
-			android:background="@drawable/menu_del"
+			android:text="@string/delete"
+			android:textSize="20sp"
+			android:textColor="@color/button_white"
+			android:background="@drawable/btn_style_alert_dialog_special"
 		    />
 	</LinearLayout>
 	

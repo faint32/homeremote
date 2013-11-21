@@ -2,18 +2,17 @@ package com.deco.ircore;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
+
 
 
 import com.deco.allremote.R;
 import com.deco.data.AirData;
 
-import com.deco.data.RemoteData;
-import com.deco.data.RemoteDevice;
+
 import com.deco.data.Value;
-import com.deco.utils.RemoteDB;
-import com.deco.utils.Tools;
+
 import com.deco.utils.UserDB;
+
 
 public class KeyTreate {
 	private final static String TAG ="KeyTreate";
@@ -45,10 +44,12 @@ public class KeyTreate {
 		
 			
 			if (Value.isStudying){
-			
+			String learnData = RemoteCommunicate.readDECOLearnData();
 			mHandler.obtainMessage(R.id.MSG_LEARN_END, 1, -1)
 			.sendToTarget();
-
+			userDB.open();
+			userDB.saveLearnData(device,keyName,learnData);
+			userDB.close();
 			}
 			else{
 			//	Log.v(TAG, "keytable----->"+ Value.keyRemoteTab.toString() );

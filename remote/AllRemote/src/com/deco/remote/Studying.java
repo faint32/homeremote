@@ -23,11 +23,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class StudyActivity extends Activity implements OnClickListener{
+public class Studying extends Activity implements OnClickListener{
 	 StudyHandler studyHandler;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialog_studyed);
+		setContentView(R.layout.dialog_studying);
 		DisplayMetrics dm = new DisplayMetrics();
 		Display display = getWindowManager().getDefaultDisplay();
 		display.getMetrics(dm);
@@ -36,10 +36,10 @@ public class StudyActivity extends Activity implements OnClickListener{
 		
 		
 		
-		Button studyExit = (Button) findViewById(R.id.button_study_exit);
-		studyExit.setOnClickListener(this);
-		studyExit.setWidth((screenWidth) / 3);
-		studyExit.setHeight((screenHeight) / 10);
+//		Button studyExit = (Button) findViewById(R.id.button_study_exit);
+//		studyExit.setOnClickListener(this);
+//		studyExit.setWidth((screenWidth) / 3);
+//		studyExit.setHeight((screenHeight) / 10);
 		studyHandler = new StudyHandler();  
           StudyThread thread = new StudyThread();  
           thread.start();  
@@ -63,7 +63,7 @@ public class StudyActivity extends Activity implements OnClickListener{
 		switch(arg0.getId())
 		{
 	
-		case R.id.button_study_exit:
+		case R.id.studying_Left:
 			RemoteCommunicate.remoteDECOLearnStop();
 			  Bundle bundle = new Bundle();  
 			  bundle.putInt("status", -1);
@@ -111,7 +111,7 @@ public class StudyActivity extends Activity implements OnClickListener{
 	            Bundle bundle = new Bundle();  
 	            bundle.putInt("status", status);  
 	            msg.setData(bundle);  
-	            StudyActivity.this.studyHandler.sendMessage(msg);  
+	            Studying.this.studyHandler.sendMessage(msg);  
 	              
 	        }  
 	    }  

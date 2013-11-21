@@ -87,7 +87,7 @@ public class BaseActivity extends Activity {
 //					mHandler.obtainMessage(R.id.MSG_OPTION_STUDY, 1, -1)
 //					.sendToTarget();	
 					Value.isStudying = true;
-					Intent studyIntent = new Intent(mContext, StudyActivity.class);
+					Intent studyIntent = new Intent(mContext, Studying.class);
 					startActivityForResult(studyIntent, R.id.REQUEST_STUDY);  
 					break;
 				case ITEM_SETTING:
@@ -172,7 +172,8 @@ public class BaseActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 	
-		
+	
+
 			
 
 	

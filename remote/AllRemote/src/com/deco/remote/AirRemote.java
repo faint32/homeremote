@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 
 
 public class AirRemote extends Activity implements OnClickListener {
+	private static final String TAG = null;
 	TextView airShow;
 	TextView airMode;
 	TextView airWindDir;	
@@ -112,6 +114,7 @@ public class AirRemote extends Activity implements OnClickListener {
 		super.onStart();
 		UserDB mUserDB = new UserDB(this);
 		Value.airData = Value.rmtDevs.get(Value.currentDevice).getAirData();
+		Log.v(TAG, Value.airData.getInfo());
 //		mUserDB.open();
 //		mUserDB.getAirData(Value.currentDevice);
 		airShow.setText(getTempStr(Value.airData));

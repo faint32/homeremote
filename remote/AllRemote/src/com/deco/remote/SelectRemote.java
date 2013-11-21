@@ -6,6 +6,7 @@ import com.database.IRDataBase;
 import com.deco.allremote.R;
 import com.deco.data.AirData;
 import com.deco.data.RemoteData;
+import com.deco.data.RemoteGetKeyValue;
 import com.deco.data.Value;
 import com.deco.ircore.RemoteCommunicate;
 import com.deco.utils.RemoteDB;
@@ -31,6 +32,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import android.widget.Toast;
 //import android.widget.RadioButton;
@@ -51,7 +53,6 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	private TextView mDeviceCount = null;
 	private TextView mRemainCount = null;
 	private TextView mCurrentCount = null;
-	private TextView mDeviceName = null;
 
 	private int mType = Value.DeviceType.TYPE_TV;
 	private String mTypeName = null;
@@ -67,10 +68,11 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 	RemoteData rmtData = new RemoteData();
 	// Button autoButton;
 	// Button stopButton;
-	Button saveButton;
+	ImageButton saveButton;
+	ImageButton cancelButton;
 	Button upButton;
 	Button downButton;
-	Button cancelButton;
+	
 	Context mContext;
 
 	@Override
@@ -124,17 +126,16 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		// stopButton = (Button) findViewById(R.id.str_stop);
 		// stopButton.setOnClickListener(this);
 		// stopButton.setEnabled(false);
-		saveButton = (Button) findViewById(R.id.str_save);
+		saveButton = (ImageButton) findViewById(R.id.asl_right);
 		saveButton.setOnClickListener(this);
 		upButton = (Button) findViewById(R.id.str_up);
 		upButton.setOnClickListener(this);
-		upButton.setEnabled(true);
-		cancelButton = (Button) findViewById(R.id.str_cancel);
+		
+		cancelButton = (ImageButton) findViewById(R.id.asl_left);
 		cancelButton.setOnClickListener(this);
-		cancelButton.setTypeface(type);
 		downButton = (Button) findViewById(R.id.str_down);
 		downButton.setOnClickListener(this);
-		downButton.setEnabled(true);
+		
 
 		initialRemoteList(mType);
 		// Locale.getDefault().getLanguage();
@@ -256,7 +257,13 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		mUserDB.open();
 		mUserDB.saveRemoteDevice(Value.rmtDev);
 		mUserDB.getRemoteDevices();
+		if(Value.rmtDev.getType()!=Value.DeviceType.TYPE_AIR){
+		mUserDB.delDevKeyTab(Value.rmtDev.getId());
 		mUserDB.close();	
+		RemoteGetKeyValue.keyTabSetValue(Value.rmtDev,mContext);	
+		}else {
+		mUserDB.close();		
+		}
 	}
 
 	@Override
@@ -357,24 +364,19 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 		// deviceSp.setEnabled(true);
 		// typeSp.setEnabled(true);
 		// break;
-		case R.id.str_save:
+		case R.id.asl_right:
 
-			// if (mThread != null) {
-			// mThread.cancel();
-			// mThread = null;
-			// }
-			// bundle.putString("name", mDeviceName.getText().toString());
-			// bundle.putInt("type", mType);
-		//	Value.rmtDev.setName(mDeviceName.getText().toString());
 
 			save(mCutCount);
 			Log.v(TAG, "end --->" + Value.rmtDev.getFullInfo());
-		//	setResult(RESULT_OK, getIntent().putExtras(bundle));
+		
+			
 			finish();
+			RemoteDevicesList.instance.finish();
 			break;
-		case R.id.str_cancel:
-
-		//	setResult(RESULT_CANCELED, getIntent().putExtras(bundle));
+		case R.id.asl_left:
+			Log.v(TAG, "back --->" + Value.rmtDev.getFullInfo());
+	
 			finish();
 			break;
 		case R.id.str_up:
@@ -408,19 +410,6 @@ public class SelectRemote extends Activity implements OnItemSelectedListener,
 			mCurrentCount.setText("    (" + String.valueOf(mCutCount + 1)
 					+ ")     ");
 			break;
-		// case R.id.name_change:
-		// Dialog dialog = new InputNameDialog(this, R.style.QuitDialog ,new
-		// InputNameDialog.PriorityListener() {
-		//
-		// @Override
-		// public void refreshDeviceName(String string) {
-		// // TODO Auto-generated method stub
-		// mDeviceName.setText(string);
-		// }
-		// });
-		// dialog.show();
-		//
-		// break;
 		default:
 			break;
 		}

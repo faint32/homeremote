@@ -134,10 +134,15 @@ public class RemoteUpdateService extends IntentService {
 		mUserDB.open();
 //		mUserDB.getUserKeyValue();
 		mUserDB.getRemoteDevices();
-		mUserDB.cleanKeyTab();
 		mUserDB.close();
+		if (!Value.initial){
+			mUserDB.open();
+			mUserDB.cleanKeyTab();
+			mUserDB.close();
 		for (RemoteDevice rmtDev : Value.rmtDevs){
 			RemoteGetKeyValue.keyTabSetValue(rmtDev,mContext);	
+		}
+		 Value.initial=true;
 		}
 		
 //		Log.v(TAG, "updata finished");
@@ -152,7 +157,7 @@ public class RemoteUpdateService extends IntentService {
 		
 	
 	       
-	    Value.initial=true;
+	   
 	    MyAppInfo.saveInfo(mContext);
 	    stopSelf();
 
