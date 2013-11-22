@@ -15,29 +15,29 @@
          >
 
         <ImageButton
-            android:id="@+id/studying_Right"
+            android:id="@+id/study_Right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@drawable/remote_select_right_selector" />
 
         <ImageButton
-            android:id="@+id/studying_Left"
+            android:id="@+id/study_Left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/remote_select_left_selector" />
 
         <TextView
-            android:id="@+id/studying_Remote"
+            android:id="@+id/study_Remote"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/studying_Right"
-            android:layout_toRightOf="@id/studying_Left"
+            android:layout_toLeftOf="@id/study_Right"
+            android:layout_toRightOf="@id/study_Left"
             android:background="@drawable/control_topbox_selector"
             android:gravity="center"
             android:lines="1"
             android:padding="5.0dip"
-            android:text="@string/title_studying"
+            android:text="@string/title_study"
             android:textSize="16.0sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -47,7 +47,6 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="40dp"
    		android:baselineAligned="false" 
-   		android:orientation="vertical"
         android:background="@drawable/control_midbox"
         android:gravity="center" >
   		  <TextView
@@ -59,7 +58,12 @@
 		android:textColor="@color/text_white"
         android:text="@string/study_info" />    
 
-  
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:gravity="bottom"
+        android:orientation="vertical" >
 
         <ProgressBar
             android:id="@+id/progressBar_logo"
@@ -72,8 +76,8 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:text="@string/study_loading"
-            android:textColor="@color/text_white" >
+            android:textColor="#FFFFFF" >
         </TextView>
- 
+    </LinearLayout>
   </LinearLayout>
 </LinearLayout>

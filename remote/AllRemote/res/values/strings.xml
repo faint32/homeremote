@@ -256,6 +256,7 @@
     <!-- title -->
     <string name="title_activity_main">All Remote Control </string>
     <string name="title_studying"><![CDATA[Are learning...]]></string>
+    <string name="title_study"><![CDATA[Learn]]></string>
     <string name="title_studyed">Learning success</string>
     <string name="title_about">About</string>
     <string name="title_device_type">Select Device Type</string>

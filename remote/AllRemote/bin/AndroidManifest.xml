@@ -83,6 +83,7 @@
         </activity>
         <activity
             android:name="com.deco.remote.Studying"
+            android:theme="@style/myDialog"
             android:screenOrientation="portrait" >
         </activity>
       
@@ -94,7 +95,11 @@
             android:name="com.deco.remote.SelectDeviceType"
             android:screenOrientation="portrait" >
         </activity>
-        
+          <activity
+            android:name="com.deco.remote.RemoteStudy"
+            android:theme="@style/myDialog"
+            android:screenOrientation="portrait" >
+        </activity>  
           <service android:enabled="true" android:name="com.deco.service.RemoteUpdateService"/>
         
         

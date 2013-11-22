@@ -28,11 +28,11 @@ public class Studying extends Activity implements OnClickListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dialog_studying);
-		DisplayMetrics dm = new DisplayMetrics();
-		Display display = getWindowManager().getDefaultDisplay();
-		display.getMetrics(dm);
-		int screenWidth = dm.widthPixels;
-		int screenHeight = dm.heightPixels;
+//		DisplayMetrics dm = new DisplayMetrics();
+//		Display display = getWindowManager().getDefaultDisplay();
+//		display.getMetrics(dm);
+//		int screenWidth = dm.widthPixels;
+//		int screenHeight = dm.heightPixels;
 		
 		
 		
